@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="國小二年級下學期數學期末複習互動遊戲，完成六個任務，點亮期末星光城。">
+    <title>二下數學期末大冒險</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="sky-glow" aria-hidden="true"></div>
+    <main class="app-shell">
+      <section class="home-screen" id="home-screen">
+        <div class="storybook">
+          <div class="hero-art" aria-hidden="true">
+            <div class="sun"></div>
+            <div class="cloud cloud-one"></div>
+            <div class="cloud cloud-two"></div>
+            <div class="hill hill-one"></div>
+            <div class="hill hill-two"></div>
+            <div class="path"></div>
+            <div class="explorer">🧒</div>
+            <div class="star-city">✦</div>
+          </div>
+          <div class="home-copy">
+            <p class="eyebrow">國小二年級下學期數學</p>
+            <h1>二下數學期末大冒險</h1>
+            <p class="subtitle">跟著小小探險家，完成五個數學任務，點亮期末星光城！</p>
+            <div class="home-actions">
+              <button class="primary-button" id="start-adventure" type="button">開始冒險</button>
+              <button class="soft-button" id="open-map" type="button">任務地圖</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="map-screen" id="map-screen" hidden>
+        <div class="section-head">
+          <p class="eyebrow">Mission Map</p>
+          <h2>數學任務地圖</h2>
+          <p>完成六個任務，點亮期末星光城。</p>
+        </div>
+        <div class="map-board" id="map-board" aria-label="數學任務地圖"></div>
+        <div class="map-actions">
+          <button class="soft-button" id="back-home" type="button">回首頁</button>
+          <button class="primary-button" id="continue-adventure" type="button">繼續冒險</button>
+        </div>
+      </section>
+
+      <section class="level-screen" id="level-screen" hidden>
+        <div class="level-topbar">
+          <button class="icon-button" id="level-map-button" type="button" aria-label="回任務地圖">⌂</button>
+          <div>
+            <p class="eyebrow" id="level-kicker">任務</p>
+            <h2 id="level-title"></h2>
+          </div>
+          <div class="score-pill" id="score-pill">0 分</div>
+        </div>
+
+        <div class="progress-card">
+          <span id="question-count">第 1 題 / 10 題</span>
+          <div class="progress-track" aria-hidden="true"><div id="progress-fill"></div></div>
+        </div>
+
+        <article class="question-card">
+          <div class="question-scene" id="question-scene" aria-hidden="true"></div>
+          <p class="skill-tag" id="skill-tag"></p>
+          <h3 id="question-text"></h3>
+          <div class="choices" id="choices"></div>
+          <div class="feedback" id="feedback" role="status" aria-live="polite" hidden></div>
+          <button class="primary-button next-button" id="next-question" type="button" hidden>下一題</button>
+        </article>
+      </section>
+
+      <section class="summary-screen" id="summary-screen" hidden>
+        <div class="summary-card">
+          <p class="eyebrow" id="summary-world">任務完成</p>
+          <h2 id="summary-title"></h2>
+          <p class="big-score" id="summary-score"></p>
+          <p id="summary-message"></p>
+          <div class="mistake-box" id="mistake-box"></div>
+          <div class="summary-actions">
+            <button class="soft-button" id="replay-level" type="button">再玩一次</button>
+            <button class="primary-button" id="summary-map" type="button">回任務地圖</button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <p>練習內容依據：國小二年級下學期數學</p>
+        <p>Interactive design by chaohuang-TW</p>
+        <p>非官方學習練習頁面</p>
+      </footer>
+    </main>
+
+    <script src="questions.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
