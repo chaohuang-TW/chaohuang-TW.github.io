@@ -3,46 +3,463 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="chaohuang-TW 的互動學習遊戲入口。">
-    <meta http-equiv="refresh" content="0; url=./g2-math-final-adventure/">
-    <title>互動學習遊戲</title>
+    <meta name="description" content="chaohuang-TW 互動學習遊戲入口網站。">
+    <title>chaohuang-TW 互動學習遊戲</title>
     <style>
+      :root {
+        --ink: #22344a;
+        --sky: #eaf7ff;
+        --sun: #ffe48b;
+        --grass: #dff5c8;
+        --card: rgba(255, 255, 255, 0.82);
+        --shadow: 0 20px 48px rgba(80, 105, 130, 0.18);
+        --line: rgba(255, 255, 255, 0.74);
+        --accent: #ffb86c;
+        --accent-deep: #f28c57;
+        --mint: #8fd3a8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         min-height: 100vh;
         margin: 0;
+        color: var(--ink);
+        font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+        background:
+          radial-gradient(circle at 15% 10%, rgba(255, 232, 143, 0.85), transparent 18rem),
+          radial-gradient(circle at 85% 14%, rgba(171, 225, 255, 0.8), transparent 20rem),
+          linear-gradient(180deg, #f7f4d7 0%, #e4f4ff 45%, #f7f7ff 100%);
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: auto auto 0 0;
+        width: 42vw;
+        height: 18vw;
+        min-width: 280px;
+        min-height: 140px;
+        border-radius: 50% 50% 0 0;
+        background: #b8e193;
+        opacity: 0.68;
+        pointer-events: none;
+      }
+
+      body::after {
+        inset: auto 0 0 auto;
+        width: 48vw;
+        background: #9bd19a;
+      }
+
+      .shell {
+        position: relative;
+        width: min(1120px, calc(100% - 28px));
+        margin: 0 auto;
+        padding: 28px 0 40px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        overflow: hidden;
+        border: 2px solid var(--line);
+        border-radius: 32px;
+        background: var(--card);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(8px);
+      }
+
+      .scene {
+        position: relative;
+        min-height: 640px;
+        background:
+          linear-gradient(180deg, #c6edff 0%, #edf9ff 48%, #d7f0bc 48%, #afdc88 100%);
+      }
+
+      .sun {
+        position: absolute;
+        top: 56px;
+        left: 56px;
+        width: 104px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: var(--sun);
+        box-shadow: 0 0 0 20px rgba(255, 228, 139, 0.28);
+      }
+
+      .cloud,
+      .cloud::before,
+      .cloud::after,
+      .hill,
+      .path,
+      .castle,
+      .explorer,
+      .sparkle {
+        position: absolute;
+      }
+
+      .cloud {
+        width: 156px;
+        height: 52px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.92);
+      }
+
+      .cloud::before,
+      .cloud::after {
+        content: "";
+        bottom: 18px;
+        border-radius: 50%;
+        background: inherit;
+      }
+
+      .cloud::before {
+        left: 22px;
+        width: 58px;
+        height: 58px;
+      }
+
+      .cloud::after {
+        right: 24px;
+        width: 74px;
+        height: 74px;
+      }
+
+      .cloud.a { top: 92px; right: 58px; }
+      .cloud.b { top: 182px; left: 150px; transform: scale(0.76); }
+
+      .hill {
+        bottom: 0;
+        border-radius: 50% 50% 0 0;
+      }
+
+      .hill.a {
+        left: -70px;
+        width: 460px;
+        height: 240px;
+        background: #8ecf7a;
+      }
+
+      .hill.b {
+        right: -86px;
+        width: 430px;
+        height: 300px;
+        background: #73bf80;
+      }
+
+      .path {
+        left: 48%;
+        bottom: -92px;
+        width: 180px;
+        height: 380px;
+        border-radius: 50% 50% 0 0;
+        background: #f6d797;
+        transform: translateX(-50%) rotate(7deg);
+      }
+
+      .castle {
+        right: 72px;
+        bottom: 196px;
+        width: 150px;
+        height: 150px;
         display: grid;
         place-items: center;
-        font-family: "PingFang TC", "Noto Sans TC", system-ui, sans-serif;
-        color: #314052;
-        background: linear-gradient(160deg, #fff8d7, #e7f6ff 52%, #f5eeff);
+        border-radius: 40px;
+        background: linear-gradient(145deg, #ffe698, #ffd1df);
+        font-size: 78px;
+        box-shadow: 0 18px 35px rgba(167, 121, 60, 0.18);
       }
-      main {
-        width: min(680px, calc(100% - 32px));
-        padding: 32px;
-        border-radius: 24px;
-        background: rgba(255,255,255,.78);
-        box-shadow: 0 18px 45px rgba(84,104,132,.18);
-        text-align: center;
+
+      .explorer {
+        left: 41%;
+        bottom: 176px;
+        width: 96px;
+        height: 96px;
+        display: grid;
+        place-items: center;
+        border-radius: 30px;
+        background: #fff8cf;
+        font-size: 58px;
+        box-shadow: 0 14px 32px rgba(77, 111, 90, 0.22);
       }
-      a {
+
+      .sparkle {
+        font-size: 24px;
+        animation: float 2.8s ease-in-out infinite;
+      }
+
+      .sparkle.s1 { right: 206px; top: 236px; }
+      .sparkle.s2 { right: 102px; top: 172px; animation-delay: .6s; }
+      .sparkle.s3 { left: 220px; top: 286px; animation-delay: 1.2s; }
+
+      .copy {
+        align-self: center;
+        padding: 54px 48px;
+      }
+
+      .kicker {
+        margin: 0 0 10px;
+        color: #58718a;
+        font-size: .96rem;
+        font-weight: 900;
+        letter-spacing: .08em;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 16px;
+        font-size: clamp(2.5rem, 5vw, 4.7rem);
+        line-height: 1.02;
+      }
+
+      .lead {
+        margin-bottom: 22px;
+        color: #506378;
+        font-size: 1.18rem;
+        line-height: 1.8;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-bottom: 24px;
+      }
+
+      .button {
         display: inline-flex;
-        min-height: 52px;
         align-items: center;
-        margin-top: 12px;
-        padding: 0 24px;
+        justify-content: center;
+        min-height: 56px;
+        padding: 0 26px;
+        border: 0;
         border-radius: 18px;
-        color: #28415a;
-        background: linear-gradient(135deg, #ffd86e, #ffbd82);
+        color: #27425f;
         font-weight: 900;
         text-decoration: none;
+        transition: transform .18s ease, filter .18s ease;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.03);
+      }
+
+      .button.primary {
+        background: linear-gradient(135deg, var(--sun), var(--accent));
+        box-shadow: 0 12px 24px rgba(242, 140, 87, 0.22);
+      }
+
+      .button.soft {
+        background: #edf7ff;
+      }
+
+      .grid {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card {
+        padding: 16px 18px;
+        border: 1px solid rgba(181, 208, 225, 0.56);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .card strong,
+      .mini strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 1rem;
+      }
+
+      .card span,
+      .mini span {
+        color: #64788b;
+        line-height: 1.55;
+      }
+
+      .section {
+        margin-top: 22px;
+        padding: 28px;
+        border: 2px solid var(--line);
+        border-radius: 28px;
+        background: rgba(255, 255, 255, 0.76);
+        box-shadow: var(--shadow);
+      }
+
+      .section-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .section-head h2 {
+        margin-bottom: 8px;
+        font-size: clamp(1.7rem, 3vw, 2.6rem);
+      }
+
+      .section-head p {
+        color: #5f7285;
+        line-height: 1.7;
+      }
+
+      .worlds {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .mini {
+        min-height: 180px;
+        padding: 18px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.86);
+        border: 1px solid rgba(185, 209, 224, 0.6);
+      }
+
+      .badge {
+        width: 54px;
+        height: 54px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 14px;
+        border-radius: 18px;
+        background: linear-gradient(145deg, #fff0a7, #ffd6ef);
+        font-size: 1.4rem;
+        font-weight: 900;
+      }
+
+      footer {
+        padding: 18px 10px 8px;
+        text-align: center;
+        color: #5d7185;
+        font-size: 0.92rem;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+
+      @media (max-width: 860px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .scene {
+          min-height: 380px;
+        }
+
+        .copy {
+          padding: 28px;
+        }
+
+        .grid,
+        .worlds {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
   <body>
-    <main>
-      <h1>互動學習遊戲</h1>
-      <p>正在前往「二下數學期末大冒險」。</p>
-      <a href="./g2-math-final-adventure/">前往二下數學期末大冒險</a>
+    <main class="shell">
+      <section class="hero">
+        <div class="scene" aria-hidden="true">
+          <div class="sun"></div>
+          <div class="cloud a"></div>
+          <div class="cloud b"></div>
+          <div class="hill a"></div>
+          <div class="hill b"></div>
+          <div class="path"></div>
+          <div class="explorer">🧒</div>
+          <div class="castle">✦</div>
+          <div class="sparkle s1">✦</div>
+          <div class="sparkle s2">✦</div>
+          <div class="sparkle s3">✦</div>
+        </div>
+        <div class="copy">
+          <p class="kicker">chaohuang-TW 互動學習遊戲</p>
+          <h1>二下數學期末大冒險</h1>
+          <p class="lead">跟著小小探險家，完成六個數學任務，點亮期末星光城。這裡是正式入口頁，按下去就能直接開始遊戲。</p>
+          <div class="actions">
+            <a class="button primary" href="./g2-math-final-adventure/">進入遊戲</a>
+            <a class="button soft" href="./g2-math-final-adventure/README.md">閱讀說明</a>
+          </div>
+          <div class="grid">
+            <div class="card">
+              <strong>純前端製作</strong>
+              <span>使用 HTML、CSS、JavaScript，可直接部署在 GitHub Pages。</span>
+            </div>
+            <div class="card">
+              <strong>適合孩子操作</strong>
+              <span>大按鈕、大字體、手機也能順手玩，避免做成冷冰冰的考卷畫面。</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Featured Adventure</p>
+            <h2>這次上線的任務地圖</h2>
+          </div>
+          <p>六個主題任務，從兩步驟應用問題一路玩到綜合挑戰。</p>
+        </div>
+        <div class="worlds">
+          <article class="mini">
+            <div class="badge">算</div>
+            <strong>算式山丘</strong>
+            <span>練習兩步驟應用問題，學會先想順序再算。</span>
+          </article>
+          <article class="mini">
+            <div class="badge">量</div>
+            <strong>彩虹尺橋</strong>
+            <span>認識公尺與公分，做長度換算和比較。</span>
+          </article>
+          <article class="mini">
+            <div class="badge">分</div>
+            <strong>積木分類森林</strong>
+            <span>看形體、做分類，練習觀察和整理。</span>
+          </article>
+          <article class="mini">
+            <div class="badge">配</div>
+            <strong>公平野餐桌</strong>
+            <span>從平均分配到分裝，學會把東西公平地分好。</span>
+          </article>
+          <article class="mini">
+            <div class="badge">半</div>
+            <strong>分數蛋糕湖</strong>
+            <span>用平分和幾分之一建立最直覺的分數感。</span>
+          </article>
+          <article class="mini">
+            <div class="badge">勇</div>
+            <strong>期末星光城</strong>
+            <span>把前面學過的觀念放在一起，完成最後挑戰。</span>
+          </article>
+        </div>
+      </section>
+
+      <footer>
+        <p>練習內容依據：國小二年級下學期數學</p>
+        <p>Interactive design by chaohuang-TW</p>
+        <p>非官方學習練習頁面</p>
+      </footer>
     </main>
   </body>
 </html>
