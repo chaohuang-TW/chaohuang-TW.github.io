@@ -1,14 +1,16 @@
 :root {
-  --ink: #314052;
-  --muted: #68788a;
-  --paper: #fffdf6;
-  --card: rgba(255, 253, 246, 0.92);
-  --green: #4cae79;
-  --green-soft: #e4f7eb;
-  --orange: #ef9b4a;
+  --ink: #25374d;
+  --muted: #637587;
+  --paper: #fffaf0;
+  --card: rgba(255, 251, 238, 0.94);
+  --green: #3f9f6f;
+  --green-soft: #e8f8e7;
+  --orange: #de8842;
   --orange-soft: #fff0df;
-  --blue: #6aa7d8;
-  --shadow: 0 18px 45px rgba(84, 104, 132, 0.18);
+  --blue: #4d9fd1;
+  --line: rgba(255, 255, 255, 0.78);
+  --shadow: 0 18px 44px rgba(72, 97, 116, 0.18);
+  --crayon: #ffcf5d;
 }
 
 * {
@@ -21,9 +23,9 @@ body {
   color: var(--ink);
   font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
   background:
-    radial-gradient(circle at 18% 12%, rgba(255, 238, 163, 0.65), transparent 24rem),
-    radial-gradient(circle at 84% 18%, rgba(189, 229, 255, 0.8), transparent 22rem),
-    linear-gradient(160deg, #fff8d7 0%, #e7f6ff 48%, #f5eeff 100%);
+    radial-gradient(circle at 12% 12%, rgba(255, 227, 127, 0.7), transparent 19rem),
+    radial-gradient(circle at 88% 18%, rgba(141, 214, 255, 0.72), transparent 20rem),
+    linear-gradient(180deg, #fff5bd 0%, #e4f7ff 42%, #e9f7d9 100%);
 }
 
 button {
@@ -51,8 +53,8 @@ button {
 .level-screen,
 .summary-card {
   background: var(--card);
-  border: 2px solid rgba(255, 255, 255, 0.85);
-  border-radius: 24px;
+  border: 2px solid var(--line);
+  border-radius: 22px;
   box-shadow: var(--shadow);
 }
 
@@ -66,7 +68,22 @@ button {
 .hero-art {
   position: relative;
   min-height: 620px;
-  background: linear-gradient(#bde9ff 0%, #e9f8ff 48%, #cfeea6 48%, #a9de86 100%);
+  background:
+    linear-gradient(#bdeeff 0%, #ebfaff 48%, #d6efb6 48%, #9fd37e 100%);
+}
+
+.hero-art::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -98px;
+  width: 210px;
+  height: 410px;
+  border-radius: 50% 50% 0 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.22) 0 16px, transparent 16px 34px),
+    #f5d28c;
+  transform: translateX(-50%) rotate(7deg);
 }
 
 .sun,
@@ -154,6 +171,7 @@ button {
   border-radius: 50% 50% 0 0;
   background: #f7d795;
   transform: translateX(-50%) rotate(7deg);
+  display: none;
 }
 
 .explorer {
@@ -181,6 +199,25 @@ button {
   color: #fffdf4;
   font-size: 72px;
   text-shadow: 0 2px 10px rgba(155, 102, 42, 0.2);
+}
+
+.star-city::before,
+.star-city::after {
+  content: "";
+  position: absolute;
+  bottom: 18px;
+  width: 24px;
+  height: 52px;
+  border-radius: 10px 10px 0 0;
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.star-city::before {
+  left: 18px;
+}
+
+.star-city::after {
+  right: 18px;
 }
 
 .home-copy {
@@ -249,7 +286,7 @@ h3 {
 .primary-button {
   padding: 0 26px;
   color: #28415a;
-  background: linear-gradient(135deg, #ffd86e, #ffbd82);
+  background: linear-gradient(135deg, #ffe16e, #ffb565);
   box-shadow: 0 12px 24px rgba(221, 142, 65, 0.24);
 }
 
@@ -287,8 +324,9 @@ h3 {
   padding: 18px;
   border-radius: 22px;
   background:
-    radial-gradient(circle at 16% 24%, rgba(255, 230, 138, 0.42), transparent 10rem),
-    linear-gradient(135deg, #e8f7ff, #f9f4dc);
+    radial-gradient(circle at 16% 24%, rgba(255, 230, 138, 0.48), transparent 10rem),
+    radial-gradient(circle at 82% 70%, rgba(142, 211, 151, 0.36), transparent 12rem),
+    linear-gradient(135deg, #e8f8ff, #fff2c8);
 }
 
 .world-card {
@@ -415,6 +453,18 @@ h3 {
 
 .question-card {
   padding: clamp(18px, 4vw, 34px);
+  position: relative;
+  overflow: hidden;
+  border: 2px dashed rgba(238, 187, 88, 0.48);
+}
+
+.question-card::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 213, 117, 0.52);
+  pointer-events: none;
 }
 
 .question-scene {
@@ -424,7 +474,9 @@ h3 {
   margin-bottom: 16px;
   padding: 18px;
   border-radius: 18px;
-  background: linear-gradient(135deg, #f7fbff, #fff8d9);
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.35) 0 18px, transparent 18px 36px),
+    linear-gradient(135deg, #dff5ff, #fff4c5);
   font-size: clamp(1.7rem, 4vw, 3rem);
   line-height: 1.4;
   text-align: center;
@@ -449,14 +501,40 @@ h3 {
 .choice-button {
   min-height: 70px;
   padding: 16px;
-  border: 2px solid #e1eef4;
-  border-radius: 18px;
+  border: 2px solid #d9e9ef;
+  border-radius: 16px;
   color: var(--ink);
-  background: #ffffff;
+  background: linear-gradient(180deg, #ffffff, #f8fcff);
   cursor: pointer;
   font-size: 1.15rem;
   font-weight: 850;
   line-height: 1.45;
+  box-shadow: 0 8px 0 rgba(138, 178, 196, 0.15);
+}
+
+#question-text span {
+  display: block;
+  width: fit-content;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: #6c5324;
+  background: #fff0b5;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.level-screen .choice-button {
+  text-align: left;
+}
+
+.level-screen .choice-button.formula-option {
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  text-align: center;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(255, 249, 224, 0.94)),
+    #fff8da;
+  border-color: #edd389;
 }
 
 .choice-button:disabled {
