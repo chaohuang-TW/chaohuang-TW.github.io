@@ -86,6 +86,12 @@ function renderQuestion() {
   const world = GAME_WORLDS[state.activeWorldIndex];
   const question = state.selectedWorldQuestions[state.activeQuestionIndex];
   const progressPercent = (state.activeQuestionIndex / state.selectedWorldQuestions.length) * 100;
+  const typePrompts = {
+    "formula-choice": "任務：不用急著算答案，先選出最能表示題意的算式。",
+    "picture-choice": "任務：先看圖，再選出正確的想法。",
+    "true-false": "任務：判斷這句話對不對。",
+    "single-choice": "任務：讀懂題目，再選出正確答案。"
+  };
 
   $("#level-kicker").textContent = `任務 ${state.activeWorldIndex + 1}｜${world.practice}`;
   $("#level-title").textContent = world.world;
@@ -93,7 +99,7 @@ function renderQuestion() {
   $("#question-count").textContent = `第 ${state.activeQuestionIndex + 1} 題 / ${state.selectedWorldQuestions.length} 題`;
   $("#progress-fill").style.width = `${progressPercent}%`;
   $("#skill-tag").textContent = question.skill;
-  $("#question-text").textContent = question.question;
+  $("#question-text").innerHTML = `<span>${typePrompts[question.type] || "任務：讀懂題目，再選出最好的答案。"}</span>${escapeHtml(question.question)}`;
   $("#question-scene").textContent = question.visual || makeScene(world.id);
   $("#feedback").hidden = true;
   $("#feedback").className = "feedback";
@@ -101,7 +107,7 @@ function renderQuestion() {
   state.answered = false;
 
   $("#choices").innerHTML = question.choices.map((choice) => `
-    <button class="choice-button" type="button" data-choice="${escapeHtml(choice)}">${choice}</button>
+    <button class="choice-button ${question.type === "formula-choice" ? "formula-option" : ""}" type="button" data-choice="${escapeHtml(choice)}">${choice}</button>
   `).join("");
 
   $("#choices").querySelectorAll(".choice-button").forEach((button) => {
