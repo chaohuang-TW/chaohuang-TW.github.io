@@ -1,452 +1,50 @@
 <!doctype html>
 <html lang="zh-Hant">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="二下數學期末大冒險，國小二年級下學期數學期末複習互動遊戲。">
-    <title>二下數學期末大冒險</title>
-    <style>
-      :root {
-        color-scheme: light;
-        --ink: #263238;
-        --muted: #65737a;
-        --paper: #fff9ed;
-        --panel: #ffffff;
-        --line: #d8e2dd;
-        --sky: #bfe3ee;
-        --sea: #2f8fa3;
-        --leaf: #4c8b57;
-        --gold: #f0bd55;
-        --red: #c95f55;
-        --plum: #765aa4;
-        --blue: #3d78a7;
-        --shadow: 0 18px 42px rgba(38, 50, 56, 0.16);
-        --hero-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 820'%3E%3Cdefs%3E%3ClinearGradient id='sky' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%239bd5df'/%3E%3Cstop offset='.5' stop-color='%23f6d784'/%3E%3Cstop offset='1' stop-color='%2387c099'/%3E%3C/linearGradient%3E%3CradialGradient id='glow' cx='70%25' cy='20%25' r='50%25'%3E%3Cstop offset='0' stop-color='%23fff5b8' stop-opacity='.95'/%3E%3Cstop offset='1' stop-color='%23fff5b8' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='1440' height='820' fill='url(%23sky)'/%3E%3Crect width='1440' height='820' fill='url(%23glow)'/%3E%3Cpath d='M0 590 C180 520 310 640 490 570 C690 492 770 626 980 552 C1140 496 1270 520 1440 470 L1440 820 L0 820 Z' fill='%232f8fa3' opacity='.86'/%3E%3Cpath d='M0 650 C170 612 310 690 500 640 C710 586 860 700 1060 610 C1210 540 1330 586 1440 548 L1440 820 L0 820 Z' fill='%234c8b57' opacity='.88'/%3E%3Cellipse cx='970' cy='615' rx='310' ry='82' fill='%23d8b477'/%3E%3Cpath d='M780 610 h380 a34 34 0 0 1 34 34 v72 H746 v-72 a34 34 0 0 1 34-34z' fill='%23fff9ed'/%3E%3Cpath d='M815 590 h98 v90 h-98zM945 552 h98 v128 h-98zM1076 504 h98 v176 h-98z' fill='%23f7cf73'/%3E%3Cpath d='M838 614 h30 v30 h-30zM974 584 h30 v30 h-30zM1106 538 h30 v30 h-30z' fill='%233d78a7'/%3E%3Cpath d='M750 464 l46-92 46 92 -46-22zM1190 424 l40-80 40 80 -40-18z' fill='%23f0bd55'/%3E%3Cpath d='M320 530 h220 a36 36 0 0 1 36 36 v120 H284 V566 a36 36 0 0 1 36-36z' fill='%23fff9ed' opacity='.96'/%3E%3Ccircle cx='358' cy='584' r='25' fill='%23c95f55'/%3E%3Ccircle cx='438' cy='584' r='25' fill='%23765aa4'/%3E%3Ccircle cx='518' cy='584' r='25' fill='%232f8fa3'/%3E%3Cpath d='M342 650 h190' stroke='%23263238' stroke-width='16' stroke-linecap='round' opacity='.38'/%3E%3Cpath d='M170 484 c44-58 100-58 142 0M1264 360 c35-42 77-42 110 0' stroke='%23fff9ed' stroke-width='14' stroke-linecap='round' fill='none' opacity='.9'/%3E%3Ctext x='640' y='312' font-family='Arial,sans-serif' font-size='70' font-weight='900' fill='%23fff9ed' opacity='.9'%3E10%3C/text%3E%3Ctext x='570' y='438' font-family='Arial,sans-serif' font-size='62' font-weight='900' fill='%23fff9ed' opacity='.75'%3Ecm%3C/text%3E%3Ctext x='1010' y='388' font-family='Arial,sans-serif' font-size='78' font-weight='900' fill='%23fff9ed' opacity='.82'%3E1/2%3C/text%3E%3C/svg%3E");
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-        min-height: 100vh;
-        color: var(--ink);
-        font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
-        background:
-          linear-gradient(180deg, #e8f5f2 0%, #fff6df 52%, #f0eadf 100%);
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .shell {
-        width: min(1180px, calc(100% - 28px));
-        margin: 0 auto;
-        padding: 22px 0 18px;
-      }
-
-      .hero {
-        position: relative;
-        min-height: 430px;
-        overflow: hidden;
-        border-radius: 8px;
-        background: #1f3f4b;
-        box-shadow: var(--shadow);
-      }
-
-      .hero::before {
-        position: absolute;
-        inset: 0;
-        z-index: 1;
-        content: "";
-        background:
-          linear-gradient(90deg, rgba(15, 32, 38, 0.88) 0%, rgba(15, 32, 38, 0.62) 42%, rgba(15, 32, 38, 0.08) 78%),
-          linear-gradient(180deg, rgba(255, 222, 143, 0.16), rgba(255, 255, 255, 0));
-      }
-
-      .hero::after {
-        position: absolute;
-        inset: 0;
-        content: "";
-        background-image: var(--hero-image);
-        background-size: cover;
-        background-position: center;
-        transform: scale(1.01);
-      }
-
-      .hero-copy {
-        position: relative;
-        z-index: 2;
-        max-width: 650px;
-        padding: 42px;
-        color: #fffdf4;
-      }
-
-      .kicker,
-      .mini {
-        margin: 0 0 8px;
-        color: var(--blue);
-        font-size: 0.88rem;
-        font-weight: 900;
-      }
-
-      .hero .kicker {
-        color: #ffe08a;
-      }
-
-      h1,
-      h2,
-      h3,
-      p {
-        margin-top: 0;
-      }
-
-      h1 {
-        max-width: 620px;
-        margin-bottom: 12px;
-        font-size: 4.2rem;
-        line-height: 1.02;
-        letter-spacing: 0;
-      }
-
-      .hero-copy p:last-of-type {
-        max-width: 520px;
-        margin-bottom: 0;
-        font-size: 1.08rem;
-        font-weight: 800;
-        line-height: 1.75;
-      }
-
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 22px;
-      }
-
-      .button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 48px;
-        padding: 0 18px;
-        border-radius: 8px;
-        font-weight: 900;
-      }
-
-      .primary {
-        color: #fff;
-        background: var(--leaf);
-      }
-
-      .secondary {
-        color: var(--ink);
-        background: #e8eef0;
-      }
-
-      .gold {
-        color: #3a2c16;
-        background: var(--gold);
-      }
-
-      .mission-peek {
-        position: relative;
-        z-index: 2;
-        display: grid;
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-        gap: 10px;
-        width: min(940px, calc(100% - 84px));
-        margin: 14px 42px 34px;
-      }
-
-      .mission-token {
-        min-height: 86px;
-        padding: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.22);
-        border-radius: 8px;
-        color: #fffdf4;
-        background: rgba(18, 40, 46, 0.66);
-        backdrop-filter: blur(8px);
-        font-weight: 900;
-      }
-
-      .mission-token strong {
-        display: block;
-        margin-bottom: 4px;
-        color: #ffdf8a;
-        font-size: 1.35rem;
-      }
-
-      .mission-token span {
-        display: block;
-        color: rgba(255, 253, 244, 0.84);
-        font-size: 0.82rem;
-        line-height: 1.45;
-      }
-
-      .layout {
-        display: grid;
-        grid-template-columns: 0.82fr 1.18fr;
-        gap: 16px;
-        margin-top: 16px;
-      }
-
-      .map,
-      .panel {
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.82);
-        box-shadow: 0 14px 28px rgba(38, 50, 56, 0.11);
-      }
-
-      .map {
-        padding: 22px;
-      }
-
-      .map h2,
-      .panel h2 {
-        margin-bottom: 10px;
-        font-size: 1.8rem;
-      }
-
-      .map p,
-      .panel p {
-        color: var(--muted);
-        font-weight: 800;
-        line-height: 1.65;
-      }
-
-      .trail {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-        margin-top: 18px;
-      }
-
-      .trail-step {
-        min-height: 118px;
-        padding: 14px;
-        border: 2px solid rgba(47, 143, 163, 0.18);
-        border-radius: 8px;
-        background: #fffdf4;
-      }
-
-      .trail-step b {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 34px;
-        height: 34px;
-        margin-bottom: 8px;
-        border-radius: 8px;
-        color: #fff;
-        background: var(--sea);
-      }
-
-      .trail-step h3 {
-        margin-bottom: 4px;
-        font-size: 1rem;
-      }
-
-      .trail-step p {
-        margin: 0;
-        font-size: 0.86rem;
-      }
-
-      .panel {
-        padding: 24px;
-        background:
-          linear-gradient(135deg, rgba(255, 249, 237, 0.96), rgba(255, 255, 255, 0.9));
-      }
-
-      .feature-card {
-        display: grid;
-        grid-template-columns: 92px 1fr;
-        gap: 16px;
-        align-items: center;
-        margin: 18px 0;
-        padding: 16px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: var(--panel);
-      }
-
-      .badge {
-        display: grid;
-        place-items: center;
-        width: 92px;
-        height: 92px;
-        border-radius: 8px;
-        color: #fffdf4;
-        background:
-          radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.36), transparent 38%),
-          var(--plum);
-        font-size: 2.4rem;
-        font-weight: 900;
-      }
-
-      .facts {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 10px;
-        margin-top: 16px;
-      }
-
-      .fact {
-        padding: 12px;
-        border-radius: 8px;
-        color: var(--ink);
-        background: #e8eef0;
-        font-weight: 900;
-      }
-
-      .fact span {
-        display: block;
-        margin-top: 4px;
-        color: var(--muted);
-        font-size: 0.84rem;
-      }
-
-      .site-credit {
-        margin: 14px 0 0;
-        color: rgba(38, 50, 56, 0.72);
-        font-size: 0.86rem;
-        font-weight: 800;
-        line-height: 1.55;
-        letter-spacing: 0;
-        text-align: center;
-      }
-
-      .site-credit p {
-        margin: 4px 0;
-      }
-
-      @media (max-width: 960px) {
-        .shell {
-          width: min(100% - 18px, 720px);
-          padding-top: 10px;
-        }
-
-        .hero {
-          min-height: 560px;
-        }
-
-        .hero-copy {
-          padding: 30px 24px;
-        }
-
-        h1 {
-          max-width: 360px;
-          font-size: 2.72rem;
-          line-height: 1.1;
-        }
-
-        .hero-copy p:last-of-type {
-          max-width: 350px;
-        }
-
-        .mission-peek {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          width: calc(100% - 48px);
-          margin: 18px 24px 28px;
-        }
-
-        .layout {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      @media (max-width: 560px) {
-        h1 {
-          max-width: 300px;
-          font-size: 2.26rem;
-        }
-
-        .mission-peek,
-        .trail,
-        .facts,
-        .feature-card {
-          grid-template-columns: 1fr;
-        }
-
-        .feature-card {
-          align-items: start;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="shell">
-      <section class="hero" aria-labelledby="site-title">
-        <div class="hero-copy">
-          <p class="kicker">國小二年級下學期數學</p>
-          <h1 id="site-title">二下數學期末大冒險</h1>
-          <p>跟著小小探險家，完成六個數學任務，點亮期末星光城！</p>
-          <div class="hero-actions">
-            <a class="button primary gold" href="./g2-math-final-adventure/">開始冒險</a>
-            <a class="button secondary" href="./g2-math-final-adventure/">任務地圖</a>
-          </div>
-        </div>
-        <div class="mission-peek" aria-label="任務預告">
-          <div class="mission-token"><strong>算</strong>算式山丘<span>兩步驟應用問題</span></div>
-          <div class="mission-token"><strong>量</strong>彩虹尺橋<span>公尺和公分</span></div>
-          <div class="mission-token"><strong>分</strong>積木分類森林<span>分類與立體形體</span></div>
-          <div class="mission-token"><strong>配</strong>公平野餐桌<span>平均分配與分裝</span></div>
-          <div class="mission-token"><strong>半</strong>分數蛋糕湖<span>平分與簡單分數</span></div>
-          <div class="mission-token"><strong>勇</strong>期末星光城<span>綜合挑戰</span></div>
-        </div>
-      </section>
-
-      <section class="layout" aria-label="網站介紹">
-        <aside class="map">
-          <p class="mini">數學任務地圖</p>
-          <h2>六站冒險，慢慢點亮</h2>
-          <p>每一站 10 題，答完立刻看到說明。完成任務後，關卡會亮起來，最後前往期末星光城。</p>
-          <div class="trail" aria-label="六個任務">
-            <div class="trail-step"><b>1</b><h3>算式山丘</h3><p>先找出正確算式，再解決問題。</p></div>
-            <div class="trail-step"><b>2</b><h3>彩虹尺橋</h3><p>練習長度單位和生活量感。</p></div>
-            <div class="trail-step"><b>3</b><h3>積木分類森林</h3><p>觀察形體，學會分類。</p></div>
-            <div class="trail-step"><b>4</b><h3>公平野餐桌</h3><p>把物品平均分給大家。</p></div>
-            <div class="trail-step"><b>5</b><h3>分數蛋糕湖</h3><p>看懂一半、幾分之一和比較。</p></div>
-            <div class="trail-step"><b>6</b><h3>期末星光城</h3><p>完成綜合挑戰，讓城市亮起來。</p></div>
-          </div>
-        </aside>
-
-        <main class="panel">
-          <p class="mini">正式入口</p>
-          <h2>不是考卷，是一張會發光的任務地圖</h2>
-          <p>這個頁面是純前端互動遊戲，不需要登入，不輸入姓名，也不蒐集班級、座號或作答紀錄。孩子可以在手機、平板或電腦上直接開始複習。</p>
-          <div class="feature-card">
-            <div class="badge">星</div>
-            <div>
-              <h3>期末星光城正在等你</h3>
-              <p>遊戲會把本機完成狀態存在瀏覽器裡，方便孩子下次回來繼續點亮關卡。</p>
-            </div>
-          </div>
-          <div class="facts" aria-label="遊戲規則">
-            <div class="fact">60 題<span>六關自編題庫</span></div>
-            <div class="fact">10 分<span>答對一題加分</span></div>
-            <div class="fact">0 扣分<span>答錯不扣分</span></div>
-          </div>
-          <div class="hero-actions">
-            <a class="button primary" href="./g2-math-final-adventure/">進入遊戲</a>
-            <a class="button secondary" href="./g2-math-final-adventure/README.md">查看 README</a>
-          </div>
-        </main>
-      </section>
-
-      <footer class="site-credit">
-        <p>練習內容依據：國小二年級下學期數學</p>
-        <p>Interactive design by chaohuang-TW</p>
-        <p>非官方學習練習頁面</p>
-      </footer>
-    </div>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>小學學習冒險島</title>
+  <meta name="description" content="國小課程互動練習網站入口，第一階段以國小二年級內容為主。">
+  <style>
+    :root{--ink:#17201b;--muted:#5a6a60;--paper:#fff8ea;--leaf:#1f6b4d;--leaf2:#0e3f32;--river:#5aa6b2;--sun:#f1b643;--line:rgba(23,32,27,.16);--shadow:0 22px 60px rgba(22,45,36,.18)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"BiauKai","Kaiti TC","PingFang TC","Noto Serif TC",serif;background:radial-gradient(circle at 8% 8%,rgba(241,182,67,.38),transparent 24rem),radial-gradient(circle at 88% 14%,rgba(90,166,178,.35),transparent 26rem),linear-gradient(135deg,#f8ecd0 0%,#f1dfb6 42%,#dce9d2 100%)}a{color:inherit}.site{width:min(1180px,calc(100% - 36px));margin:auto;padding:28px 0 54px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:14px 0 28px}.mark{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.08em}.mark-icon{display:grid;place-items:center;width:48px;height:48px;border:2px solid var(--ink);border-radius:18px;background:var(--sun);box-shadow:5px 5px 0 var(--leaf2);font-family:Georgia,serif;font-size:22px}.nav{display:flex;flex-wrap:wrap;gap:10px;font-family:"PingFang TC",sans-serif;font-size:14px}.nav a{text-decoration:none;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(255,248,234,.62)}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:stretch;min-height:500px}.hero-card,.panel,.course-card{border:2px solid rgba(23,32,27,.82);background:rgba(255,248,234,.82);box-shadow:var(--shadow);backdrop-filter:blur(8px)}.hero-card{position:relative;overflow:hidden;border-radius:40px;padding:clamp(28px,5vw,64px)}.hero-card:before{content:"";position:absolute;inset:auto -8% -28% -8%;height:50%;background:linear-gradient(160deg,rgba(90,166,178,.72),rgba(31,107,77,.38));border-radius:60% 45% 0 0;transform:rotate(-2deg)}.hero-card>*{position:relative}.eyebrow{display:inline-flex;margin:0 0 22px;padding:9px 14px;border:1px solid var(--ink);border-radius:999px;background:#fffdf4;font-family:"PingFang TC",sans-serif;font-size:13px;letter-spacing:.12em;font-weight:800}h1{margin:0;max-width:8em;font-size:clamp(52px,8vw,104px);line-height:.92;letter-spacing:-.08em}.statement{margin:22px 0 0;max-width:34rem;color:var(--leaf2);font-family:"PingFang TC",sans-serif;font-size:clamp(18px,2.4vw,25px);font-weight:800;line-height:1.45}.declaration{margin-top:28px;display:inline-block;padding:12px 16px;border:2px solid var(--ink);border-radius:18px;background:var(--sun);box-shadow:5px 5px 0 var(--leaf2);font-family:Georgia,"Times New Roman",serif;font-weight:900;letter-spacing:.02em}.panel{border-radius:40px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;gap:22px;background:linear-gradient(180deg,rgba(255,248,234,.9),rgba(255,248,234,.66)),repeating-linear-gradient(90deg,transparent 0 22px,rgba(31,107,77,.06) 22px 24px)}.panel h2,.section-title h2{margin:0;font-size:clamp(28px,4vw,46px);line-height:1.05}.panel p,.section-title p,.course-card p,.note p{font-family:"PingFang TC","Noto Sans TC",sans-serif;color:var(--muted);line-height:1.8}.grade-map{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.grade{min-height:94px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.45);padding:14px;font-family:"PingFang TC",sans-serif}.grade strong{display:block;font-size:20px}.grade span{display:block;margin-top:8px;color:var(--muted);font-size:13px}.grade.active{background:var(--leaf);color:#fffdf4;border-color:var(--leaf2);box-shadow:5px 5px 0 rgba(14,63,50,.4)}.grade.active span{color:rgba(255,253,244,.82)}section{margin-top:54px}.section-title{display:flex;align-items:end;justify-content:space-between;gap:22px;margin-bottom:20px}.section-title p{max-width:560px;margin:0}.courses{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.course-card{position:relative;min-height:250px;overflow:hidden;border-radius:30px;padding:24px;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease}.course-card:hover{transform:translateY(-5px);box-shadow:0 28px 70px rgba(22,45,36,.23)}.course-card:after{content:"";position:absolute;right:-36px;bottom:-44px;width:130px;height:130px;border-radius:40px;background:var(--accent,var(--river));opacity:.28;transform:rotate(18deg)}.tag{display:inline-flex;padding:7px 10px;border-radius:999px;background:rgba(23,32,27,.08);font-family:"PingFang TC",sans-serif;font-size:13px;font-weight:800}.course-card h3{margin:18px 0 10px;font-size:30px;line-height:1.12}.course-card p{margin:0 0 24px}.go{position:absolute;left:24px;bottom:22px;font-family:"PingFang TC",sans-serif;font-weight:900;color:var(--leaf2)}.note{display:grid;grid-template-columns:1fr 1fr;gap:18px}.note-card{border:1px solid var(--line);border-radius:28px;padding:24px;background:rgba(255,253,244,.58)}.note h3{margin:0 0 10px;font-size:24px}.note p{margin:0}footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;color:var(--muted);font-family:"PingFang TC",sans-serif;font-size:14px}@media(max-width:900px){.hero,.note{grid-template-columns:1fr}.courses{grid-template-columns:repeat(2,1fr)}.section-title{display:block}}@media(max-width:640px){.site{width:min(100% - 24px,1180px);padding-top:18px}.topbar{align-items:flex-start;flex-direction:column}.hero-card,.panel{border-radius:28px}.grade-map,.courses{grid-template-columns:1fr}h1{font-size:58px}.course-card{min-height:220px}}
+  </style>
+</head>
+<body>
+  <main class="site">
+    <header class="topbar">
+      <div class="mark"><span class="mark-icon">G2</span><span>小學學習冒險島</span></div>
+      <nav class="nav" aria-label="首頁導覽"><a href="#grades">年級入口</a><a href="#grade-2">二年級課程</a><a href="#principles">網站原則</a></nav>
+    </header>
+    <section class="hero" aria-labelledby="home-title">
+      <div class="hero-card">
+        <p class="eyebrow">國小課程互動練習網站入口</p>
+        <h1 id="home-title">小學學習冒險島</h1>
+        <p class="statement">第一階段以國小二年級為主，整理國語、數學互動練習；之後可依年級、科目、課次繼續擴充。</p>
+        <div class="declaration">Interactive design by chaohuang-TW</div>
+      </div>
+      <aside class="panel" id="grades" aria-label="年級狀態">
+        <div><h2>長期擴充架構</h2><p>首頁先讓學生知道要從哪個年級、哪個科目進入。尚未製作的年級先保留位置，不放假連結。</p></div>
+        <div class="grade-map"><div class="grade"><strong>一年級</strong><span>規劃中</span></div><div class="grade active"><strong>二年級</strong><span>目前主內容</span></div><div class="grade"><strong>三年級</strong><span>規劃中</span></div><div class="grade"><strong>四年級</strong><span>規劃中</span></div><div class="grade"><strong>五年級</strong><span>規劃中</span></div><div class="grade"><strong>六年級</strong><span>規劃中</span></div></div>
+      </aside>
+    </section>
+    <section id="grade-2" aria-labelledby="grade-2-title">
+      <div class="section-title"><h2 id="grade-2-title">二年級課程入口</h2><p>以下只放目前可連到的練習頁。外部課程使用已建立的 GitHub Pages 連結；本 repo 內的數學期末冒險使用相對連結。</p></div>
+      <div class="courses">
+        <a class="course-card" style="--accent:#5aa6b2" href="https://chaohuang-tw.github.io/g2-mandarin-moon-river/g2-mandarin-moon-river/"><span class="tag">國語 第七課</span><h3>月光河</h3><p>故事理解、識字與句型練習。</p><span class="go">進入練習</span></a>
+        <a class="course-card" style="--accent:#bd6842" href="https://chaohuang-tw.github.io/g2-mandarin-dog-egg-case/"><span class="tag">國語</span><h3>黃狗生蛋</h3><p>閱讀推理與課文重點互動練習。</p><span class="go">進入練習</span></a>
+        <a class="course-card" style="--accent:#f1b643" href="https://chaohuang-tw.github.io/g2-mandarin-magic-brush-ma-liang/"><span class="tag">國語</span><h3>神筆馬良</h3><p>角色、情節與詞語理解練習。</p><span class="go">進入練習</span></a>
+        <a class="course-card" style="--accent:#1f6b4d" href="https://chaohuang-tw.github.io/g2-mandarin-happy-explorer/"><span class="tag">國語</span><h3>快樂的探險家</h3><p>課文閱讀與任務式問答。</p><span class="go">進入練習</span></a>
+        <a class="course-card" style="--accent:#8a6f3d" href="https://chaohuang-tw.github.io/g2-mandarin-little-reader-paradise/"><span class="tag">國語</span><h3>小讀者樂園</h3><p>閱讀素養與語文活動整理。</p><span class="go">進入練習</span></a>
+        <a class="course-card" style="--accent:#6f8f54" href="https://chaohuang-tw.github.io/g2-mandarin-giant-mountain/"><span class="tag">國語</span><h3>巨人山</h3><p>文章理解與語句練習。</p><span class="go">進入練習</span></a>
+        <a class="course-card" style="--accent:#4f7fc1" href="https://chaohuang-tw.github.io/g2-mandarin-moon-river/g2-math-final-adventure/"><span class="tag">數學</span><h3>二下數學期末大冒險</h3><p>期末複習與闖關練習。</p><span class="go">進入練習</span></a>
+      </div>
+    </section>
+    <section id="principles" class="note" aria-label="網站原則">
+      <div class="note-card"><h3>使用對象</h3><p>給國小學童使用，入口文字保持清楚，避免誇張宣傳；重點是能快速找到年級、科目與課程。</p></div>
+      <div class="note-card"><h3>安全與維護</h3><p>不要求登入、不收個資。後續新增課程時，以新增卡片與課程頁為主，不破壞既有入口。</p></div>
+    </section>
+    <footer><span>Interactive design by chaohuang-TW</span><span>First phase: Grade 2 Mandarin and Math practice</span></footer>
+  </main>
+</body>
 </html>
