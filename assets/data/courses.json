@@ -1,0 +1,130 @@
+[
+  {
+    "id": "moon-river",
+    "subject": "國語",
+    "lesson": "第七課",
+    "cardLabel": "國語 第七課",
+    "name": "月光河",
+    "platformTitle": "月光河互動練習",
+    "focus": "故事排序、部首辨識、字族應用、句型與聆聽理解",
+    "href": "https://chaohuang-tw.github.io/g2-mandarin-moon-river/",
+    "basis": "練習內容依據：國小二年級下學期國語第七課〈月光河〉",
+    "skillsIntro": [
+      "課文順序與故事理解",
+      "部首、字族與語詞辨識",
+      "句型與語氣詞運用",
+      "聆聽理解與重點擷取"
+    ],
+    "learnSummary": "我學會先抓住故事中的人物、事件和原因，再用生字、句型與聆聽線索完成作答。"
+  },
+  {
+    "id": "dog-egg-case",
+    "subject": "國語",
+    "lesson": "第八課",
+    "cardLabel": "國語 第八課",
+    "name": "狗窩蛋事件",
+    "platformTitle": "狗窩蛋事件互動練習",
+    "focus": "課文理解、角色證詞、線索推理、句子排序與生字辨識",
+    "href": "https://chaohuang-tw.github.io/g2-mandarin-dog-egg-case/",
+    "basis": "練習內容依據：國小二年級下學期國語第八課〈狗窩蛋事件〉",
+    "skillsIntro": [
+      "觀察事件現場與角色反應",
+      "分辨角色證詞與合理推論",
+      "用句子排序整理事情先後",
+      "用生字和線索完成真相報告"
+    ],
+    "learnSummary": "我學會根據證詞和線索慢慢推理，不急著下結論，也能整理句子順序說清楚事情經過。"
+  },
+  {
+    "id": "magic-brush",
+    "subject": "國語",
+    "lesson": "第九課",
+    "cardLabel": "國語 第九課",
+    "name": "神筆馬良",
+    "platformTitle": "神筆馬良互動練習",
+    "focus": "情節理解、相似字辨識、句型運用、景物描寫與創意表達",
+    "href": "https://chaohuang-tw.github.io/g2-mandarin-magic-brush-ma-liang/",
+    "basis": "練習內容依據：國小二年級下學期國語第九課〈神筆馬良〉",
+    "skillsIntro": [
+      "整理故事情節與因果",
+      "辨識相似字與部首",
+      "練習「不然」句型",
+      "用文字與創意完成表達"
+    ],
+    "learnSummary": "我學會用故事情節、字形線索和句型表達自己的想法，也能把畫面描述得更完整。"
+  },
+  {
+    "id": "happy-explorer",
+    "subject": "國語",
+    "lesson": "第十課",
+    "cardLabel": "國語 第十課",
+    "name": "快樂的探險家",
+    "platformTitle": "快樂的探險家互動練習",
+    "focus": "課文理解、字族運用、句型回報、摘要整理與生活日記",
+    "href": "https://chaohuang-tw.github.io/g2-mandarin-happy-explorer/",
+    "basis": "練習內容依據：國小二年級下學期國語第十課〈快樂的探險家〉",
+    "skillsIntro": [
+      "理解角色與探險情境",
+      "辨識寺字家族生字",
+      "完成句型回報與摘要",
+      "寫出自己的生活日記"
+    ],
+    "learnSummary": "我學會從課文找出人物、地點和重點，再用生字、句型和日記寫法表達探險收穫。"
+  },
+  {
+    "id": "little-reader",
+    "subject": "國語",
+    "lesson": "第十一課",
+    "cardLabel": "國語 第十一課",
+    "name": "小讀者樂園",
+    "platformTitle": "小讀者樂園互動練習",
+    "focus": "課文理解、書名號、食部字、不但而且句型與日記練習",
+    "href": "https://chaohuang-tw.github.io/g2-mandarin-little-reader-paradise/",
+    "basis": "練習內容依據：國小二年級下學期國語第十一課〈小讀者樂園〉",
+    "skillsIntro": [
+      "掌握日記中的人事時地物",
+      "辨識書名號與食部字",
+      "練習「不但……而且……」句型",
+      "完成圖書館與桌球日記任務"
+    ],
+    "learnSummary": "我學會從日記抓重點，也能分辨書名號和食部字，並把自己的活動寫成完整句子。"
+  },
+  {
+    "id": "giant-mountain",
+    "subject": "國語",
+    "lesson": "第十二課",
+    "cardLabel": "國語 第十二課",
+    "name": "巨人山",
+    "platformTitle": "巨人山互動練習",
+    "focus": "課文細節、譬喻句、情境推論、摘要整理與多音字辨識",
+    "href": "https://chaohuang-tw.github.io/g2-mandarin-giant-mountain/",
+    "basis": "練習內容依據：國小二年級下學期國語第十二課〈巨人山〉",
+    "skillsIntro": [
+      "回答課文細節與線索",
+      "理解譬喻句和外貌描寫",
+      "做情境推論與摘要整理",
+      "分辨多音字與形近字"
+    ],
+    "learnSummary": "我學會從課文細節推理原因，也能看懂譬喻句，整理重點後再做判斷。"
+  },
+  {
+    "id": "math-final",
+    "subject": "數學",
+    "lesson": "二下期末",
+    "cardLabel": "數學 二下期末",
+    "name": "二下數學期末大冒險",
+    "platformTitle": "二下數學期末大冒險",
+    "focus": "六個任務：兩步驟題、公尺公分、分類形體、平均分配、分數比較與綜合複習",
+    "href": "https://chaohuang-tw.github.io/g2-mandarin-moon-river/g2-math-final-adventure/",
+    "basis": "練習內容依據：國小二年級下學期數學",
+    "skillsIntro": [
+      "兩步驟應用問題",
+      "公尺和公分換算",
+      "分類與立體形體",
+      "平均分配與分裝",
+      "平分、幾分之一與分數比較",
+      "期末綜合挑戰"
+    ],
+    "learnSummary": "我學會用六個任務整理期末重點，能判讀算式、換算長度、分類形體、平均分配，也能比較簡單分數。"
+  }
+]

@@ -1,0 +1,335 @@
+:root {
+  color-scheme: light;
+  --ink: #18231d;
+  --muted: #57685f;
+  --paper: #fff8ea;
+  --surface: rgba(255, 253, 246, 0.88);
+  --line: rgba(24, 35, 29, 0.2);
+  --leaf: #1d6a4d;
+  --leaf-dark: #0d4131;
+  --river: #4f9cab;
+  --sun: #eeb449;
+  --clay: #bb6a42;
+  --shadow: 0 24px 64px rgba(19, 40, 32, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: "BiauKai", "Kaiti TC", "PingFang TC", "Noto Serif TC", serif;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(238, 180, 73, 0.28), transparent 24rem),
+    radial-gradient(circle at 92% 14%, rgba(79, 156, 171, 0.24), transparent 24rem),
+    linear-gradient(135deg, #f7ecd2 0%, #f1deb1 42%, #d8e7d3 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+.site-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 54px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 24px;
+  min-height: 520px;
+}
+
+.hero-copy,
+.hero-side,
+.course-card,
+.support-card {
+  border: 2px solid rgba(24, 35, 29, 0.82);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
+}
+
+.hero-copy {
+  position: relative;
+  overflow: hidden;
+  border-radius: 42px;
+  padding: clamp(28px, 5vw, 64px);
+}
+
+.hero-copy::after {
+  content: "";
+  position: absolute;
+  inset: auto -6% -28% -6%;
+  height: 48%;
+  background: linear-gradient(160deg, rgba(79, 156, 171, 0.64), rgba(29, 106, 77, 0.34));
+  border-radius: 58% 42% 0 0;
+  transform: rotate(-2deg);
+}
+
+.hero-copy > * {
+  position: relative;
+}
+
+.hero-kicker,
+.section-kicker,
+.course-label {
+  font-family: "PingFang TC", "Noto Sans TC", sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.hero-kicker,
+.section-kicker {
+  margin-bottom: 16px;
+  color: var(--leaf-dark);
+  font-size: 0.84rem;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 8em;
+  margin-bottom: 18px;
+  font-size: clamp(3.4rem, 8vw, 6.6rem);
+  line-height: 0.94;
+  letter-spacing: -0.08em;
+}
+
+.hero-text {
+  max-width: 34rem;
+  margin-bottom: 0;
+  color: var(--leaf-dark);
+  font-family: "PingFang TC", "Noto Sans TC", sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  margin-top: 28px;
+}
+
+.primary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 12px 20px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--sun);
+  box-shadow: 5px 5px 0 var(--leaf-dark);
+  font-family: "PingFang TC", "Noto Sans TC", sans-serif;
+  font-weight: 900;
+}
+
+.hero-side {
+  border-radius: 42px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.grade-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+.grade-card {
+  min-height: 96px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.52);
+  font-family: "PingFang TC", "Noto Sans TC", sans-serif;
+}
+
+.grade-card strong {
+  display: block;
+  font-size: 1.15rem;
+}
+
+.grade-card span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.grade-card.active {
+  background: var(--leaf);
+  color: #fffdf5;
+  border-color: var(--leaf-dark);
+  box-shadow: 4px 4px 0 rgba(13, 65, 49, 0.38);
+}
+
+.grade-card.active span {
+  color: rgba(255, 253, 245, 0.84);
+}
+
+.course-section,
+.support-section {
+  margin-top: 56px;
+}
+
+.section-head {
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-bottom: 0;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.02;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.course-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+  min-height: 250px;
+  padding: 24px;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 70px rgba(19, 40, 32, 0.22);
+}
+
+.course-card::after {
+  content: "";
+  position: absolute;
+  right: -36px;
+  bottom: -44px;
+  width: 132px;
+  height: 132px;
+  border-radius: 38px;
+  background: linear-gradient(135deg, var(--river), var(--clay));
+  opacity: 0.22;
+  transform: rotate(18deg);
+}
+
+.course-card > * {
+  position: relative;
+}
+
+.course-label {
+  display: inline-flex;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(24, 35, 29, 0.08);
+  font-size: 0.78rem;
+}
+
+.course-name {
+  margin: 18px 0 10px;
+  font-size: 1.9rem;
+  line-height: 1.12;
+}
+
+.course-focus {
+  margin-bottom: 26px;
+  color: var(--muted);
+  font-family: "PingFang TC", "Noto Sans TC", sans-serif;
+  line-height: 1.75;
+}
+
+.course-action {
+  position: absolute;
+  left: 24px;
+  bottom: 22px;
+  font-family: "PingFang TC", "Noto Sans TC", sans-serif;
+  font-weight: 900;
+  color: var(--leaf-dark);
+}
+
+.support-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.support-card {
+  border-radius: 30px;
+  padding: 24px;
+}
+
+.support-card p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-family: "PingFang TC", "Noto Sans TC", sans-serif;
+  line-height: 1.8;
+}
+
+.site-footer {
+  margin-top: 56px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-family: "PingFang TC", "Noto Sans TC", sans-serif;
+  font-size: 0.9rem;
+}
+
+.load-fallback {
+  color: var(--muted);
+  font-family: "PingFang TC", "Noto Sans TC", sans-serif;
+}
+
+@media (max-width: 900px) {
+  .hero,
+  .support-section,
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .grade-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .site-shell {
+    width: min(100% - 24px, 1180px);
+    padding-top: 20px;
+  }
+
+  .hero-copy,
+  .hero-side,
+  .course-card,
+  .support-card {
+    border-radius: 28px;
+  }
+
+  .grade-grid {
+    grid-template-columns: 1fr;
+  }
+}

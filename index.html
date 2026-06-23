@@ -4,40 +4,70 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>小學學習冒險島</title>
-  <meta name="description" content="國小課程互動練習網站入口。">
-  <style>
-    :root{--ink:#17201b;--muted:#5a6a60;--paper:#fff8ea;--leaf:#1f6b4d;--leaf2:#0e3f32;--river:#5aa6b2;--sun:#f1b643;--line:rgba(23,32,27,.16);--shadow:0 22px 60px rgba(22,45,36,.18)}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"BiauKai","Kaiti TC","PingFang TC","Noto Serif TC",serif;background:radial-gradient(circle at 8% 8%,rgba(241,182,67,.38),transparent 24rem),radial-gradient(circle at 88% 14%,rgba(90,166,178,.35),transparent 26rem),linear-gradient(135deg,#f8ecd0 0%,#f1dfb6 42%,#dce9d2 100%)}a{color:inherit}.site{width:min(1180px,calc(100% - 36px));margin:auto;padding:38px 0 54px}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:stretch;min-height:500px}.hero-card,.panel,.course-card{border:2px solid rgba(23,32,27,.82);background:rgba(255,248,234,.82);box-shadow:var(--shadow);backdrop-filter:blur(8px)}.hero-card{position:relative;overflow:hidden;border-radius:40px;padding:clamp(28px,5vw,64px)}.hero-card:before{content:"";position:absolute;inset:auto -8% -28% -8%;height:50%;background:linear-gradient(160deg,rgba(90,166,178,.72),rgba(31,107,77,.38));border-radius:60% 45% 0 0;transform:rotate(-2deg)}.hero-card>*{position:relative}.eyebrow{display:inline-flex;margin:0 0 22px;padding:9px 14px;border:1px solid var(--ink);border-radius:999px;background:#fffdf4;font-family:"PingFang TC",sans-serif;font-size:13px;letter-spacing:.12em;font-weight:800}h1{margin:0;max-width:8em;font-size:clamp(52px,8vw,104px);line-height:.92;letter-spacing:-.08em}.declaration{margin-top:28px;display:inline-block;padding:12px 16px;border:2px solid var(--ink);border-radius:18px;background:var(--sun);box-shadow:5px 5px 0 var(--leaf2);font-family:Georgia,"Times New Roman",serif;font-weight:900;letter-spacing:.02em}.panel{border-radius:40px;padding:28px;display:flex;align-items:center;background:linear-gradient(180deg,rgba(255,248,234,.9),rgba(255,248,234,.66)),repeating-linear-gradient(90deg,transparent 0 22px,rgba(31,107,77,.06) 22px 24px)}.panel h2,.section-title h2{margin:0;font-size:clamp(28px,4vw,46px);line-height:1.05}.course-card p,.note p{font-family:"PingFang TC","Noto Sans TC",sans-serif;color:var(--muted);line-height:1.8}.grade-map{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%}.grade{min-height:94px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.45);padding:14px;font-family:"PingFang TC",sans-serif;text-decoration:none}.grade strong{display:block;font-size:20px}.grade span{display:block;margin-top:8px;color:var(--muted);font-size:13px}.grade.active{background:var(--leaf);color:#fffdf4;border-color:var(--leaf2);box-shadow:5px 5px 0 rgba(14,63,50,.4);transition:transform .18s ease,box-shadow .18s ease}.grade.active:hover{transform:translateY(-4px);box-shadow:8px 8px 0 rgba(14,63,50,.42)}.grade.active span{color:rgba(255,253,244,.82)}section{margin-top:54px}.section-title{margin-bottom:20px}.courses{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.course-card{position:relative;min-height:250px;overflow:hidden;border-radius:30px;padding:24px;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease}.course-card:hover{transform:translateY(-5px);box-shadow:0 28px 70px rgba(22,45,36,.23)}.course-card:after{content:"";position:absolute;right:-36px;bottom:-44px;width:130px;height:130px;border-radius:40px;background:var(--accent,var(--river));opacity:.28;transform:rotate(18deg)}.tag{display:inline-flex;padding:7px 10px;border-radius:999px;background:rgba(23,32,27,.08);font-family:"PingFang TC",sans-serif;font-size:13px;font-weight:800}.course-card h3{margin:18px 0 10px;font-size:30px;line-height:1.12}.course-card p{margin:0 0 24px}.go{position:absolute;left:24px;bottom:22px;font-family:"PingFang TC",sans-serif;font-weight:900;color:var(--leaf2)}.note{max-width:520px}.note-card{border:1px solid var(--line);border-radius:28px;padding:24px;background:rgba(255,253,244,.58)}.note h3{margin:0 0 10px;font-size:24px}.note p{margin:0}footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;color:var(--muted);font-family:"PingFang TC",sans-serif;font-size:14px}@media(max-width:900px){.hero{grid-template-columns:1fr}.courses{grid-template-columns:repeat(2,1fr)}}@media(max-width:640px){.site{width:min(100% - 24px,1180px);padding-top:18px}.hero-card,.panel{border-radius:28px}.grade-map,.courses{grid-template-columns:1fr}h1{font-size:58px}.course-card{min-height:220px}}
-  </style>
+  <meta name="description" content="國小課文與數學複習互動練習平台。">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="site">
+  <main class="site-shell">
     <section class="hero" aria-labelledby="home-title">
-      <div class="hero-card">
-        <p class="eyebrow">國小課程互動練習網站入口</p>
+      <div class="hero-copy">
+        <p class="hero-kicker">國小互動練習平台</p>
         <h1 id="home-title">小學學習冒險島</h1>
-        <div class="declaration">Interactive design by chaohuang-TW</div>
+        <p class="hero-text">把課程變成孩子可以自己闖關的互動練習</p>
+        <div class="hero-actions">
+          <a class="primary-link" href="#grade-2">開始二年級練習</a>
+        </div>
       </div>
-      <aside class="panel" id="grades" aria-label="年級狀態">
-        <div class="grade-map"><div class="grade"><strong>一年級</strong><span>規劃中</span></div><a class="grade active" href="#grade-2"><strong>二年級</strong><span>進入課程</span></a><div class="grade"><strong>三年級</strong><span>規劃中</span></div><div class="grade"><strong>四年級</strong><span>規劃中</span></div><div class="grade"><strong>五年級</strong><span>規劃中</span></div><div class="grade"><strong>六年級</strong><span>規劃中</span></div></div>
-      </aside>
-    </section>
-    <section id="grade-2" aria-labelledby="grade-2-title">
-      <div class="section-title"><h2 id="grade-2-title">二年級課程入口</h2></div>
-      <div class="courses">
-        <a class="course-card" style="--accent:#5aa6b2" href="https://chaohuang-tw.github.io/g2-mandarin-moon-river/g2-mandarin-moon-river/"><span class="tag">國語 第七課</span><h3>月光河</h3><p>故事理解、識字與句型練習。</p><span class="go">進入練習</span></a>
-        <a class="course-card" style="--accent:#bd6842" href="https://chaohuang-tw.github.io/g2-mandarin-dog-egg-case/"><span class="tag">國語</span><h3>黃狗生蛋</h3><p>閱讀推理與課文重點互動練習。</p><span class="go">進入練習</span></a>
-        <a class="course-card" style="--accent:#f1b643" href="https://chaohuang-tw.github.io/g2-mandarin-magic-brush-ma-liang/"><span class="tag">國語</span><h3>神筆馬良</h3><p>角色、情節與詞語理解練習。</p><span class="go">進入練習</span></a>
-        <a class="course-card" style="--accent:#1f6b4d" href="https://chaohuang-tw.github.io/g2-mandarin-happy-explorer/"><span class="tag">國語</span><h3>快樂的探險家</h3><p>課文閱讀與任務式問答。</p><span class="go">進入練習</span></a>
-        <a class="course-card" style="--accent:#8a6f3d" href="https://chaohuang-tw.github.io/g2-mandarin-little-reader-paradise/"><span class="tag">國語</span><h3>小讀者樂園</h3><p>閱讀素養與語文活動整理。</p><span class="go">進入練習</span></a>
-        <a class="course-card" style="--accent:#6f8f54" href="https://chaohuang-tw.github.io/g2-mandarin-giant-mountain/"><span class="tag">國語</span><h3>巨人山</h3><p>文章理解與語句練習。</p><span class="go">進入練習</span></a>
-        <a class="course-card" style="--accent:#4f7fc1" href="https://chaohuang-tw.github.io/g2-mandarin-moon-river/g2-math-final-adventure/"><span class="tag">數學</span><h3>二下數學期末大冒險</h3><p>期末複習與闖關練習。</p><span class="go">進入練習</span></a>
+      <div class="hero-side" aria-label="年級入口">
+        <div class="grade-grid">
+          <div class="grade-card"><strong>一年級</strong><span>規劃中</span></div>
+          <a class="grade-card active" href="#grade-2"><strong>二年級</strong><span>開始練習</span></a>
+          <div class="grade-card"><strong>三年級</strong><span>規劃中</span></div>
+          <div class="grade-card"><strong>四年級</strong><span>規劃中</span></div>
+          <div class="grade-card"><strong>五年級</strong><span>規劃中</span></div>
+          <div class="grade-card"><strong>六年級</strong><span>規劃中</span></div>
+        </div>
       </div>
     </section>
-    <section id="principles" class="note" aria-label="網站原則">
-      <div class="note-card"><h3>使用對象</h3><p>提供國小學童練習使用。</p></div>
+
+    <section class="course-section" id="grade-2" aria-labelledby="grade-2-title">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">二年級課程</p>
+          <h2 id="grade-2-title">二年級課程入口</h2>
+        </div>
+      </div>
+      <div class="course-grid" id="course-grid"></div>
     </section>
-    <footer><span>Interactive design by chaohuang-TW</span><span>First phase: Grade 2 Mandarin and Math practice</span></footer>
+
+    <section class="support-section" aria-label="平台說明">
+      <article class="support-card">
+        <p class="section-kicker">給家長的話</p>
+        <h2>孩子可以直接開始練習</h2>
+        <p>不需要登入、不蒐集個資，孩子可以直接練習，適合課後複習與考前整理。</p>
+      </article>
+      <article class="support-card">
+        <p class="section-kicker">給老師的話</p>
+        <h2>目前先從二下建立平台骨架</h2>
+        <p>目前以二年級下學期為第一階段，後續可能依年級、科目、課次擴充。</p>
+      </article>
+    </section>
+
+    <footer class="site-footer">
+      <p>提供國小學童練習使用。</p>
+      <p>Interactive design by chaohuang-TW</p>
+    </footer>
   </main>
+
+  <template id="course-card-template">
+    <a class="course-card" href="">
+      <p class="course-label"></p>
+      <h3 class="course-name"></h3>
+      <p class="course-focus"></p>
+      <span class="course-action">進入練習</span>
+    </a>
+  </template>
+
+  <script src="app.js"></script>
 </body>
 </html>
