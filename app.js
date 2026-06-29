@@ -30,14 +30,18 @@ function renderCourses(courses) {
   });
 }
 
-function trackAiVideo(video) {
+function sendEvent(name, parameters) {
   if (typeof window.gtag === "function") {
-    window.gtag("event", "select_ai_video", {
-      video_id: video.videoId,
-      video_title: video.videoTitle,
-      youtube_url: video.youtubeUrl
-    });
+    window.gtag("event", name, parameters);
   }
+}
+
+function trackAiVideo(video) {
+  sendEvent("select_ai_video", {
+    video_id: video.videoId,
+    video_title: video.videoTitle,
+    youtube_url: video.youtubeUrl
+  });
 }
 
 function bindAiVideoTracking() {
@@ -52,6 +56,52 @@ function bindAiVideoTracking() {
   });
 }
 
+function bindHomeCategoryTracking() {
+  document.querySelectorAll(".track-home-category").forEach((element) => {
+    element.addEventListener("click", () => {
+      sendEvent("select_home_category", {
+        category_id: element.dataset.categoryId,
+        category_name: element.dataset.categoryName,
+        href: element.getAttribute("href")
+      });
+    });
+  });
+}
+
+function bindPodcastTracking() {
+  document.querySelectorAll(".track-podcast").forEach((element) => {
+    element.addEventListener("click", () => {
+      sendEvent("select_podcast", {
+        podcast_title: element.dataset.podcastTitle,
+        platform: element.dataset.platform,
+        url: element.getAttribute("href")
+      });
+    });
+  });
+}
+
+function bindAiNoteTracking() {
+  document.querySelectorAll(".track-ai-note").forEach((element) => {
+    element.addEventListener("click", () => {
+      sendEvent("select_ai_note", {
+        note_title: element.dataset.noteTitle,
+        status: element.dataset.status
+      });
+    });
+  });
+}
+
+function bindLabProjectTracking() {
+  document.querySelectorAll(".track-lab-project").forEach((element) => {
+    element.addEventListener("click", () => {
+      sendEvent("select_lab_project", {
+        project_title: element.dataset.projectTitle,
+        status: element.dataset.status
+      });
+    });
+  });
+}
+
 async function bootstrap() {
   const target = document.querySelector("#course-grid");
   try {
@@ -63,4 +113,8 @@ async function bootstrap() {
 }
 
 bindAiVideoTracking();
+bindHomeCategoryTracking();
+bindPodcastTracking();
+bindAiNoteTracking();
+bindLabProjectTracking();
 bootstrap();
