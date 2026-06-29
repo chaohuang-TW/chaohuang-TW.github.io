@@ -15,6 +15,17 @@ function renderCourses(courses) {
     card.querySelector(".course-label").textContent = course.cardLabel;
     card.querySelector(".course-name").textContent = course.name;
     card.querySelector(".course-focus").textContent = `能力重點：${course.focus}`;
+    card.addEventListener("click", () => {
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "select_course", {
+          course_id: course.id,
+          course_name: course.name,
+          subject: course.subject,
+          lesson: course.lesson,
+          href: course.href
+        });
+      }
+    });
     target.append(fragment);
   });
 }
