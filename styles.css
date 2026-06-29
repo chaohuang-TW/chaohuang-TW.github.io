@@ -187,6 +187,7 @@ h1 {
 }
 
 .course-section,
+.ai-video-section,
 .support-section {
   margin-top: 56px;
 }
@@ -268,6 +269,70 @@ h2 {
   color: var(--leaf-dark);
 }
 
+.ai-video-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(16rem, 1.1fr);
+  gap: 18px;
+  align-items: end;
+}
+
+.section-note {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-family: "PingFang TC", "Noto Sans TC", sans-serif;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.ai-video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.ai-video-card {
+  border: 2px solid rgba(24, 35, 29, 0.82);
+  border-radius: 30px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.ai-video-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+  font-family: "PingFang TC", "Noto Sans TC", sans-serif;
+  font-weight: 900;
+}
+
+.ai-video-link span:last-child {
+  color: var(--leaf-dark);
+  font-size: 0.88rem;
+}
+
+.ai-video-frame {
+  padding: 18px;
+  background:
+    linear-gradient(180deg, rgba(79, 156, 171, 0.12), transparent 44%),
+    rgba(255, 255, 255, 0.34);
+}
+
+.ai-video-frame iframe {
+  display: block;
+  width: min(100%, 360px);
+  aspect-ratio: 9 / 16;
+  margin: 0 auto;
+  border: 0;
+  border-radius: 22px;
+  box-shadow: 0 18px 44px rgba(19, 40, 32, 0.18);
+  background: #111;
+}
+
 .support-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -316,6 +381,13 @@ h2 {
   }
 }
 
+@media (max-width: 760px) {
+  .ai-video-head,
+  .ai-video-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 640px) {
   .site-shell {
     width: min(100% - 24px, 1180px);
@@ -325,11 +397,21 @@ h2 {
   .hero-copy,
   .hero-side,
   .course-card,
+  .ai-video-card,
   .support-card {
     border-radius: 28px;
   }
 
   .grade-grid {
     grid-template-columns: 1fr;
+  }
+
+  .ai-video-link {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ai-video-frame {
+    padding: 14px;
   }
 }

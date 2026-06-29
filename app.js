@@ -30,6 +30,28 @@ function renderCourses(courses) {
   });
 }
 
+function trackAiVideo(video) {
+  if (typeof window.gtag === "function") {
+    window.gtag("event", "select_ai_video", {
+      video_id: video.videoId,
+      video_title: video.videoTitle,
+      youtube_url: video.youtubeUrl
+    });
+  }
+}
+
+function bindAiVideoTracking() {
+  document.querySelectorAll(".ai-video-card").forEach((card) => {
+    const video = {
+      videoId: card.dataset.videoId,
+      videoTitle: card.dataset.videoTitle,
+      youtubeUrl: card.dataset.youtubeUrl
+    };
+
+    card.addEventListener("click", () => trackAiVideo(video));
+  });
+}
+
 async function bootstrap() {
   const target = document.querySelector("#course-grid");
   try {
@@ -40,4 +62,5 @@ async function bootstrap() {
   }
 }
 
+bindAiVideoTracking();
 bootstrap();
