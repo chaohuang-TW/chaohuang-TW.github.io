@@ -13,136 +13,83 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AI 學習冒險島</title>
-  <meta name="description" content="親子故事、AI 短片、互動練習與實作心得的學習入口。">
+  <meta name="description" content="AI 課程、工具筆記、短影音、Podcast 與互動作品的學習入口">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="site-shell">
     <section class="hero" aria-labelledby="home-title">
       <div class="hero-copy">
-        <p class="hero-kicker">親子教育與 AI 作品入口</p>
+        <p class="hero-kicker">AI learning portfolio</p>
         <h1 id="home-title">AI 學習冒險島</h1>
-        <p class="hero-text">親子故事、AI 短片、互動練習與實作心得的學習入口。</p>
+        <p class="hero-text">AI 課程、工具筆記、短影音、Podcast 與互動作品的學習入口</p>
+        <p class="hero-description">整理我用 AI 做課程、簡報、文書、網站、短影音與親子學習作品的實作紀錄。</p>
         <div class="hero-actions" aria-label="主要入口">
           <a
             class="primary-link track-home-category"
-            href="#learning-games"
-            data-category-id="learning-games"
-            data-category-name="小學生互動練習">開始互動練習</a>
+            href="#course-hub"
+            data-category-id="course-hub"
+            data-category-name="課程中心">查看課程中心</a>
+          <a
+            class="secondary-link track-home-category"
+            href="#ai-notes"
+            data-category-id="ai-notes"
+            data-category-name="AI 工具應用筆記">AI 工具筆記</a>
           <a
             class="secondary-link track-home-category"
             href="#mica-ai-videos"
             data-category-id="mica-ai-videos"
             data-category-name="Mica AI 短片">觀看 AI 短片</a>
-          <a
-            class="secondary-link track-home-category track-podcast"
-            href="https://podcasts.apple.com/tw/podcast/%E5%8F%94%E5%A7%A8%E8%AC%9B%E5%8F%A4/id1829910020"
-            target="_blank"
-            rel="noopener"
-            data-category-id="podcast"
-            data-category-name="叔姨講古 Podcast"
-            data-podcast-title="叔姨講古"
-            data-platform="Apple Podcasts">收聽叔姨講古</a>
         </div>
       </div>
-      <aside class="hero-side" aria-label="網站內容概覽">
-        <div class="hero-overview">
-          <p>入口大廳</p>
-          <ol>
-            <li>課程互動練習</li>
-            <li>AI 短影音學習</li>
-            <li>親子故事 Podcast</li>
-            <li>AI 實作心得</li>
-          </ol>
+      <aside class="hero-panel" aria-label="網站內容概覽">
+        <p class="panel-label">brand hub</p>
+        <div class="panel-grid">
+          <span>AI 課程</span>
+          <span>工具筆記</span>
+          <span>短影音</span>
+          <span>Podcast</span>
+          <span>互動作品</span>
+          <span>實驗紀錄</span>
         </div>
       </aside>
     </section>
 
-    <section class="category-section" aria-labelledby="category-title">
-      <div class="section-head">
-        <p class="section-kicker">學習入口</p>
-        <h2 id="category-title">五大入口</h2>
-      </div>
-      <div class="category-grid">
-        <a
-          class="category-card track-home-category"
-          href="#learning-games"
-          data-category-id="learning-games"
-          data-category-name="小學生互動練習">
-          <span class="category-label">互動練習</span>
-          <h3>小學生互動練習</h3>
-          <p>把課程變成孩子可以自己闖關的互動練習，從國語、數學開始慢慢擴充。</p>
-          <span class="card-cta">進入課程</span>
-        </a>
-        <a
-          class="category-card track-home-category"
-          href="#mica-ai-videos"
-          data-category-id="mica-ai-videos"
-          data-category-name="Mica AI 短片">
-          <span class="category-label">短影音</span>
-          <h3>Mica AI 短片</h3>
-          <p>用短影音認識 AI 概念，讓抽象知識變得簡單、有趣、好理解。</p>
-          <span class="card-cta">觀看短片</span>
-        </a>
-        <a
-          class="category-card track-home-category track-podcast"
-          href="https://podcasts.apple.com/tw/podcast/%E5%8F%94%E5%A7%A8%E8%AC%9B%E5%8F%A4/id1829910020"
-          target="_blank"
-          rel="noopener"
-          data-category-id="podcast"
-          data-category-name="叔姨講古 Podcast"
-          data-podcast-title="叔姨講古"
-          data-platform="Apple Podcasts">
-          <span class="category-label">Podcast</span>
-          <h3>叔姨講古 Podcast</h3>
-          <p>睡前故事、經典文學與親子共聽內容，用溫暖的聲音陪孩子進入故事世界。</p>
-          <span class="card-cta">前往收聽</span>
-        </a>
-        <a
-          class="category-card track-home-category track-ai-note"
-          href="#ai-notes"
-          data-category-id="ai-notes"
-          data-category-name="AI 心得分享"
-          data-note-title="AI 心得分享"
-          data-status="建置中">
-          <span class="category-label">實作筆記</span>
-          <h3>AI 心得分享</h3>
-          <p>記錄我如何用 AI 做網站、做遊戲、做內容，整理成可以複製的實作筆記。</p>
-          <span class="card-cta">即將整理</span>
-        </a>
-        <a
-          class="category-card track-home-category track-lab-project"
-          href="#ai-lab"
-          data-category-id="ai-lab"
-          data-category-name="AI 實驗室"
-          data-project-title="AI 實驗室"
-          data-status="陸續加入">
-          <span class="category-label">作品實驗</span>
-          <h3>AI 實驗室</h3>
-          <p>收錄其他 AI 作品、提示詞實驗、圖卡、短影音與未來工具。</p>
-          <span class="card-cta">陸續加入</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="course-section" id="learning-games" aria-labelledby="learning-games-title">
+    <section class="course-hub" id="course-hub" aria-labelledby="course-hub-title">
       <div class="section-head split-head">
         <div>
-          <p class="section-kicker">小學生互動練習</p>
-          <h2 id="learning-games-title">小學生互動練習</h2>
+          <p class="section-kicker">Course center</p>
+          <h2 id="course-hub-title">課程中心</h2>
         </div>
-        <p class="section-note">目前先從二年級國語與數學開始，後續依年級、科目與課次擴充。</p>
+        <p class="section-note">這裡會陸續整理我的 AI 課程、講義、實作資源與課後補充。</p>
       </div>
-      <div class="course-grid" id="course-grid"></div>
+      <div class="course-feature-grid" id="course-hub-grid"></div>
+    </section>
+
+    <section class="notes-section" id="ai-notes" aria-labelledby="ai-notes-title">
+      <div class="section-head split-head">
+        <div>
+          <p class="section-kicker">Tool notes</p>
+          <h2 id="ai-notes-title">AI 工具應用筆記</h2>
+        </div>
+        <p class="section-note">整理 AI 工具在課程設計、文書整理、網站製作與內容產出的實作心得；目前先保留主題，後續再補完整文章。</p>
+      </div>
+      <div class="note-list">
+        <button class="note-item track-ai-note" type="button" data-note-title="我如何用 AI 做出互動學習網站" data-status="建置中">我如何用 AI 做出互動學習網站</button>
+        <button class="note-item track-ai-note" type="button" data-note-title="用 Codex 管理 GitHub Pages 的心得" data-status="建置中">用 Codex 管理 GitHub Pages 的心得</button>
+        <button class="note-item track-ai-note" type="button" data-note-title="從 Prompt 到作品：AI 協作的工作方式" data-status="建置中">從 Prompt 到作品：AI 協作的工作方式</button>
+      </div>
+      <button class="status-cta track-ai-note" type="button" data-note-title="AI 工具應用筆記" data-status="內容整理中">內容整理中</button>
     </section>
 
     <section class="ai-video-section" id="mica-ai-videos" aria-labelledby="mica-ai-video-title">
       <div class="section-head split-head">
         <div>
-          <p class="section-kicker">Mica AI 短片</p>
+          <p class="section-kicker">Mica AI video</p>
           <h2 id="mica-ai-video-title">Mica AI 短片</h2>
         </div>
-        <p class="section-note">用短影音認識 AI 概念，適合親子一起觀看，也可以作為課前暖身或課後延伸。未來若要擴充，會另建短片頁，不讓首頁塞滿影片。</p>
+        <p class="section-note">用短影音認識 AI 概念，適合課前暖身、親子共看或延伸討論。首頁先保留兩支，未來擴充會另建短片頁。</p>
       </div>
       <div class="ai-video-grid">
         <article
@@ -201,26 +148,21 @@
       </article>
     </section>
 
-    <section class="notes-section" id="ai-notes" aria-labelledby="ai-notes-title">
+    <section class="course-section" id="learning-games" aria-labelledby="learning-games-title">
       <div class="section-head split-head">
         <div>
-          <p class="section-kicker">AI 心得分享</p>
-          <h2 id="ai-notes-title">AI 心得分享</h2>
+          <p class="section-kicker">Interactive works</p>
+          <h2 id="learning-games-title">小學生互動練習</h2>
         </div>
-        <p class="section-note">先做成即將整理區，保留真實實作筆記的位置，不放假文章。</p>
+        <p class="section-note">保留國小學童可直接操作的互動作品，目前先從二年級國語與數學開始，後續依年級、科目與課次擴充。</p>
       </div>
-      <div class="note-list">
-        <button class="note-item track-ai-note" type="button" data-note-title="我如何用 AI 做出互動學習網站" data-status="建置中">我如何用 AI 做出互動學習網站</button>
-        <button class="note-item track-ai-note" type="button" data-note-title="用 Codex 管理 GitHub Pages 的心得" data-status="建置中">用 Codex 管理 GitHub Pages 的心得</button>
-        <button class="note-item track-ai-note" type="button" data-note-title="從 Prompt 到作品：AI 協作的工作方式" data-status="建置中">從 Prompt 到作品：AI 協作的工作方式</button>
-      </div>
-      <button class="status-cta track-ai-note" type="button" data-note-title="AI 心得分享" data-status="內容整理中">內容整理中</button>
+      <div class="course-grid" id="course-grid"></div>
     </section>
 
     <section class="lab-section" id="ai-lab" aria-labelledby="ai-lab-title">
       <article class="feature-panel compact-panel">
         <div>
-          <p class="section-kicker">AI 實驗室</p>
+          <p class="section-kicker">AI lab</p>
           <h2 id="ai-lab-title">AI 實驗室</h2>
           <p>未來會收錄 AI 圖卡、短影音、提示詞、互動工具與實驗作品。</p>
         </div>
@@ -230,22 +172,41 @@
 
     <section class="support-section" aria-label="平台說明">
       <article class="support-card">
-        <p class="section-kicker">給家長的話</p>
-        <h2>孩子可以直接開始探索</h2>
-        <p>這裡整理互動練習、AI 短片與親子故事內容，適合課後複習、睡前共聽，也能陪孩子慢慢理解 AI。核心隱私原則不變：不需要登入、不蒐集姓名或帳號資料；網站僅使用匿名流量統計，幫助改善練習內容。</p>
+        <p class="section-kicker">Privacy</p>
+        <h2>開放瀏覽，降低使用門檻</h2>
+        <p>不需要登入、不蒐集姓名或帳號資料；網站僅使用匿名流量統計，幫助改善練習內容。</p>
       </article>
       <article class="support-card">
-        <p class="section-kicker">給老師的話</p>
-        <h2>從課程練習擴充到 AI 學習入口</h2>
-        <p>目前互動練習先從二年級國語與數學開始，後續可能依年級、科目、課次、AI 概念短片與實作心得逐步擴充。</p>
+        <p class="section-kicker">Direction</p>
+        <h2>長期整理 AI 學習與作品</h2>
+        <p>這裡會持續收納 AI 課程、工具筆記、短影音、Podcast、互動作品與實驗紀錄。</p>
       </article>
     </section>
 
     <footer class="site-footer">
-      <p>提供親子共學、國小學童練習與 AI 學習探索使用。</p>
+      <p>AI 課程、工具筆記、短影音、Podcast 與互動作品的學習入口。</p>
       <p>Interactive design by chaohuang-TW</p>
     </footer>
   </main>
+
+  <template id="course-feature-template">
+    <article class="course-feature-card track-course-hub" tabindex="0">
+      <div class="course-cover-wrap">
+        <img class="course-cover" src="" alt="">
+        <div class="course-cover-fallback">課程封面準備中</div>
+      </div>
+      <div class="course-feature-body">
+        <div class="course-feature-topline">
+          <span class="course-status"></span>
+          <span class="course-subtitle"></span>
+        </div>
+        <h3 class="course-feature-title"></h3>
+        <p class="course-feature-description"></p>
+        <div class="course-tool-list" aria-label="課前準備工具"></div>
+        <div class="course-resource-list" aria-label="課程資源"></div>
+      </div>
+    </article>
+  </template>
 
   <template id="course-card-template">
     <a class="course-card" href="">

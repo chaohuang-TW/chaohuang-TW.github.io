@@ -1,0 +1,42 @@
+[
+  {
+    "id": "gen-ai-software-applications",
+    "title": "生成式 AI 軟體應用課程",
+    "subtitle": "ChatGPT × NotebookLM × Notion",
+    "description": "從文書、簡報、報表到會議管理，整理課前準備、講義與實作資源。",
+    "status": "即將上架",
+    "cover": "assets/images/gen-ai-course-banner.jpeg",
+    "href": "#course-hub",
+    "prepTools": [
+      {
+        "name": "ChatGPT",
+        "href": "https://chatgpt.com/"
+      },
+      {
+        "name": "NotebookLM",
+        "href": "https://notebooklm.google.com/"
+      },
+      {
+        "name": "Notion",
+        "href": "https://www.notion.so/"
+      }
+    ],
+    "resources": [
+      {
+        "label": "課前準備",
+        "status": "可查看",
+        "target": "課前準備"
+      },
+      {
+        "label": "課程講義",
+        "status": "即將開放",
+        "target": "課程講義"
+      },
+      {
+        "label": "實作資源",
+        "status": "整理中",
+        "target": "實作資源"
+      }
+    ]
+  }
+]
