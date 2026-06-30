@@ -173,6 +173,47 @@ function bindPodcastTracking() {
   });
 }
 
+function trackPodcastEpisode(episode) {
+  sendEvent("select_podcast_episode", {
+    episode_id: episode.id,
+    episode_title: episode.title,
+    platform: episode.platform,
+    href: episode.href
+  });
+}
+
+function renderPodcastEpisodes(episodes) {
+  const target = document.querySelector("#podcast-episodes");
+
+  if (!target) return;
+
+  episodes
+    .filter((episode) => episode.featured)
+    .forEach((episode) => {
+      const link = document.createElement("a");
+      link.className = "podcast-episode-card podcast-episode-link";
+      link.href = episode.href;
+      link.target = "_blank";
+      link.rel = "noopener";
+
+      [
+        ["span", "episode-label", "episode"],
+        ["strong", "podcast-episode-title", episode.title],
+        ["span", "podcast-episode-subtitle", episode.subtitle],
+        ["span", "podcast-episode-description", episode.description],
+        ["span", "podcast-episode-cta", "收聽本集"]
+      ].forEach(([tagName, className, text]) => {
+        const element = document.createElement(tagName);
+        element.className = className;
+        element.textContent = text;
+        link.append(element);
+      });
+
+      link.addEventListener("click", () => trackPodcastEpisode(episode));
+      target.append(link);
+    });
+}
+
 function bindAiNoteTracking() {
   document.querySelectorAll(".track-ai-note").forEach((element) => {
     element.addEventListener("click", () => {
@@ -234,6 +275,18 @@ async function bootstrapCourseHub() {
   }
 }
 
+async function bootstrapPodcastEpisodes() {
+  const target = document.querySelector("#podcast-episodes");
+  if (!target) return;
+
+  try {
+    const episodes = await loadJson("assets/data/podcast-episodes.json");
+    renderPodcastEpisodes(episodes);
+  } catch (_error) {
+    target.innerHTML = '<p class="load-fallback">Podcast 集數資料載入中發生問題，請重新整理頁面再試一次。</p>';
+  }
+}
+
 async function bootstrapCourses() {
   const target = document.querySelector("#course-grid");
   try {
@@ -252,4 +305,5 @@ bindAiNoteTracking();
 bindLabProjectTracking();
 bindLearningGamesToggle();
 bootstrapCourseHub();
+bootstrapPodcastEpisodes();
 bootstrapCourses();
