@@ -184,6 +184,35 @@ function bindLabProjectTracking() {
   });
 }
 
+function bindLearningGamesToggle() {
+  const button = document.querySelector(".learning-toggle");
+  const panel = document.querySelector("#learning-games-panel");
+
+  if (!button || !panel) return;
+
+  button.addEventListener("click", () => {
+    const nextExpanded = button.getAttribute("aria-expanded") !== "true";
+    button.setAttribute("aria-expanded", String(nextExpanded));
+    button.textContent = nextExpanded ? "收合練習列表" : "展開練習列表";
+
+    if (nextExpanded) {
+      panel.hidden = false;
+      requestAnimationFrame(() => panel.classList.add("is-expanded"));
+    } else {
+      panel.classList.remove("is-expanded");
+      window.setTimeout(() => {
+        if (button.getAttribute("aria-expanded") !== "true") {
+          panel.hidden = true;
+        }
+      }, 230);
+    }
+
+    sendEvent("toggle_learning_games", {
+      expanded: nextExpanded
+    });
+  });
+}
+
 async function bootstrapCourseHub() {
   const target = document.querySelector("#course-hub-grid");
   try {
@@ -209,5 +238,6 @@ bindHomeCategoryTracking();
 bindPodcastTracking();
 bindAiNoteTracking();
 bindLabProjectTracking();
+bindLearningGamesToggle();
 bootstrapCourseHub();
 bootstrapCourses();

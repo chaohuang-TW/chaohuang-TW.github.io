@@ -502,6 +502,52 @@ h2 {
   min-height: 170px;
 }
 
+.learning-summary-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: center;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(224, 244, 241, 0.66)),
+    #fff;
+  box-shadow: 0 18px 42px rgba(9, 32, 82, 0.08);
+}
+
+.learning-summary-card p {
+  max-width: 54rem;
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.85;
+}
+
+.learning-games-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  margin-top: 0;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: grid-template-rows 220ms ease, margin-top 220ms ease, opacity 180ms ease, transform 220ms ease;
+}
+
+.learning-games-panel.is-expanded {
+  grid-template-rows: 1fr;
+  margin-top: 18px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.learning-games-panel[hidden] {
+  display: none;
+}
+
+.learning-games-panel > .course-grid {
+  min-height: 0;
+  overflow: hidden;
+}
+
 .course-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -599,6 +645,7 @@ h2 {
   .course-grid,
   .ai-video-grid,
   .feature-panel,
+  .learning-summary-card,
   .note-list {
     grid-template-columns: 1fr;
   }
@@ -656,6 +703,7 @@ h2 {
 
   .course-feature-body,
   .feature-panel,
+  .learning-summary-card,
   .support-card {
     padding: 20px;
   }
@@ -666,5 +714,11 @@ h2 {
 
   .ai-video-frame {
     padding: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .learning-games-panel {
+    transition: none;
   }
 }
