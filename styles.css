@@ -97,6 +97,7 @@ p {
   background:
     linear-gradient(135deg, rgba(15, 140, 140, 0.16), rgba(9, 32, 82, 0.06)),
     repeating-linear-gradient(90deg, transparent 0 28px, rgba(9, 32, 82, 0.08) 28px 30px);
+  pointer-events: none;
 }
 
 .hero-copy > * {
@@ -208,13 +209,29 @@ h1 {
   gap: 10px;
 }
 
-.panel-grid span {
+.brand-hub-link {
+  position: relative;
+  z-index: 1;
   min-height: 72px;
   padding: 14px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.09);
   font-weight: 900;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.brand-hub-link:hover,
+.brand-hub-link:focus-visible {
+  border-color: rgba(255, 255, 255, 0.52);
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), 0 14px 28px rgba(0, 0, 0, 0.16);
+  transform: translateY(-2px);
+}
+
+.brand-hub-link:focus-visible {
+  outline: 3px solid rgba(239, 125, 34, 0.75);
+  outline-offset: 3px;
 }
 
 .course-hub,

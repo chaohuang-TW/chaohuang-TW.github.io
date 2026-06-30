@@ -150,6 +150,17 @@ function bindHomeCategoryTracking() {
   });
 }
 
+function bindBrandHubTracking() {
+  document.querySelectorAll(".brand-hub-link").forEach((element) => {
+    element.addEventListener("click", () => {
+      sendEvent("select_brand_hub", {
+        hub_item: element.dataset.hubItem,
+        target: element.dataset.target || element.getAttribute("href")
+      });
+    });
+  });
+}
+
 function bindPodcastTracking() {
   document.querySelectorAll(".track-podcast").forEach((element) => {
     element.addEventListener("click", () => {
@@ -235,6 +246,7 @@ async function bootstrapCourses() {
 
 bindAiVideoTracking();
 bindHomeCategoryTracking();
+bindBrandHubTracking();
 bindPodcastTracking();
 bindAiNoteTracking();
 bindLabProjectTracking();
