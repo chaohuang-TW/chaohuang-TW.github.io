@@ -60,12 +60,10 @@ p {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
-  gap: 22px;
-  min-height: 430px;
+  gap: 16px;
 }
 
-.hero-copy,
+.hero-banner-card,
 .hero-panel,
 .course-feature-card,
 .ai-video-card,
@@ -79,31 +77,37 @@ p {
   box-shadow: var(--shadow);
 }
 
-.hero-copy {
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hero-banner-card {
   position: relative;
   overflow: hidden;
-  padding: clamp(30px, 5.6vw, 66px);
-  background:
-    linear-gradient(140deg, rgba(255, 255, 255, 0.96) 0%, rgba(238, 247, 251, 0.96) 58%, rgba(224, 244, 241, 0.92) 100%);
+  background: #f6fbff;
 }
 
-.hero-copy::after {
-  content: "";
-  position: absolute;
-  right: -8%;
-  bottom: -32%;
-  width: 54%;
-  height: 70%;
-  border-radius: 999px 0 0 0;
-  background:
-    linear-gradient(135deg, rgba(15, 140, 140, 0.16), rgba(9, 32, 82, 0.06)),
-    repeating-linear-gradient(90deg, transparent 0 28px, rgba(9, 32, 82, 0.08) 28px 30px);
-  pointer-events: none;
+.hero-banner {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
-.hero-copy > * {
-  position: relative;
-  z-index: 1;
+.hero-readable-summary {
+  display: none;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 14px 34px rgba(9, 32, 82, 0.08);
 }
 
 .hero-kicker,
@@ -184,20 +188,16 @@ h1 {
 }
 
 .hero-panel {
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  min-height: 100%;
-  padding: 24px;
-  color: #fff;
-  background:
-    linear-gradient(160deg, rgba(9, 32, 82, 0.96), rgba(10, 100, 102, 0.9)),
-    radial-gradient(circle at 25% 18%, rgba(255, 255, 255, 0.2), transparent 18rem);
+  position: relative;
+  z-index: 1;
+  padding: 18px;
+  color: var(--navy);
+  background: rgba(255, 255, 255, 0.94);
 }
 
 .panel-label {
-  margin-bottom: 18px;
-  color: rgba(255, 255, 255, 0.68);
+  margin-bottom: 12px;
+  color: var(--teal-dark);
   font-size: 0.78rem;
   font-weight: 900;
   letter-spacing: 0.14em;
@@ -206,27 +206,34 @@ h1 {
 
 .panel-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .brand-hub-link {
   position: relative;
   z-index: 1;
-  min-height: 72px;
-  padding: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.09);
+  display: grid;
+  place-items: center;
+  min-height: 70px;
+  padding: 13px;
+  border: 1px solid rgba(9, 32, 82, 0.12);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(238, 247, 251, 0.86)),
+    #fff;
   font-weight: 900;
+  text-align: center;
   transition: background 180ms ease, border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
 }
 
 .brand-hub-link:hover,
 .brand-hub-link:focus-visible {
-  border-color: rgba(255, 255, 255, 0.52);
-  background: rgba(255, 255, 255, 0.18);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), 0 14px 28px rgba(0, 0, 0, 0.16);
+  border-color: rgba(15, 140, 140, 0.32);
+  background:
+    linear-gradient(180deg, rgba(224, 244, 241, 0.9), rgba(255, 255, 255, 0.96)),
+    #fff;
+  box-shadow: 0 16px 30px rgba(9, 32, 82, 0.14);
   transform: translateY(-2px);
 }
 
@@ -722,7 +729,6 @@ h2 {
 }
 
 @media (max-width: 940px) {
-  .hero,
   .split-head,
   .course-feature-card,
   .support-section,
@@ -735,8 +741,8 @@ h2 {
     grid-template-columns: 1fr;
   }
 
-  .hero {
-    min-height: auto;
+  .panel-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .course-cover-wrap,
@@ -755,8 +761,12 @@ h2 {
     padding-top: 20px;
   }
 
-  h1 {
-    font-size: clamp(2.8rem, 18vw, 4.2rem);
+  .hero {
+    gap: 12px;
+  }
+
+  .hero-readable-summary {
+    display: block;
   }
 
   .hero-actions,
@@ -773,10 +783,11 @@ h2 {
 
   .panel-grid,
   .course-resource-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .hero-copy,
+  .hero-banner-card,
+  .hero-readable-summary,
   .hero-panel,
   .course-feature-card,
   .ai-video-card,
@@ -790,9 +801,19 @@ h2 {
   .course-feature-body,
   .feature-panel,
   .podcast-episode-card,
+  .hero-readable-summary,
   .learning-summary-card,
   .support-card {
     padding: 20px;
+  }
+
+  .hero-panel {
+    padding: 14px;
+  }
+
+  .brand-hub-link {
+    min-height: 58px;
+    border-radius: 15px;
   }
 
   .course-card {
