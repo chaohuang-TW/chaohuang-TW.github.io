@@ -6,7 +6,7 @@
     "description": "從文書、簡報、報表到會議管理，整理課前準備、講義與實作資源。",
     "status": "即將上架",
     "cover": "assets/images/gen-ai-course-banner.jpeg",
-    "href": "#course-hub",
+    "href": "/courses/gen-ai-software-applications/",
     "prepTools": [
       {
         "name": "ChatGPT",

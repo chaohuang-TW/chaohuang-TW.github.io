@@ -36,6 +36,7 @@ function renderCourseHub(courses) {
     card.dataset.courseId = course.id;
     card.dataset.courseTitle = course.title;
     card.dataset.status = course.status;
+    card.dataset.href = course.href || "#course-hub";
 
     cover.src = course.cover;
     cover.alt = `${course.title}課程封面`;
@@ -50,11 +51,19 @@ function renderCourseHub(courses) {
     fragment.querySelector(".course-feature-title").textContent = course.title;
     fragment.querySelector(".course-feature-description").textContent = course.description;
 
-    card.addEventListener("click", () => trackCourseHub(course, course.href || "#course-hub"));
+    card.addEventListener("click", () => {
+      trackCourseHub(course, course.href || "#course-hub");
+      if (course.href) {
+        window.location.href = course.href;
+      }
+    });
     card.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
         trackCourseHub(course, course.href || "#course-hub");
+        if (course.href) {
+          window.location.href = course.href;
+        }
       }
     });
 
