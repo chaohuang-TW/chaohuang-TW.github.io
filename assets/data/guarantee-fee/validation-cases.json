@@ -1,0 +1,76 @@
+[
+  {
+    "caseId": "A-MATURITY-5Y",
+    "description": "表甲，到期一次償還，5年",
+    "tableId": "A",
+    "repaymentType": "maturity",
+    "loanYears": 5,
+    "expectedBaseFeePer10k": 45.64
+  },
+  {
+    "caseId": "A-MONTHLY-5Y",
+    "description": "表甲，本金平均攤還，每月，5年",
+    "tableId": "A",
+    "repaymentType": "principal_equal",
+    "repaymentFrequency": "monthly",
+    "loanYears": 5,
+    "expectedBaseFeePer10k": 24.39
+  },
+  {
+    "caseId": "A-QUARTERLY-5Y",
+    "description": "表甲，本金平均攤還，每三個月，5年",
+    "tableId": "A",
+    "repaymentType": "principal_equal",
+    "repaymentFrequency": "quarterly",
+    "loanYears": 5,
+    "expectedBaseFeePer10k": 25.10
+  },
+  {
+    "caseId": "A-ANNUAL-5Y",
+    "description": "表甲，本金平均攤還，每年，5年",
+    "tableId": "A",
+    "repaymentType": "principal_equal",
+    "repaymentFrequency": "annual",
+    "loanYears": 5,
+    "expectedBaseFeePer10k": 28.22
+  },
+  {
+    "caseId": "B-GRACE1-MONTHLY-5Y",
+    "description": "表乙，寬緩1年，本金平均攤還，每月，5年",
+    "tableId": "B",
+    "repaymentType": "principal_equal_with_grace",
+    "graceYears": 1,
+    "repaymentFrequency": "monthly",
+    "loanYears": 5,
+    "expectedBaseFeePer10k": 28.90
+  },
+  {
+    "caseId": "B-GRACE2-SEMIANNUAL-5Y",
+    "description": "表乙，寬緩2年，本金平均攤還，每半年，5年",
+    "tableId": "B",
+    "repaymentType": "principal_equal_with_grace",
+    "graceYears": 2,
+    "repaymentFrequency": "semiannual",
+    "loanYears": 5,
+    "expectedBaseFeePer10k": 35.07
+  },
+  {
+    "caseId": "B-GRACE3-ANNUAL-5Y",
+    "description": "表乙，寬緩3年，本金平均攤還，每年，5年",
+    "tableId": "B",
+    "repaymentType": "principal_equal_with_grace",
+    "graceYears": 3,
+    "repaymentFrequency": "annual",
+    "loanYears": 5,
+    "expectedBaseFeePer10k": 41.44
+  },
+  {
+    "caseId": "C-ANNUITY-5P00-5Y",
+    "description": "表丙，本息按月平均攤還，貸款年利率5.00%，5年",
+    "tableId": "C",
+    "repaymentType": "annuity_monthly",
+    "loanRate": "5.00",
+    "loanYears": 5,
+    "expectedBaseFeePer10k": 25.35
+  }
+]

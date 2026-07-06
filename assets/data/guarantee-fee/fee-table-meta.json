@@ -1,0 +1,21 @@
+{
+  "source": "附錄十八、農業信用保證手續費一次總繳簡捷查索表",
+  "unit": "保證金額每萬元之保證手續費",
+  "baseRate": "0.1%",
+  "rounding": "元以下四捨五入",
+  "singlePaymentDiscount": "一次總繳保證手續費按年率 5% 優待",
+  "feeRateMultipliers": {
+    "0.1": 1,
+    "0.15": 1.5,
+    "0.35": 3.5,
+    "0.5": 5,
+    "0.7": 7,
+    "1.0": 10
+  },
+  "supportedRepaymentTypes": [
+    "maturity",
+    "principal_equal",
+    "principal_equal_with_grace",
+    "annuity_monthly"
+  ]
+}
