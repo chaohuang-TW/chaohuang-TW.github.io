@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0WRZ173JVH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-0WRZ173JVH');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>農信保保證手續費試算器｜Chao AI 實作所</title>
+  <meta name="description" content="依農業信用保證手續費一次總繳簡捷查索表，快速試算農信保保證手續費。">
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <main class="site-shell fee-calculator-page">
+    <nav class="course-breadcrumb" aria-label="頁面導覽">
+      <a href="/">Chao AI 實作所</a>
+      <span aria-hidden="true">/</span>
+      <span>農信保保證手續費試算器</span>
+    </nav>
+
+    <section class="fee-calculator-hero" aria-labelledby="fee-calculator-title">
+      <div>
+        <p class="section-kicker">ACGF calculator</p>
+        <h1 id="fee-calculator-title">農信保保證手續費試算器</h1>
+        <p class="fee-calculator-subtitle">依一次總繳簡捷查索表，快速試算保證手續費</p>
+        <p class="fee-calculator-description">本工具依農業信用保證手續費一次總繳簡捷查索表進行查表試算，輸入貸款條件後，自動判斷適用表別並顯示計算明細。</p>
+      </div>
+      <aside class="fee-calculator-alert" aria-label="重要提醒">
+        本工具為試算輔助，實際應收金額仍以承辦機構及基金核算結果為準。
+      </aside>
+    </section>
+
+    <section class="fee-calculator-workspace" aria-label="保證手續費試算">
+      <form class="fee-calculator-form" id="fee-calculator-form" novalidate>
+        <div class="section-head">
+          <p class="section-kicker">Input</p>
+          <h2>輸入貸款條件</h2>
+        </div>
+
+        <div class="form-message" id="fee-form-message" role="status" aria-live="polite" hidden></div>
+
+        <label class="field-group" for="loan-amount">
+          <span>貸款金額</span>
+          <input id="loan-amount" name="loanAmount" type="text" inputmode="numeric" autocomplete="off" placeholder="例如 1,000,000" required>
+        </label>
+
+        <div class="form-grid-2">
+          <label class="field-group" for="guarantee-ratio">
+            <span>保證成數</span>
+            <select id="guarantee-ratio" name="guaranteeRatio">
+              <option value="100">100%</option>
+              <option value="95">95%</option>
+              <option value="90">90%</option>
+              <option value="85">85%</option>
+              <option value="80" selected>80%</option>
+              <option value="75">75%</option>
+              <option value="70">70%</option>
+              <option value="60">60%</option>
+              <option value="50">50%</option>
+              <option value="custom">自訂</option>
+            </select>
+          </label>
+
+          <label class="field-group conditional-field" id="custom-ratio-field" for="custom-guarantee-ratio" hidden>
+            <span>自訂保證成數</span>
+            <input id="custom-guarantee-ratio" name="customGuaranteeRatio" type="text" inputmode="decimal" autocomplete="off" placeholder="例如 82.5">
+          </label>
+        </div>
+
+        <div class="form-grid-2">
+          <label class="field-group" for="fee-rate">
+            <span>適用保證手續費率</span>
+            <select id="fee-rate" name="feeRate"></select>
+          </label>
+
+          <label class="field-group" for="repayment-type">
+            <span>還款方式</span>
+            <select id="repayment-type" name="repaymentType">
+              <option value="maturity">到期一次償還</option>
+              <option value="principal_equal">本金平均攤還</option>
+              <option value="principal_equal_with_grace">本金寬緩後平均攤還</option>
+              <option value="annuity_monthly">本息按月平均攤還（年金法）</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-grid-2">
+          <label class="field-group conditional-field" id="repayment-frequency-field" for="repayment-frequency" hidden>
+            <span>攤還頻率</span>
+            <select id="repayment-frequency" name="repaymentFrequency">
+              <option value="monthly">每月</option>
+              <option value="quarterly">每三個月</option>
+              <option value="semiannual">每六個月</option>
+              <option value="annual">每年</option>
+            </select>
+          </label>
+
+          <label class="field-group conditional-field" id="grace-key-field" for="grace-key" hidden>
+            <span>本金寬緩年數</span>
+            <select id="grace-key" name="graceKey">
+              <option value="grace_1">1 年</option>
+              <option value="grace_2">2 年</option>
+              <option value="grace_3">3 年</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-grid-2">
+          <label class="field-group" for="loan-years">
+            <span>貸款期限</span>
+            <select id="loan-years" name="loanYears"></select>
+          </label>
+
+          <label class="field-group conditional-field" id="loan-interest-rate-field" for="loan-interest-rate" hidden>
+            <span>貸款年利率</span>
+            <select id="loan-interest-rate" name="loanInterestRate"></select>
+            <small>這是貸款年利率，不是保證手續費率。</small>
+          </label>
+        </div>
+
+        <button class="primary-link calculator-submit" type="submit">開始試算</button>
+      </form>
+
+      <aside class="fee-result-card" id="fee-result-card" aria-live="polite">
+        <p class="section-kicker">Result</p>
+        <h2>應收保證手續費</h2>
+        <p class="fee-result-placeholder">輸入條件後，這裡會顯示查表依據、計算式與四捨五入後金額。</p>
+      </aside>
+    </section>
+
+    <section class="fee-source-panel" aria-label="資料來源與提醒">
+      <div>
+        <p class="section-kicker">Source</p>
+        <h2>資料來源與試算提醒</h2>
+      </div>
+      <p>資料依「附錄十八、農業信用保證手續費一次總繳簡捷查索表」整理，表列金額為保證金額每萬元之保證手續費，基準年率為 0.1%。一次總繳保證手續費已按年率 5% 優待。</p>
+      <p>本試算依農業信用保證手續費一次總繳簡捷查索表估算，實際應收金額仍以承辦機構及基金規定核算結果為準。</p>
+      <a class="secondary-link" href="/">回首頁</a>
+    </section>
+  </main>
+
+  <script src="calculator.js"></script>
+</body>
+</html>

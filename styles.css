@@ -915,6 +915,188 @@ h2 {
   font-weight: 900;
 }
 
+.fee-calculator-page h1 {
+  max-width: 10em;
+}
+
+.fee-calculator-hero,
+.fee-calculator-form,
+.fee-result-card,
+.fee-source-panel {
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 4px);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow);
+}
+
+.fee-calculator-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.45fr);
+  gap: 24px;
+  align-items: center;
+  padding: clamp(24px, 4vw, 42px);
+  background:
+    radial-gradient(circle at 8% 0%, rgba(15, 140, 140, 0.17), transparent 24rem),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(238, 247, 251, 0.92));
+}
+
+.fee-calculator-subtitle {
+  margin-bottom: 12px;
+  color: var(--teal-dark);
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-weight: 900;
+  line-height: 1.5;
+}
+
+.fee-calculator-description {
+  max-width: 56rem;
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.85;
+}
+
+.fee-calculator-alert {
+  padding: 20px;
+  border: 1px solid rgba(239, 125, 34, 0.28);
+  border-radius: 20px;
+  color: var(--navy);
+  background: rgba(239, 125, 34, 0.1);
+  font-weight: 900;
+  line-height: 1.7;
+}
+
+.fee-calculator-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 0.98fr) minmax(320px, 0.72fr);
+  gap: 22px;
+  align-items: start;
+  margin-top: 38px;
+}
+
+.fee-calculator-form,
+.fee-result-card,
+.fee-source-panel {
+  padding: clamp(22px, 3vw, 30px);
+}
+
+.field-group {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.field-group span {
+  color: var(--navy);
+  font-weight: 900;
+}
+
+.field-group input,
+.field-group select {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 13px;
+  border: 1px solid rgba(9, 32, 82, 0.18);
+  border-radius: 14px;
+  color: var(--ink);
+  background: #fff;
+  font: inherit;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.field-group input:focus,
+.field-group select:focus {
+  border-color: rgba(15, 140, 140, 0.48);
+  box-shadow: 0 0 0 4px rgba(15, 140, 140, 0.12);
+  outline: none;
+}
+
+.field-group small {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.form-message {
+  margin-bottom: 16px;
+  padding: 13px 15px;
+  border: 1px solid rgba(239, 125, 34, 0.28);
+  border-radius: 16px;
+  color: #8b3f08;
+  background: rgba(239, 125, 34, 0.1);
+  font-weight: 900;
+  line-height: 1.6;
+}
+
+.calculator-submit {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.fee-result-card {
+  position: sticky;
+  top: 18px;
+}
+
+.fee-result-placeholder,
+.fee-result-note,
+.fee-source-panel p {
+  color: var(--muted);
+  line-height: 1.85;
+}
+
+.fee-result-amount {
+  margin: 18px 0 18px;
+  color: var(--navy);
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.fee-result-details {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 18px;
+}
+
+.fee-result-details div {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.42fr) minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+
+.fee-result-details dt {
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.fee-result-details dd {
+  margin: 0;
+  color: var(--navy);
+  font-weight: 900;
+  line-height: 1.55;
+}
+
+.fee-result-note {
+  margin-bottom: 0;
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--teal-soft);
+}
+
+.fee-source-panel {
+  display: grid;
+  gap: 10px;
+  margin-top: 38px;
+}
+
 @media (max-width: 940px) {
   .split-head,
   .course-feature-card,
@@ -926,8 +1108,14 @@ h2 {
   .learning-summary-card,
   .note-list,
   .course-page-hero,
-  .course-map-layout {
+  .course-map-layout,
+  .fee-calculator-hero,
+  .fee-calculator-workspace {
     grid-template-columns: 1fr;
+  }
+
+  .fee-result-card {
+    position: static;
   }
 
   .panel-grid {
@@ -1007,7 +1195,9 @@ h2 {
   }
 
   .course-page-actions,
-  .handout-preview-grid {
+  .handout-preview-grid,
+  .form-grid-2,
+  .fee-result-details div {
     grid-template-columns: 1fr;
   }
 
@@ -1026,6 +1216,13 @@ h2 {
 
   .ai-video-frame {
     padding: 14px;
+  }
+
+  .fee-calculator-form,
+  .fee-result-card,
+  .fee-source-panel {
+    padding: 20px;
+    border-radius: 18px;
   }
 }
 
