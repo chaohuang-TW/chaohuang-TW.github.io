@@ -5,7 +5,7 @@
     "subtitle": "ChatGPT × NotebookLM × Notion",
     "description": "從文書、簡報、報表到會議管理，整理課前準備、講義與實作資源。",
     "status": "即將上架",
-    "cover": "assets/images/gen-ai-course-banner.jpeg",
+    "cover": "assets/course/gen-ai-software-applications/course-main-visual.png",
     "href": "/courses/gen-ai-software-applications/",
     "prepTools": [
       {
