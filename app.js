@@ -129,22 +129,67 @@ function renderCourses(courses) {
 
 function trackAiVideo(video) {
   sendEvent("select_ai_video", {
-    video_id: video.videoId,
-    video_title: video.videoTitle,
+    video_id: video.id,
+    video_title: video.title,
     youtube_url: video.youtubeUrl
   });
 }
 
-function bindAiVideoTracking() {
-  document.querySelectorAll(".ai-video-card").forEach((card) => {
-    const video = {
-      videoId: card.dataset.videoId,
-      videoTitle: card.dataset.videoTitle,
-      youtubeUrl: card.dataset.youtubeUrl
-    };
+function renderAiVideos(videos) {
+  const target = document.querySelector("#ai-video-grid");
 
-    card.addEventListener("click", () => trackAiVideo(video));
-  });
+  if (!target) return;
+
+  videos
+    .filter((video) => video.status === "published")
+    .sort((current, next) => current.order - next.order)
+    .forEach((video) => {
+      const card = document.createElement("article");
+      card.className = "ai-video-card";
+      card.dataset.videoId = video.id;
+      card.dataset.videoTitle = video.title;
+      card.dataset.youtubeUrl = video.youtubeUrl;
+
+      const link = document.createElement("a");
+      link.className = "ai-video-link";
+      link.href = video.youtubeUrl;
+      link.target = "_blank";
+      link.rel = "noopener";
+
+      const title = document.createElement("span");
+      title.textContent = video.title;
+
+      const action = document.createElement("span");
+      action.textContent = "在 YouTube 開啟";
+
+      link.append(title, action);
+      link.addEventListener("click", () => trackAiVideo(video));
+
+      const frame = document.createElement("div");
+      frame.className = "ai-video-frame";
+
+      const iframe = document.createElement("iframe");
+      iframe.src = video.embedUrl;
+      iframe.title = video.title;
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.allowFullscreen = true;
+
+      frame.append(iframe);
+      card.append(link, frame);
+      target.append(card);
+    });
+}
+
+async function bootstrapAiVideos() {
+  const target = document.querySelector("#ai-video-grid");
+  if (!target) return;
+
+  try {
+    const videos = await loadJson("assets/data/ai-videos.json");
+    renderAiVideos(videos);
+  } catch (_error) {
+    target.innerHTML = '<p class="load-fallback">短片資料暫時無法載入。</p>';
+  }
 }
 
 function bindHomeCategoryTracking() {
@@ -306,13 +351,13 @@ async function bootstrapCourses() {
   }
 }
 
-bindAiVideoTracking();
 bindHomeCategoryTracking();
 bindBrandHubTracking();
 bindPodcastTracking();
 bindAiNoteTracking();
 bindLabProjectTracking();
 bindLearningGamesToggle();
+bootstrapAiVideos();
 bootstrapCourseHub();
 bootstrapPodcastEpisodes();
 bootstrapCourses();

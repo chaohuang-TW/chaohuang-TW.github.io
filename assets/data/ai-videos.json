@@ -1,0 +1,26 @@
+[
+  {
+    "id": "pCl-ZhjNorA",
+    "title": "Mica AI 短片｜AI 是什麼？",
+    "youtubeUrl": "https://youtube.com/shorts/pCl-ZhjNorA?si=EMgMVIdsDisvDuXF",
+    "embedUrl": "https://www.youtube.com/embed/pCl-ZhjNorA",
+    "status": "published",
+    "order": 1
+  },
+  {
+    "id": "xd7sT2kvBEM",
+    "title": "Mica AI 短片｜一起認識 AI",
+    "youtubeUrl": "https://youtube.com/shorts/xd7sT2kvBEM?si=E9dXVG5PpXeSOoG2",
+    "embedUrl": "https://www.youtube.com/embed/xd7sT2kvBEM",
+    "status": "published",
+    "order": 2
+  },
+  {
+    "id": "0wW0-vu7XGM",
+    "title": "Mica AI 短片｜AI 不是魔法，是工具",
+    "youtubeUrl": "https://youtube.com/shorts/0wW0-vu7XGM?si=NoH0zt2srWboqnxc",
+    "embedUrl": "https://www.youtube.com/embed/0wW0-vu7XGM",
+    "status": "published",
+    "order": 3
+  }
+]
