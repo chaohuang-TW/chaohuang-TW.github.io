@@ -1,0 +1,24 @@
+[
+  {
+    "id": "ai-lab-video-001",
+    "type": "youtube",
+    "title": "AI 實驗室｜實作影片 01",
+    "description": "AI 應用與創作流程實驗紀錄。",
+    "youtubeId": "97vU63GZfXo",
+    "youtubeUrl": "https://youtu.be/97vU63GZfXo?si=Q9EB-FTZ5ASTDPwz",
+    "embedUrl": "https://www.youtube.com/embed/97vU63GZfXo",
+    "status": "published",
+    "order": 1
+  },
+  {
+    "id": "ai-lab-video-002",
+    "type": "youtube",
+    "title": "AI 實驗室｜實作影片 02",
+    "description": "AI 應用與創作流程實驗紀錄。",
+    "youtubeId": "Bsbsvuu8JVA",
+    "youtubeUrl": "https://youtu.be/Bsbsvuu8JVA?si=NfoiaU-eUen_EsEH",
+    "embedUrl": "https://www.youtube.com/embed/Bsbsvuu8JVA",
+    "status": "published",
+    "order": 2
+  }
+]

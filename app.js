@@ -192,6 +192,80 @@ async function bootstrapAiVideos() {
   }
 }
 
+function trackAiLabProject(project) {
+  sendEvent("select_ai_lab_project", {
+    project_id: project.id,
+    project_title: project.title,
+    project_type: project.type,
+    youtube_url: project.youtubeUrl
+  });
+}
+
+function renderAiLabProjects(projects) {
+  const target = document.querySelector("#ai-lab-projects");
+
+  if (!target) return;
+
+  projects
+    .filter((project) => project.status === "published")
+    .sort((current, next) => current.order - next.order)
+    .forEach((project) => {
+      const card = document.createElement("article");
+      card.className = "lab-project-card";
+      card.dataset.projectId = project.id;
+      card.dataset.projectType = project.type;
+      card.dataset.youtubeId = project.youtubeId;
+
+      const copy = document.createElement("div");
+      copy.className = "lab-project-copy";
+
+      const label = document.createElement("span");
+      label.className = "lab-project-label";
+      label.textContent = "AI experiment";
+
+      const title = document.createElement("h3");
+      title.textContent = project.title;
+
+      const description = document.createElement("p");
+      description.textContent = project.description;
+
+      const link = document.createElement("a");
+      link.className = "lab-project-link";
+      link.href = project.youtubeUrl;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = "在 YouTube 開啟";
+      link.addEventListener("click", () => trackAiLabProject(project));
+
+      copy.append(label, title, description, link);
+
+      const frame = document.createElement("div");
+      frame.className = "lab-video-frame";
+
+      const iframe = document.createElement("iframe");
+      iframe.src = project.embedUrl;
+      iframe.title = project.title;
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.allowFullscreen = true;
+
+      frame.append(iframe);
+      card.append(copy, frame);
+      target.append(card);
+    });
+}
+
+async function bootstrapAiLabProjects() {
+  const target = document.querySelector("#ai-lab-projects");
+  if (!target) return;
+
+  try {
+    const projects = await loadJson("assets/data/ai-lab-projects.json");
+    renderAiLabProjects(projects);
+  } catch (_error) {
+    target.innerHTML = '<p class="load-fallback">AI 實驗室內容暫時無法載入。</p>';
+  }
+}
+
 function bindHomeCategoryTracking() {
   document.querySelectorAll(".track-home-category").forEach((element) => {
     element.addEventListener("click", () => {
@@ -358,6 +432,7 @@ bindAiNoteTracking();
 bindLabProjectTracking();
 bindLearningGamesToggle();
 bootstrapAiVideos();
+bootstrapAiLabProjects();
 bootstrapCourseHub();
 bootstrapPodcastEpisodes();
 bootstrapCourses();
