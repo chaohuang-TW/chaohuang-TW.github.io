@@ -301,6 +301,17 @@ function bindPodcastTracking() {
   });
 }
 
+function bindPodcastSeriesTracking() {
+  document.querySelectorAll(".track-podcast-series").forEach((element) => {
+    element.addEventListener("click", () => {
+      sendEvent("select_podcast_series", {
+        series_name: element.dataset.seriesName,
+        href: element.getAttribute("href")
+      });
+    });
+  });
+}
+
 function trackPodcastEpisode(episode) {
   sendEvent("select_podcast_episode", {
     episode_id: episode.id,
@@ -428,6 +439,7 @@ async function bootstrapCourses() {
 bindHomeCategoryTracking();
 bindBrandHubTracking();
 bindPodcastTracking();
+bindPodcastSeriesTracking();
 bindAiNoteTracking();
 bindLabProjectTracking();
 bindLearningGamesToggle();

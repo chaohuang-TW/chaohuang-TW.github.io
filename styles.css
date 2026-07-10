@@ -1309,3 +1309,209 @@ h2 {
     transition: none;
   }
 }
+
+/* Journey to the West episode archive */
+.podcast-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.journey-page {
+  max-width: 1160px;
+}
+
+.journey-hero {
+  padding: clamp(28px, 6vw, 68px);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 8px);
+  background:
+    radial-gradient(circle at 90% 10%, rgba(15, 140, 140, 0.16), transparent 22rem),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(238, 247, 251, 0.92));
+  box-shadow: var(--shadow);
+}
+
+.journey-hero h1 {
+  max-width: 10em;
+  margin-bottom: 14px;
+  font-size: clamp(2.8rem, 7vw, 5.8rem);
+}
+
+.journey-subtitle {
+  margin-bottom: 12px;
+  color: var(--teal-dark);
+  font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+  font-weight: 900;
+}
+
+.journey-summary {
+  max-width: 44rem;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.journey-archive {
+  margin-top: clamp(42px, 7vw, 76px);
+}
+
+.journey-archive-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr);
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+
+.journey-count {
+  margin: 12px 0 0;
+  color: var(--teal-dark);
+  font-weight: 900;
+}
+
+.journey-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(160px, 0.6fr);
+  gap: 12px;
+}
+
+.journey-search,
+.journey-sort {
+  display: grid;
+  gap: 7px;
+  color: var(--navy);
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.journey-search input,
+.journey-sort select {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 13px;
+  border: 1px solid rgba(9, 32, 82, 0.2);
+  border-radius: 12px;
+  color: var(--ink);
+  background: #fff;
+  font: inherit;
+}
+
+.journey-search input:focus,
+.journey-sort select:focus {
+  border-color: var(--teal);
+  outline: 3px solid rgba(15, 140, 140, 0.14);
+  outline-offset: 2px;
+}
+
+.journey-episode-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.journey-episode-card {
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  gap: 12px;
+  min-height: 238px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 14px 34px rgba(9, 32, 82, 0.08);
+}
+
+.journey-episode-number {
+  color: var(--teal-dark);
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.journey-episode-card h3 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.journey-episode-card time {
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.journey-episode-link {
+  width: 100%;
+}
+
+.journey-empty {
+  grid-column: 1 / -1;
+  padding: 28px;
+  border: 1px dashed rgba(9, 32, 82, 0.22);
+  border-radius: var(--radius);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.72);
+  text-align: center;
+}
+
+.journey-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.journey-load-more {
+  min-width: 180px;
+}
+
+@media (max-width: 940px) {
+  .journey-archive-head {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .journey-episode-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .podcast-actions,
+  .journey-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .podcast-actions {
+    display: grid;
+    width: 100%;
+  }
+
+  .journey-hero {
+    padding: 24px 20px;
+    border-radius: 22px;
+  }
+
+  .journey-episode-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .journey-episode-card {
+    min-height: 0;
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+  .journey-load-more {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journey-page *,
+  .podcast-actions * {
+    scroll-behavior: auto;
+    transition: none;
+  }
+}

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0WRZ173JVH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-0WRZ173JVH');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>西遊記故事全集｜叔姨講古 Podcast</title>
+  <meta name="description" content="叔姨講古 Podcast 西遊記故事全集，整理適合親子共聽的經典文學故事。">
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <main class="site-shell journey-page">
+    <nav class="course-breadcrumb" aria-label="頁面導覽">
+      <a href="/">Chao AI 實作所</a>
+      <span aria-hidden="true">/</span>
+      <span>西遊記故事全集</span>
+    </nav>
+
+    <section class="journey-hero" aria-labelledby="journey-title">
+      <p class="section-kicker">叔姨講古 Podcast</p>
+      <h1 id="journey-title">西遊記故事全集</h1>
+      <p class="journey-subtitle">叔姨講古 Podcast 經典文學系列</p>
+      <p class="journey-summary">從石猴誕生、齊天大聖，到取經路上的妖怪、法寶與人心考驗，整理適合親子共聽的西遊記故事。</p>
+      <div class="hero-actions" aria-label="全集操作">
+        <a
+          class="primary-link"
+          href="https://podcasts.apple.com/tw/podcast/%E5%8F%94%E5%A7%A8%E8%AC%9B%E5%8F%A4/id1829910020"
+          target="_blank"
+          rel="noopener">前往 Apple Podcasts</a>
+        <a class="secondary-link" href="/#podcast">回首頁 Podcast</a>
+      </div>
+    </section>
+
+    <section class="journey-archive" aria-labelledby="journey-archive-title">
+      <div class="journey-archive-head">
+        <div>
+          <h2 id="journey-archive-title">選擇想聽的回目</h2>
+          <p class="journey-count" id="journey-count" aria-live="polite">正在載入集數資料</p>
+        </div>
+        <div class="journey-controls">
+          <label class="journey-search">
+            <span>搜尋集數</span>
+            <input id="journey-search" type="search" placeholder="搜尋回數或故事名稱" autocomplete="off">
+          </label>
+          <label class="journey-sort">
+            <span>排序方式</span>
+            <select id="journey-sort">
+              <option value="desc">最新回目</option>
+              <option value="asc">從第一回開始</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="journey-episode-grid" id="journey-episode-grid" aria-live="polite">
+        <p class="load-fallback">正在載入西遊記集數。</p>
+      </div>
+      <div class="journey-more-wrap">
+        <button class="secondary-link journey-load-more" id="journey-load-more" type="button" hidden>載入更多</button>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p>叔姨講古 Podcast：西遊記故事全集。</p>
+      <p><a href="/#podcast">回首頁 Podcast</a></p>
+    </footer>
+  </main>
+
+  <script src="journey.js"></script>
+</body>
+</html>
