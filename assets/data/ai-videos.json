@@ -22,5 +22,13 @@
     "embedUrl": "https://www.youtube.com/embed/0wW0-vu7XGM",
     "status": "published",
     "order": 3
+  },
+  {
+    "id": "uQzmPeCIDGU",
+    "title": "Mica AI 短片｜AI 的擴散模型：灰霧裡的畫",
+    "youtubeUrl": "https://youtube.com/shorts/uQzmPeCIDGU?si=PyB3fuC5HPgTplQw",
+    "embedUrl": "https://www.youtube.com/embed/uQzmPeCIDGU",
+    "status": "published",
+    "order": 4
   }
 ]
