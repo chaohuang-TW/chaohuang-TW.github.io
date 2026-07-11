@@ -135,60 +135,90 @@ function trackAiVideo(video) {
   });
 }
 
+function createAiVideoCard(video, format, showDescription = false) {
+  const card = document.createElement("article");
+  card.className = `ai-video-card is-${format}`;
+  card.dataset.videoId = video.id;
+  card.dataset.videoTitle = video.title;
+  card.dataset.youtubeUrl = video.youtubeUrl;
+  card.dataset.videoFormat = format;
+
+  const link = document.createElement("a");
+  link.className = "ai-video-link";
+  link.href = video.youtubeUrl;
+  link.target = "_blank";
+  link.rel = "noopener";
+
+  const title = document.createElement("span");
+  title.textContent = video.title;
+
+  const action = document.createElement("span");
+  action.textContent = "在 YouTube 開啟";
+
+  link.append(title, action);
+  link.addEventListener("click", () => trackAiVideo(video));
+  card.append(link);
+
+  if (showDescription && video.description) {
+    const description = document.createElement("p");
+    description.className = "ai-video-description";
+    description.textContent = video.description;
+    card.append(description);
+  }
+
+  const frame = document.createElement("div");
+  frame.className = `ai-video-frame is-${format}`;
+
+  const iframe = document.createElement("iframe");
+  iframe.src = video.embedUrl;
+  iframe.title = video.title;
+  iframe.loading = "lazy";
+  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  iframe.allowFullscreen = true;
+
+  frame.append(iframe);
+  card.append(frame);
+  return card;
+}
+
 function renderAiVideos(videos) {
-  const target = document.querySelector("#ai-video-grid");
+  const featureTarget = document.querySelector("#ai-video-feature");
+  const shortsTarget = document.querySelector("#ai-video-grid");
 
-  if (!target) return;
+  if (!featureTarget || !shortsTarget) return;
 
-  videos
-    .filter((video) => video.status === "published")
-    .sort((current, next) => current.order - next.order)
-    .forEach((video) => {
-      const card = document.createElement("article");
-      card.className = "ai-video-card";
-      card.dataset.videoId = video.id;
-      card.dataset.videoTitle = video.title;
-      card.dataset.youtubeUrl = video.youtubeUrl;
+  const publishedVideos = videos.filter((video) => video.status === "published");
+  const featuredVideo = publishedVideos
+    .filter((video) => video.featured === true && video.format === "standard")
+    .sort((current, next) => next.order - current.order)[0];
+  const latestShorts = publishedVideos
+    .filter((video) => (video.format || "short") === "short")
+    .sort((current, next) => next.order - current.order)
+    .slice(0, 3);
 
-      const link = document.createElement("a");
-      link.className = "ai-video-link";
-      link.href = video.youtubeUrl;
-      link.target = "_blank";
-      link.rel = "noopener";
+  featureTarget.replaceChildren();
+  shortsTarget.replaceChildren();
 
-      const title = document.createElement("span");
-      title.textContent = video.title;
+  if (featuredVideo) {
+    featureTarget.append(createAiVideoCard(featuredVideo, "standard", true));
+  }
 
-      const action = document.createElement("span");
-      action.textContent = "在 YouTube 開啟";
-
-      link.append(title, action);
-      link.addEventListener("click", () => trackAiVideo(video));
-
-      const frame = document.createElement("div");
-      frame.className = "ai-video-frame";
-
-      const iframe = document.createElement("iframe");
-      iframe.src = video.embedUrl;
-      iframe.title = video.title;
-      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-      iframe.allowFullscreen = true;
-
-      frame.append(iframe);
-      card.append(link, frame);
-      target.append(card);
-    });
+  latestShorts.forEach((video) => {
+    shortsTarget.append(createAiVideoCard(video, "short"));
+  });
 }
 
 async function bootstrapAiVideos() {
-  const target = document.querySelector("#ai-video-grid");
-  if (!target) return;
+  const featureTarget = document.querySelector("#ai-video-feature");
+  const shortsTarget = document.querySelector("#ai-video-grid");
+  if (!featureTarget || !shortsTarget) return;
 
   try {
     const videos = await loadJson("assets/data/ai-videos.json");
     renderAiVideos(videos);
   } catch (_error) {
-    target.innerHTML = '<p class="load-fallback">短片資料暫時無法載入。</p>';
+    featureTarget.innerHTML = '<p class="load-fallback">短片資料暫時無法載入。</p>';
+    shortsTarget.innerHTML = '<p class="load-fallback">短片資料暫時無法載入。</p>';
   }
 }
 

@@ -1515,3 +1515,223 @@ h2 {
     transition: none;
   }
 }
+
+/* Mica AI video hub and archive */
+.ai-video-home-group + .ai-video-home-group {
+  margin-top: 28px;
+}
+
+.ai-video-home-group > h3,
+.ai-video-group-head h3 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 1.25rem;
+}
+
+.ai-video-home-group > h3 {
+  margin-bottom: 14px;
+}
+
+.ai-video-group-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.ai-video-feature {
+  display: grid;
+}
+
+.ai-video-feature .ai-video-card {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.28fr);
+  grid-template-areas:
+    "link frame"
+    "description frame";
+  align-items: start;
+  background:
+    linear-gradient(135deg, rgba(224, 244, 241, 0.62), rgba(255, 255, 255, 0.96)),
+    #fff;
+}
+
+.ai-video-feature .ai-video-link {
+  grid-area: link;
+}
+
+.ai-video-description {
+  grid-area: description;
+  margin: 0;
+  padding: 0 20px 20px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.ai-video-feature .ai-video-frame {
+  grid-area: frame;
+  height: 100%;
+}
+
+.ai-video-frame.is-standard iframe {
+  width: 100%;
+  max-width: none;
+  aspect-ratio: 16 / 9;
+}
+
+.ai-video-frame.is-short iframe {
+  aspect-ratio: 9 / 16;
+}
+
+.video-library-page {
+  max-width: 1160px;
+}
+
+.video-library-hero {
+  padding: clamp(28px, 6vw, 64px);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 8px);
+  background:
+    radial-gradient(circle at 90% 8%, rgba(15, 140, 140, 0.17), transparent 22rem),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(238, 247, 251, 0.92));
+  box-shadow: var(--shadow);
+}
+
+.video-library-hero h1 {
+  max-width: 8em;
+  margin-bottom: 14px;
+  font-size: clamp(2.8rem, 7vw, 5.8rem);
+}
+
+.video-library-subtitle {
+  margin-bottom: 12px;
+  color: var(--teal-dark);
+  font-size: clamp(1.25rem, 2.4vw, 1.8rem);
+  font-weight: 900;
+}
+
+.video-library-summary {
+  max-width: 42rem;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.video-library-section {
+  margin-top: clamp(42px, 7vw, 72px);
+}
+
+.video-library-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.video-library-grid.is-standard {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.video-library-grid.is-shorts {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.video-archive-card {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 14px 34px rgba(9, 32, 82, 0.09);
+}
+
+.video-archive-copy {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 20px;
+}
+
+.video-archive-copy h3 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 1.2rem;
+  line-height: 1.45;
+}
+
+.video-archive-copy p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.video-archive-link {
+  width: fit-content;
+  margin-top: 4px;
+}
+
+.video-archive-frame {
+  padding: 18px;
+  background: linear-gradient(180deg, rgba(15, 140, 140, 0.1), transparent 44%);
+}
+
+.video-archive-frame iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 18px;
+  background: #111;
+  box-shadow: 0 18px 44px rgba(9, 32, 82, 0.15);
+}
+
+.video-archive-frame.is-standard iframe {
+  aspect-ratio: 16 / 9;
+}
+
+.video-archive-frame.is-short iframe {
+  width: min(100%, 360px);
+  aspect-ratio: 9 / 16;
+  margin: 0 auto;
+}
+
+@media (max-width: 940px) {
+  .ai-video-feature .ai-video-card,
+  .video-library-grid.is-standard {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-video-feature .ai-video-card {
+    grid-template-areas:
+      "link"
+      "description"
+      "frame";
+  }
+
+  .video-library-grid.is-shorts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .ai-video-group-head {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .ai-video-group-head .secondary-link,
+  .video-archive-link {
+    width: 100%;
+  }
+
+  .video-library-hero {
+    padding: 24px 20px;
+    border-radius: 22px;
+  }
+
+  .video-library-grid.is-shorts {
+    grid-template-columns: 1fr;
+  }
+
+  .video-archive-card {
+    border-radius: 18px;
+  }
+}

@@ -30,5 +30,27 @@
     "embedUrl": "https://www.youtube.com/embed/uQzmPeCIDGU",
     "status": "published",
     "order": 4
+  },
+  {
+    "id": "7hhdFb8chck",
+    "title": "Mica AI 專題｜完美簡報，直到 Mica 放大第三頁",
+    "description": "它交出了一份完美簡報，直到 Mica 放大第三頁。GPT-5.6 最值得注意的進步。",
+    "youtubeUrl": "https://youtu.be/7hhdFb8chck?si=aloYMQ8f14IrZ0ak",
+    "embedUrl": "https://www.youtube.com/embed/7hhdFb8chck",
+    "format": "standard",
+    "status": "published",
+    "featured": true,
+    "order": 5
+  },
+  {
+    "id": "KyWjZqi-YKU",
+    "title": "Mica AI 短片｜GPT-5.6 三種力量：Sol、Terra、Luna",
+    "description": "同樣是 GPT-5.6，為什麼會有 Sol、Terra、Luna 三種定位？",
+    "youtubeUrl": "https://youtube.com/shorts/KyWjZqi-YKU?si=9yV3vPLsJuHHHdE0",
+    "embedUrl": "https://www.youtube.com/embed/KyWjZqi-YKU",
+    "format": "short",
+    "status": "published",
+    "featured": false,
+    "order": 6
   }
 ]
