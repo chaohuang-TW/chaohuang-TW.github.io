@@ -240,6 +240,7 @@ function renderAiLabProjects(projects) {
     .filter((project) => project.status === "published")
     .sort((current, next) => current.order - next.order)
     .forEach((project) => {
+      const isVideoReference = project.type === "video-reference";
       const card = document.createElement("article");
       card.className = "lab-project-card";
       card.dataset.projectId = project.id;
@@ -251,7 +252,7 @@ function renderAiLabProjects(projects) {
 
       const label = document.createElement("span");
       label.className = "lab-project-label";
-      label.textContent = "AI experiment";
+      label.textContent = isVideoReference ? "Mica AI video" : "AI experiment";
 
       const title = document.createElement("h3");
       title.textContent = project.title;
@@ -261,13 +262,21 @@ function renderAiLabProjects(projects) {
 
       const link = document.createElement("a");
       link.className = "lab-project-link";
-      link.href = project.youtubeUrl;
-      link.target = "_blank";
-      link.rel = "noopener";
-      link.textContent = "在 YouTube 開啟";
+      link.href = isVideoReference ? project.href : project.youtubeUrl;
+      link.textContent = isVideoReference ? "前往 Mica AI 影音庫觀看" : "在 YouTube 開啟";
+      if (!isVideoReference) {
+        link.target = "_blank";
+        link.rel = "noopener";
+      }
       link.addEventListener("click", () => trackAiLabProject(project));
 
       copy.append(label, title, description, link);
+
+      if (isVideoReference) {
+        card.append(copy);
+        target.append(card);
+        return;
+      }
 
       const frame = document.createElement("div");
       frame.className = "lab-video-frame";

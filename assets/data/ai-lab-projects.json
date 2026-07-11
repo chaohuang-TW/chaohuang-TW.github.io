@@ -20,5 +20,27 @@
     "embedUrl": "https://www.youtube.com/embed/Bsbsvuu8JVA",
     "status": "published",
     "order": 2
+  },
+  {
+    "id": "ai-lab-video-003",
+    "type": "youtube",
+    "title": "同圖同詞，誰的貓拳更有戲？",
+    "description": "Google Flow 對上 Super Grok，同一張參考圖、同一組提示詞，卻演出兩種完全不同的氣場。你比較喜歡哪一邊？",
+    "youtubeId": "EQpcdW5cVp4",
+    "youtubeUrl": "https://youtu.be/EQpcdW5cVp4?si=i0qcjOg2OhVo86GZ",
+    "embedUrl": "https://www.youtube.com/embed/EQpcdW5cVp4",
+    "status": "published",
+    "order": 3
+  },
+  {
+    "id": "ai-lab-reference-7hhdFb8chck",
+    "type": "video-reference",
+    "title": "GPT-5.6 最值得注意的進步",
+    "description": "它交出了一份完美簡報，直到 Mica 放大第三頁。",
+    "youtubeId": "7hhdFb8chck",
+    "youtubeUrl": "https://youtu.be/7hhdFb8chck?si=06tL8zA-j1zPGHTM",
+    "href": "/videos/",
+    "status": "published",
+    "order": 4
   }
 ]
