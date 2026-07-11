@@ -1735,3 +1735,78 @@ h2 {
     border-radius: 18px;
   }
 }
+
+/* Shuyi Podcast cover */
+.podcast-feature-panel {
+  grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+  align-items: start;
+}
+
+.podcast-cover-link {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 18px 42px rgba(9, 32, 82, 0.14);
+}
+
+.podcast-cover-link:focus-visible {
+  outline: 3px solid rgba(239, 125, 34, 0.55);
+  outline-offset: 3px;
+}
+
+.podcast-cover {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+.podcast-main {
+  display: grid;
+  min-width: 0;
+  gap: 20px;
+}
+
+.podcast-main .podcast-actions {
+  justify-content: flex-start;
+}
+
+.journey-hero-with-cover {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 46px);
+  align-items: center;
+}
+
+.journey-cover-link {
+  max-width: 280px;
+}
+
+.journey-hero-copy {
+  min-width: 0;
+}
+
+@media (max-width: 760px) {
+  .podcast-feature-panel,
+  .journey-hero-with-cover {
+    grid-template-columns: 1fr;
+  }
+
+  .podcast-cover-link {
+    margin-inline: auto;
+  }
+
+  .journey-cover-link {
+    max-width: 280px;
+  }
+
+  .podcast-main,
+  .journey-hero-copy {
+    width: 100%;
+  }
+}
