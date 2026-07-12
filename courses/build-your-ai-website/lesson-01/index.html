@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0WRZ173JVH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-0WRZ173JVH');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第一課：認識 ChatGPT 與 Codex，完成安裝｜Chao AI 實作所</title>
+  <meta name="description" content="認識 ChatGPT 與 Codex 的角色、兩者如何合作，並完成 ChatGPT 桌面版或 Codex CLI 的基本安裝。">
+  <link rel="icon" href="../../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+</head>
+<body>
+  <main class="site-shell guide-lesson-page">
+    <nav class="course-breadcrumb" aria-label="頁面導覽">
+      <a href="/">Chao AI 實作所</a><span aria-hidden="true">/</span><a href="../">用 AI 建立你的第一個官網</a><span aria-hidden="true">/</span><span>第一課</span>
+    </nav>
+
+    <article class="lesson-article">
+      <header class="lesson-hero">
+        <p class="section-kicker">Lesson 01</p>
+        <h1>認識 ChatGPT 與 Codex，完成安裝</h1>
+        <p class="lesson-subtitle">開始建站之前，先認識你的 AI 企劃師與 AI 工程師。</p>
+        <p>這一課不急著寫 HTML，也不急著建立 GitHub repository。</p>
+        <p>我們先弄懂 ChatGPT 與 Codex 分別負責什麼、如何合作，以及你可以從哪一種方式開始使用 Codex。</p>
+        <dl class="lesson-meta">
+          <div><dt>主題</dt><dd>工具認識與安裝</dd></div>
+          <div><dt>建議時間</dt><dd>約 15～25 分鐘</dd></div>
+          <div><dt>實作成果</dt><dd>完成第一次 Codex 只讀任務</dd></div>
+        </dl>
+      </header>
+
+      <section class="lesson-section" aria-labelledby="lesson-outcomes">
+        <p class="section-kicker">Lesson outcomes</p><h2 id="lesson-outcomes">本課你會完成什麼</h2>
+        <div class="lesson-outcome-grid">
+          <article>說明 ChatGPT 在網站建置中的角色</article><article>說明 Codex 在網站建置中的角色</article><article>看懂 ChatGPT、Codex、GitHub 與 GitHub Pages 的合作流程</article><article>選擇一種 Codex 使用方式並完成第一次任務</article>
+        </div>
+      </section>
+
+      <section class="lesson-section" aria-labelledby="chatgpt-role">
+        <p class="section-kicker">Plan clearly</p><h2 id="chatgpt-role">ChatGPT：幫你把想法整理清楚</h2>
+        <p>ChatGPT 適合協助討論、說明、規劃、比較與整理需求。</p><p>在網站建置流程中，可以把它理解成企劃師與顧問。</p>
+        <p>它可以協助你：</p>
+        <ul><li>釐清網站目的</li><li>找出主要訪客</li><li>規劃網站分類</li><li>安排首頁內容順序</li><li>撰寫標題與介紹文字</li><li>將模糊想法整理成可交付的施工需求</li></ul>
+        <blockquote class="example-dialogue"><span>範例對話</span><p>我想建立一個官網，放 AI 課程、影片、Podcast 與作品，但不知道首頁應該怎麼安排。</p></blockquote>
+        <aside class="lesson-note">AI 的建議仍需要由人確認目的、內容與最終決定。</aside>
+      </section>
+
+      <section class="lesson-section" aria-labelledby="codex-role">
+        <p class="section-kicker">Build carefully</p><h2 id="codex-role">Codex：進入專案實際完成工作</h2>
+        <p>Codex 可以閱讀專案檔案、提出修改計畫、編輯程式碼、執行指令與檢查結果。</p><p>在網站建置流程中，可以把它理解成 AI 工程師。</p>
+        <p>它可以協助：</p>
+        <ul><li>閱讀 HTML、CSS、JavaScript 與 JSON</li><li>新增或修改網站頁面</li><li>檢查連結與版面</li><li>執行測試與檢查</li><li>顯示 git diff</li><li>建立 commit</li><li>在取得權限及正確設定後 push 到 GitHub</li></ul>
+        <aside class="lesson-note is-warning">Codex 能做多少事情，取決於你授予的資料夾、repository、工具與權限。重要修改前應先確認工作範圍，完成後應檢查差異。</aside>
+      </section>
+
+      <section class="lesson-section" aria-labelledby="workflow-title">
+        <p class="section-kicker">Workflow</p><h2 id="workflow-title">ChatGPT 與 Codex 的關係</h2>
+        <ol class="ai-workflow" aria-label="網站建置合作流程"><li><span>01</span>你的目標</li><li><span>02</span>ChatGPT 整理需求</li><li><span>03</span>Codex 修改專案</li><li><span>04</span>GitHub 保存版本</li><li><span>05</span>GitHub Pages 發布網站</li></ol>
+        <p class="workflow-keyline">ChatGPT 幫你想清楚，Codex 幫你做出來。</p>
+        <div class="guide-table-wrap"><table class="role-table"><thead><tr><th>工具</th><th>角色</th><th>任務</th></tr></thead><tbody>
+          <tr><th>ChatGPT</th><td>企劃師／顧問</td><td>討論、規劃、解釋、整理需求</td></tr><tr><th>Codex</th><td>AI 工程師</td><td>讀取專案、修改檔案、執行檢查</td></tr><tr><th>GitHub</th><td>專案倉庫與版本紀錄</td><td>保存網站檔案與每次修改</td></tr><tr><th>GitHub Pages</th><td>公開展示空間</td><td>將 repository 的網站內容發布成公開網址</td></tr>
+        </tbody></table></div>
+      </section>
+
+      <section class="lesson-section" aria-labelledby="install-title">
+        <p class="section-kicker">Choose your setup</p><h2 id="install-title">選擇 Codex 的使用方式</h2>
+        <div class="install-option-grid">
+          <article class="install-option-card"><span class="option-label">初學者建議</span><h3>ChatGPT 桌面版中的 Codex</h3><p>適合不熟悉終端機，希望從圖形介面開始的人。</p>
+            <ol><li>前往 ChatGPT 下載頁。</li><li>下載 Windows 或 macOS 桌面版。</li><li>使用 ChatGPT 帳號登入。</li><li>建立工作、專案，或開啟資料夾。</li><li>依目前介面選擇 Chat、Work 或 Codex。</li><li>加入需要處理的資料夾與任務說明。</li></ol>
+            <div class="guide-actions"><a class="primary-link install-track-link" href="https://chatgpt.com/download/" target="_blank" rel="noopener" data-tool-name="ChatGPT desktop" data-destination="https://chatgpt.com/download/">下載 ChatGPT</a><a class="secondary-link install-track-link" href="https://learn.chatgpt.com/docs/app" target="_blank" rel="noopener" data-tool-name="ChatGPT desktop docs" data-destination="https://learn.chatgpt.com/docs/app">查看官方桌面版說明</a></div>
+          </article>
+          <article class="install-option-card"><span class="option-label">終端機使用者</span><h3>Codex CLI</h3><p>適合已經習慣使用終端機、需要在本機 repository 中直接工作的使用者。</p>
+            <p class="code-label">macOS／Linux 官方安裝指令</p><pre><code>curl -fsSL https://chatgpt.com/codex/install.sh | sh</code></pre><p class="code-label">安裝後執行</p><pre><code>codex</code></pre>
+            <p>第一次執行時，依畫面選擇使用 ChatGPT 帳號或其他可用方式登入。</p>
+            <a class="primary-link install-track-link" href="https://learn.chatgpt.com/docs/codex/cli" target="_blank" rel="noopener" data-tool-name="Codex CLI docs" data-destination="https://learn.chatgpt.com/docs/codex/cli">查看 Codex CLI 官方說明</a>
+            <aside class="lesson-note">Windows 使用者若不熟悉終端機，建議先採用 ChatGPT 桌面版。需要 CLI 時，請依 Codex CLI 官方文件目前提供的 Windows 安裝方式操作，不要在頁面自行杜撰或寫死未經確認的 Windows 指令。</aside>
+          </article>
+        </div>
+      </section>
+
+      <section class="lesson-section safety-card" aria-labelledby="safety-title"><p class="section-kicker">Safety first</p><h2 id="safety-title">先保護好你的帳號與專案</h2><ul><li>不要把密碼或 access token 貼進公開網頁</li><li>不要把 token 寫在 HTML、JavaScript 或 JSON</li><li>不要把含 token 的網址傳給別人</li><li>操作前先確認 Codex 目前所在的資料夾與 repository</li><li>第一次任務先採只讀，不要直接要求修改或發布</li><li>每次修改後都應查看 git diff 與變更檔案</li></ul></section>
+
+      <section class="lesson-section" aria-labelledby="first-task-title">
+        <p class="section-kicker">First task</p><h2 id="first-task-title">先閱讀，不修改</h2><p>第一次任務不要急著請 Codex 做網站。先確認它看得到正確資料夾，也能清楚回報內容。</p>
+        <div class="prompt-panel"><pre id="readonly-prompt"><code>請先閱讀目前資料夾。
+
+告訴我：
+
+1. 目前有哪些檔案與資料夾。
+2. 這個專案看起來是做什麼的。
+3. 哪些檔案可能是首頁、樣式與主要程式。
+
+不要修改任何內容。
+不要建立檔案。
+不要執行 commit 或 push。</code></pre><button class="copy-prompt-button" type="button" data-prompt-name="第一次 Codex 只讀任務" aria-describedby="copy-status">複製指令</button><p class="sr-only" id="copy-status" aria-live="polite"></p></div>
+      </section>
+
+      <section class="lesson-section" aria-labelledby="success-title"><p class="section-kicker">Verify the result</p><h2 id="success-title">如何判斷第一次任務成功</h2><ul class="guide-check-list"><li>Codex 沒有修改任何檔案</li><li>回報的資料夾是你預期的專案</li><li>能指出可能的首頁與樣式檔</li><li>沒有執行 commit 或 push</li></ul><aside class="lesson-note is-warning">若 Codex 顯示的專案名稱或資料夾不對，先停止，不要繼續施工。</aside></section>
+
+      <section class="lesson-section lesson-checklist-section" aria-labelledby="checklist-title"><p class="section-kicker">Complete lesson 01</p><h2 id="checklist-title">第一課完成檢查</h2><p>勾選紀錄只保存在這台裝置的瀏覽器，不需登入，也不會傳送到伺服器。</p>
+        <div class="interactive-checklist">
+          <label><input type="checkbox" data-check-item="我知道 ChatGPT 負責什麼"><span>我知道 ChatGPT 負責什麼</span></label><label><input type="checkbox" data-check-item="我知道 Codex 負責什麼"><span>我知道 Codex 負責什麼</span></label><label><input type="checkbox" data-check-item="我知道兩者如何合作"><span>我知道兩者如何合作</span></label><label><input type="checkbox" data-check-item="我已選擇桌面版或 CLI"><span>我已選擇桌面版或 CLI</span></label><label><input type="checkbox" data-check-item="我已找到官方安裝入口"><span>我已找到官方安裝入口</span></label><label><input type="checkbox" data-check-item="我完成第一次只讀任務"><span>我完成第一次只讀任務</span></label><label><input type="checkbox" data-check-item="我知道 token 不應出現在公開網址或程式碼裡"><span>我知道 token 不應出現在公開網址或程式碼裡</span></label>
+        </div><button class="clear-lesson-progress" type="button">清除本課紀錄</button><p class="sr-only" id="checklist-status" aria-live="polite"></p>
+      </section>
+
+      <nav class="lesson-footer-nav" aria-label="課程導覽"><a class="secondary-link" href="../">回到學習路徑</a><div class="next-lesson"><span>下一課</span><strong>認識 GitHub、Repository 與 GitHub Pages</strong><span class="lesson-status">後續更新</span></div></nav>
+    </article>
+    <footer class="site-footer"><p>Chao AI 實作所：用真實專案學習 AI 協作與網站建置。</p></footer>
+  </main>
+  <script src="lesson.js"></script>
+</body>
+</html>

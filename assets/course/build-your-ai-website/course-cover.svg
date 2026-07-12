@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">用 AI 建立你的第一個官網</title>
+  <desc id="desc">從想法、規劃、建置到上線的網站學習指南封面</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#071d4a"/>
+      <stop offset="0.58" stop-color="#0b3568"/>
+      <stop offset="1" stop-color="#087f80"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#39d0bd"/>
+      <stop offset="1" stop-color="#8ae5cc"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#00102c" flood-opacity=".3"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" rx="48" fill="url(#bg)"/>
+  <circle cx="1390" cy="110" r="260" fill="#38cfbb" opacity=".11"/>
+  <circle cx="1510" cy="780" r="340" fill="#fff" opacity=".06"/>
+  <path d="M0 728C240 632 430 792 720 700s468-192 880-80v280H0Z" fill="#fff" opacity=".05"/>
+  <g transform="translate(112 104)">
+    <rect width="180" height="12" rx="6" fill="url(#accent)"/>
+    <text x="0" y="116" fill="#8ae5cc" font-family="sans-serif" font-size="34" font-weight="700" letter-spacing="6">WEB LEARNING GUIDE</text>
+    <text x="0" y="242" fill="#fff" font-family="sans-serif" font-size="88" font-weight="800">用 AI 建立你的</text>
+    <text x="0" y="352" fill="#fff" font-family="sans-serif" font-size="108" font-weight="800">第一個官網</text>
+    <text x="4" y="430" fill="#d8f5f0" font-family="sans-serif" font-size="40" font-weight="600">ChatGPT × Codex × GitHub Pages</text>
+  </g>
+  <g transform="translate(112 640)" font-family="sans-serif" font-size="31" font-weight="700" text-anchor="middle" filter="url(#shadow)">
+    <g><rect width="230" height="100" rx="24" fill="#fff"/><text x="115" y="62" fill="#0a2a58">想法</text></g>
+    <path d="M250 50h72" stroke="#77dfcf" stroke-width="8" stroke-linecap="round"/><path d="m306 30 22 20-22 20" fill="none" stroke="#77dfcf" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(350)"><rect width="230" height="100" rx="24" fill="#fff"/><text x="115" y="62" fill="#0a2a58">規劃</text></g>
+    <path d="M600 50h72" stroke="#77dfcf" stroke-width="8" stroke-linecap="round"/><path d="m656 30 22 20-22 20" fill="none" stroke="#77dfcf" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(700)"><rect width="230" height="100" rx="24" fill="#fff"/><text x="115" y="62" fill="#0a2a58">建置</text></g>
+    <path d="M950 50h72" stroke="#77dfcf" stroke-width="8" stroke-linecap="round"/><path d="m1006 30 22 20-22 20" fill="none" stroke="#77dfcf" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(1050)"><rect width="230" height="100" rx="24" fill="#42d2be"/><text x="115" y="62" fill="#06234b">上線</text></g>
+  </g>
+</svg>
