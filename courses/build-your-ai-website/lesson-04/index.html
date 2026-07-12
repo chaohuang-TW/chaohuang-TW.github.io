@@ -2,10 +2,15 @@
 <header class="lesson-hero"><p class="section-kicker">Lesson 04</p><div class="lesson-series-progress">第 4 / 8 課</div><h1>建立 GitHub Repository</h1><p class="lesson-subtitle">為你的網站建立正確的專案空間與版本起點。</p><dl class="lesson-meta"><div><dt>主題</dt><dd>建立網站專案</dd></div><div><dt>建議時間</dt><dd>約 20～35 分鐘</dd></div><div><dt>實作成果</dt><dd>建立自己的網站 repository</dd></div></dl></header>
 <nav class="lesson-toc"><a href="#goals">本課目標</a><a href="#naming">核心觀念</a><a href="#steps">實際操作</a><a href="#prompt">可複製指令</a><a href="#mistakes">常見錯誤</a><a href="#checklist">完成檢查</a></nav>
 <section class="lesson-section" id="goals"><h2>本課你會完成什麼</h2><div class="concept-card-grid"><article>確認 GitHub username</article><article>選擇正確 owner 與名稱</article><article>建立 main branch</article><article>讓 Codex 只讀確認專案</article></div></section>
-<section class="lesson-section" id="naming"><h2>建立前與命名規則</h2><p>先確認已有 GitHub 帳號、知道 username，並決定 User site 或 Project site。本指南主線採 User site。</p><aside class="lesson-note"><p>若 username 是 <code>example-user</code>，repository 必須是 <code>example-user.github.io</code>。大小寫、連字號與拼字都要確認。</p></aside></section>
+<section class="lesson-section" id="naming"><h2>建立前與命名規則</h2><p>先確認已有 GitHub 帳號、知道 username，並決定 User site 或 Project site。本指南主線採 User site。</p><aside class="lesson-note"><p>假設 GitHub username 是 <code>&lt;username&gt;</code>，User site repository 必須是 <code>&lt;username&gt;.github.io</code>，完整 repository 是 <code>&lt;username&gt;/&lt;username&gt;.github.io</code>，公開網址是 <code>https://&lt;username&gt;.github.io/</code>。</p><p>例如 username 為 <code>example-user</code>，repository 才會是 <code>example-user.github.io</code>；主要規則仍以 <code>&lt;username&gt;</code> 表示。大小寫、連字號與拼字都要確認。</p></aside></section>
 <section class="lesson-section" id="steps"><h2>建立步驟</h2><ol><li>登入 GitHub 並建立新 repository。</li><li>選擇正確 owner。</li><li>輸入正確名稱。</li><li>本課範例採 Public。</li><li>可建立 README，讓 main branch 立即存在。</li><li>完成建立並確認 branch 為 main。</li></ol><p class="lesson-note">GitHub 介面可能更新，請以官方目前畫面為準。</p></section>
 <section class="lesson-section safety-card"><h2>Public repository 安全提醒</h2><p>公開 repository 不得放入密碼、token、身分證件、私人文件、未公開資料或內部機密。</p><h3>讓 Codex 進入正確 repository</h3><p>可使用 ChatGPT／Codex 當前提供的 GitHub 連線方式，或先在本機 clone repository，再讓 Codex 開啟該資料夾。不要把 token 貼進 Prompt；介面可能更新，請依官方目前說明操作。</p></section>
-<section class="lesson-section" id="prompt"><h2>第一次只讀確認</h2><div class="prompt-panel"><pre id="lesson-04-prompt"><code>請先確認目前 repository。
+<section class="lesson-section" id="prompt"><h2>第一次只讀確認</h2><div class="prompt-panel"><pre id="lesson-04-prompt"><code>請確認目前 repository 是否為：
+&lt;username&gt;/&lt;username&gt;.github.io
+
+其中 &lt;username&gt; 代表我自己的 GitHub 使用者名稱。
+不要使用課程作者的帳號名稱。
+不要把 token、密碼或其他驗證資訊放進指令。
 
 請回報：
 1. repository 名稱
@@ -16,9 +21,9 @@
 
 不要修改任何檔案。
 不要建立 commit。
-不要 push。</code></pre><button class="copy-prompt-button" data-copy-target="#lesson-04-prompt code" data-prompt-name="Repository 只讀確認">複製指令</button></div><div class="code-explanation"><p><strong>正確結果範例</strong></p><pre><code>repository: example-user/example-user.github.io
+不要 push。</code></pre><button class="copy-prompt-button" data-copy-target="#lesson-04-prompt code" data-prompt-name="Repository 只讀確認">複製指令</button></div><div class="code-explanation"><p><strong>正確結果範例</strong></p><pre><code>repository: &lt;username&gt;/&lt;username&gt;.github.io
 branch: main
-工作樹: clean</code></pre></div></section>
+working tree: clean</code></pre></div></section>
 <section class="lesson-section"><h2>官方資源</h2><p><a class="primary-link" href="https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository" target="_blank" rel="noopener" data-resource-name="GitHub 建立 repository 文件">查看 GitHub 官方建立 repository 文件</a></p></section>
 <section class="lesson-section common-mistakes" id="mistakes"><h2>常見錯誤</h2><ul><li>建錯 owner</li><li>repository 名稱少了 <code>.github.io</code></li><li>在錯誤 repository 施工</li><li>將 token 貼進 Prompt</li><li>main 與其他 branch 混淆</li><li>工作樹不乾淨仍繼續操作</li></ul></section>
 <section class="lesson-section lesson-checklist-section" id="checklist"><h2>本課完成檢查</h2><p>勾選紀錄只保存在這台裝置的瀏覽器，不會上傳。</p><div class="interactive-checklist"><label><input type="checkbox" data-check-item="確認 GitHub username"><span>我確認 GitHub username</span></label><label><input type="checkbox" data-check-item="選擇 User site"><span>我選擇 User site</span></label><label><input type="checkbox" data-check-item="確認 owner"><span>我確認 owner</span></label><label><input type="checkbox" data-check-item="確認 repository 名稱"><span>我確認 repository 名稱</span></label><label><input type="checkbox" data-check-item="確認 main branch"><span>我確認 branch 為 main</span></label><label><input type="checkbox" data-check-item="移除敏感資料"><span>我確認沒有敏感資料</span></label><label><input type="checkbox" data-check-item="完成只讀確認"><span>我完成 Codex 只讀確認</span></label></div><p class="lesson-complete-state" hidden></p><button class="clear-lesson-progress">清除本課紀錄</button><p id="lesson-live-status" class="sr-only" aria-live="polite"></p></section>
