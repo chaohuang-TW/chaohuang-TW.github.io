@@ -821,6 +821,14 @@ h2 {
   font-size: 0.9rem;
 }
 
+.site-footer-privacy {
+  flex-basis: 100%;
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
 .load-fallback {
   color: var(--muted);
 }
