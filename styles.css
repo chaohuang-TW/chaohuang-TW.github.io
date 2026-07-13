@@ -111,6 +111,20 @@ p {
   box-shadow: 0 14px 34px rgba(9, 32, 82, 0.08);
 }
 
+.hero-primary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.hero-primary-actions .primary-link,
+.hero-primary-actions .secondary-link {
+  min-width: min(100%, 230px);
+  text-align: center;
+}
+
 .hero-kicker,
 .section-kicker {
   margin-bottom: 12px;
@@ -1232,6 +1246,15 @@ h2 {
 
   .hero-readable-summary {
     display: block;
+  }
+
+  .hero-primary-actions {
+    flex-direction: column;
+  }
+
+  .hero-primary-actions .primary-link,
+  .hero-primary-actions .secondary-link {
+    width: 100%;
   }
 
   .hero-actions,

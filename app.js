@@ -333,6 +333,17 @@ function bindBrandHubTracking() {
   });
 }
 
+function bindHomePrimaryActionTracking() {
+  document.querySelectorAll(".track-home-primary-action").forEach((element) => {
+    element.addEventListener("click", () => {
+      sendEvent("select_home_primary_action", {
+        action_name: element.dataset.actionName,
+        href: element.getAttribute("href")
+      });
+    });
+  });
+}
+
 function bindPodcastTracking() {
   document.querySelectorAll(".track-podcast").forEach((element) => {
     element.addEventListener("click", () => {
@@ -482,6 +493,7 @@ async function bootstrapCourses() {
 
 bindHomeCategoryTracking();
 bindBrandHubTracking();
+bindHomePrimaryActionTracking();
 bindPodcastTracking();
 bindPodcastSeriesTracking();
 bindAiNoteTracking();
