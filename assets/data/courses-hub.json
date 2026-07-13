@@ -5,7 +5,7 @@
     "subtitle": "ChatGPT × Codex × GitHub Pages",
     "description": "從認識 ChatGPT 與 Codex、完成安裝開始，一步一步規劃、建置並發布自己的第一個網站。全程以 Chao AI 實作所為真實案例。",
     "status": "持續更新",
-    "cover": "assets/course/build-your-ai-website/course-cover.svg",
+    "cover": "assets/course/build-your-ai-website/course-cover.webp",
     "href": "/courses/build-your-ai-website/",
     "prepTools": [
       { "name": "ChatGPT", "href": "https://chatgpt.com/" },
