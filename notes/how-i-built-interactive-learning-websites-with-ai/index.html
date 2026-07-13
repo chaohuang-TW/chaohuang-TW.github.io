@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0WRZ173JVH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-0WRZ173JVH');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>我如何用 AI 做出互動學習網站｜Chao AI 實作所</title>
+  <meta name="description" content="我不是先學會所有程式，才開始做互動學習網站。這篇文章整理我如何從學習需求出發，運用 ChatGPT 與 Codex，把想法逐步做成真正可以操作的作品。">
+  <link rel="canonical" href="https://chaohuang-tw.github.io/notes/how-i-built-interactive-learning-websites-with-ai/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="我如何用 AI 做出互動學習網站">
+  <meta property="og:description" content="從一句需求開始，運用 ChatGPT 與 Codex，逐步完成真正能在手機上操作的互動學習網站。">
+  <meta property="og:url" content="https://chaohuang-tw.github.io/notes/how-i-built-interactive-learning-websites-with-ai/">
+  <meta property="og:site_name" content="Chao AI 實作所">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:image" content="https://chaohuang-tw.github.io/assets/images/chao-ai-studio-hero-v2.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="我如何用 AI 做出互動學習網站">
+  <meta name="twitter:description" content="從學習需求出發，運用 ChatGPT 與 Codex，把想法逐步做成真正可以操作的作品。">
+  <meta name="twitter:image" content="https://chaohuang-tw.github.io/assets/images/chao-ai-studio-hero-v2.png">
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <main class="site-shell ai-note-page">
+    <nav class="article-breadcrumb" aria-label="頁面導覽">
+      <a href="/">Chao AI 實作所</a><span aria-hidden="true">/</span><a href="/#ai-notes">AI 工具應用筆記</a><span aria-hidden="true">/</span><span>我如何用 AI 做出互動學習網站</span>
+    </nav>
+
+    <article class="ai-note-article">
+      <header class="ai-note-hero">
+        <p class="ai-note-kicker">AI TOOL NOTES</p>
+        <h1>我如何用 AI 做出互動學習網站</h1>
+        <p class="ai-note-deck">從一句需求，到真正能在手機上操作的作品</p>
+        <div class="ai-note-lead">
+          <p>過去，要做一個互動學習網站，通常會先想到程式設計、網頁排版、資料處理，甚至覺得必須找工程師才能完成。</p>
+          <p>但我真正開始做之後，發現事情可以換一種方式進行。</p>
+          <p>我不必先學會所有程式語言，也不必一次做出完整的平台。我只需要先想清楚一件事：</p>
+          <blockquote class="ai-note-highlight">這個網站要幫使用者練習什麼？</blockquote>
+          <p>接著，再讓 ChatGPT 協助我整理想法，讓 Codex 把這些想法做成能實際操作的網頁。</p>
+          <p>AI 沒有讓建網站變成「按一下就完成」，但它確實大幅縮短了從想法到作品之間的距離。</p>
+        </div>
+      </header>
+
+      <div class="ai-note-layout">
+        <div class="ai-note-content">
+          <section class="ai-note-section" aria-labelledby="note-section-1">
+            <p class="ai-note-section-number">01</p>
+            <h2 id="note-section-1">一、我不是先想網站，而是先想學習需求</h2>
+            <p>一開始，我並不是告訴 AI：</p>
+            <blockquote>幫我做一個很厲害的互動網站。</blockquote>
+            <p>這種說法看似簡單，實際上卻太模糊。</p>
+            <p>AI 不知道使用者是誰、要學什麼、題目有多難，也不知道答錯時要怎麼回應。</p>
+            <p>所以我會先確認幾個基本問題：</p>
+            <ul>
+              <li>這個練習是給誰使用？</li><li>要練習哪一項能力？</li><li>使用手機、平板還是電腦？</li><li>答對之後要顯示什麼？</li><li>答錯時是直接公布答案，還是讓使用者再試一次？</li><li>一次要出幾題？</li><li>完成後要不要顯示成績？</li>
+            </ul>
+            <p>例如，小學生的練習網站，不一定需要很多動畫與複雜功能。</p>
+            <p>有時候真正重要的是：</p>
+            <ul><li>題目夠清楚</li><li>按鈕夠大</li><li>回饋夠直接</li><li>手機上容易操作</li><li>孩子知道自己做對還是做錯</li></ul>
+            <p>當學習目標清楚後，網站的設計才有方向。</p>
+          </section>
+
+          <section class="ai-note-section" aria-labelledby="note-section-2">
+            <p class="ai-note-section-number">02</p>
+            <h2 id="note-section-2">二、ChatGPT 和 Codex 的工作不同</h2>
+            <p>我在製作網站時，通常會把 ChatGPT 和 Codex 當成兩種不同角色。</p>
+            <h3>ChatGPT 像企劃與編輯</h3>
+            <p>我會用 ChatGPT 協助：</p>
+            <ul><li>整理需求</li><li>設計題型</li><li>調整文字</li><li>思考操作流程</li><li>找出可能遺漏的地方</li><li>將模糊想法整理成清楚規格</li></ul>
+            <p>例如，我可能先告訴 ChatGPT：</p>
+            <blockquote>我要做一個適合小學生的國語練習網站，使用手機操作，每次顯示一題，答對要立即鼓勵，答錯可以再試一次。</blockquote>
+            <p>ChatGPT 會幫我把這個想法拆成比較具體的功能。</p>
+            <h3>Codex 像實際施工的人</h3>
+            <p>當需求整理完成後，我再把明確的工作交給 Codex。</p>
+            <p>Codex 負責：</p>
+            <ul><li>閱讀網站現有檔案</li><li>建立或修改 HTML、CSS、JavaScript</li><li>加入互動功能</li><li>檢查錯誤</li><li>測試手機版面</li><li>協助保存版本與發布網站</li></ul>
+            <p>簡單來說：</p>
+            <div class="ai-note-role-grid">
+              <article class="ai-note-role-card"><span>01</span><h3>我</h3><strong>決定要做什麼</strong><p>負責學習目標、內容品質與最後判斷。</p></article>
+              <article class="ai-note-role-card"><span>02</span><h3>ChatGPT</h3><strong>協助整理怎麼做</strong><p>負責需求整理、題型構想、文字與流程。</p></article>
+              <article class="ai-note-role-card"><span>03</span><h3>Codex</h3><strong>負責把它做出來</strong><p>負責讀取檔案、建立功能、修改、測試與發布。</p></article>
+            </div>
+            <p class="ai-note-emphasis">AI 可以協助施工，但最後的方向仍然必須由人決定。</p>
+          </section>
+
+          <section class="ai-note-section" aria-labelledby="note-section-3">
+            <p class="ai-note-section-number">03</p>
+            <h2 id="note-section-3">三、我的實際製作流程</h2>
+            <p>我現在製作互動網站，大致會經過以下幾個步驟。</p>
+            <ol class="ai-note-flow" aria-label="互動網站製作流程">
+              <li class="ai-note-flow-step"><span>01</span>發現需求</li><li class="ai-note-flow-step"><span>02</span>定義學習目標</li><li class="ai-note-flow-step"><span>03</span>和 ChatGPT 討論玩法</li><li class="ai-note-flow-step"><span>04</span>整理成 Codex 指令</li><li class="ai-note-flow-step"><span>05</span>建立第一版</li><li class="ai-note-flow-step"><span>06</span>實際操作</li><li class="ai-note-flow-step"><span>07</span>發現問題</li><li class="ai-note-flow-step"><span>08</span>逐項修正</li><li class="ai-note-flow-step"><span>09</span>手機測試</li><li class="ai-note-flow-step"><span>10</span>發布上線</li>
+            </ol>
+            <h3>1. 先寫下最簡單的需求</h3>
+            <p>不需要一開始就寫出完整企劃書。</p><p>先回答三件事即可：</p>
+            <p>給誰使用？<br>要練習什麼？<br>完成後希望得到什麼結果？</p>
+            <p>例如：</p><p>使用者：國小學生<br>學習內容：國語詞語辨識<br>完成成果：做完 10 題後顯示答對題數</p>
+            <h3>2. 請 ChatGPT 協助補充細節</h3>
+            <p>我會請 ChatGPT 幫我檢查：</p>
+            <ul><li>題目是否適合孩子</li><li>操作流程是否太複雜</li><li>是否缺少答對、答錯回饋</li><li>手機版需要注意什麼</li><li>第一版應該先做哪些功能</li></ul>
+            <p>這一步的重點不是叫 AI 直接寫程式，而是先把需求說清楚。</p>
+            <h3>3. 整理成 Codex 能執行的指令</h3>
+            <p>交給 Codex 時，我不只寫「幫我做網站」，而會說明：</p>
+            <ul><li>正確的 repository</li><li>這次要完成的功能</li><li>允許修改哪些檔案</li><li>哪些內容不能動</li><li>手機版要求</li><li>測試方式</li><li>完成後是否可以 commit 與 push</li></ul>
+            <p>範圍越清楚，Codex 越不容易改到不相關的地方。</p>
+            <h3>4. 先做最小版本</h3>
+            <p>第一版不需要把所有想法都放進去。</p>
+            <p>我通常先完成：</p><ul><li>一種題型</li><li>一個操作流程</li><li>一個回饋方式</li><li>一個完成畫面</li></ul>
+            <p>確認基本功能可以使用後，再逐步增加內容。</p>
+            <h3>5. 自己實際操作</h3>
+            <p>網站能打開，不代表真的好用。</p>
+            <p>我會實際從頭操作一次，觀察：</p><ul><li>題目是否看得懂</li><li>按鈕是否太小</li><li>手機版是否擠在一起</li><li>答錯後是否知道下一步</li><li>完成後是否有清楚結果</li><li>有沒有不必要的步驟</li></ul>
+            <p>這一步經常比寫程式更重要。</p>
+            <h3>6. 一次修正一個問題</h3>
+            <p>我不會把十個問題全部塞進同一個指令。</p>
+            <p>比較穩定的方法是：</p><p>先修手機按鈕<br>確認正常<br>再修改答錯回饋<br>確認正常<br>再加入完成畫面</p>
+            <p>每次修改範圍越小，越容易看出是哪一個變更造成問題。</p>
+          </section>
+
+          <section class="ai-note-section" aria-labelledby="note-section-4">
+            <p class="ai-note-section-number">04</p>
+            <h2 id="note-section-4">四、我怎麼寫 Codex 指令</h2>
+            <p>Codex 指令不一定要非常長，但必須清楚。</p>
+            <p>一個基本指令可以像這樣：</p>
+            <div class="ai-note-code-block">
+              <p>Codex 指令範例</p>
+              <pre tabindex="0"><code>請先閱讀目前網站檔案，不要立即修改。
+
+本次任務：
+在現有練習頁面加入 10 題作答功能。
+
+只允許修改：
+- index.html
+- styles.css
+- app.js
+
+功能要求：
+1. 每次只顯示一題。
+2. 答對後顯示鼓勵文字。
+3. 答錯後可以再次作答。
+4. 完成 10 題後顯示答對題數。
+5. 390px 手機畫面不得水平溢出。
+
+不要：
+- 修改其他頁面
+- 加入登入功能
+- 加入外部套件
+- commit
+- push
+
+完成後請回報：
+- 修改檔案
+- 功能測試結果
+- 手機版結果
+- Console error</code></pre>
+            </div>
+            <p>這種寫法的重點，不是格式有多漂亮，而是讓 Codex 知道：</p>
+            <blockquote>哪些事情要做，哪些事情不能做。</blockquote>
+          </section>
+
+          <section class="ai-note-section" aria-labelledby="note-section-5">
+            <p class="ai-note-section-number">05</p>
+            <h2 id="note-section-5">五、網站最常出現的問題，不一定是程式錯誤</h2>
+            <p>我在實際製作時發現，很多問題並不是網站不能執行，而是「使用起來不順」。</p>
+            <h3>按鈕太小</h3><p>桌機上看起來正常，但到了手機上，孩子很難準確點選。</p>
+            <h3>文字太多</h3><p>畫面塞了很多說明，反而讓使用者不知道應該先做什麼。</p>
+            <h3>答錯回饋不清楚</h3><p>只是顯示紅色叉叉，但沒有告訴使用者可以再試一次。</p>
+            <h3>動畫太多</h3><p>動畫本來是為了增加趣味，最後卻可能干擾作答。</p>
+            <h3>第一版功能太多</h3><p>一次加入計分、倒數、音效、排行榜及多種題型，結果任何一個地方出錯，都很難找出原因。</p>
+            <p>所以，我後來越來越重視一件事：</p>
+            <blockquote class="ai-note-highlight">互動網站不是功能越多越好，而是使用者越容易完成越好。</blockquote>
+          </section>
+
+          <section class="ai-note-section" aria-labelledby="note-section-6">
+            <p class="ai-note-section-number">06</p>
+            <h2 id="note-section-6">六、AI 做得到什麼，也做不到什麼</h2>
+            <p>AI 很適合協助：</p>
+            <ul><li>快速建立第一版</li><li>整理需求</li><li>修改排版</li><li>加入互動</li><li>找出部分錯誤</li><li>提供不同做法</li><li>重複處理相似工作</li></ul>
+            <p>但 AI 仍然不知道：</p>
+            <ul><li>這道題目適不適合孩子</li><li>文字是否符合臺灣使用習慣</li><li>動畫會不會造成干擾</li><li>使用者真正卡在哪裡</li><li>哪一個功能其實不需要</li><li>最終成果是否符合原來的學習目的</li></ul>
+            <p>因此，AI 雖然可以寫出程式，但不能完全取代內容判斷與使用者觀察。</p>
+            <p>真正重要的工作仍然包括：</p>
+            <ul><li>決定學習目標</li><li>檢查題目內容</li><li>實際試用</li><li>發現問題</li><li>判斷哪些功能應該保留或刪除</li></ul>
+          </section>
+
+          <section class="ai-note-section" aria-labelledby="note-section-7">
+            <p class="ai-note-section-number">07</p>
+            <h2 id="note-section-7">七、我從中學到的事</h2>
+            <p>在使用 AI 製作互動學習網站後，我最大的體會不是「AI 很會寫程式」，而是：</p>
+            <blockquote class="ai-note-highlight">清楚表達需求，本身就是一種重要能力。</blockquote>
+            <p>當我只說「幫我做得更好」，AI 很難知道我要的是什麼。</p>
+            <p>但當我能說清楚：</p>
+            <ul><li>哪一段有問題</li><li>希望變成什麼樣子</li><li>哪些部分不能修改</li><li>要如何檢查結果</li></ul>
+            <p>AI 就能更有效地協助我完成工作。</p>
+            <p>這不只是網站製作的方法，也適用於文書、簡報、課程設計與內容整理。</p>
+          </section>
+
+          <section class="ai-note-section" aria-labelledby="note-section-8">
+            <p class="ai-note-section-number">08</p>
+            <h2 id="note-section-8">八、初學者可以怎麼開始</h2>
+            <p>第一次嘗試時，不需要直接做完整學習平台。</p>
+            <p>可以先從一個非常小的作品開始：</p>
+            <p>一個學習目標<br>一種題型<br>三到五道題目<br>一個答對回饋<br>一個完成畫面</p>
+            <p>例如：</p>
+            <ul><li>三題英文單字選擇</li><li>五題國語詞語判斷</li><li>三題數學加法</li><li>圖片與名稱配對</li><li>簡單的是非題</li></ul>
+            <p>先讓第一個小作品真的可以使用，再慢慢增加功能。</p>
+            <p>完成一個小網站，比規劃一個永遠沒有完成的大平台更有價值。</p>
+          </section>
+
+          <section class="ai-note-section ai-note-conclusion" aria-labelledby="note-conclusion">
+            <p class="ai-note-section-number">Conclusion</p>
+            <h2 id="note-conclusion">結語：AI 降低門檻，但作品仍然來自人的判斷</h2>
+            <p>AI 讓我能更快把想法變成網站，也讓原本需要大量技術準備的工作，變得比較容易開始。</p>
+            <p>但真正讓網站有價值的，不是使用了多少 AI 工具，而是：</p>
+            <ul><li>它有沒有解決一個真實需求</li><li>使用者能不能順利完成</li><li>內容是否正確</li><li>操作是否清楚</li><li>製作者是否願意不斷測試與修正</li></ul>
+            <p>我不是先成為工程師，才開始做網站。</p>
+            <p>而是在實際製作的過程中，一步一步學會如何和 AI 合作。</p>
+            <p>這也是我建立「Chao AI 實作所」的原因：</p>
+            <blockquote class="ai-note-highlight">不只展示成品，也記錄一個普通人如何把想法，逐步做成真正可以使用的作品。</blockquote>
+            <h3>延伸閱讀</h3>
+            <p>想進一步了解 ChatGPT、Codex 與 GitHub Pages 如何分工，並跟著步驟建立自己的網站，可閱讀：</p>
+            <p><strong>《用 AI 建立你的第一個官網》</strong></p>
+            <p>從認識工具、規劃內容、建立 repository，到發布正式網址，逐步完成第一個屬於自己的網站。</p>
+          </section>
+        </div>
+      </div>
+
+      <section class="ai-note-course-cta" aria-labelledby="note-cta-title">
+        <p class="section-kicker">Continue learning</p>
+        <h2 id="note-cta-title">接著建立你的第一個官網</h2>
+        <p>想進一步了解 ChatGPT、Codex 與 GitHub Pages 如何分工，可以跟著完整學習指南，一步一步建立並發布自己的第一個網站。</p>
+        <div class="ai-note-cta-actions">
+          <a class="primary-link" href="/courses/build-your-ai-website/">閱讀《用 AI 建立你的第一個官網》</a>
+          <a class="secondary-link" href="/">回到 Chao AI 實作所</a>
+        </div>
+      </section>
+    </article>
+
+    <footer class="site-footer"><p>Chao AI 實作所：記錄從想法到作品的 AI 實作過程。</p></footer>
+  </main>
+</body>
+</html>

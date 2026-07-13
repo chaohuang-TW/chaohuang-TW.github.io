@@ -1841,6 +1841,91 @@ h2 {
   .guide-hero > .guide-cover { order: 0; }
 }
 
+/* AI tool note article */
+.note-item {
+  display: grid;
+  align-content: space-between;
+  gap: 18px;
+  text-decoration: none;
+}
+
+.note-item-action {
+  width: fit-content;
+  color: var(--teal-dark);
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.note-item.is-published {
+  border-color: rgba(8, 127, 128, 0.3);
+  background: linear-gradient(135deg, rgba(224, 244, 241, 0.8), rgba(255, 255, 255, 0.98)), #fff;
+}
+
+.ai-note-page { padding-bottom: 28px; }
+.article-breadcrumb { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 22px 0 18px; color: var(--muted); font-size: 0.9rem; }
+.article-breadcrumb a { color: var(--teal-dark); font-weight: 800; text-decoration: none; }
+.article-breadcrumb a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.article-breadcrumb a:focus-visible { outline: 3px solid rgba(239, 125, 34, 0.55); outline-offset: 3px; border-radius: 4px; }
+
+.ai-note-article { min-width: 0; }
+.ai-note-hero { position: relative; overflow: hidden; padding: clamp(34px, 7vw, 76px); border: 1px solid rgba(8, 127, 128, 0.18); border-radius: 34px; background: radial-gradient(circle at 88% 14%, rgba(66, 210, 190, 0.25), transparent 28%), linear-gradient(135deg, #f8fbff 0%, #eef8f7 62%, #fff4e9 100%); box-shadow: 0 28px 70px rgba(9, 32, 82, 0.13); }
+.ai-note-hero::after { position: absolute; right: -70px; bottom: -110px; width: 280px; height: 280px; border: 42px solid rgba(37, 101, 207, 0.08); border-radius: 50%; content: ""; pointer-events: none; }
+.ai-note-kicker, .ai-note-section-number { margin: 0 0 10px; color: var(--teal-dark); font-size: 0.78rem; font-weight: 950; letter-spacing: 0.14em; text-transform: uppercase; }
+.ai-note-hero h1 { position: relative; z-index: 1; max-width: 850px; margin: 0; color: var(--navy); font-size: clamp(2.3rem, 6vw, 5rem); line-height: 1.06; letter-spacing: -0.055em; }
+.ai-note-deck { max-width: 760px; margin: 22px 0 0; color: var(--teal-dark); font-size: clamp(1.18rem, 2.3vw, 1.6rem); font-weight: 850; }
+.ai-note-lead { position: relative; z-index: 1; max-width: 790px; margin-top: 34px; color: #243d59; font-size: clamp(1rem, 1.5vw, 1.12rem); line-height: 1.85; }
+.ai-note-lead p { margin: 0 0 1em; }
+
+.ai-note-layout { max-width: 820px; margin: 0 auto; }
+.ai-note-content { color: #21384f; font-size: clamp(1rem, 1.5vw, 1.1rem); line-height: 1.85; }
+.ai-note-section { margin-top: clamp(64px, 9vw, 104px); scroll-margin-top: 20px; }
+.ai-note-section h2 { margin: 0 0 26px; color: var(--navy); font-size: clamp(1.7rem, 3.4vw, 2.45rem); line-height: 1.28; letter-spacing: -0.025em; }
+.ai-note-section h3 { margin: 38px 0 12px; color: var(--teal-dark); font-size: clamp(1.18rem, 2vw, 1.38rem); line-height: 1.45; }
+.ai-note-section p { margin: 0 0 1.2em; }
+.ai-note-section ul { margin: 0 0 1.5em; padding-left: 1.3em; }
+.ai-note-section li { margin: 0.35em 0; padding-left: 0.25em; }
+.ai-note-section blockquote { margin: 24px 0 30px; padding: 18px 22px; border-left: 5px solid var(--orange); border-radius: 0 16px 16px 0; background: #fff7ed; color: var(--navy); font-weight: 800; }
+.ai-note-highlight { font-size: clamp(1.12rem, 2.2vw, 1.35rem); }
+.ai-note-emphasis { margin-top: 22px !important; padding: 18px 20px; border-radius: 16px; background: #eaf8f5; color: #145c5e; font-weight: 850; }
+
+.ai-note-role-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 26px 0; }
+.ai-note-role-card { min-width: 0; padding: 24px; border: 1px solid rgba(8, 127, 128, 0.22); border-radius: 20px; background: #fff; box-shadow: 0 16px 36px rgba(9, 32, 82, 0.08); }
+.ai-note-role-card > span { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #e0f4f1; color: var(--teal-dark); font-size: 0.78rem; font-weight: 900; }
+.ai-note-role-card h3 { margin: 16px 0 8px; color: var(--navy); }
+.ai-note-role-card strong { color: var(--teal-dark); }
+.ai-note-role-card p { margin: 10px 0 0; color: var(--muted); font-size: 0.95rem; line-height: 1.65; }
+
+.ai-note-flow { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 28px 0 46px; padding: 0; list-style: none; }
+.ai-note-flow-step { display: flex; gap: 14px; align-items: center; min-width: 0; padding: 16px 18px; border: 1px solid rgba(37, 101, 207, 0.14); border-radius: 15px; background: #f7faff; color: var(--navy); font-weight: 800; }
+.ai-note-flow-step span { flex: 0 0 auto; color: var(--teal-dark); font-size: 0.78rem; letter-spacing: 0.08em; }
+
+.ai-note-code-block { overflow: hidden; margin: 28px 0 34px; border: 1px solid #234a78; border-radius: 20px; background: #061c44; box-shadow: 0 20px 46px rgba(6, 28, 68, 0.18); }
+.ai-note-code-block > p { margin: 0; padding: 14px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.15); color: #91e7da; font-size: 0.85rem; font-weight: 900; letter-spacing: 0.06em; }
+.ai-note-code-block pre { max-width: 100%; margin: 0; padding: 24px; overflow-x: auto; color: #effffc; font: 0.9rem/1.75 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; }
+.ai-note-code-block pre:focus-visible { outline: 3px solid var(--orange); outline-offset: -5px; }
+.ai-note-conclusion { padding: clamp(28px, 5vw, 48px); border: 1px solid rgba(8, 127, 128, 0.2); border-radius: 26px; background: linear-gradient(145deg, #f4fbfa, #fff); }
+
+.ai-note-course-cta { max-width: 920px; margin: clamp(70px, 10vw, 120px) auto 0; padding: clamp(28px, 6vw, 54px); border-radius: 28px; background: linear-gradient(135deg, #082554, #0b5470 62%, #087f80); color: #fff; box-shadow: 0 28px 64px rgba(9, 32, 82, 0.22); }
+.ai-note-course-cta .section-kicker { color: #8fe7d9; }
+.ai-note-course-cta h2 { margin: 0 0 14px; color: #fff; font-size: clamp(1.7rem, 4vw, 2.65rem); }
+.ai-note-course-cta p { max-width: 690px; margin: 0; color: rgba(255, 255, 255, 0.86); line-height: 1.75; }
+.ai-note-cta-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.ai-note-course-cta .primary-link { background: #42d2be; color: #06234b; }
+.ai-note-course-cta .secondary-link { border-color: rgba(255, 255, 255, 0.55); color: #fff; }
+.ai-note-course-cta a:focus-visible { outline: 3px solid #ffac63; outline-offset: 3px; }
+
+@media (max-width: 760px) {
+  .ai-note-page { padding-inline: 16px; }
+  .ai-note-hero { padding: 30px 20px; border-radius: 22px; }
+  .ai-note-hero h1 { font-size: clamp(2.05rem, 11vw, 3.1rem); letter-spacing: -0.04em; }
+  .ai-note-role-grid, .ai-note-flow { grid-template-columns: 1fr; }
+  .ai-note-section { margin-top: 62px; }
+  .ai-note-section blockquote { padding: 16px 17px; }
+  .ai-note-code-block pre { padding: 20px; font-size: 0.84rem; }
+  .ai-note-cta-actions { flex-direction: column; }
+  .ai-note-cta-actions a { width: 100%; text-align: center; }
+}
+
 /* AI website learning guide */
 .ai-website-guide-page,
 .guide-lesson-page {
