@@ -38,13 +38,18 @@ function renderCourseHub(courses) {
     card.dataset.status = course.status;
     card.dataset.href = course.href || "#course-hub";
 
-    cover.src = course.cover;
-    cover.alt = `${course.title}課程封面`;
+    fallback.hidden = true;
+    cover.hidden = false;
+    cover.addEventListener("load", () => {
+      cover.hidden = false;
+      fallback.hidden = true;
+    });
     cover.addEventListener("error", () => {
       cover.hidden = true;
       fallback.hidden = false;
     });
-    fallback.hidden = true;
+    cover.src = course.cover;
+    cover.alt = `${course.title}課程封面`;
 
     fragment.querySelector(".course-status").textContent = course.status;
     fragment.querySelector(".course-subtitle").textContent = course.subtitle;
