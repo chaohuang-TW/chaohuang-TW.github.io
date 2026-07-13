@@ -288,6 +288,7 @@ h2 {
 .course-feature-card {
   display: grid;
   grid-template-columns: minmax(280px, 0.86fr) minmax(0, 1.14fr);
+  align-items: center;
   overflow: hidden;
   cursor: pointer;
   transition: transform 180ms ease, box-shadow 180ms ease;
@@ -319,18 +320,22 @@ h2 {
 
 .course-cover-wrap {
   position: relative;
-  min-height: 260px;
+  aspect-ratio: 4 / 3;
+  min-height: 0;
+  align-self: center;
+  overflow: hidden;
   background:
     linear-gradient(135deg, rgba(9, 32, 82, 0.12), rgba(15, 140, 140, 0.18)),
     var(--surface-blue);
 }
 
 .course-cover {
+  display: block;
   width: 100%;
   height: 100%;
-  min-height: 260px;
-  display: block;
+  min-height: 0;
   object-fit: cover;
+  object-position: center;
 }
 
 .course-cover-fallback {
@@ -1201,9 +1206,9 @@ h2 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .course-cover-wrap,
-  .course-cover {
-    min-height: 220px;
+  .course-feature-card .course-cover-wrap,
+  .course-feature-card .course-cover {
+    min-height: 0;
   }
 
   .course-page-copy h1 {
@@ -1320,15 +1325,6 @@ h2 {
 @media(prefers-reduced-motion:reduce){.course-progress-bar span{transition:none}}
 .concept-card-grid>*{min-width:0}.guide-lesson-page code{overflow-wrap:anywhere;word-break:break-word}.guide-table-wrap{max-width:100%}
 
-/* Portrait cover for the AI website course */
-.course-feature-card[data-course-id="build-your-ai-website"] .course-cover {
-  height: auto;
-  max-height: 540px;
-  padding: 18px;
-  object-fit: contain;
-  object-position: top center;
-  background: #f4f7ff;
-}
 .guide-cover { align-self: start; max-width: 520px; justify-self: center; }
 .guide-cover picture { display: block; }
 .guide-cover img { width: 100%; height: auto; object-fit: contain; }

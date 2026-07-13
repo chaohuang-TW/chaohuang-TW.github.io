@@ -5,7 +5,7 @@
     "subtitle": "ChatGPT × Codex × GitHub Pages",
     "description": "從認識 ChatGPT 與 Codex、完成安裝開始，一步一步規劃、建置並發布自己的第一個網站。全程以 Chao AI 實作所為真實案例。",
     "status": "持續更新",
-    "cover": "assets/course/build-your-ai-website/course-cover.webp",
+    "cover": "assets/course/build-your-ai-website/course-card-cover.webp",
     "href": "/courses/build-your-ai-website/",
     "prepTools": [
       { "name": "ChatGPT", "href": "https://chatgpt.com/" },
@@ -24,7 +24,7 @@
     "subtitle": "ChatGPT × NotebookLM × Notion",
     "description": "從文書、簡報、報表到會議管理，整理課前準備、講義與實作資源。",
     "status": "即將上架",
-    "cover": "assets/course/gen-ai-software-applications/course-main-visual.png",
+    "cover": "assets/course/gen-ai-software-applications/course-card-cover.webp",
     "href": "/courses/gen-ai-software-applications/",
     "prepTools": [
       {
