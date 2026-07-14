@@ -377,16 +377,6 @@ function showAll() {
   document.querySelector("#category-title").focus({ preventScroll: true });
 }
 
-function returnToList() {
-  if (state.detailFromList && history.length > 1) history.back();
-  else {
-    state.detailFromList = false;
-    history.pushState(null, "", `${location.pathname}${location.search}`);
-    showList();
-    document.querySelector("#category-title").focus({ preventScroll: true });
-  }
-}
-
 async function loadBenefits() {
   try {
     const response = await fetch(DATA_URL, { cache: "no-store" });
@@ -410,12 +400,11 @@ elements.search.addEventListener("input", () => {
 });
 elements.showAllTop.addEventListener("click", showAll);
 elements.showAllEmpty.addEventListener("click", showAll);
-elements.back.addEventListener("click", returnToList);
 elements.print.addEventListener("click", () => window.print());
 window.addEventListener("hashchange", route);
 window.addEventListener("popstate", route);
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !elements.detailView.hidden) returnToList();
+  if (event.key === "Escape" && !elements.detailView.hidden) elements.back.click();
 });
 
 loadBenefits();
