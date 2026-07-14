@@ -3,7 +3,7 @@
 const DATA_URL = "/assets/data/staff-benefits/benefits.json";
 const CATEGORY_ORDER = ["住宿", "餐飲", "交通", "醫療"];
 const OMITTED_KEYS = new Set([
-  "id", "slug", "publicationStatus", "verificationStatus", "source", "sourceIndex",
+  "id", "slug", "publicationStatus", "verificationStatus", "verificationNotes", "source", "sourceIndex",
   "featuredText", "summary", "category", "name", "lastVerified", "validity", "contact",
   "roomRateColumns", "rateColumns", "vehicleRateColumns", "roomRates", "vehicleRates",
 ]);

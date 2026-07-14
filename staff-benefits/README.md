@@ -8,7 +8,7 @@
    - 執行資料驗證。
    - 本機預覽。
    - commit 與 push。
-4. 網站只顯示同時符合 `publicationStatus: published` 與 `verificationStatus: confirmed` 的優惠。
+4. 網站只顯示同時符合 `publicationStatus: published` 與 `verificationStatus: confirmed` 的優惠；目前 10 筆皆經使用者確認公開。
 5. `noindex` 不是權限控管。GitHub Pages 上的頁面與 JSON 都是公開資源。
 6. 不得把 PDF、DOCX、簽呈或內部資料放進 repository。
 7. 本機預覽：在 repository 根目錄執行 `python3 -m http.server 8000`，再開啟 `http://localhost:8000/staff-benefits/`。

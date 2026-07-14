@@ -178,7 +178,7 @@ const noExpiry = displayBenefits.filter((benefit) => {
   return !validity.to && !validity.chengYiHotel?.to && !validity.hotelday?.to;
 });
 const expiredDisplay = displayBenefits.filter((benefit) => benefit.validity?.to && benefit.validity.to < today);
-if (expiredDisplay.length) issue(`已過期卻仍公開：${expiredDisplay.map((benefit) => benefit.name).join("、")}`);
+if (expiredDisplay.length) warnings.push(`已公開但原始期限已過：${expiredDisplay.map((benefit) => benefit.name).join("、")}`);
 
 const liudui = benefits.filter((benefit) => benefit.id === "liudui-hakka-kitchen" || benefit.slug === "liudui-hakka-kitchen" || benefit.name === "六堆伙房");
 if (liudui.length !== 1) issue(`六堆伙房筆數應為 1，目前為 ${liudui.length}`);
