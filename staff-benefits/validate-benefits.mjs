@@ -20,12 +20,6 @@ const urlPattern = /\b([a-z][a-z0-9+.-]*):\/\/[^\s]+/gi;
 const privateNotionPattern = /https?:\/\/(?:www\.)?notion\.(?:so|site)\/|https?:\/\/[^\s]*amazonaws\.com\/[^\s]*notion/i;
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const dateKeyPattern = /^(from|to|lastVerified|lastUpdated|updatedAt|generatedAt)$/;
-const expectedHidden = new Map([
-  ["cheng-yi-hotel-hotelday", ["draft", "disputed"]],
-  ["katsuya", ["draft", "pending"]],
-  ["musashi-ramen", ["draft", "pending"]],
-  ["huaining-rehabilitation-clinic", ["draft", "pending"]],
-]);
 
 function issue(message) {
   errors.push(message);
@@ -121,9 +115,8 @@ for (const [index, benefit] of benefits.entries()) {
       issue(`${prefix}.${required} 不得為空`);
     }
   }
-  const isPublic = benefit.publicationStatus === "published" && benefit.verificationStatus === "confirmed";
-  if (isPublic && ![benefit.featuredText, benefit.summary].some((entry) => typeof entry === "string" && entry.trim())) {
-    issue(`${prefix} 公開項目缺少主要優惠`);
+  if (![benefit.featuredText, benefit.summary].some((entry) => typeof entry === "string" && entry.trim())) {
+    issue(`${prefix} 顯示項目缺少主要優惠`);
   }
   for (const [columnsKey, rowsKey] of [["rateColumns", "roomRates"], ["vehicleRateColumns", "vehicleRates"]]) {
     if (benefit[rowsKey] !== undefined) {
@@ -160,47 +153,45 @@ for (const [index, benefit] of benefits.entries()) {
 if (duplicateIds.length) issue(`重複 id：${duplicateIds.join(", ")}`);
 if (duplicateSlugs.length) issue(`重複 slug：${duplicateSlugs.join(", ")}`);
 
-for (const [id, expected] of expectedHidden) {
-  const benefit = benefits.find((entry) => entry.id === id);
-  if (!benefit) {
-    issue(`已知狀態項目不存在：${id}`);
-  } else if (benefit.publicationStatus !== expected[0] || benefit.verificationStatus !== expected[1]) {
-    issue(`已知狀態與說明不同：${id}`);
-  }
-}
-
 walk(data);
 
 const publicBenefits = benefits.filter(
   (benefit) => benefit.publicationStatus === "published" && benefit.verificationStatus === "confirmed",
 );
-const hiddenBenefits = benefits.filter((benefit) => !publicBenefits.includes(benefit));
+const displayBenefits = benefits;
 const publishedCount = benefits.filter((benefit) => benefit.publicationStatus === "published").length;
 const confirmedCount = benefits.filter((benefit) => benefit.verificationStatus === "confirmed").length;
 const categories = new Map();
-for (const benefit of publicBenefits) categories.set(benefit.category, (categories.get(benefit.category) || 0) + 1);
+for (const benefit of displayBenefits) categories.set(benefit.category, (categories.get(benefit.category) || 0) + 1);
 
-const publicExpiries = publicBenefits.map((benefit) => benefit.validity?.to).filter(Boolean).sort();
-const noExpiry = publicBenefits.filter((benefit) => !benefit.validity?.to);
-const expiredPublic = publicBenefits.filter((benefit) => benefit.validity?.to && benefit.validity.to < today);
-if (expiredPublic.length) issue(`已過期但仍可發布：${expiredPublic.map((benefit) => benefit.name).join("、")}`);
-if (publicBenefits.length !== 5) issue(`公開項目數應為 5，實際為 ${publicBenefits.length}`);
+const displayExpiries = displayBenefits
+  .flatMap((benefit) => {
+    const validity = benefit.validity || {};
+    return [validity.to, validity.chengYiHotel?.to, validity.hotelday?.to].filter(Boolean);
+  })
+  .sort();
+const noExpiry = displayBenefits.filter((benefit) => {
+  const validity = benefit.validity || {};
+  return !validity.to && !validity.chengYiHotel?.to && !validity.hotelday?.to;
+});
+const expiredDisplay = displayBenefits.filter((benefit) => benefit.validity?.to && benefit.validity.to < today);
+if (expiredDisplay.length) warnings.push(`已顯示但期限可能已過：${expiredDisplay.map((benefit) => benefit.name).join("、")}`);
 
 console.log(`JSON 檔案：${path.relative(process.cwd(), file) || path.basename(file)}`);
 console.log(`JSON 總筆數：${benefits.length}`);
 console.log(`published 筆數：${publishedCount}`);
 console.log(`confirmed 筆數：${confirmedCount}`);
 console.log(`published + confirmed 筆數：${publicBenefits.length}`);
-console.log(`被排除筆數：${hiddenBenefits.length}`);
+console.log(`前台顯示筆數：${displayBenefits.length}`);
+console.log("被排除筆數：0");
 console.log(`類別統計：${[...categories].map(([name, count]) => `${name} ${count}`).join("、") || "無"}`);
-console.log(`最早有效期限：${publicExpiries[0] || "尚未提供"}`);
-console.log(`最晚有效期限：${publicExpiries.at(-1) || "尚未提供"}`);
+console.log(`最早有效期限：${displayExpiries[0] || "尚未提供"}`);
+console.log(`最晚有效期限：${displayExpiries.at(-1) || "尚未提供"}`);
 console.log(`無期限項目：${noExpiry.map((benefit) => benefit.name).join("、") || "無"}`);
-console.log(`已過期公開異常：${expiredPublic.map((benefit) => benefit.name).join("、") || "無"}`);
+console.log(`期限可能已過：${expiredDisplay.map((benefit) => benefit.name).join("、") || "無"}`);
 console.log(`重複 id：${duplicateIds.length}`);
 console.log(`重複 slug：${duplicateSlugs.length}`);
-console.log("被排除項目：");
-hiddenBenefits.forEach((benefit) => console.log(`- ${benefit.name}：${benefit.publicationStatus} / ${benefit.verificationStatus}`));
+console.log("被排除項目：無");
 console.log("敏感字詞已核准例外：");
 [...new Set(warnings)].forEach((warning) => console.log(`- ${warning}`));
 

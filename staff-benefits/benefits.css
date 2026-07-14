@@ -1,44 +1,25 @@
 :root {
-  color-scheme: light dark;
-  --navy-950: #092b3c;
-  --navy-900: #0d3a4d;
-  --navy-800: #174d60;
+  color-scheme: light;
+  --navy-950: #174b54;
+  --navy-900: #1b626b;
+  --navy-800: #22727b;
   --teal-700: #087d78;
   --teal-600: #0a9189;
-  --teal-100: #d9f1ed;
-  --teal-50: #edf8f6;
-  --page: #f3f6f7;
-  --surface: #fbfcfc;
+  --teal-100: #dff4f1;
+  --teal-50: #eef9f7;
+  --page: #f7fbfb;
+  --surface: #fcfefe;
   --surface-strong: #ffffff;
-  --surface-tint: #edf4f4;
-  --text: #132d38;
-  --muted: #526b75;
-  --border: #c9d8dc;
-  --border-strong: #9eb6bd;
+  --surface-tint: #eff8f7;
+  --text: #17363d;
+  --muted: #587078;
+  --border: #d6e5e6;
+  --border-strong: #a8c4c7;
   --danger: #a73535;
   --focus: #f6c344;
-  --shadow: 0 14px 34px rgba(9, 43, 60, 0.09);
+  --shadow: 0 10px 28px rgba(23, 75, 84, 0.06);
   --radius: 14px;
   --shell: 1180px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --page: #0e222b;
-    --surface: #122b35;
-    --surface-strong: #17343f;
-    --surface-tint: #183943;
-    --text: #e5f0f2;
-    --muted: #b5c8cd;
-    --border: #35535e;
-    --border-strong: #55727b;
-    --teal-100: #174c4c;
-    --teal-50: #153f42;
-    --teal-700: #67d4ca;
-    --teal-600: #5bc8bf;
-    --danger: #ffaaaa;
-    --shadow: 0 16px 36px rgba(2, 13, 18, 0.28);
-  }
 }
 
 *,
@@ -129,8 +110,8 @@ a:hover {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: var(--navy-950);
-  color: #f4fbfc;
+  background: #e1f5f2;
+  color: #173b42;
 }
 
 .hero::after {
@@ -140,7 +121,7 @@ a:hover {
   z-index: -1;
   width: min(54vw, 650px);
   aspect-ratio: 1;
-  border: clamp(24px, 5vw, 70px) solid rgba(73, 193, 180, 0.16);
+  border: clamp(24px, 5vw, 70px) solid rgba(36, 151, 142, 0.12);
   border-radius: 50%;
 }
 
@@ -153,7 +134,7 @@ a:hover {
 
 .hero__eyebrow {
   margin: 0 0 14px;
-  color: #8ee3d9;
+  color: #087d78;
   font-size: 0.875rem;
   font-weight: 750;
   letter-spacing: 0.15em;
@@ -170,7 +151,7 @@ a:hover {
 .hero__description {
   max-width: 690px;
   margin: 24px 0 0;
-  color: #d7e8eb;
+  color: #385a61;
   font-size: clamp(1rem, 2vw, 1.2rem);
   line-height: 1.8;
 }
@@ -214,12 +195,6 @@ a:hover {
   color: var(--navy-900);
   font-size: clamp(1.65rem, 4vw, 2.3rem);
   line-height: 1.2;
-}
-
-@media (prefers-color-scheme: dark) {
-  .summary__value {
-    color: #a7e6df;
-  }
 }
 
 .summary__value--date {
@@ -404,6 +379,43 @@ input::placeholder {
   font-weight: 800;
 }
 
+.benefit-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.benefit-card__meta .benefit-card__category {
+  margin-bottom: 0;
+}
+
+.benefit-status {
+  flex: none;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 0.875rem;
+  font-weight: 750;
+  line-height: 1.5;
+}
+
+.benefit-status--confirmed {
+  background: #e5f6f2;
+  color: #08756f;
+}
+
+.benefit-status--pending {
+  background: #f1f5f5;
+  color: #526b72;
+}
+
+.benefit-status--disputed {
+  background: #fff3ed;
+  color: #9b4d36;
+}
+
 .benefit-card h3 {
   margin: 0;
   font-size: clamp(1.35rem, 3vw, 1.75rem);
@@ -416,12 +428,6 @@ input::placeholder {
   color: var(--navy-800);
   font-size: 1.12rem;
   font-weight: 800;
-}
-
-@media (prefers-color-scheme: dark) {
-  .benefit-card__featured {
-    color: #a7e6df;
-  }
 }
 
 .benefit-card__summary {
@@ -563,6 +569,39 @@ input::placeholder {
   font-size: 1rem;
 }
 
+.property-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.property-card {
+  min-width: 0;
+  overflow: hidden;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface-tint);
+}
+
+.property-card h5 {
+  font-size: 1rem;
+}
+
+.property-card > h5:first-child {
+  margin: 0 0 14px;
+  color: var(--navy-800);
+  font-size: 1.12rem;
+}
+
+.property-card__subheading,
+.property-card > h5:not(:first-child) {
+  margin: 18px 0 10px;
+}
+
+.property-card .data-table-wrap {
+  background: var(--surface-strong);
+}
+
 .data-table-wrap {
   max-width: 100%;
   overflow-x: auto;
@@ -639,8 +678,8 @@ input::placeholder {
 }
 
 .footer {
-  background: var(--navy-950);
-  color: #d7e8eb;
+  background: #e1f2f0;
+  color: var(--text);
 }
 
 .footer__inner {
@@ -656,7 +695,7 @@ input::placeholder {
 .footer a {
   width: fit-content;
   margin-top: 8px;
-  color: #8ee3d9;
+  color: var(--teal-700);
 }
 
 [hidden] {
@@ -675,7 +714,8 @@ input::placeholder {
 
   .hero__eyebrow,
   .summary__label,
-  .benefit-card__category {
+  .benefit-card__category,
+  .benefit-status {
     font-size: 1rem;
   }
 

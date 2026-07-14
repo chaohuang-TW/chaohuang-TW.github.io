@@ -11,6 +11,9 @@ const labels = {
   to: "結束日期",
   autoRenewal: "自動續約",
   renewalNote: "續約說明",
+  note: "說明",
+  chengYiHotel: "承億酒店",
+  hotelday: "承億文旅",
   address: "地址／地區",
   locations: "適用地區／門市",
   contact: "公開聯絡資訊",
@@ -27,6 +30,11 @@ const labels = {
   additionalCharges: "附加費用",
   stayRules: "住宿規則",
   diningAndFacilities: "餐飲與館內設施",
+  properties: "館別優惠",
+  hoteldayCommonPolicies: "承億文旅共同規則",
+  annualRewards: "年度回饋",
+  commonRestrictions: "共同限制",
+  verificationNotes: "確認狀態說明",
   freeFacilityRules: "免費設施規則",
   discounts: "優惠內容",
   definitions: "日期定義",
@@ -49,18 +57,35 @@ const labels = {
   activities: "活動",
   karaoke: "卡拉 OK",
   priceNote: "價格說明",
+  rooms: "客房數",
+  pricing: "價格",
+  breakfast: "早餐",
+  parking: "停車",
+  facilities: "設施",
+  diningAndServices: "餐飲與服務",
+  depositAndCancellation: "定金與取消規定",
+  specialDates: "特殊日期",
+  consecutiveHolidays: "連續假期",
+  springFestival: "春節",
+  dining: "餐飲優惠",
+  restaurants: "適用餐廳",
   item: "項目",
   discount: "優惠",
 };
 
 const sectionOrder = [
   "validity",
+  "verificationNotes",
   "address",
   "locations",
   "contact",
   "roomRates",
   "otherRoomDiscounts",
   "howToUse",
+  "commonRestrictions",
+  "properties",
+  "hoteldayCommonPolicies",
+  "annualRewards",
   "facilitiesAndCharges",
   "included",
   "transportation",
@@ -132,15 +157,20 @@ function formatCell(value) {
 }
 
 function expiryText(benefit) {
-  const end = benefit.validity?.to;
+  const end = expiryValue(benefit);
   return end ? `有效至 ${formatDate(end)}` : "期限請於使用前確認";
 }
 
 function isExpired(benefit) {
-  const end = benefit.validity?.to;
+  const end = expiryValue(benefit);
   if (!end) return false;
   const date = new Date(`${end}T00:00:00`);
   return !Number.isNaN(date.valueOf()) && date < TODAY;
+}
+
+function expiryValue(benefit) {
+  const validity = benefit.validity || {};
+  return [validity.to, validity.chengYiHotel?.to, validity.hotelday?.to].filter(Boolean).sort()[0] || "";
 }
 
 function locationText(benefit) {
@@ -267,6 +297,51 @@ function createNestedCards(items) {
   return grid;
 }
 
+function createPropertyCards(properties) {
+  const grid = create("div", "property-grid");
+  for (const property of properties) {
+    const card = create("section", "property-card");
+    card.append(create("h5", "", property.name));
+
+    const basics = {};
+    for (const key of ["rooms", "address", "pricing", "breakfast", "parking"]) {
+      if (hasValue(property[key]) && !Array.isArray(property[key])) basics[key] = property[key];
+    }
+    if (Object.keys(basics).length) card.append(createDefinitionList(basics));
+    if (property.phone) card.append(createContact({ phone: property.phone }));
+
+    const columns = property.roomRateColumns || property.rateColumns;
+    if (columns && property.roomRates) {
+      card.append(create("h5", "property-card__subheading", "房型與價格"));
+      card.append(createTable(columns, property.roomRates));
+    }
+
+    for (const key of [
+      "included",
+      "additionalCharges",
+      "depositAndCancellation",
+      "stayRules",
+      "facilities",
+      "breakfast",
+      "diningAndServices",
+      "restrictions",
+    ]) {
+      if (Array.isArray(property[key])) appendNestedValue(card, key, property[key]);
+    }
+
+    if (property.specialDates) {
+      card.append(create("h5", "property-card__subheading", labels.specialDates));
+      card.append(createDefinitionList(property.specialDates));
+    }
+    if (property.dining) {
+      card.append(create("h5", "property-card__subheading", labels.dining));
+      card.append(createDefinitionList(property.dining));
+    }
+    grid.append(card);
+  }
+  return grid;
+}
+
 function createDetailSection(title, content) {
   const section = create("section", "detail-section");
   section.append(create("h4", "", title), content);
@@ -285,6 +360,22 @@ function renderField(benefit, key) {
   }
   if (key === "contact") return createDetailSection(labels[key], createContact(value));
   if (key === "validity") {
+    if (value.chengYiHotel || value.hotelday) {
+      const grid = create("div", "nested-grid");
+      for (const validityKey of ["chengYiHotel", "hotelday"]) {
+        if (!value[validityKey]) continue;
+        const card = create("section", "nested-card");
+        card.append(create("h5", "", labels[validityKey]));
+        const display = {
+          from: value[validityKey].from ? formatDate(value[validityKey].from) : "尚未提供",
+          to: value[validityKey].to ? formatDate(value[validityKey].to) : "期限請於使用前確認",
+        };
+        if (value[validityKey].note) display.note = value[validityKey].note;
+        card.append(createDefinitionList(display));
+        grid.append(card);
+      }
+      return createDetailSection(labels[key], grid);
+    }
     const display = {
       from: value.from ? formatDate(value.from) : "尚未提供",
       to: value.to ? formatDate(value.to) : "期限請於使用前確認",
@@ -293,6 +384,7 @@ function renderField(benefit, key) {
     if (value.renewalNote) display.renewalNote = value.renewalNote;
     return createDetailSection(labels[key], createDefinitionList(display, ["from", "to", "autoRenewal", "renewalNote"]));
   }
+  if (key === "properties") return createDetailSection(labels[key], createPropertyCards(value));
   if (key === "definitions") return createDetailSection(labels[key], createDefinitionList(value));
   if (Array.isArray(value) && value.every((item) => item && typeof item === "object" && !Array.isArray(item))) {
     return createDetailSection(labels[key] || key, createNestedCards(value));
@@ -305,7 +397,17 @@ function renderField(benefit, key) {
 function createBenefitCard(benefit) {
   const article = create("article", "benefit-card");
   const body = create("div", "benefit-card__body");
-  body.append(create("p", "benefit-card__category", benefit.category));
+  const meta = create("div", "benefit-card__meta");
+  meta.append(create("p", "benefit-card__category", benefit.category));
+  const confirmed = benefit.publicationStatus === "published" && benefit.verificationStatus === "confirmed";
+  const disputed = benefit.verificationStatus === "disputed";
+  const status = create(
+    "span",
+    `benefit-status ${confirmed ? "benefit-status--confirmed" : disputed ? "benefit-status--disputed" : "benefit-status--pending"}`,
+    confirmed ? "已確認" : disputed ? "內容待釐清" : "待確認",
+  );
+  meta.append(status);
+  body.append(meta);
   body.append(create("h3", "", benefit.name));
   body.append(create("p", "benefit-card__featured", benefit.featuredText));
   if (benefit.summary) body.append(create("p", "benefit-card__summary", benefit.summary));
@@ -339,8 +441,8 @@ function filteredBenefits() {
 
   if (state.sort === "expiry") {
     filtered.sort((a, b) => {
-      const aEnd = a.validity?.to || "9999-12-31";
-      const bEnd = b.validity?.to || "9999-12-31";
+      const aEnd = expiryValue(a) || "9999-12-31";
+      const bEnd = expiryValue(b) || "9999-12-31";
       return aEnd.localeCompare(bEnd) || a.sourceIndex - b.sourceIndex;
     });
   } else if (state.sort === "name") {
@@ -404,11 +506,7 @@ async function loadBenefits() {
     if (!response.ok) throw new Error("load failed");
     const data = await response.json();
     const allBenefits = Array.isArray(data.benefits) ? data.benefits : [];
-    state.benefits = allBenefits
-      .map((benefit, sourceIndex) => ({ ...benefit, sourceIndex }))
-      .filter(
-        (benefit) => benefit.publicationStatus === "published" && benefit.verificationStatus === "confirmed",
-      );
+    state.benefits = allBenefits.map((benefit, sourceIndex) => ({ ...benefit, sourceIndex }));
     elements.loading.hidden = true;
     updateSummary(data.meta || {});
     if (!state.benefits.length) {
