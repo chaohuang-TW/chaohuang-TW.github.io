@@ -42,15 +42,93 @@
           href="/notes/how-i-built-interactive-learning-websites-with-ai/"
           data-action-name="閱讀最新實作筆記">閱讀最新實作筆記</a>
       </nav>
-      <nav class="hero-panel brand-hub-nav" aria-label="Brand Hub 快速入口">
-        <p class="panel-label">brand hub</p>
+      <nav class="hero-panel brand-hub-nav" aria-labelledby="brand-hub-title">
+        <header class="brand-hub-head">
+          <p class="panel-label">Brand Hub</p>
+          <h2 id="brand-hub-title">從這裡開始探索</h2>
+          <p>依照你的需求，直接前往課程、筆記、影音與互動作品。</p>
+        </header>
         <div class="panel-grid">
-          <a class="brand-hub-link" href="#course-hub" data-hub-item="AI 課程" data-target="#course-hub">AI 課程</a>
-          <a class="brand-hub-link" href="#ai-notes" data-hub-item="工具筆記" data-target="#ai-notes">工具筆記</a>
-          <a class="brand-hub-link" href="#mica-ai-videos" data-hub-item="AI 影音" data-target="#mica-ai-videos">AI 影音</a>
-          <a class="brand-hub-link" href="#podcast" data-hub-item="Podcast" data-target="#podcast">Podcast</a>
-          <a class="brand-hub-link" href="#ai-lab" data-hub-item="實驗紀錄" data-target="#ai-lab">實驗紀錄</a>
-          <a class="brand-hub-link" href="#learning-games" data-hub-item="互動作品" data-target="#learning-games">互動作品</a>
+          <a class="brand-hub-link" href="#course-hub" data-hub-item="AI 課程" data-target="#course-hub">
+            <span class="brand-hub-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M3.5 5.5A3.5 3.5 0 0 1 7 2h4v17H7a3.5 3.5 0 0 0-3.5 3.5z"></path>
+                <path d="M20.5 5.5A3.5 3.5 0 0 0 17 2h-4v17h4a3.5 3.5 0 0 1 3.5 3.5z"></path>
+              </svg>
+            </span>
+            <span class="brand-hub-copy">
+              <strong>AI 課程</strong>
+              <span>跟著步驟完成 AI 實作</span>
+            </span>
+            <span class="brand-hub-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="brand-hub-link" href="#ai-notes" data-hub-item="工具筆記" data-target="#ai-notes">
+            <span class="brand-hub-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M5 3.5h11a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2z"></path>
+                <path d="M7 3.5v17M10 8h5M10 12h4"></path>
+                <path d="m15.5 17 4.7-4.7 1.5 1.5-4.7 4.7-2.3.8z"></path>
+              </svg>
+            </span>
+            <span class="brand-hub-copy">
+              <strong>工具筆記</strong>
+              <span>ChatGPT、Codex 與工作流程</span>
+            </span>
+            <span class="brand-hub-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="brand-hub-link" href="#mica-ai-videos" data-hub-item="AI 影音" data-target="#mica-ai-videos">
+            <span class="brand-hub-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                <path d="m10 9 5 3-5 3z"></path>
+              </svg>
+            </span>
+            <span class="brand-hub-copy">
+              <strong>AI 影音</strong>
+              <span>Mica 專題影片與 AI Shorts</span>
+            </span>
+            <span class="brand-hub-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="brand-hub-link" href="#podcast" data-hub-item="Podcast" data-target="#podcast">
+            <span class="brand-hub-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <rect x="8" y="2.5" width="8" height="13" rx="4"></rect>
+                <path d="M5 11.5a7 7 0 0 0 14 0M12 18.5v3M8.5 21.5h7"></path>
+              </svg>
+            </span>
+            <span class="brand-hub-copy">
+              <strong>Podcast</strong>
+              <span>睡前故事與親子共聽</span>
+            </span>
+            <span class="brand-hub-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="brand-hub-link" href="#ai-lab" data-hub-item="實驗紀錄" data-target="#ai-lab">
+            <span class="brand-hub-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"></path>
+                <path d="M7.5 15h9M9.5 12.5h5"></path>
+              </svg>
+            </span>
+            <span class="brand-hub-copy">
+              <strong>實驗紀錄</strong>
+              <span>提示詞、圖卡與實驗作品</span>
+            </span>
+            <span class="brand-hub-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="brand-hub-link" href="#learning-games" data-hub-item="互動作品" data-target="#learning-games">
+            <span class="brand-hub-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="m5 3 11 8-5 1.5L9.5 18z"></path>
+                <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+                <path d="M17.5 16.5v2M16.5 17.5h2"></path>
+              </svg>
+            </span>
+            <span class="brand-hub-copy">
+              <strong>互動作品</strong>
+              <span>親子共學與互動練習</span>
+            </span>
+            <span class="brand-hub-arrow" aria-hidden="true">→</span>
+          </a>
         </div>
       </nav>
     </section>
