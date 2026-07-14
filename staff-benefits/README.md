@@ -8,7 +8,7 @@
    - 執行資料驗證。
    - 本機預覽。
    - commit 與 push。
-4. 網站顯示 JSON 中的全部優惠，並依 `publicationStatus` 與 `verificationStatus` 標示確認狀態。
+4. 網站顯示 JSON 中的全部優惠，不在前台顯示 `publicationStatus` 與 `verificationStatus` 狀態標籤。
 5. `noindex` 不是權限控管。GitHub Pages 上的頁面與 JSON 都是公開資源。
 6. 不得把 PDF、DOCX、簽呈或內部資料放進 repository。
 7. 本機預覽：在 repository 根目錄執行 `python3 -m http.server 8000`，再開啟 `http://localhost:8000/staff-benefits/`。

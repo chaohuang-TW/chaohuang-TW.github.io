@@ -34,7 +34,6 @@ const labels = {
   hoteldayCommonPolicies: "承億文旅共同規則",
   annualRewards: "年度回饋",
   commonRestrictions: "共同限制",
-  verificationNotes: "確認狀態說明",
   freeFacilityRules: "免費設施規則",
   discounts: "優惠內容",
   definitions: "日期定義",
@@ -75,7 +74,6 @@ const labels = {
 
 const sectionOrder = [
   "validity",
-  "verificationNotes",
   "address",
   "locations",
   "contact",
@@ -397,17 +395,7 @@ function renderField(benefit, key) {
 function createBenefitCard(benefit) {
   const article = create("article", "benefit-card");
   const body = create("div", "benefit-card__body");
-  const meta = create("div", "benefit-card__meta");
-  meta.append(create("p", "benefit-card__category", benefit.category));
-  const confirmed = benefit.publicationStatus === "published" && benefit.verificationStatus === "confirmed";
-  const disputed = benefit.verificationStatus === "disputed";
-  const status = create(
-    "span",
-    `benefit-status ${confirmed ? "benefit-status--confirmed" : disputed ? "benefit-status--disputed" : "benefit-status--pending"}`,
-    confirmed ? "已確認" : disputed ? "內容待釐清" : "待確認",
-  );
-  meta.append(status);
-  body.append(meta);
+  body.append(create("p", "benefit-card__category", benefit.category));
   body.append(create("h3", "", benefit.name));
   body.append(create("p", "benefit-card__featured", benefit.featuredText));
   if (benefit.summary) body.append(create("p", "benefit-card__summary", benefit.summary));

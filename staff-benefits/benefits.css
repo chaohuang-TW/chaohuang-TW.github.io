@@ -379,43 +379,6 @@ input::placeholder {
   font-weight: 800;
 }
 
-.benefit-card__meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 10px;
-}
-
-.benefit-card__meta .benefit-card__category {
-  margin-bottom: 0;
-}
-
-.benefit-status {
-  flex: none;
-  border: 1px solid currentColor;
-  border-radius: 999px;
-  padding: 3px 10px;
-  font-size: 0.875rem;
-  font-weight: 750;
-  line-height: 1.5;
-}
-
-.benefit-status--confirmed {
-  background: #e5f6f2;
-  color: #08756f;
-}
-
-.benefit-status--pending {
-  background: #f1f5f5;
-  color: #526b72;
-}
-
-.benefit-status--disputed {
-  background: #fff3ed;
-  color: #9b4d36;
-}
-
 .benefit-card h3 {
   margin: 0;
   font-size: clamp(1.35rem, 3vw, 1.75rem);
@@ -714,8 +677,7 @@ input::placeholder {
 
   .hero__eyebrow,
   .summary__label,
-  .benefit-card__category,
-  .benefit-status {
+  .benefit-card__category {
     font-size: 1rem;
   }
 
