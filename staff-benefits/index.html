@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+    <meta name="referrer" content="no-referrer">
+    <title>員工特約優惠專區</title>
+    <link rel="icon" href="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+    <link rel="stylesheet" href="benefits.css">
+    <script src="benefits.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#benefit-list">跳至優惠清單</a>
+
+    <header class="hero">
+      <div class="shell hero__inner">
+        <p class="hero__eyebrow">STAFF BENEFITS</p>
+        <h1>員工特約優惠專區</h1>
+        <p class="hero__description">彙整目前已確認並可公開使用的住宿、餐飲、交通與醫療優惠，使用前請再次確認適用條件及有效期限。</p>
+      </div>
+    </header>
+
+    <main>
+      <section class="summary shell" aria-labelledby="summary-title">
+        <h2 id="summary-title" class="visually-hidden">資料摘要</h2>
+        <div class="summary__grid">
+          <div class="summary__item">
+            <span class="summary__label">目前可用優惠</span>
+            <strong id="available-count" class="summary__value">-</strong>
+          </div>
+          <div class="summary__item">
+            <span class="summary__label">優惠類別</span>
+            <strong id="category-count" class="summary__value">-</strong>
+          </div>
+          <div class="summary__item">
+            <span class="summary__label">最近確認日期</span>
+            <strong id="latest-date" class="summary__value summary__value--date">尚未提供</strong>
+          </div>
+        </div>
+        <p class="summary__notice">優惠內容可能因廠商政策調整；實際價格、適用日期、門市與使用方式，以預約或消費當日廠商確認結果為準。</p>
+      </section>
+
+      <section class="controls shell" aria-labelledby="controls-title">
+        <div class="section-heading">
+          <h2 id="controls-title">查找優惠</h2>
+          <p id="result-count" class="result-count" aria-live="polite"></p>
+        </div>
+
+        <div class="controls__panel">
+          <div class="field field--search">
+            <label for="benefit-search">搜尋</label>
+            <input id="benefit-search" type="search" autocomplete="off" placeholder="搜尋廠商、優惠、地區或服務">
+          </div>
+
+          <div class="field field--sort">
+            <label for="benefit-sort">排序</label>
+            <select id="benefit-sort">
+              <option value="default">預設順序</option>
+              <option value="expiry">有效期限近到遠</option>
+              <option value="name">廠商名稱</option>
+            </select>
+          </div>
+
+          <div class="field field--categories">
+            <span class="field__label" id="category-label">分類</span>
+            <div id="category-filters" class="category-filters" role="group" aria-labelledby="category-label"></div>
+          </div>
+
+          <div class="controls__actions">
+            <button id="clear-filters" class="button button--secondary" type="button" hidden>清除篩選</button>
+            <button id="print-page" class="button button--primary" type="button">列印／儲存 PDF</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="benefits shell" aria-labelledby="benefits-title">
+        <h2 id="benefits-title" class="visually-hidden">優惠清單</h2>
+        <p id="loading-state" class="state-message" aria-live="polite">正在整理優惠資料…</p>
+        <div id="benefit-list" class="benefit-list"></div>
+        <p id="empty-state" class="state-message" aria-live="polite" hidden>找不到符合條件的優惠，請調整搜尋文字或分類。</p>
+        <p id="no-public-state" class="state-message" aria-live="polite" hidden>目前沒有已確認可發布的優惠資訊。</p>
+        <p id="error-state" class="state-message state-message--error" aria-live="polite" hidden>優惠資料暫時無法載入，請稍後再試。</p>
+      </section>
+
+      <section class="reminders shell" aria-labelledby="reminders-title">
+        <h2 id="reminders-title">使用提醒</h2>
+        <div class="reminders__content">
+          <p>預約或消費前，請先向廠商確認優惠仍適用，並依各優惠所列方式出示證明文件。</p>
+          <p>沒有明確期限的資料不代表永久有效；如遇價格、門市或條件不同，以廠商當日說明為準。</p>
+          <p>本頁公開但未設身分驗證。知道網址的人都可能瀏覽頁面及其資料檔。</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="shell footer__inner">
+        <p>本頁為特約優惠資訊彙整，非各廠商官方網站。優惠內容若有異動，以廠商實際說明為準。</p>
+        <p>本頁未設會員系統，也不要求輸入姓名、帳號或其他個人資料。</p>
+        <a href="/">返回網站首頁</a>
+      </div>
+    </footer>
+  </body>
+</html>
