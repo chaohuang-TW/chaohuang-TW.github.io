@@ -2,130 +2,54 @@
 
 const DATA_URL = "/assets/data/staff-benefits/benefits.json";
 const CATEGORY_ORDER = ["住宿", "餐飲", "交通", "醫療"];
-const TODAY = new Date();
-TODAY.setHours(0, 0, 0, 0);
+const OMITTED_KEYS = new Set([
+  "id", "slug", "publicationStatus", "verificationStatus", "source", "sourceIndex",
+  "featuredText", "summary", "category", "name", "lastVerified", "validity", "contact",
+  "roomRateColumns", "rateColumns", "vehicleRateColumns", "roomRates", "vehicleRates",
+]);
 
-const labels = {
-  validity: "有效期限",
-  from: "開始日期",
-  to: "結束日期",
-  autoRenewal: "自動續約",
-  renewalNote: "續約說明",
-  note: "說明",
-  chengYiHotel: "承億酒店",
-  hotelday: "承億文旅",
-  address: "地址／地區",
-  locations: "適用地區／門市",
-  contact: "公開聯絡資訊",
-  phone: "電話",
-  fax: "傳真",
-  email: "Email",
-  website: "網站",
-  roomRates: "房型與價格",
-  otherRoomDiscounts: "其他房型優惠",
-  howToUse: "使用方式",
-  facilitiesAndCharges: "設施與其他費用",
-  included: "包含項目",
-  transportation: "交通與接駁",
-  additionalCharges: "附加費用",
-  stayRules: "住宿規則",
-  diningAndFacilities: "餐飲與館內設施",
-  properties: "館別優惠",
-  hoteldayCommonPolicies: "承億文旅共同規則",
-  annualRewards: "年度回饋",
-  commonRestrictions: "共同限制",
-  freeFacilityRules: "免費設施規則",
-  discounts: "優惠內容",
-  definitions: "日期定義",
-  weekday: "平日",
-  holiday: "假日",
-  specialFestivals: "特殊節慶",
-  offers: "優惠內容",
-  restrictions: "限制與不適用條件",
-  eligibility: "適用資格",
-  insurance: "保險",
-  deductibles: "自負額與營業損失",
-  mileage: "里程限制",
-  vehicleRates: "車型與租車價格",
-  serviceRules: "服務規則",
-  lastVerified: "最後確認日期",
-  name: "名稱",
-  hours: "營業時間",
-  prices: "價格",
-  rules: "使用規則",
-  activities: "活動",
-  karaoke: "卡拉 OK",
-  priceNote: "價格說明",
-  rooms: "客房數",
-  pricing: "價格",
-  breakfast: "早餐",
-  parking: "停車",
-  facilities: "設施",
-  diningAndServices: "餐飲與服務",
-  depositAndCancellation: "定金與取消規定",
-  specialDates: "特殊日期",
-  consecutiveHolidays: "連續假期",
-  springFestival: "春節",
-  dining: "餐飲優惠",
-  restaurants: "適用餐廳",
-  item: "項目",
-  discount: "優惠",
+const LABELS = {
+  from: "開始日期", to: "結束日期", autoRenewal: "自動續約", renewalNote: "續約說明",
+  note: "說明", address: "地址／地區", locations: "適用地區／門市", phone: "電話",
+  fax: "傳真", email: "Email", website: "網站", howToUse: "怎麼使用", eligibility: "適用對象",
+  offers: "優惠內容", discounts: "優惠內容", otherRoomDiscounts: "其他房型優惠",
+  annualRewards: "年度回饋", restrictions: "限制與不適用條件", commonRestrictions: "共同限制",
+  stayRules: "住宿規則", definitions: "日期定義", included: "包含項目",
+  facilitiesAndCharges: "設施與其他費用", transportation: "交通與接駁", additionalCharges: "附加費用",
+  freeFacilityRules: "免費設施規則", serviceRules: "服務規則", hoteldayCommonPolicies: "共同規則",
+  insurance: "保險", deductibles: "自負額與營業損失", mileage: "里程限制",
+  diningAndFacilities: "餐飲與館內設施", properties: "館別優惠", facilities: "設施",
+  diningAndServices: "餐飲與服務", depositAndCancellation: "定金與取消規定",
+  specialDates: "特殊日期", consecutiveHolidays: "連續假期", springFestival: "春節",
+  dining: "餐飲優惠", restaurants: "適用餐廳", rooms: "客房數", pricing: "價格",
+  breakfast: "早餐", parking: "停車", item: "項目", discount: "優惠", weekday: "平日",
+  holiday: "假日", specialFestivals: "特殊節慶", name: "名稱", hours: "營業時間",
+  prices: "價格", rules: "使用規則", activities: "活動", karaoke: "卡拉 OK", priceNote: "價格說明",
 };
-
-const sectionOrder = [
-  "validity",
-  "address",
-  "locations",
-  "contact",
-  "roomRates",
-  "otherRoomDiscounts",
-  "howToUse",
-  "commonRestrictions",
-  "properties",
-  "hoteldayCommonPolicies",
-  "annualRewards",
-  "facilitiesAndCharges",
-  "included",
-  "transportation",
-  "additionalCharges",
-  "stayRules",
-  "diningAndFacilities",
-  "freeFacilityRules",
-  "discounts",
-  "definitions",
-  "offers",
-  "eligibility",
-  "insurance",
-  "deductibles",
-  "mileage",
-  "vehicleRates",
-  "serviceRules",
-  "restrictions",
-  "lastVerified",
-];
 
 const state = {
   benefits: [],
   activeCategory: "全部",
   query: "",
-  sort: "default",
+  detailFromList: false,
+  returnScrollY: 0,
 };
 
 const elements = {
-  availableCount: document.querySelector("#available-count"),
-  categoryCount: document.querySelector("#category-count"),
-  latestDate: document.querySelector("#latest-date"),
+  listView: document.querySelector("#list-view"),
+  detailView: document.querySelector("#detail-view"),
+  detailContent: document.querySelector("#detail-content"),
+  categories: document.querySelector("#category-buttons"),
   search: document.querySelector("#benefit-search"),
-  sort: document.querySelector("#benefit-sort"),
-  categoryFilters: document.querySelector("#category-filters"),
-  clear: document.querySelector("#clear-filters"),
-  print: document.querySelector("#print-page"),
-  resultCount: document.querySelector("#result-count"),
   list: document.querySelector("#benefit-list"),
+  resultCount: document.querySelector("#result-count"),
   loading: document.querySelector("#loading-state"),
   empty: document.querySelector("#empty-state"),
-  noPublic: document.querySelector("#no-public-state"),
   error: document.querySelector("#error-state"),
+  showAllTop: document.querySelector("#show-all-top"),
+  showAllEmpty: document.querySelector("#show-all-empty"),
+  back: document.querySelector("#back-to-list"),
+  print: document.querySelector("#print-detail"),
 };
 
 function create(tag, className, text) {
@@ -138,32 +62,28 @@ function create(tag, className, text) {
 function hasValue(value) {
   if (value === null || value === undefined || value === "") return false;
   if (Array.isArray(value)) return value.length > 0;
-  if (typeof value === "object") return Object.keys(value).length > 0;
+  if (typeof value === "object") return Object.keys(value).some((key) => hasValue(value[key]));
   return true;
 }
 
-function formatDate(value) {
-  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return "尚未提供";
-  const [year, month, day] = value.split("-");
-  return `${year}/${month}/${day}`;
+function label(key) {
+  return LABELS[key] || key.replace(/([a-z])([A-Z])/g, "$1 $2");
 }
 
-function formatCell(value) {
-  if (typeof value === "number") return value.toLocaleString("zh-TW");
+function formatDate(value) {
+  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return "";
+  return value.replaceAll("-", "/");
+}
+
+function formatValue(value, key = "") {
   if (typeof value === "boolean") return value ? "是" : "否";
+  if (typeof value === "number") return value.toLocaleString("zh-TW");
+  if (["from", "to", "lastVerified"].includes(key)) return formatDate(value) || String(value);
   return String(value);
 }
 
-function expiryText(benefit) {
-  const end = expiryValue(benefit);
-  return end ? `有效至 ${formatDate(end)}` : "期限請於使用前確認";
-}
-
-function isExpired(benefit) {
-  const end = expiryValue(benefit);
-  if (!end) return false;
-  const date = new Date(`${end}T00:00:00`);
-  return !Number.isNaN(date.valueOf()) && date < TODAY;
+function slugFor(benefit) {
+  return benefit.slug || benefit.id;
 }
 
 function expiryValue(benefit) {
@@ -171,10 +91,9 @@ function expiryValue(benefit) {
   return [validity.to, validity.chengYiHotel?.to, validity.hotelday?.to].filter(Boolean).sort()[0] || "";
 }
 
-function locationText(benefit) {
-  if (benefit.address) return benefit.address;
-  if (Array.isArray(benefit.locations) && benefit.locations.length) return benefit.locations.join("、");
-  return "";
+function expiryText(benefit) {
+  const expiry = expiryValue(benefit);
+  return expiry ? `有效至 ${formatDate(expiry)}` : "";
 }
 
 function searchableText(value) {
@@ -184,308 +103,288 @@ function searchableText(value) {
   return String(value);
 }
 
-function addFact(list, term, description) {
-  if (!hasValue(description)) return;
-  const wrapper = create("div", "fact");
-  wrapper.append(create("dt", "", term), create("dd", "", description));
-  list.append(wrapper);
-}
-
-function createList(items) {
-  const list = create("ul", "detail-list");
-  for (const item of items) list.append(create("li", "", formatCell(item)));
-  return list;
-}
-
-function createDefinitionList(object, keyOrder = Object.keys(object)) {
-  const list = create("dl", "definition-list");
-  for (const key of keyOrder) {
-    const value = object[key];
-    if (!hasValue(value)) continue;
-    list.append(create("dt", "", labels[key] || key));
-    const description = create("dd");
-    if (Array.isArray(value)) description.append(createList(value));
-    else description.textContent = formatCell(value);
-    list.append(description);
-  }
-  return list;
-}
-
-function createTable(columns, rows) {
-  const wrapper = create("div", "data-table-wrap");
-  const table = create("table", "data-table");
-  const head = create("thead");
-  const headRow = create("tr");
-  columns.forEach((column) => headRow.append(create("th", "", column)));
-  head.append(headRow);
-  const body = create("tbody");
-  for (const row of rows) {
-    const tableRow = create("tr");
-    row.forEach((cell, index) => {
-      const tableCell = create("td", "", formatCell(cell));
-      tableCell.setAttribute("data-label", columns[index]);
-      tableRow.append(tableCell);
-    });
-    body.append(tableRow);
-  }
-  table.append(head, body);
-  wrapper.append(table);
-  return wrapper;
-}
-
-function safeExternalUrl(value) {
+function safeUrl(value) {
   try {
     const url = new URL(value);
-    return url.protocol === "http:" || url.protocol === "https:" ? url.href : null;
+    return ["http:", "https:"].includes(url.protocol) ? url.href : "";
   } catch {
-    return null;
+    return "";
   }
 }
 
-function createContact(contact) {
-  const list = create("div", "contact-list");
-  if (contact.phone) {
-    const phone = create("a", "", contact.phone);
-    const basePhone = contact.phone.split(/分機|ext\.?|#/i)[0];
-    const safePhone = basePhone.replace(/[^0-9+]/g, "");
-    phone.setAttribute("href", `tel:${safePhone}`);
-    list.append(phone);
+function createDefinitionList(entries) {
+  const dl = create("dl", "definition-list");
+  for (const [key, value] of entries) {
+    if (!hasValue(value)) continue;
+    const row = create("div");
+    row.append(create("dt", "", label(key)), create("dd", "", formatValue(value, key)));
+    dl.append(row);
   }
-  if (contact.fax) list.append(create("span", "", `傳真：${contact.fax}`));
-  if (contact.email) {
-    const email = create("a", "", contact.email);
-    email.setAttribute("href", `mailto:${contact.email}`);
-    list.append(email);
-  }
-  if (contact.website) {
-    const url = safeExternalUrl(contact.website);
-    if (url) {
-      const website = create("a", "", contact.website);
-      website.setAttribute("href", url);
-      website.setAttribute("target", "_blank");
-      website.setAttribute("rel", "noopener noreferrer");
-      list.append(website);
-    }
-  }
+  return dl;
+}
+
+function createPrimitiveList(values) {
+  const list = create("ul");
+  for (const value of values) list.append(create("li", "", formatValue(value)));
   return list;
 }
 
-function appendNestedValue(container, key, value) {
-  if (!hasValue(value)) return;
-  const heading = create("h5", "", labels[key] || key);
-  container.append(heading);
-  if (Array.isArray(value)) container.append(createList(value));
-  else container.append(create("p", "", formatCell(value)));
+function createObjectCard(object, headingFallback = "") {
+  const card = create("section", "info-card");
+  const heading = object.name || object.item || headingFallback;
+  if (heading) card.append(create("h4", "", heading));
+  const scalarEntries = Object.entries(object).filter(([key, value]) => !["name", "item"].includes(key) && !Array.isArray(value) && typeof value !== "object" && hasValue(value));
+  if (scalarEntries.length) card.append(createDefinitionList(scalarEntries));
+  for (const [key, value] of Object.entries(object)) {
+    if (["name", "item"].includes(key) || !hasValue(value) || (!Array.isArray(value) && typeof value !== "object")) continue;
+    card.append(create("h4", "", label(key)), renderValue(value, key));
+  }
+  return card;
 }
 
-function createNestedCards(items) {
-  const grid = create("div", "nested-grid");
-  for (const item of items) {
-    const card = create("section", "nested-card");
-    if (item.name) card.append(create("h5", "", item.name));
-    const scalarEntries = {};
-    for (const [key, value] of Object.entries(item)) {
-      if (key === "name" || !hasValue(value)) continue;
-      if (Array.isArray(value)) appendNestedValue(card, key, value);
-      else scalarEntries[key] = value;
+function renderValue(value, key = "") {
+  if (Array.isArray(value)) {
+    if (value.every((item) => typeof item !== "object" || item === null)) return createPrimitiveList(value);
+    const grid = create("div", "info-grid");
+    value.forEach((item, index) => grid.append(Array.isArray(item)
+      ? createObjectCard(Object.fromEntries(item.map((cell, cellIndex) => [`${cellIndex + 1}`, cell])), `${label(key)} ${index + 1}`)
+      : createObjectCard(item, `${label(key)} ${index + 1}`)));
+    return grid;
+  }
+  if (typeof value === "object" && value !== null) {
+    const wrapper = create("div");
+    const scalars = Object.entries(value).filter(([, child]) => typeof child !== "object" && hasValue(child));
+    if (scalars.length) wrapper.append(createDefinitionList(scalars));
+    for (const [childKey, child] of Object.entries(value)) {
+      if (!hasValue(child) || typeof child !== "object") continue;
+      wrapper.append(create("h4", "", label(childKey)), renderValue(child, childKey));
     }
-    if (Object.keys(scalarEntries).length) card.append(createDefinitionList(scalarEntries));
+    return wrapper;
+  }
+  return create("p", "", formatValue(value, key));
+}
+
+function createRateCards(columns, rows) {
+  const grid = create("div", "rate-grid");
+  for (const row of rows) {
+    const card = create("article", "rate-card");
+    card.append(create("h4", "", formatValue(row[0])));
+    card.append(createDefinitionList(row.slice(1).map((value, index) => [columns[index + 1] || `項目 ${index + 2}`, value])));
     grid.append(card);
   }
   return grid;
 }
 
 function createPropertyCards(properties) {
-  const grid = create("div", "property-grid");
+  const grid = create("div", "info-grid");
   for (const property of properties) {
-    const card = create("section", "property-card");
-    card.append(create("h5", "", property.name));
-
-    const basics = {};
-    for (const key of ["rooms", "address", "pricing", "breakfast", "parking"]) {
-      if (hasValue(property[key]) && !Array.isArray(property[key])) basics[key] = property[key];
-    }
-    if (Object.keys(basics).length) card.append(createDefinitionList(basics));
-    if (property.phone) card.append(createContact({ phone: property.phone }));
-
+    const card = create("section", "info-card");
+    card.append(create("h4", "", property.name));
+    const scalarEntries = Object.entries(property).filter(([key, value]) => !["name", "phone"].includes(key) && !key.endsWith("Columns") && key !== "roomRates" && !Array.isArray(value) && typeof value !== "object" && hasValue(value));
+    if (scalarEntries.length) card.append(createDefinitionList(scalarEntries));
+    if (property.phone) card.append(createContactLinks({ phone: property.phone }));
     const columns = property.roomRateColumns || property.rateColumns;
-    if (columns && property.roomRates) {
-      card.append(create("h5", "property-card__subheading", "房型與價格"));
-      card.append(createTable(columns, property.roomRates));
-    }
-
-    for (const key of [
-      "included",
-      "additionalCharges",
-      "depositAndCancellation",
-      "stayRules",
-      "facilities",
-      "breakfast",
-      "diningAndServices",
-      "restrictions",
-    ]) {
-      if (Array.isArray(property[key])) appendNestedValue(card, key, property[key]);
-    }
-
-    if (property.specialDates) {
-      card.append(create("h5", "property-card__subheading", labels.specialDates));
-      card.append(createDefinitionList(property.specialDates));
-    }
-    if (property.dining) {
-      card.append(create("h5", "property-card__subheading", labels.dining));
-      card.append(createDefinitionList(property.dining));
+    if (columns && property.roomRates) card.append(create("h4", "", "房型與價格"), createRateCards(columns, property.roomRates));
+    for (const [key, value] of Object.entries(property)) {
+      if (["name", "phone", "roomRateColumns", "rateColumns", "roomRates"].includes(key) || !hasValue(value) || (!Array.isArray(value) && typeof value !== "object")) continue;
+      card.append(create("h4", "", label(key)), renderValue(value, key));
     }
     grid.append(card);
   }
   return grid;
 }
 
-function createDetailSection(title, content) {
+function createContactLinks(contact) {
+  const wrapper = create("div", "contact-actions");
+  if (contact.phone) {
+    const href = `tel:${String(contact.phone).replace(/[^\d+]/g, "")}`;
+    const link = create("a", "contact-link", "撥打電話");
+    link.setAttribute("href", href);
+    wrapper.append(link);
+  }
+  if (contact.email) {
+    const link = create("a", "contact-link", "寄送 Email");
+    link.setAttribute("href", `mailto:${contact.email}`);
+    wrapper.append(link);
+  }
+  const website = safeUrl(contact.website);
+  if (website) {
+    const link = create("a", "contact-link", "開啟官方網站");
+    link.setAttribute("href", website);
+    link.setAttribute("target", "_blank");
+    link.setAttribute("rel", "noopener noreferrer");
+    wrapper.append(link);
+  }
+  if (contact.fax) wrapper.append(create("p", "", `傳真：${contact.fax}`));
+  return wrapper;
+}
+
+function detailSection(title, contents) {
   const section = create("section", "detail-section");
-  section.append(create("h4", "", title), content);
+  section.append(create("h3", "", title));
+  contents.filter(Boolean).forEach((content) => section.append(content));
   return section;
 }
 
-function renderField(benefit, key) {
-  const value = benefit[key];
-  if (!hasValue(value)) return null;
-
-  if (key === "roomRates") {
-    return createDetailSection(labels[key], createTable(benefit.rateColumns, value));
-  }
-  if (key === "vehicleRates") {
-    return createDetailSection(labels[key], createTable(benefit.vehicleRateColumns, value));
-  }
-  if (key === "contact") return createDetailSection(labels[key], createContact(value));
-  if (key === "validity") {
-    if (value.chengYiHotel || value.hotelday) {
-      const grid = create("div", "nested-grid");
-      for (const validityKey of ["chengYiHotel", "hotelday"]) {
-        if (!value[validityKey]) continue;
-        const card = create("section", "nested-card");
-        card.append(create("h5", "", labels[validityKey]));
-        const display = {
-          from: value[validityKey].from ? formatDate(value[validityKey].from) : "尚未提供",
-          to: value[validityKey].to ? formatDate(value[validityKey].to) : "期限請於使用前確認",
-        };
-        if (value[validityKey].note) display.note = value[validityKey].note;
-        card.append(createDefinitionList(display));
-        grid.append(card);
-      }
-      return createDetailSection(labels[key], grid);
-    }
-    const display = {
-      from: value.from ? formatDate(value.from) : "尚未提供",
-      to: value.to ? formatDate(value.to) : "期限請於使用前確認",
-      autoRenewal: value.autoRenewal ? "是" : "否",
-    };
-    if (value.renewalNote) display.renewalNote = value.renewalNote;
-    return createDetailSection(labels[key], createDefinitionList(display, ["from", "to", "autoRenewal", "renewalNote"]));
-  }
-  if (key === "properties") return createDetailSection(labels[key], createPropertyCards(value));
-  if (key === "definitions") return createDetailSection(labels[key], createDefinitionList(value));
-  if (Array.isArray(value) && value.every((item) => item && typeof item === "object" && !Array.isArray(item))) {
-    return createDetailSection(labels[key] || key, createNestedCards(value));
-  }
-  if (Array.isArray(value)) return createDetailSection(labels[key] || key, createList(value));
-  if (key === "lastVerified") return createDetailSection(labels[key], create("p", "", formatDate(value)));
-  return createDetailSection(labels[key] || key, create("p", "", formatCell(value)));
+function valuesFor(benefit, keys) {
+  return keys.filter((key) => hasValue(benefit[key])).map((key) => {
+    const wrapper = create("div");
+    if (keys.length > 1) wrapper.append(create("h4", "", label(key)));
+    wrapper.append(renderValue(benefit[key], key));
+    return wrapper;
+  });
 }
 
-function createBenefitCard(benefit) {
-  const article = create("article", "benefit-card");
-  const body = create("div", "benefit-card__body");
-  body.append(create("p", "benefit-card__category", benefit.category));
-  body.append(create("h3", "", benefit.name));
-  body.append(create("p", "benefit-card__featured", benefit.featuredText));
-  if (benefit.summary) body.append(create("p", "benefit-card__summary", benefit.summary));
+function createDetail(benefit) {
+  const fragment = document.createDocumentFragment();
+  const hero = create("header", "detail-hero");
+  hero.append(create("p", "detail-hero__category", benefit.category));
+  const heading = create("h2", "", benefit.name);
+  heading.id = "detail-title";
+  heading.tabIndex = -1;
+  hero.append(heading, create("p", "detail-hero__offer", benefit.featuredText));
+  const expiry = expiryText(benefit);
+  if (expiry) hero.append(create("p", "detail-hero__expiry", expiry));
+  hero.append(create("p", "detail-hero__notice", "優惠內容可能因廠商政策調整；使用前請再次確認適用門市、日期及限制。"));
+  fragment.append(hero);
 
-  const facts = create("dl", "benefit-card__facts");
-  addFact(facts, "有效期限", expiryText(benefit));
-  addFact(facts, "適用地區／門市", locationText(benefit));
-  addFact(facts, "使用方式", benefit.howToUse?.[0]);
-  body.append(facts);
-  if (isExpired(benefit)) body.append(create("span", "expiry-warning", "期限可能已過"));
+  const sections = create("div", "detail-sections");
+  const offer = [benefit.summary ? create("p", "", benefit.summary) : null, ...valuesFor(benefit, ["offers", "discounts", "otherRoomDiscounts", "annualRewards"])];
+  if (offer.some(Boolean)) sections.append(detailSection("優惠內容", offer));
+  if (hasValue(benefit.howToUse)) sections.append(detailSection("怎麼使用", [renderValue(benefit.howToUse, "howToUse")]));
+  if (hasValue(benefit.eligibility)) sections.append(detailSection("適用對象", [renderValue(benefit.eligibility, "eligibility")]));
+  const locations = [];
+  if (benefit.address) locations.push(create("p", "", benefit.address));
+  if (hasValue(benefit.locations)) locations.push(renderValue(benefit.locations, "locations"));
+  if (locations.length) sections.append(detailSection("適用地區／門市", locations));
 
-  const details = create("details", "benefit-details");
-  details.append(create("summary", "", "查看完整內容"));
-  const content = create("div", "benefit-details__content");
-  for (const key of sectionOrder) {
-    const section = renderField(benefit, key);
-    if (section) content.append(section);
+  const prices = [];
+  const roomColumns = benefit.roomRateColumns || benefit.rateColumns;
+  if (roomColumns && benefit.roomRates) prices.push(createRateCards(roomColumns, benefit.roomRates));
+  if (benefit.vehicleRateColumns && benefit.vehicleRates) prices.push(createRateCards(benefit.vehicleRateColumns, benefit.vehicleRates));
+  if (benefit.properties) prices.push(createPropertyCards(benefit.properties));
+  if (benefit.diningAndFacilities) prices.push(renderValue(benefit.diningAndFacilities, "diningAndFacilities"));
+  if (prices.length) sections.append(detailSection("房型、車型或品項價格", prices));
+
+  const restrictions = valuesFor(benefit, ["restrictions", "commonRestrictions", "stayRules", "definitions"]);
+  if (restrictions.length) sections.append(detailSection("限制與不適用條件", restrictions));
+  const services = valuesFor(benefit, ["included", "facilitiesAndCharges", "transportation", "additionalCharges", "freeFacilityRules", "serviceRules", "hoteldayCommonPolicies", "insurance", "deductibles", "mileage"]);
+  if (services.length) sections.append(detailSection("附加服務", services));
+  if (hasValue(benefit.contact)) sections.append(detailSection("聯絡方式", [createContactLinks(benefit.contact)]));
+  if (hasValue(benefit.validity)) sections.append(detailSection("有效期限", [renderValue(benefit.validity, "validity")]));
+  if (benefit.lastVerified) sections.append(detailSection("最後確認日期", [create("p", "", formatDate(benefit.lastVerified))]));
+
+  const remaining = Object.entries(benefit).filter(([key, value]) => !OMITTED_KEYS.has(key) && ![
+    "offers", "discounts", "otherRoomDiscounts", "annualRewards", "howToUse", "eligibility", "address", "locations",
+    "properties", "diningAndFacilities", "restrictions", "commonRestrictions", "stayRules", "definitions", "included",
+    "facilitiesAndCharges", "transportation", "additionalCharges", "freeFacilityRules", "serviceRules", "hoteldayCommonPolicies",
+    "insurance", "deductibles", "mileage",
+  ].includes(key) && hasValue(value));
+  if (remaining.length) sections.append(detailSection("其他資訊", remaining.map(([key, value]) => {
+    const wrapper = create("div");
+    wrapper.append(create("h4", "", label(key)), renderValue(value, key));
+    return wrapper;
+  })));
+  fragment.append(sections);
+  return { fragment, heading };
+}
+
+function createCategoryButtons() {
+  elements.categories.replaceChildren();
+  const counts = new Map(CATEGORY_ORDER.map((category) => [category, state.benefits.filter((item) => item.category === category).length]));
+  for (const category of CATEGORY_ORDER) {
+    const count = counts.get(category);
+    const button = create("button", "category-button");
+    button.type = "button";
+    button.dataset.category = category;
+    button.setAttribute("aria-pressed", String(state.activeCategory === category));
+    button.append(create("span", "category-button__name", category));
+    button.append(create("span", "category-button__count", count ? `${count} 項優惠` : "目前沒有已確認優惠"));
+    button.addEventListener("click", () => {
+      state.activeCategory = state.activeCategory === category ? "全部" : category;
+      renderList();
+    });
+    elements.categories.append(button);
   }
-  details.append(content);
-  article.append(body, details);
-  return article;
 }
 
 function filteredBenefits() {
   const query = state.query.trim().toLocaleLowerCase("zh-TW");
-  const filtered = state.benefits.filter((benefit) => {
-    const categoryMatch = state.activeCategory === "全部" || benefit.category === state.activeCategory;
-    const queryMatch = !query || searchableText(benefit).toLocaleLowerCase("zh-TW").includes(query);
-    return categoryMatch && queryMatch;
+  return state.benefits.filter((benefit) => {
+    const categoryMatches = state.activeCategory === "全部" || benefit.category === state.activeCategory;
+    const queryMatches = !query || searchableText(benefit).toLocaleLowerCase("zh-TW").includes(query);
+    return categoryMatches && queryMatches;
   });
-
-  if (state.sort === "expiry") {
-    filtered.sort((a, b) => {
-      const aEnd = expiryValue(a) || "9999-12-31";
-      const bEnd = expiryValue(b) || "9999-12-31";
-      return aEnd.localeCompare(bEnd) || a.sourceIndex - b.sourceIndex;
-    });
-  } else if (state.sort === "name") {
-    filtered.sort((a, b) => a.name.localeCompare(b.name, "zh-TW"));
-  } else {
-    filtered.sort((a, b) => a.sourceIndex - b.sourceIndex);
-  }
-  return filtered;
 }
 
-function render() {
+function createBenefitCard(benefit) {
+  const card = create("a", "benefit-card");
+  card.setAttribute("href", `#${encodeURIComponent(slugFor(benefit))}`);
+  card.append(create("p", "benefit-card__category", benefit.category));
+  card.append(create("h3", "", benefit.name));
+  card.append(create("p", "benefit-card__offer", benefit.featuredText));
+  const expiry = expiryText(benefit);
+  if (expiry) card.append(create("p", "benefit-card__expiry", expiry));
+  card.append(create("span", "benefit-card__link", "查看完整優惠"));
+  card.addEventListener("click", () => {
+    state.detailFromList = true;
+    state.returnScrollY = window.scrollY;
+  });
+  return card;
+}
+
+function renderList() {
+  createCategoryButtons();
   const results = filteredBenefits();
   elements.list.replaceChildren(...results.map(createBenefitCard));
-  elements.resultCount.textContent = `顯示 ${results.length} 筆優惠`;
-  elements.empty.hidden = results.length > 0 || state.benefits.length === 0;
-  elements.clear.hidden = !state.query && state.activeCategory === "全部";
+  elements.resultCount.textContent = `共 ${results.length} 項`;
+  elements.empty.hidden = results.length !== 0;
+  elements.showAllTop.hidden = state.activeCategory === "全部" && !state.query;
 }
 
-function setCategory(category) {
-  state.activeCategory = category;
-  for (const button of elements.categoryFilters.querySelectorAll("button")) {
-    button.setAttribute("aria-pressed", String(button.textContent === category));
+function showList() {
+  elements.detailView.hidden = true;
+  elements.listView.hidden = false;
+  renderList();
+  requestAnimationFrame(() => window.scrollTo({ top: state.returnScrollY, behavior: "auto" }));
+}
+
+function showDetail(benefit) {
+  elements.listView.hidden = true;
+  elements.detailView.hidden = false;
+  elements.detailContent.replaceChildren();
+  const { fragment, heading } = createDetail(benefit);
+  elements.detailContent.append(fragment);
+  window.scrollTo({ top: 0, behavior: "auto" });
+  requestAnimationFrame(() => heading.focus());
+}
+
+function route() {
+  const slug = decodeURIComponent(location.hash.slice(1));
+  if (!slug) return showList();
+  const benefit = state.benefits.find((item) => slugFor(item) === slug);
+  if (benefit) return showDetail(benefit);
+  state.detailFromList = false;
+  history.replaceState(null, "", `${location.pathname}${location.search}`);
+  showList();
+}
+
+function showAll() {
+  state.activeCategory = "全部";
+  state.query = "";
+  elements.search.value = "";
+  renderList();
+  document.querySelector("#category-title").focus({ preventScroll: true });
+}
+
+function returnToList() {
+  if (state.detailFromList && history.length > 1) history.back();
+  else {
+    state.detailFromList = false;
+    history.pushState(null, "", `${location.pathname}${location.search}`);
+    showList();
+    document.querySelector("#category-title").focus({ preventScroll: true });
   }
-  render();
-}
-
-function renderCategoryFilters() {
-  const found = [...new Set(state.benefits.map((benefit) => benefit.category))];
-  found.sort((a, b) => {
-    const aIndex = CATEGORY_ORDER.indexOf(a);
-    const bIndex = CATEGORY_ORDER.indexOf(b);
-    if (aIndex === -1 && bIndex === -1) return a.localeCompare(b, "zh-TW");
-    if (aIndex === -1) return 1;
-    if (bIndex === -1) return -1;
-    return aIndex - bIndex;
-  });
-
-  const categories = ["全部", ...found];
-  const buttons = categories.map((category) => {
-    const button = create("button", "category-filter", category);
-    button.type = "button";
-    button.setAttribute("aria-pressed", String(category === state.activeCategory));
-    button.addEventListener("click", () => setCategory(category));
-    return button;
-  });
-  elements.categoryFilters.replaceChildren(...buttons);
-}
-
-function updateSummary(meta) {
-  const categories = new Set(state.benefits.map((benefit) => benefit.category));
-  const verifiedDates = state.benefits.map((benefit) => benefit.lastVerified).filter(Boolean).sort();
-  const latest = verifiedDates.at(-1) || meta.updatedAt || meta.generatedAt || meta.lastUpdated;
-  elements.availableCount.textContent = String(state.benefits.length);
-  elements.categoryCount.textContent = String(categories.size);
-  elements.latestDate.textContent = latest ? formatDate(latest) : "尚未提供";
 }
 
 async function loadBenefits() {
@@ -493,57 +392,30 @@ async function loadBenefits() {
     const response = await fetch(DATA_URL, { cache: "no-store" });
     if (!response.ok) throw new Error("load failed");
     const data = await response.json();
-    const allBenefits = Array.isArray(data.benefits) ? data.benefits : [];
-    state.benefits = allBenefits.map((benefit, sourceIndex) => ({ ...benefit, sourceIndex }));
+    state.benefits = (Array.isArray(data.benefits) ? data.benefits : [])
+      .map((benefit, sourceIndex) => ({ ...benefit, sourceIndex }))
+      .filter((benefit) => benefit.publicationStatus === "published" && benefit.verificationStatus === "confirmed")
+      .sort((a, b) => (a.sort ?? a.order ?? a.sourceIndex) - (b.sort ?? b.order ?? b.sourceIndex));
     elements.loading.hidden = true;
-    updateSummary(data.meta || {});
-    if (!state.benefits.length) {
-      elements.noPublic.hidden = false;
-      elements.resultCount.textContent = "顯示 0 筆優惠";
-      return;
-    }
-    renderCategoryFilters();
-    render();
+    route();
   } catch {
     elements.loading.hidden = true;
     elements.error.hidden = false;
-    elements.resultCount.textContent = "";
   }
 }
 
-elements.search.addEventListener("input", (event) => {
-  state.query = event.target.value;
-  render();
+elements.search.addEventListener("input", () => {
+  state.query = elements.search.value;
+  renderList();
 });
-
-elements.sort.addEventListener("change", (event) => {
-  state.sort = event.target.value;
-  render();
-});
-
-elements.clear.addEventListener("click", () => {
-  state.query = "";
-  state.activeCategory = "全部";
-  elements.search.value = "";
-  setCategory("全部");
-  elements.search.focus();
-});
-
+elements.showAllTop.addEventListener("click", showAll);
+elements.showAllEmpty.addEventListener("click", showAll);
+elements.back.addEventListener("click", returnToList);
 elements.print.addEventListener("click", () => window.print());
-
-let printOpenStates = [];
-window.addEventListener("beforeprint", () => {
-  const details = [...document.querySelectorAll(".benefit-details")];
-  printOpenStates = details.map((item) => item.open);
-  details.forEach((item) => {
-    item.open = true;
-  });
-});
-
-window.addEventListener("afterprint", () => {
-  document.querySelectorAll(".benefit-details").forEach((item, index) => {
-    item.open = printOpenStates[index] ?? false;
-  });
+window.addEventListener("hashchange", route);
+window.addEventListener("popstate", route);
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !elements.detailView.hidden) returnToList();
 });
 
 loadBenefits();

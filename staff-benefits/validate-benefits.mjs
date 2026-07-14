@@ -94,6 +94,7 @@ const ids = new Set();
 const slugs = new Set();
 const duplicateIds = [];
 const duplicateSlugs = [];
+const missingPublicationFields = [];
 
 for (const [index, benefit] of benefits.entries()) {
   const prefix = `benefits.${index}`;
@@ -113,6 +114,7 @@ for (const [index, benefit] of benefits.entries()) {
   for (const required of ["name", "category", "publicationStatus", "verificationStatus"]) {
     if (typeof benefit[required] !== "string" || !benefit[required].trim()) {
       issue(`${prefix}.${required} 不得為空`);
+      if (["publicationStatus", "verificationStatus"].includes(required)) missingPublicationFields.push(`${prefix}.${required}`);
     }
   }
   if (![benefit.featuredText, benefit.summary].some((entry) => typeof entry === "string" && entry.trim())) {
@@ -158,7 +160,8 @@ walk(data);
 const publicBenefits = benefits.filter(
   (benefit) => benefit.publicationStatus === "published" && benefit.verificationStatus === "confirmed",
 );
-const displayBenefits = benefits;
+const hiddenBenefits = benefits.filter((benefit) => !publicBenefits.includes(benefit));
+const displayBenefits = publicBenefits;
 const publishedCount = benefits.filter((benefit) => benefit.publicationStatus === "published").length;
 const confirmedCount = benefits.filter((benefit) => benefit.verificationStatus === "confirmed").length;
 const categories = new Map();
@@ -175,7 +178,25 @@ const noExpiry = displayBenefits.filter((benefit) => {
   return !validity.to && !validity.chengYiHotel?.to && !validity.hotelday?.to;
 });
 const expiredDisplay = displayBenefits.filter((benefit) => benefit.validity?.to && benefit.validity.to < today);
-if (expiredDisplay.length) warnings.push(`已顯示但期限可能已過：${expiredDisplay.map((benefit) => benefit.name).join("、")}`);
+if (expiredDisplay.length) issue(`已過期卻仍公開：${expiredDisplay.map((benefit) => benefit.name).join("、")}`);
+
+const liudui = benefits.filter((benefit) => benefit.id === "liudui-hakka-kitchen" || benefit.slug === "liudui-hakka-kitchen" || benefit.name === "六堆伙房");
+if (liudui.length !== 1) issue(`六堆伙房筆數應為 1，目前為 ${liudui.length}`);
+if (liudui.length === 1) {
+  const benefit = liudui[0];
+  if (!/95\s*折/.test(benefit.featuredText || "")) issue("六堆伙房缺少 95 折優惠文字");
+  if (benefit.publicationStatus !== "published" || benefit.verificationStatus !== "confirmed") issue("六堆伙房尚未設為 published + confirmed");
+  if (JSON.stringify(benefit.locations) !== JSON.stringify(["壽德大樓門市"])) issue("六堆伙房適用門市與使用者確認內容不符");
+  if (JSON.stringify(benefit.eligibility) !== JSON.stringify(["基金同仁本人"])) issue("六堆伙房適用對象與使用者確認內容不符");
+  if (JSON.stringify(benefit.howToUse) !== JSON.stringify(["消費時出示員工證"])) issue("六堆伙房使用方式與使用者確認內容不符");
+  for (const forbidden of ["validity", "contact", "restrictions", "offers"]) {
+    if (benefit[forbidden] !== undefined) issue(`六堆伙房不得自行補寫欄位：${forbidden}`);
+  }
+}
+
+if (publicBenefits.some((benefit) => benefit.publicationStatus !== "published" || benefit.verificationStatus !== "confirmed")) {
+  issue("公開 filter 包含非 published + confirmed 資料");
+}
 
 console.log(`JSON 檔案：${path.relative(process.cwd(), file) || path.basename(file)}`);
 console.log(`JSON 總筆數：${benefits.length}`);
@@ -183,7 +204,7 @@ console.log(`published 筆數：${publishedCount}`);
 console.log(`confirmed 筆數：${confirmedCount}`);
 console.log(`published + confirmed 筆數：${publicBenefits.length}`);
 console.log(`前台顯示筆數：${displayBenefits.length}`);
-console.log("被排除筆數：0");
+console.log(`被排除筆數：${hiddenBenefits.length}`);
 console.log(`類別統計：${[...categories].map(([name, count]) => `${name} ${count}`).join("、") || "無"}`);
 console.log(`最早有效期限：${displayExpiries[0] || "尚未提供"}`);
 console.log(`最晚有效期限：${displayExpiries.at(-1) || "尚未提供"}`);
@@ -191,7 +212,8 @@ console.log(`無期限項目：${noExpiry.map((benefit) => benefit.name).join("�
 console.log(`期限可能已過：${expiredDisplay.map((benefit) => benefit.name).join("、") || "無"}`);
 console.log(`重複 id：${duplicateIds.length}`);
 console.log(`重複 slug：${duplicateSlugs.length}`);
-console.log("被排除項目：無");
+console.log(`缺少發布欄位：${missingPublicationFields.join("、") || "無"}`);
+console.log(`被排除項目：${hiddenBenefits.map((benefit) => `${benefit.name}（${benefit.publicationStatus || "缺少 publicationStatus"}/${benefit.verificationStatus || "缺少 verificationStatus"}）`).join("、") || "無"}`);
 console.log("敏感字詞已核准例外：");
 [...new Set(warnings)].forEach((warning) => console.log(`- ${warning}`));
 
