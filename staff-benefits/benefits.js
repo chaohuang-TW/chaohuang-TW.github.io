@@ -5,7 +5,7 @@ const CATEGORY_ORDER = ["住宿", "餐飲", "交通", "醫療"];
 const OMITTED_KEYS = new Set([
   "id", "slug", "publicationStatus", "verificationStatus", "verificationNotes", "source", "sourceIndex",
   "featuredText", "summary", "category", "name", "lastVerified", "validity", "contact",
-  "roomRateColumns", "rateColumns", "vehicleRateColumns", "roomRates", "vehicleRates",
+  "roomRateColumns", "rateColumns", "vehicleRateColumns", "roomRates", "vehicleRates", "depositAndCancellation",
 ]);
 
 const LABELS = {
@@ -19,7 +19,7 @@ const LABELS = {
   freeFacilityRules: "免費設施規則", serviceRules: "服務規則", hoteldayCommonPolicies: "共同規則",
   insurance: "保險", deductibles: "自負額與營業損失", mileage: "里程限制",
   diningAndFacilities: "餐飲與館內設施", properties: "館別優惠", facilities: "設施",
-  diningAndServices: "餐飲與服務", depositAndCancellation: "定金與取消規定",
+  diningAndServices: "餐飲與服務", depositAndCancellation: "訂金與取消規定",
   specialDates: "特殊日期", consecutiveHolidays: "連續假期", springFestival: "春節",
   dining: "餐飲優惠", restaurants: "適用餐廳", rooms: "客房數", pricing: "價格",
   breakfast: "早餐", parking: "停車", item: "項目", discount: "優惠", weekday: "平日",
@@ -49,8 +49,13 @@ const elements = {
   showAllTop: document.querySelector("#show-all-top"),
   showAllEmpty: document.querySelector("#show-all-empty"),
   back: document.querySelector("#back-to-list"),
+  backBottom: document.querySelector("#back-to-list-bottom"),
+  copy: document.querySelector("#copy-detail-link"),
+  copyStatus: document.querySelector("#copy-link-status"),
   print: document.querySelector("#print-detail"),
 };
+
+let copyStatusTimer;
 
 function create(tag, className, text) {
   const element = document.createElement(tag);
@@ -110,6 +115,18 @@ function safeUrl(value) {
   } catch {
     return "";
   }
+}
+
+function parsePhoneContact(rawPhone) {
+  const source = String(rawPhone || "").trim();
+  if (!source) return { source: "", baseDisplay: "", extensionDisplay: "", dialNumber: "" };
+
+  const extensionMatch = source.match(/^(.+?)\s*(?:轉|分機|ext(?:ension)?\.?|#)\s*(.+)$/i);
+  const baseDisplay = (extensionMatch ? extensionMatch[1] : source).trim();
+  const extensionDisplay = (extensionMatch ? extensionMatch[2] : "").trim();
+  const dialNumber = baseDisplay.replace(/[^\d+]/g, "");
+
+  return { source, baseDisplay, extensionDisplay, dialNumber };
 }
 
 function createDefinitionList(entries) {
@@ -195,17 +212,30 @@ function createPropertyCards(properties) {
 }
 
 function createContactLinks(contact) {
-  const wrapper = create("div", "contact-actions");
-  if (contact.phone) {
-    const href = `tel:${String(contact.phone).replace(/[^\d+]/g, "")}`;
-    const link = create("a", "contact-link", "撥打電話");
-    link.setAttribute("href", href);
-    wrapper.append(link);
+  const wrapper = create("div", "contact-block");
+  const actions = create("div", "contact-actions");
+  const phone = parsePhoneContact(contact.phone);
+  if (phone.source) {
+    const details = create("div", "contact-phone-details");
+    const baseLine = create("p");
+    baseLine.append(
+      create("strong", "", phone.extensionDisplay ? "訂房電話：" : "電話："),
+      document.createTextNode(phone.baseDisplay),
+    );
+    details.append(baseLine);
+    if (phone.extensionDisplay) details.append(create("p", "", `請轉 ${phone.extensionDisplay}`));
+    wrapper.append(details);
+
+    if (phone.dialNumber) {
+      const link = create("a", "contact-link", phone.extensionDisplay ? "撥打訂房專線" : "撥打電話");
+      link.setAttribute("href", `tel:${phone.dialNumber}`);
+      actions.append(link);
+    }
   }
   if (contact.email) {
     const link = create("a", "contact-link", "寄送 Email");
     link.setAttribute("href", `mailto:${contact.email}`);
-    wrapper.append(link);
+    actions.append(link);
   }
   const website = safeUrl(contact.website);
   if (website) {
@@ -213,14 +243,15 @@ function createContactLinks(contact) {
     link.setAttribute("href", website);
     link.setAttribute("target", "_blank");
     link.setAttribute("rel", "noopener noreferrer");
-    wrapper.append(link);
+    actions.append(link);
   }
-  if (contact.fax) wrapper.append(create("p", "", `傳真：${contact.fax}`));
+  if (actions.childElementCount) wrapper.append(actions);
+  if (contact.fax) wrapper.append(create("p", "contact-fax", `傳真：${contact.fax}`));
   return wrapper;
 }
 
-function detailSection(title, contents) {
-  const section = create("section", "detail-section");
+function detailSection(title, contents, className = "") {
+  const section = create("section", `detail-section ${className}`.trim());
   section.append(create("h3", "", title));
   contents.filter(Boolean).forEach((content) => section.append(content));
   return section;
@@ -270,6 +301,13 @@ function createDetail(benefit) {
   if (restrictions.length) sections.append(detailSection("限制與不適用條件", restrictions));
   const services = valuesFor(benefit, ["included", "facilitiesAndCharges", "transportation", "additionalCharges", "freeFacilityRules", "serviceRules", "hoteldayCommonPolicies", "insurance", "deductibles", "mileage"]);
   if (services.length) sections.append(detailSection("附加服務", services));
+  if (hasValue(benefit.depositAndCancellation)) {
+    sections.append(detailSection(
+      "訂金與取消規定",
+      [renderValue(benefit.depositAndCancellation, "depositAndCancellation")],
+      "detail-section--important",
+    ));
+  }
   if (hasValue(benefit.contact)) sections.append(detailSection("聯絡方式", [createContactLinks(benefit.contact)]));
   if (hasValue(benefit.validity)) sections.append(detailSection("有效期限", [renderValue(benefit.validity, "validity")]));
   if (benefit.lastVerified) sections.append(detailSection("最後確認日期", [create("p", "", formatDate(benefit.lastVerified))]));
@@ -278,7 +316,7 @@ function createDetail(benefit) {
     "offers", "discounts", "otherRoomDiscounts", "annualRewards", "howToUse", "eligibility", "address", "locations",
     "properties", "diningAndFacilities", "restrictions", "commonRestrictions", "stayRules", "definitions", "included",
     "facilitiesAndCharges", "transportation", "additionalCharges", "freeFacilityRules", "serviceRules", "hoteldayCommonPolicies",
-    "insurance", "deductibles", "mileage",
+    "insurance", "deductibles", "mileage", "depositAndCancellation",
   ].includes(key) && hasValue(value));
   if (remaining.length) sections.append(detailSection("其他資訊", remaining.map(([key, value]) => {
     const wrapper = create("div");
@@ -345,6 +383,9 @@ function renderList() {
 function showList() {
   elements.detailView.hidden = true;
   elements.listView.hidden = false;
+  elements.search.value = state.query;
+  document.title = "員工特約優惠專區";
+  clearCopyStatus();
   renderList();
   requestAnimationFrame(() => window.scrollTo({ top: state.returnScrollY, behavior: "auto" }));
 }
@@ -353,20 +394,88 @@ function showDetail(benefit) {
   elements.listView.hidden = true;
   elements.detailView.hidden = false;
   elements.detailContent.replaceChildren();
+  clearCopyStatus();
   const { fragment, heading } = createDetail(benefit);
   elements.detailContent.append(fragment);
+  document.title = `${benefit.name}｜員工特約優惠專區`;
   window.scrollTo({ top: 0, behavior: "auto" });
   requestAnimationFrame(() => heading.focus());
 }
 
 function route() {
   const slug = decodeURIComponent(location.hash.slice(1));
-  if (!slug) return showList();
+  if (!slug) {
+    showList();
+    state.detailFromList = false;
+    return;
+  }
   const benefit = state.benefits.find((item) => slugFor(item) === slug);
   if (benefit) return showDetail(benefit);
   state.detailFromList = false;
   history.replaceState(null, "", `${location.pathname}${location.search}`);
   showList();
+}
+
+function returnToBenefitList(event) {
+  if (!state.detailFromList) return;
+
+  event.preventDefault();
+  history.replaceState(null, "", `${location.pathname}${location.search}`);
+  showList();
+  state.detailFromList = false;
+}
+
+function clearCopyStatus() {
+  window.clearTimeout(copyStatusTimer);
+  elements.copyStatus.textContent = "";
+}
+
+function setCopyStatus(message) {
+  clearCopyStatus();
+  elements.copyStatus.textContent = message;
+  copyStatusTimer = window.setTimeout(() => {
+    elements.copyStatus.textContent = "";
+  }, 3000);
+}
+
+function fallbackCopyText(text) {
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.left = "-9999px";
+  textarea.style.top = "0";
+  document.body.append(textarea);
+  try {
+    textarea.select();
+    return document.execCommand("copy");
+  } finally {
+    textarea.remove();
+  }
+}
+
+async function copyDetailLink() {
+  const detailUrl = window.location.href;
+  let copied = false;
+
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(detailUrl);
+      copied = true;
+    }
+  } catch {
+    copied = false;
+  }
+
+  if (!copied) {
+    try {
+      copied = fallbackCopyText(detailUrl);
+    } catch {
+      copied = false;
+    }
+  }
+
+  setCopyStatus(copied ? "已複製此優惠連結" : "無法自動複製，請複製瀏覽器網址");
 }
 
 function showAll() {
@@ -400,6 +509,9 @@ elements.search.addEventListener("input", () => {
 });
 elements.showAllTop.addEventListener("click", showAll);
 elements.showAllEmpty.addEventListener("click", showAll);
+elements.back.addEventListener("click", returnToBenefitList);
+elements.backBottom.addEventListener("click", returnToBenefitList);
+elements.copy.addEventListener("click", copyDetailLink);
 elements.print.addEventListener("click", () => window.print());
 window.addEventListener("hashchange", route);
 window.addEventListener("popstate", route);

@@ -8,8 +8,8 @@
     <meta name="referrer" content="no-referrer">
     <title>員工特約優惠專區</title>
     <link rel="icon" href="about:blank">
-    <link rel="stylesheet" href="benefits.css?v=20260714">
-    <script src="benefits.js?v=20260714" defer></script>
+    <link rel="stylesheet" href="benefits.css?v=20260715">
+    <script src="benefits.js?v=20260715" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#benefit-list">跳至優惠清單</a>
@@ -57,7 +57,12 @@
       <section id="detail-view" class="detail-view shell" aria-live="polite" hidden>
         <a id="back-to-list" class="benefits-back-link" href="/staff-benefits/" aria-label="返回員工特約優惠專區">← 返回員工特約優惠專區</a>
         <article id="detail-content" class="detail-content"></article>
-        <button id="print-detail" class="button print-button" type="button">列印／儲存 PDF</button>
+        <nav class="detail-actions" aria-label="優惠資訊操作">
+          <a id="back-to-list-bottom" class="button button--secondary benefits-back-link" href="/staff-benefits/">返回員工特約優惠專區</a>
+          <button id="copy-detail-link" class="button button--secondary" type="button">複製此優惠連結</button>
+          <button id="print-detail" class="button" type="button">列印／儲存 PDF</button>
+        </nav>
+        <p id="copy-link-status" class="copy-link-status" aria-live="polite"></p>
       </section>
     </main>
 
