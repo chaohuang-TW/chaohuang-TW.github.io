@@ -5,13 +5,17 @@ const DEFAULT_FILE = path.resolve("assets/data/staff-benefits/benefits.json");
 const file = path.resolve(process.argv[2] || DEFAULT_FILE);
 const errors = [];
 const warnings = [];
-const today = "2026-07-14";
+const today = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Taipei",
+}).format(new Date());
 
-const approvedSensitiveValues = new Map([
-  ["meta.publicContentPolicy", "已排除 PDF／DOCX、簽呈背景、比價過程、內部人名、簽署資訊、公司統編、簽章及不宜公開資料。"],
-  ["benefits.0.howToUse.1", "入住時出示館方要求之員工身分證明"],
-  ["benefits.2.howToUse.2", "入住時出示員工證或名片及身分證；未提供身分證明須補足房價差額"],
-  ["benefits.7.howToUse.3", "本國籍承租人攜帶有效身分證及駕照正本"],
+const approvedSensitiveTexts = new Set([
+  "已排除 PDF／DOCX、簽呈背景、比價過程、內部人名、簽署資訊、公司統編、簽章及不宜公開資料。",
+  "入住時出示館方要求之員工身分證明",
+  "入住時出示員工證或名片及身分證；未提供身分證明須補足房價差額",
+  "本國籍承租人攜帶有效身分證及駕照正本",
+  "已排除雙方統編、基金承辦人、飯店業務代表、主管姓名、內部分機、個人業務信箱及簽章資料",
+  "user-provided-signed-contract",
 ]);
 
 const sensitivePattern = /internalNotes?|private|confidential|approval|signer|signature|contractFile|attachment|pdf|docx|taxId|統一編號|統編|簽呈|簽署人|承辦人|內部聯絡人|內部電話|比價|採購|核准|簽章|身分證|銀行帳號|私人手機|個人Email|Notion內部網址|file:\/\/|attachment:/i;
@@ -42,7 +46,7 @@ function walk(value, segments = []) {
   if (typeof value === "string") {
     const sensitiveMatch = value.match(sensitivePattern);
     if (sensitiveMatch) {
-      if (approvedSensitiveValues.get(location) === value) {
+      if (approvedSensitiveTexts.has(value)) {
         warnings.push(`已核准敏感字詞例外：${location}`);
       } else {
         issue(`敏感文字：${location}（值未輸出）`);
@@ -180,6 +184,83 @@ const noExpiry = displayBenefits.filter((benefit) => {
 const expiredDisplay = displayBenefits.filter((benefit) => benefit.validity?.to && benefit.validity.to < today);
 if (expiredDisplay.length) warnings.push(`已公開但原始期限已過：${expiredDisplay.map((benefit) => benefit.name).join("、")}`);
 
+const fullonErrorStart = errors.length;
+const fullonMatches = benefits.filter((benefit) =>
+  benefit.id === "fullon-hotel-kaohsiung"
+  || benefit.slug === "fullon-hotel-kaohsiung"
+  || benefit.name === "福容大飯店高雄"
+);
+if (fullonMatches.length !== 1) issue(`福容大飯店高雄筆數應為 1，目前為 ${fullonMatches.length}`);
+if (fullonMatches.length === 1) {
+  const benefit = fullonMatches[0];
+  const serialized = JSON.stringify(benefit);
+  const normalized = serialized.replace(/\s+/g, "");
+  if (benefit.publicationStatus !== "published") issue("福容大飯店高雄 publicationStatus 必須為 published");
+  if (benefit.verificationStatus !== "confirmed") issue("福容大飯店高雄 verificationStatus 必須為 confirmed");
+  if (!String(benefit.featuredText || "").includes("2,700") || !String(benefit.featuredText || "").includes("3,500")) {
+    issue("福容大飯店高雄 featuredText 必須包含 2,700 與 3,500");
+  }
+  if (benefit.validity?.from !== "2026-07-03") issue("福容大飯店高雄開始日期必須為 2026-07-03");
+  if (benefit.validity?.to !== "2026-12-30") issue("福容大飯店高雄結束日期必須為 2026-12-30");
+  if (!Array.isArray(benefit.properties) || benefit.properties.length !== 2) {
+    issue("福容大飯店高雄 properties 必須為 2 組");
+  }
+
+  const businessTravel = benefit.properties?.find((property) => property.name === "差旅住宿專案");
+  const employeeStay = benefit.properties?.find((property) => property.name === "員工福利住宿");
+  if (!businessTravel || !Array.isArray(businessTravel.roomRates) || businessTravel.roomRates.length !== 4) {
+    issue("福容大飯店高雄差旅住宿 roomRates 必須為 4 筆");
+  }
+  if (!employeeStay || !Array.isArray(employeeStay.roomRates) || employeeStay.roomRates.length !== 6) {
+    issue("福容大飯店高雄員工福利住宿 roomRates 必須為 6 筆");
+  }
+  for (const property of [businessTravel, employeeStay].filter(Boolean)) {
+    if (!Array.isArray(property.roomRateColumns)) {
+      issue(`福容大飯店高雄「${property.name}」缺少 roomRateColumns`);
+      continue;
+    }
+    property.roomRates?.forEach((row, rowIndex) => {
+      if (!Array.isArray(row) || row.length !== property.roomRateColumns.length) {
+        issue(`福容大飯店高雄「${property.name}」roomRates.${rowIndex} 欄位數不一致`);
+      }
+    });
+  }
+
+  if (benefit.contact?.phone !== "07-551-1188 轉 7706 或 7708") issue("福容大飯店高雄訂房電話不符");
+  if (benefit.contact?.email !== "rsvn_KH@fullon-hotels.com.tw") issue("福容大飯店高雄訂房 Email 不符");
+
+  const forbiddenSensitiveValues = [
+    "53001555", "14103317", "maxchensales", "ing@acgf", "Max Chen",
+    "陳彥文", "黃益勝", "沈嘉敏", "賴坤成", "07-531-7686",
+  ];
+  for (const forbidden of forbiddenSensitiveValues) {
+    if (serialized.toLocaleLowerCase("zh-TW").includes(forbidden.toLocaleLowerCase("zh-TW"))) {
+      issue(`福容大飯店高雄包含禁止公開資料：${forbidden}`);
+    }
+  }
+
+  if (/國定(?:假日)?(?:及|、|／)?連續假日.*加價1,?000元(?:即可|可).*使用/.test(normalized)) {
+    issue("福容大飯店高雄不得保證國定或連續假日加價 1,000 元即可使用");
+  }
+  const holidayNotice = "國定假日及連續假日的適用方式在契約不同位置記載不一，請訂房時以飯店確認結果為準";
+  if (!Array.isArray(benefit.restrictions) || !benefit.restrictions.includes(holidayNotice)) {
+    issue("福容大飯店高雄 restrictions 缺少國定及連續假日再次確認文字");
+  }
+
+  const publishedRoomRateCells = (benefit.properties || [])
+    .flatMap((property) => property.roomRates || [])
+    .flat()
+    .map(String);
+  if (publishedRoomRateCells.some((cell) => cell.includes("家庭套房"))) {
+    issue("福容大飯店高雄不得公開家庭套房房價");
+  }
+  if (/軟墊.{0,20}1,?200|1,?200.{0,20}軟墊/.test(serialized)) {
+    issue("福容大飯店高雄不得公開 1,200 元軟墊費");
+  }
+}
+const fullonValidationPassed = errors.length === fullonErrorStart;
+
+const liuduiErrorStart = errors.length;
 const liudui = benefits.filter((benefit) => benefit.id === "liudui-hakka-kitchen" || benefit.slug === "liudui-hakka-kitchen" || benefit.name === "六堆伙房");
 if (liudui.length !== 1) issue(`六堆伙房筆數應為 1，目前為 ${liudui.length}`);
 if (liudui.length === 1) {
@@ -193,6 +274,7 @@ if (liudui.length === 1) {
     if (benefit[forbidden] !== undefined) issue(`六堆伙房不得自行補寫欄位：${forbidden}`);
   }
 }
+const liuduiValidationPassed = errors.length === liuduiErrorStart;
 
 if (publicBenefits.some((benefit) => benefit.publicationStatus !== "published" || benefit.verificationStatus !== "confirmed")) {
   issue("公開 filter 包含非 published + confirmed 資料");
@@ -214,6 +296,8 @@ console.log(`重複 id：${duplicateIds.length}`);
 console.log(`重複 slug：${duplicateSlugs.length}`);
 console.log(`缺少發布欄位：${missingPublicationFields.join("、") || "無"}`);
 console.log(`被排除項目：${hiddenBenefits.map((benefit) => `${benefit.name}（${benefit.publicationStatus || "缺少 publicationStatus"}/${benefit.verificationStatus || "缺少 verificationStatus"}）`).join("、") || "無"}`);
+console.log(`福容大飯店高雄驗證：${fullonValidationPassed ? "通過" : "失敗"}`);
+console.log(`六堆伙房驗證：${liuduiValidationPassed ? "通過" : "失敗"}`);
 console.log("敏感字詞已核准例外：");
 [...new Set(warnings)].forEach((warning) => console.log(`- ${warning}`));
 

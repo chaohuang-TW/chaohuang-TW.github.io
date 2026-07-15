@@ -1,14 +1,14 @@
 # 員工特約優惠專區維護說明
 
 1. `assets/data/staff-benefits/benefits.json` 是網站唯一資料母檔。
-2. 現有資料由人工整理，與 Notion 不會同步；六堆伙房資料為使用者明確確認。
+2. 現有資料由人工整理，與 Notion 不會同步；六堆伙房資料為使用者明確確認，福容大飯店高雄資料已依 2026 年雙方簽署契約人工核對。
 3. 更新流程：
    - 從 Notion 下載最新 `benefits.json`。
    - 覆蓋 `assets/data/staff-benefits/benefits.json`。
    - 執行資料驗證。
    - 本機預覽。
    - commit 與 push。
-4. 網站只顯示同時符合 `publicationStatus: published` 與 `verificationStatus: confirmed` 的優惠；目前 10 筆皆經使用者確認公開。
+4. 網站只顯示同時符合 `publicationStatus: published` 與 `verificationStatus: confirmed` 的優惠；目前 11 筆皆經確認公開。
 5. `noindex` 不是權限控管。GitHub Pages 上的頁面與 JSON 都是公開資源。
 6. 不得把 PDF、DOCX、簽呈或內部資料放進 repository。
 7. 本機預覽：在 repository 根目錄執行 `python3 -m http.server 8000`，再開啟 `http://localhost:8000/staff-benefits/`。
