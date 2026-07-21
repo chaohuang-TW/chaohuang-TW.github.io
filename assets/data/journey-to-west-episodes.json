@@ -750,7 +750,7 @@
     "appleEpisodeId": "1000769647450",
     "applePodcastUrl": "https://podcasts.apple.com/tw/podcast/%E8%A5%BF%E9%81%8A%E8%A8%98-%E7%AC%AC58%E5%9B%9E-%E7%9C%9F%E5%81%87%E6%82%9F%E7%A9%BA%E7%B5%82%E6%A5%B5%E5%B0%8D%E6%B1%BA-%E5%85%AD%E9%9A%BB%E8%80%B3%E6%9C%B5%E8%97%8F%E4%B8%8D%E4%BD%8F%E7%A5%95%E5%AF%86/id1829910020?i=1000769647450",
     "status": "published",
-    "featured": true,
+    "featured": false,
     "source": "website-existing"
   },
   {
@@ -801,6 +801,19 @@
     "publishedDate": "",
     "appleEpisodeId": "1000775661813",
     "applePodcastUrl": "https://podcasts.apple.com/tw/podcast/%E8%A5%BF%E9%81%8A%E8%A8%98-%E7%AC%AC62%E5%9B%9E-%E9%87%91%E5%85%89%E5%A1%94%E5%A4%B1%E7%AB%8A%E6%A1%88-%E6%82%9F%E7%A9%BA%E5%8C%96%E8%BA%AB%E5%B0%8F%E5%81%B5%E6%8E%A2/id1829910020?i=1000775661813",
+    "status": "published",
+    "featured": true,
+    "source": "user-provided-apple-podcasts"
+  },
+  {
+    "id": "journey-063",
+    "series": "西遊記",
+    "episodeNumber": 63,
+    "title": "西遊記・第63回",
+    "subtitle": "九頭怪現形！悟空、二郎神聯手奪寶！",
+    "publishedDate": "2026-07-15",
+    "appleEpisodeId": "1000777072533",
+    "applePodcastUrl": "https://podcasts.apple.com/tw/podcast/%E5%8F%94%E5%A7%A8%E8%AC%9B%E5%8F%A4/id1829910020?i=1000777072533",
     "status": "published",
     "featured": true,
     "source": "user-provided-apple-podcasts"
