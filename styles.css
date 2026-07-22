@@ -63,6 +63,65 @@ p {
   gap: clamp(14px, 2vw, 22px);
 }
 
+.home-page .top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.home-page .top-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(1160px, calc(100% - 32px));
+  height: 56px;
+  margin: 0 auto;
+}
+
+.home-page .top-nav-brand {
+  flex: 0 0 auto;
+  color: var(--navy);
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.home-page .top-nav-links {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.home-page .top-nav-links a {
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 700;
+  opacity: 0.85;
+  transition:
+    color 180ms ease,
+    opacity 180ms ease;
+}
+
+.home-page .top-nav-links a:hover,
+.home-page .top-nav-links a:focus-visible {
+  color: var(--teal-dark);
+  opacity: 1;
+}
+
+.home-page .top-nav a:focus-visible {
+  border-radius: 8px;
+  outline: 3px solid rgba(239, 125, 34, 0.75);
+  outline-offset: 4px;
+}
+
+.home-page main section[id] {
+  scroll-margin-top: 72px;
+}
+
 .hero-banner-card,
 .hero-panel,
 .course-feature-card,
@@ -1260,6 +1319,14 @@ h2 {
 }
 
 @media (max-width: 940px) {
+  .home-page .top-nav {
+    display: none;
+  }
+
+  .home-page main section[id] {
+    scroll-margin-top: 16px;
+  }
+
   .hero-banner-card {
     height: clamp(260px, 38vw, 330px);
     aspect-ratio: auto;
