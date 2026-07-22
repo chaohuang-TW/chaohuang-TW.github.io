@@ -785,27 +785,12 @@ h2 {
 
 .learning-games-panel {
   display: grid;
-  grid-template-rows: 0fr;
-  margin-top: 0;
-  opacity: 0;
-  transform: translateY(-8px);
-  transition: grid-template-rows 220ms ease, margin-top 220ms ease, opacity 180ms ease, transform 220ms ease;
-}
-
-.learning-games-panel.is-expanded {
-  grid-template-rows: 1fr;
   margin-top: 18px;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.learning-games-panel[hidden] {
-  display: none;
 }
 
 .learning-games-panel > .course-grid {
   min-height: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .course-grid {

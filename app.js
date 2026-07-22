@@ -4,6 +4,8 @@ async function loadJson(path) {
   return response.json();
 }
 
+let learningCourses = [];
+
 function sendEvent(name, parameters) {
   if (typeof window.gtag === "function") {
     window.gtag("event", name, parameters);
@@ -110,6 +112,10 @@ function renderCourses(courses) {
   const target = document.querySelector("#course-grid");
   const template = document.querySelector("#course-card-template");
 
+  if (!target || !template) return;
+
+  target.replaceChildren();
+
   courses.forEach((course) => {
     const fragment = template.content.cloneNode(true);
     const card = fragment.querySelector(".course-card");
@@ -130,6 +136,22 @@ function renderCourses(courses) {
     });
     target.append(fragment);
   });
+}
+
+function getFeaturedCourses(courses) {
+  return courses
+    .filter((course) => course.featured === true)
+    .sort((current, next) => (
+      (current.homeOrder || 99) - (next.homeOrder || 99)
+    ));
+}
+
+function renderLearningCourses(expanded) {
+  renderCourses(
+    expanded
+      ? learningCourses
+      : getFeaturedCourses(learningCourses)
+  );
 }
 
 function trackAiVideo(video) {
@@ -432,26 +454,18 @@ function bindLabProjectTracking() {
 
 function bindLearningGamesToggle() {
   const button = document.querySelector(".learning-toggle");
-  const panel = document.querySelector("#learning-games-panel");
 
-  if (!button || !panel) return;
+  if (!button) return;
 
   button.addEventListener("click", () => {
+    if (learningCourses.length === 0) return;
+
     const nextExpanded = button.getAttribute("aria-expanded") !== "true";
     button.setAttribute("aria-expanded", String(nextExpanded));
-    button.textContent = nextExpanded ? "收合練習列表" : "展開練習列表";
-
-    if (nextExpanded) {
-      panel.hidden = false;
-      requestAnimationFrame(() => panel.classList.add("is-expanded"));
-    } else {
-      panel.classList.remove("is-expanded");
-      window.setTimeout(() => {
-        if (button.getAttribute("aria-expanded") !== "true") {
-          panel.hidden = true;
-        }
-      }, 230);
-    }
+    renderLearningCourses(nextExpanded);
+    button.textContent = nextExpanded
+      ? "收合練習列表"
+      : `查看全部 ${learningCourses.length} 個練習`;
 
     sendEvent("toggle_learning_games", {
       expanded: nextExpanded
@@ -483,11 +497,34 @@ async function bootstrapPodcastEpisodes() {
 
 async function bootstrapCourses() {
   const target = document.querySelector("#course-grid");
+  const button = document.querySelector(".learning-toggle");
+
   try {
-    const courses = await loadJson("assets/data/courses.json");
-    renderCourses(courses);
+    learningCourses = await loadJson("assets/data/courses.json");
+
+    const featuredCourses = getFeaturedCourses(learningCourses);
+
+    if (featuredCourses.length !== 3) {
+      throw new Error("Featured learning course count must be 3");
+    }
+
+    renderLearningCourses(false);
+
+    if (button) {
+      button.disabled = false;
+      button.textContent = `查看全部 ${learningCourses.length} 個練習`;
+    }
   } catch (_error) {
-    target.innerHTML = '<p class="load-fallback">課程資料載入中發生問題，請重新整理頁面再試一次。</p>';
+    learningCourses = [];
+
+    if (target) {
+      target.innerHTML = '<p class="load-fallback">課程資料載入中發生問題，請重新整理頁面再試一次。</p>';
+    }
+
+    if (button) {
+      button.disabled = true;
+      button.textContent = "練習暫時無法載入";
+    }
   }
 }
 
