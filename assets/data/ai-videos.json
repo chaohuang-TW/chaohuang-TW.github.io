@@ -52,5 +52,15 @@
     "status": "published",
     "featured": false,
     "order": 6
+  },
+  {
+    "id": "M0DP1XxOLho",
+    "title": "Mica AI 短片｜【每個字，都在偷偷看誰？】一句話裡的「他」，到底是誰？人類會從前後文找線索，AI 也是一樣。當 AI 讀到一個字，它不只看前後順序，還會同時觀察句子裡其他的字，判斷哪些線索最重要、哪些關係最值得注意。",
+    "youtubeUrl": "https://youtube.com/shorts/M0DP1XxOLho",
+    "embedUrl": "https://www.youtube.com/embed/M0DP1XxOLho",
+    "format": "short",
+    "status": "published",
+    "featured": false,
+    "order": 7
   }
 ]
