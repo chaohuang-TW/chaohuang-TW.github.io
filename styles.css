@@ -388,6 +388,7 @@ h1 {
   transform: translateX(4px);
 }
 
+.recent-updates-section,
 .course-hub,
 .notes-section,
 .ai-video-section,
@@ -423,6 +424,88 @@ h2 {
   margin-bottom: 0;
   color: var(--muted);
   line-height: 1.85;
+}
+
+.recent-updates-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.recent-update-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 210px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 12px 30px rgba(9, 32, 82, 0.08);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.recent-update-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(15, 140, 140, 0.28);
+  box-shadow: 0 16px 34px rgba(9, 32, 82, 0.12);
+}
+
+.recent-update-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.recent-update-type {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: var(--teal-dark);
+  background: var(--teal-soft);
+}
+
+.recent-update-title {
+  margin: 0 0 10px;
+  color: var(--navy);
+  font-size: 1.15rem;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}
+
+.recent-update-description {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+
+.recent-update-link {
+  margin-top: auto;
+  width: fit-content;
+  color: var(--teal-dark);
+  font-weight: 900;
+}
+
+.recent-update-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.recent-update-link:focus-visible {
+  border-radius: 6px;
+  outline: 3px solid rgba(239, 125, 34, 0.75);
+  outline-offset: 4px;
 }
 
 .course-feature-grid {
@@ -1361,6 +1444,10 @@ h2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .recent-updates-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .course-feature-card .course-cover-wrap,
   .course-feature-card .course-cover {
     min-height: 0;
@@ -1424,6 +1511,10 @@ h2 {
   }
 
   .panel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recent-updates-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1504,7 +1595,8 @@ h2 {
   }
 
   .brand-hub-link,
-  .brand-hub-arrow {
+  .brand-hub-arrow,
+  .recent-update-card {
     transition: none;
   }
 

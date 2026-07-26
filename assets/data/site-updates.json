@@ -1,0 +1,35 @@
+[
+  {
+    "id": "mica-shadow-town",
+    "date": "2026-07-26",
+    "type": "AI Shorts",
+    "title": "影子鎮：AI 如何用對比學習分辨相似與不同？",
+    "description": "同一個小怪物換帽子、換角度、走進霧裡，帶你理解相似靠近、不同拉開的對比學習。",
+    "href": "https://youtube.com/shorts/cuwjzn4pnSA",
+    "cta": "觀看影片",
+    "external": true,
+    "status": "published"
+  },
+  {
+    "id": "mica-ai-context-clues",
+    "date": "2026-07-23",
+    "type": "AI Shorts",
+    "title": "每個字，都在偷偷看誰？AI 如何找出句子裡的重要線索",
+    "description": "從一句話裡的「他」開始，看 AI 如何同時觀察上下文，判斷哪些線索最值得注意。",
+    "href": "https://youtube.com/shorts/M0DP1XxOLho",
+    "cta": "觀看影片",
+    "external": true,
+    "status": "published"
+  },
+  {
+    "id": "journey-to-the-west-63",
+    "date": "2026-07-21",
+    "type": "Podcast",
+    "title": "西遊記・第63回｜九頭怪現形！悟空、二郎神聯手奪寶！",
+    "description": "金光塔佛寶失竊，悟空一路追進碧波潭，九頭怪現出真身，二郎神也趕來助陣。",
+    "href": "https://podcasts.apple.com/tw/podcast/%E5%8F%94%E5%A7%A8%E8%AC%9B%E5%8F%A4/id1829910020?i=1000777072533",
+    "cta": "收聽本集",
+    "external": true,
+    "status": "published"
+  }
+]

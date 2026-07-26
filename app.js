@@ -12,6 +12,95 @@ function sendEvent(name, parameters) {
   }
 }
 
+function formatSiteUpdateDate(value) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+
+  if (!match) return value;
+
+  return `${match[1]}.${match[2]}.${match[3]}`;
+}
+
+function createRecentUpdateCard(update) {
+  const card = document.createElement("article");
+  card.className = "recent-update-card";
+
+  const meta = document.createElement("div");
+  meta.className = "recent-update-meta";
+
+  const date = document.createElement("time");
+  date.dateTime = update.date;
+  date.textContent = formatSiteUpdateDate(update.date);
+
+  const type = document.createElement("span");
+  type.className = "recent-update-type";
+  type.textContent = update.type;
+
+  meta.append(date, type);
+
+  const title = document.createElement("h3");
+  title.className = "recent-update-title";
+  title.textContent = update.title;
+
+  card.append(meta, title);
+
+  if (update.description) {
+    const description = document.createElement("p");
+    description.className = "recent-update-description";
+    description.textContent = update.description;
+    card.append(description);
+  }
+
+  const link = document.createElement("a");
+  link.className = "recent-update-link";
+  link.href = update.href;
+  link.textContent = `${update.cta} →`;
+
+  if (update.external === true) {
+    link.target = "_blank";
+    link.rel = "noopener";
+  }
+
+  link.addEventListener("click", () => {
+    sendEvent("select_site_update", {
+      update_id: update.id,
+      update_type: update.type,
+      update_title: update.title,
+      href: update.href
+    });
+  });
+
+  card.append(link);
+
+  return card;
+}
+
+function renderRecentUpdates(updates) {
+  const target = document.querySelector("#recent-updates-grid");
+
+  if (!target) return;
+
+  const latestUpdates = updates
+    .filter((update) => update.status === "published")
+    .sort((current, next) => (
+      next.date.localeCompare(current.date)
+    ))
+    .slice(0, 3);
+
+  target.replaceChildren();
+
+  if (latestUpdates.length === 0) {
+    const fallback = document.createElement("p");
+    fallback.className = "load-fallback";
+    fallback.textContent = "目前沒有新的公開內容。";
+    target.append(fallback);
+    return;
+  }
+
+  latestUpdates.forEach((update) => {
+    target.append(createRecentUpdateCard(update));
+  });
+}
+
 function trackCourseHub(course, target) {
   sendEvent("select_course_hub", {
     course_id: course.id,
@@ -483,6 +572,20 @@ async function bootstrapCourseHub() {
   }
 }
 
+async function bootstrapRecentUpdates() {
+  const target = document.querySelector("#recent-updates-grid");
+
+  if (!target) return;
+
+  try {
+    const updates = await loadJson("assets/data/site-updates.json");
+    renderRecentUpdates(updates);
+  } catch (_error) {
+    target.innerHTML =
+      '<p class="load-fallback">最近更新資料暫時無法載入。</p>';
+  }
+}
+
 async function bootstrapPodcastEpisodes() {
   const target = document.querySelector("#podcast-episodes");
   if (!target) return;
@@ -538,6 +641,7 @@ bindLabProjectTracking();
 bindLearningGamesToggle();
 bootstrapAiVideos();
 bootstrapAiLabProjects();
+bootstrapRecentUpdates();
 bootstrapCourseHub();
 bootstrapPodcastEpisodes();
 bootstrapCourses();
