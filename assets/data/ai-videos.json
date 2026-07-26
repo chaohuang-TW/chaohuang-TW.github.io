@@ -62,5 +62,15 @@
     "status": "published",
     "featured": false,
     "order": 7
+  },
+  {
+    "id": "cuwjzn4pnSA",
+    "title": "Mica AI 短片｜🌙 影子鎮裡，沒有人有名字。同一個小怪物，換頂帽子、換個角度、走進霧裡，看起來就像完全不同的人。相似的聚在一起，不同的彼此拉開距離。這正是 AI 很重要的一種學習方式：對比學習。",
+    "youtubeUrl": "https://youtube.com/shorts/cuwjzn4pnSA",
+    "embedUrl": "https://www.youtube.com/embed/cuwjzn4pnSA",
+    "format": "short",
+    "status": "published",
+    "featured": false,
+    "order": 8
   }
 ]
