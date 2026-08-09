@@ -39,7 +39,7 @@
     "embedUrl": "https://www.youtube.com/embed/7hhdFb8chck",
     "format": "standard",
     "status": "published",
-    "featured": true,
+    "featured": false,
     "order": 5
   },
   {
@@ -72,5 +72,16 @@
     "status": "published",
     "featured": false,
     "order": 8
+  },
+  {
+    "id": "gzNm6ur6FoY",
+    "title": "Mica AI 專題｜每月報告只更新數據？用 Notebook 快速找異動、核對來源、產生本月草稿",
+    "description": "Mica 與 Notebook AI 助理 Dora 示範先找出月報異動、標示資料來源，再由人員核對並沿用原架構產生本月草稿。",
+    "youtubeUrl": "https://youtu.be/gzNm6ur6FoY",
+    "embedUrl": "https://www.youtube.com/embed/gzNm6ur6FoY",
+    "format": "standard",
+    "status": "published",
+    "featured": true,
+    "order": 9
   }
 ]
