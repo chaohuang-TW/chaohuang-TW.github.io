@@ -1,0 +1,25 @@
+[
+  {
+    "id": "star-planet-tycoon",
+    "eyebrow": "親子 × AI 共創",
+    "title": "星球大富翁：寶石星開墾計畫",
+    "description": "從孩子的一個遊戲想法開始，我和兒子一起討論規則，再與 AI 反覆設計、開發與測試，最後做成真正可以玩的網頁桌遊。",
+    "tags": [
+      "親子共創",
+      "AI 協作",
+      "網頁桌遊"
+    ],
+    "highlights": [
+      "1～2 位真人＋電腦玩家",
+      "24 格環狀棋盤",
+      "20 回合結算",
+      "手機、平板、桌機皆可玩"
+    ],
+    "href": "https://chaohuang-tw.github.io/star-planet-tycoon/",
+    "cta": "開始遊戲",
+    "external": true,
+    "status": "published",
+    "featured": true,
+    "order": 1
+  }
+]

@@ -101,6 +101,113 @@ function renderRecentUpdates(updates) {
   });
 }
 
+function trackInteractiveProject(project) {
+  sendEvent("select_interactive_project", {
+    project_id: project.id,
+    project_title: project.title,
+    href: project.href
+  });
+}
+
+function createFeaturedInteractiveProject(project) {
+  const card = document.createElement("article");
+  card.className = "interactive-feature-card";
+
+  const copy = document.createElement("div");
+  copy.className = "interactive-feature-copy";
+
+  const eyebrow = document.createElement("p");
+  eyebrow.className = "interactive-feature-eyebrow";
+  eyebrow.textContent = project.eyebrow;
+
+  const title = document.createElement("h3");
+  title.className = "interactive-feature-title";
+  title.textContent = project.title;
+
+  const description = document.createElement("p");
+  description.className = "interactive-feature-description";
+  description.textContent = project.description;
+
+  const tags = document.createElement("div");
+  tags.className = "interactive-feature-tags";
+  tags.setAttribute("aria-label", "作品標籤");
+
+  project.tags.forEach((tagText) => {
+    const tag = document.createElement("span");
+    tag.className = "interactive-feature-tag";
+    tag.textContent = tagText;
+    tags.append(tag);
+  });
+
+  const action = document.createElement("a");
+  action.className = "primary-link interactive-feature-action";
+  action.href = project.href;
+  action.textContent = project.cta;
+
+  if (project.external === true) {
+    action.target = "_blank";
+    action.rel = "noopener";
+  }
+
+  action.addEventListener("click", () => {
+    trackInteractiveProject(project);
+  });
+
+  copy.append(
+    eyebrow,
+    title,
+    description,
+    tags,
+    action
+  );
+
+  const facts = document.createElement("ul");
+  facts.className = "interactive-feature-facts";
+  facts.setAttribute("aria-label", "遊戲特色");
+
+  project.highlights.forEach((highlight) => {
+    const item = document.createElement("li");
+    item.className = "interactive-feature-fact";
+    item.textContent = highlight;
+    facts.append(item);
+  });
+
+  card.append(copy, facts);
+
+  return card;
+}
+
+function renderInteractiveProjects(projects) {
+  const target = document.querySelector(
+    "#interactive-feature-project"
+  );
+
+  if (!target) return;
+
+  const featuredProject = projects
+    .filter((project) => (
+      project.status === "published"
+      && project.featured === true
+    ))
+    .sort((current, next) => (
+      next.order - current.order
+    ))[0];
+
+  target.replaceChildren();
+
+  if (!featuredProject) {
+    const fallback = document.createElement("p");
+    fallback.className = "load-fallback";
+    fallback.textContent = "精選互動作品暫時無法顯示。";
+    target.append(fallback);
+    return;
+  }
+
+  target.append(
+    createFeaturedInteractiveProject(featuredProject)
+  );
+}
+
 function trackCourseHub(course, target) {
   sendEvent("select_course_hub", {
     course_id: course.id,
@@ -586,6 +693,27 @@ async function bootstrapRecentUpdates() {
   }
 }
 
+async function bootstrapInteractiveProjects() {
+  const target = document.querySelector(
+    "#interactive-feature-project"
+  );
+
+  if (!target) return;
+
+  try {
+    const projects = await loadJson(
+      "assets/data/interactive-projects.json"
+    );
+
+    renderInteractiveProjects(projects);
+  } catch (_error) {
+    target.innerHTML =
+      '<p class="load-fallback">'
+      + "精選互動作品資料暫時無法載入。"
+      + "</p>";
+  }
+}
+
 async function bootstrapPodcastEpisodes() {
   const target = document.querySelector("#podcast-episodes");
   if (!target) return;
@@ -642,6 +770,7 @@ bindLearningGamesToggle();
 bootstrapAiVideos();
 bootstrapAiLabProjects();
 bootstrapRecentUpdates();
+bootstrapInteractiveProjects();
 bootstrapCourseHub();
 bootstrapPodcastEpisodes();
 bootstrapCourses();
