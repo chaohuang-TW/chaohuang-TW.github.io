@@ -1,5 +1,16 @@
 [
   {
+    "id": "star-planet-tycoon",
+    "date": "2026-08-10",
+    "type": "互動作品",
+    "title": "星球大富翁：我和孩子一起用 AI 做出的網頁桌遊",
+    "description": "從一個遊戲點子出發，一起討論規則，再讓 AI 協助開發、測試與修正，最後做成真正可以玩的親子共創作品。",
+    "href": "https://chaohuang-tw.github.io/star-planet-tycoon/",
+    "cta": "開始遊戲",
+    "external": true,
+    "status": "published"
+  },
+  {
     "id": "mica-feature-gzNm6ur6FoY",
     "date": "2026-08-09",
     "type": "Mica AI 專題",
