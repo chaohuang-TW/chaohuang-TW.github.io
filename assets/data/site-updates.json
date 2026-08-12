@@ -1,5 +1,16 @@
 [
   {
+    "id": "taiwan-agri-king",
+    "date": "2026-08-12",
+    "type": "互動作品",
+    "title": "臺灣農產王：把臺灣農漁產地做成一款環島策略桌遊",
+    "description": "從 22 縣市與 48 項農漁產品出發，設計環島棋盤、電腦玩家與市場機制，把臺灣產地知識做成真正可以玩的作品。",
+    "href": "https://chaohuang-tw.github.io/taiwan-agri-king/game.html",
+    "cta": "開始遊戲",
+    "external": true,
+    "status": "published"
+  },
+  {
     "id": "star-planet-tycoon",
     "date": "2026-08-10",
     "type": "互動作品",
