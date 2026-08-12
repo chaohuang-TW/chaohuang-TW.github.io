@@ -179,33 +179,33 @@ function createFeaturedInteractiveProject(project) {
 
 function renderInteractiveProjects(projects) {
   const target = document.querySelector(
-    "#interactive-feature-project"
+    "#interactive-feature-projects"
   );
 
   if (!target) return;
 
-  const featuredProject = projects
+  const featuredProjects = projects
     .filter((project) => (
       project.status === "published"
       && project.featured === true
     ))
     .sort((current, next) => (
       next.order - current.order
-    ))[0];
+    ));
 
   target.replaceChildren();
 
-  if (!featuredProject) {
+  if (featuredProjects.length === 0) {
     const fallback = document.createElement("p");
     fallback.className = "load-fallback";
-    fallback.textContent = "精選互動作品暫時無法顯示。";
+    fallback.textContent = "代表作品暫時無法顯示。";
     target.append(fallback);
     return;
   }
 
-  target.append(
-    createFeaturedInteractiveProject(featuredProject)
-  );
+  featuredProjects.forEach((project) => {
+    target.append(createFeaturedInteractiveProject(project));
+  });
 }
 
 function trackCourseHub(course, target) {
@@ -695,7 +695,7 @@ async function bootstrapRecentUpdates() {
 
 async function bootstrapInteractiveProjects() {
   const target = document.querySelector(
-    "#interactive-feature-project"
+    "#interactive-feature-projects"
   );
 
   if (!target) return;
@@ -709,7 +709,7 @@ async function bootstrapInteractiveProjects() {
   } catch (_error) {
     target.innerHTML =
       '<p class="load-fallback">'
-      + "精選互動作品資料暫時無法載入。"
+      + "代表作品資料暫時無法載入。"
       + "</p>";
   }
 }

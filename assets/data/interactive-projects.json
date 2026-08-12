@@ -21,5 +21,28 @@
     "status": "published",
     "featured": true,
     "order": 1
+  },
+  {
+    "id": "taiwan-agri-king",
+    "eyebrow": "AI × 臺灣農業 × 遊戲設計",
+    "title": "臺灣農產王：環島產地爭霸戰",
+    "description": "把臺灣農漁產地資料做成一款兒童與家庭網頁桌遊。玩家沿環島棋盤認識產地、採購農漁產品、觀察市場變化，在 12 輪遊戲中累積自己的農產版圖。",
+    "tags": [
+      "臺灣農業",
+      "AI 協作",
+      "策略桌遊"
+    ],
+    "highlights": [
+      "22 縣市 × 48 項農漁產品",
+      "30 格環島棋盤",
+      "1～4 位真人，不足四席由電腦補位",
+      "2,000 局平衡驗證"
+    ],
+    "href": "https://chaohuang-tw.github.io/taiwan-agri-king/game.html",
+    "cta": "開始遊戲",
+    "external": true,
+    "status": "published",
+    "featured": true,
+    "order": 2
   }
 ]
