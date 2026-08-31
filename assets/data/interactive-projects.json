@@ -44,5 +44,28 @@
     "status": "published",
     "featured": true,
     "order": 2
+  },
+  {
+    "id": "number-snake-arena",
+    "eyebrow": "AI × 遊戲設計 × 動作策略",
+    "title": "Number Snake Arena",
+    "description": "控制數字蛇在競技場中移動，吞掉比自己小的數字成長、避開更大的敵人，再透過 Combo、Boost 與關卡挑戰一路反殺 Boss。",
+    "tags": [
+      "AI 協作",
+      "動作策略",
+      "數字成長"
+    ],
+    "highlights": [
+      "小吃大逃的成長規則",
+      "Boss 100／200 關卡",
+      "Combo ＋ Boost 系統",
+      "鍵盤與手機觸控皆可玩"
+    ],
+    "href": "https://chaohuang-tw.github.io/number-snake-arena/",
+    "cta": "開始遊戲",
+    "external": true,
+    "status": "published",
+    "featured": true,
+    "order": 3
   }
 ]
