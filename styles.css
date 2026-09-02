@@ -2323,6 +2323,244 @@ h2 {
   background: transparent;
 }
 
+/* Ensure Shuyi copy keeps the dark-panel contrast over shared paragraph rules. */
+.home-page .podcast-section .shuyi-video-description {
+  color: rgba(250, 248, 244, 0.78);
+}
+
+.home-page .podcast-section .shuyi-video-label {
+  color: #8dd9ce;
+}
+
+/* Shuyi Stories brand feature inside the existing Podcast section. */
+.home-page .shuyi-video-area {
+  grid-column: 1 / -1;
+  padding-top: 30px;
+  border-top: 1px solid rgba(250, 248, 244, 0.2);
+}
+
+.home-page .shuyi-video-area > h3 {
+  margin: 0 0 22px;
+  color: var(--paper-light);
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  letter-spacing: -0.02em;
+}
+
+.home-page .shuyi-video-feature {
+  display: grid;
+  grid-template-columns: minmax(180px, 280px) minmax(0, 1fr);
+  gap: clamp(26px, 4vw, 56px);
+  align-items: center;
+}
+
+.home-page .shuyi-video-media {
+  position: relative;
+  display: block;
+  width: min(100%, 280px);
+  max-height: 520px;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border: 1px solid rgba(250, 248, 244, 0.2);
+  border-radius: var(--radius-md);
+  background: #050d18;
+  box-shadow: var(--shadow-soft);
+}
+
+.home-page .shuyi-video-media:focus-visible {
+  outline: 3px solid #f49a66;
+  outline-offset: 4px;
+}
+
+.home-page .shuyi-video-thumbnail {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 220ms ease;
+}
+
+.home-page .shuyi-video-media:hover .shuyi-video-thumbnail,
+.home-page .shuyi-video-media:focus-visible .shuyi-video-thumbnail {
+  transform: scale(1.015);
+}
+
+.home-page .shuyi-video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  padding-left: 3px;
+  border-radius: 50%;
+  color: var(--navy-deep);
+  background: #f49a66;
+  box-shadow: 0 8px 20px rgba(9, 24, 42, 0.24);
+  font-size: 1.15rem;
+  transform: translate(-50%, -50%);
+}
+
+.home-page .shuyi-video-copy {
+  max-width: 720px;
+}
+
+.home-page .shuyi-video-label {
+  margin-bottom: 14px;
+  color: #8dd9ce;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.home-page .shuyi-video-title {
+  margin: 0 0 18px;
+  color: var(--paper-light);
+  font-size: clamp(1.7rem, 3.3vw, 3.25rem);
+  line-height: 1.14;
+  letter-spacing: -0.045em;
+}
+
+.home-page .shuyi-video-description {
+  max-width: 38rem;
+  margin-bottom: 26px;
+  color: rgba(250, 248, 244, 0.78);
+  font-size: 1.04rem;
+  line-height: 1.85;
+}
+
+.home-page .shuyi-video-link {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  border-bottom: 2px solid #f49a66;
+  color: #f49a66;
+  font-weight: 850;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.home-page .shuyi-video-link:hover,
+.home-page .shuyi-video-link:focus-visible {
+  border-color: var(--paper-light);
+  color: var(--paper-light);
+}
+
+.home-page .podcast-section .podcast-episodes {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.home-page .podcast-section .podcast-episode-card {
+  display: grid;
+  grid-template-columns: minmax(84px, 0.22fr) minmax(0, 1fr) auto;
+  grid-template-rows: auto auto auto;
+  column-gap: 20px;
+  min-height: 0;
+  padding: 18px 0;
+  border: 0;
+  border-top: 1px solid rgba(250, 248, 244, 0.18);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transition: background 180ms ease;
+}
+
+.home-page .podcast-section .podcast-episode-card:last-child {
+  border-bottom: 1px solid rgba(250, 248, 244, 0.18);
+}
+
+.home-page .podcast-section .podcast-episode-card:hover,
+.home-page .podcast-section .podcast-episode-card:focus-visible {
+  border-color: rgba(250, 248, 244, 0.18);
+  background: rgba(250, 248, 244, 0.06);
+  box-shadow: none;
+  transform: none;
+}
+
+.home-page .podcast-section .podcast-episode-card .episode-label {
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  align-self: start;
+  padding: 4px 0;
+}
+
+.home-page .podcast-section .podcast-episode-card .podcast-episode-title,
+.home-page .podcast-section .podcast-episode-card .podcast-episode-subtitle,
+.home-page .podcast-section .podcast-episode-card .podcast-episode-description {
+  grid-column: 2;
+}
+
+.home-page .podcast-section .podcast-episode-card .podcast-episode-title {
+  grid-row: 1;
+}
+
+.home-page .podcast-section .podcast-episode-card .podcast-episode-subtitle {
+  grid-row: 2;
+}
+
+.home-page .podcast-section .podcast-episode-card .podcast-episode-description {
+  grid-row: 3;
+}
+
+.home-page .podcast-section .podcast-episode-card .podcast-episode-cta {
+  grid-column: 3;
+  grid-row: 1 / span 3;
+  align-self: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .home-page .shuyi-video-feature {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .home-page .shuyi-video-media {
+    width: min(72vw, 280px);
+    margin-inline: 0;
+  }
+
+  .home-page .shuyi-video-title {
+    font-size: clamp(1.55rem, 7vw, 2.25rem);
+  }
+
+  .home-page .podcast-section .podcast-episode-card {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+    padding: 18px 0;
+  }
+
+  .home-page .podcast-section .podcast-episode-card .episode-label,
+  .home-page .podcast-section .podcast-episode-card .podcast-episode-title,
+  .home-page .podcast-section .podcast-episode-card .podcast-episode-subtitle,
+  .home-page .podcast-section .podcast-episode-card .podcast-episode-description,
+  .home-page .podcast-section .podcast-episode-card .podcast-episode-cta {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .home-page .podcast-section .podcast-episode-card .episode-label {
+    padding: 0;
+  }
+
+  .home-page .podcast-section .podcast-episode-card .podcast-episode-cta {
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page .shuyi-video-thumbnail,
+  .home-page .shuyi-video-link,
+  .home-page .podcast-section .podcast-episode-card {
+    transition: none;
+  }
+}
+
 /* Chao AI 實作所 Visual v2: editorial portfolio / digital lab */
 .home-page {
   --ink: #17202a;
@@ -3785,4 +4023,15 @@ h2 {
 
 @media (max-width: 900px) {
   .guide-hero > .guide-cover { order: 0; }
+}
+/* Final homepage Podcast row overrides. */
+.home-page .podcast-section .podcast-episode-card {
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page .note-item {
+    transition: none;
+  }
 }

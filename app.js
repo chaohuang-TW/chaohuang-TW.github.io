@@ -468,6 +468,108 @@ async function bootstrapAiVideos() {
   }
 }
 
+function trackShuyiVideo(video) {
+  sendEvent("select_shuyi_video", {
+    video_id: video.id,
+    video_title: video.title,
+    channel: video.channel,
+    href: video.youtubeUrl
+  });
+}
+
+function createShuyiVideoFeature(video) {
+  const article = document.createElement("article");
+  article.className = "shuyi-video-feature";
+
+  const media = document.createElement("a");
+  media.className = "shuyi-video-media";
+  media.href = video.youtubeUrl;
+  media.target = "_blank";
+  media.rel = "noopener";
+
+  const image = document.createElement("img");
+  image.className = "shuyi-video-thumbnail";
+  image.src = video.thumbnail;
+  image.alt = video.thumbnailAlt;
+  image.loading = "lazy";
+  image.decoding = "async";
+
+  const playIndicator = document.createElement("span");
+  playIndicator.className = "shuyi-video-play";
+  playIndicator.setAttribute("aria-hidden", "true");
+  playIndicator.textContent = "▶";
+
+  media.append(image, playIndicator);
+  media.addEventListener("click", () => trackShuyiVideo(video));
+
+  const copy = document.createElement("div");
+  copy.className = "shuyi-video-copy";
+
+  const label = document.createElement("p");
+  label.className = "shuyi-video-label";
+  label.textContent = `${video.channel} · YouTube Shorts`;
+
+  const title = document.createElement("h3");
+  title.className = "shuyi-video-title";
+  title.textContent = video.title;
+
+  const description = document.createElement("p");
+  description.className = "shuyi-video-description";
+  description.textContent = video.description;
+
+  const link = document.createElement("a");
+  link.className = "shuyi-video-link";
+  link.href = video.youtubeUrl;
+  link.target = "_blank";
+  link.rel = "noopener";
+  link.textContent = "觀看影片 →";
+  link.addEventListener("click", () => trackShuyiVideo(video));
+
+  copy.append(label, title, description, link);
+  article.append(media, copy);
+
+  return article;
+}
+
+function renderShuyiVideos(videos) {
+  const target = document.querySelector("#shuyi-video-feature");
+
+  if (!target) return;
+
+  const latestVideo = videos
+    .filter((video) => video.status === "published" && video.featured === true)
+    .sort((current, next) => next.order - current.order)[0];
+
+  target.replaceChildren();
+
+  if (!latestVideo) {
+    const fallback = document.createElement("p");
+    fallback.className = "load-fallback";
+    fallback.textContent = "目前沒有新的叔姨講古動畫。";
+    target.append(fallback);
+    return;
+  }
+
+  target.append(createShuyiVideoFeature(latestVideo));
+}
+
+async function bootstrapShuyiVideos() {
+  const target = document.querySelector("#shuyi-video-feature");
+
+  if (!target) return;
+
+  try {
+    const videos = await loadJson("assets/data/shuyi-videos.json");
+    renderShuyiVideos(videos);
+  } catch (_error) {
+    target.replaceChildren();
+    const fallback = document.createElement("p");
+    fallback.className = "load-fallback";
+    fallback.textContent = "叔姨講古動畫資料暫時無法載入。";
+    target.append(fallback);
+  }
+}
+
 function trackAiLabProject(project) {
   sendEvent("select_ai_lab_project", {
     project_id: project.id,
@@ -791,6 +893,7 @@ bindAiNoteTracking();
 bindLabProjectTracking();
 bindLearningGamesToggle();
 bootstrapAiVideos();
+bootstrapShuyiVideos();
 bootstrapAiLabProjects();
 bootstrapRecentUpdates();
 bootstrapInteractiveProjects();
