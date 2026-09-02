@@ -3,6 +3,8 @@
     "id": "star-planet-tycoon",
     "eyebrow": "親子 × AI 共創",
     "title": "星球大富翁：寶石星開墾計畫",
+    "image": "assets/images/projects/star-planet-tycoon.jpg",
+    "imageAlt": "星球大富翁寶石星開墾計畫遊戲畫面",
     "description": "從孩子的一個遊戲想法開始，我和兒子一起討論規則，再與 AI 反覆設計、開發與測試，最後做成真正可以玩的網頁桌遊。",
     "tags": [
       "親子共創",
@@ -26,6 +28,8 @@
     "id": "taiwan-agri-king",
     "eyebrow": "AI × 臺灣農業 × 遊戲設計",
     "title": "臺灣農產王：環島產地爭霸戰",
+    "image": "assets/images/projects/taiwan-agri-king.jpg",
+    "imageAlt": "臺灣農產王環島產地爭霸戰遊戲畫面",
     "description": "把臺灣農漁產地資料做成一款兒童與家庭網頁桌遊。玩家沿環島棋盤認識產地、採購農漁產品、觀察市場變化，在 12 輪遊戲中累積自己的農產版圖。",
     "tags": [
       "臺灣農業",
@@ -49,6 +53,8 @@
     "id": "number-snake-arena",
     "eyebrow": "AI × 遊戲設計 × 動作策略",
     "title": "Number Snake Arena",
+    "image": "assets/images/projects/number-snake-arena.jpg",
+    "imageAlt": "Number Snake Arena 遊戲畫面，玩家控制數字蛇在競技場中成長並挑戰敵人",
     "description": "控制數字蛇在競技場中移動，吞掉比自己小的數字成長、避開更大的敵人，再透過 Combo、Boost 與關卡挑戰一路反殺 Boss。",
     "tags": [
       "AI 協作",

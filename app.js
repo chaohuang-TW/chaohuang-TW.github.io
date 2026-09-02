@@ -113,6 +113,28 @@ function createFeaturedInteractiveProject(project) {
   const card = document.createElement("article");
   card.className = "interactive-feature-card";
 
+  const media = document.createElement("figure");
+  media.className = "interactive-feature-media";
+  media.setAttribute("aria-label", `${project.title}遊戲畫面`);
+
+  if (project.image) {
+    const image = document.createElement("img");
+    image.className = "interactive-feature-image";
+    image.src = project.image;
+    image.alt = project.imageAlt || `${project.title}遊戲畫面`;
+    image.loading = "lazy";
+    image.decoding = "async";
+    image.width = 1400;
+    image.height = 788;
+    media.append(image);
+  } else {
+    media.hidden = true;
+    card.classList.add("is-text-only");
+  }
+
+  const content = document.createElement("div");
+  content.className = "interactive-feature-content";
+
   const copy = document.createElement("div");
   copy.className = "interactive-feature-copy";
 
@@ -172,7 +194,8 @@ function createFeaturedInteractiveProject(project) {
     facts.append(item);
   });
 
-  card.append(copy, facts);
+  content.append(copy, facts);
+  card.append(media, content);
 
   return card;
 }
