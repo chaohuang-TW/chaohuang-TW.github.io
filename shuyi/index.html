@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0WRZ173JVH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-0WRZ173JVH');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>叔姨講古｜動畫、故事與 Podcast｜Chao AI 實作所</title>
+  <meta name="description" content="叔姨講古收錄動畫、AI 小知識、經典故事與 Podcast，整理最新 YouTube 影音與西遊記內容。">
+  <link rel="canonical" href="https://chaohuang-tw.github.io/shuyi/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:site_name" content="Chao AI 實作所">
+  <meta property="og:title" content="叔姨講古｜動畫、故事與 Podcast｜Chao AI 實作所">
+  <meta property="og:description" content="叔姨講古收錄動畫、AI 小知識、經典故事與 Podcast，整理最新 YouTube 影音與西遊記內容。">
+  <meta property="og:url" content="https://chaohuang-tw.github.io/shuyi/">
+  <meta property="og:image" content="https://chaohuang-tw.github.io/assets/images/shuyi-podcast-cover.jpg">
+  <meta property="og:image:alt" content="叔姨講古 Podcast 節目封面">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="叔姨講古｜動畫、故事與 Podcast｜Chao AI 實作所">
+  <meta name="twitter:description" content="叔姨講古收錄動畫、AI 小知識、經典故事與 Podcast，整理最新 YouTube 影音與西遊記內容。">
+  <meta name="twitter:image" content="https://chaohuang-tw.github.io/assets/images/shuyi-podcast-cover.jpg">
+  <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="shuyi.css">
+</head>
+<body class="shuyi-page">
+  <header class="shuyi-topbar">
+    <div class="shuyi-topbar-inner">
+      <a class="shuyi-brand" href="/">Chao AI 實作所</a>
+      <nav aria-label="叔姨講古內容導覽">
+        <a href="#latest">最新影音</a>
+        <a href="#shorts">YouTube Shorts</a>
+        <a href="#standard">完整影片</a>
+        <a href="#podcast">Podcast</a>
+        <a href="#journey">西遊記全集</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shuyi-shell">
+    <nav class="shuyi-breadcrumb" aria-label="頁面導覽">
+      <a href="/">Chao AI 實作所</a>
+      <span aria-hidden="true">/</span>
+      <span>叔姨講古</span>
+    </nav>
+
+    <section class="shuyi-hero" aria-labelledby="shuyi-title">
+      <div class="shuyi-hero-copy">
+        <p class="shuyi-kicker">STORIES IN MOTION</p>
+        <h1 id="shuyi-title">叔姨講古</h1>
+        <p class="shuyi-lead">用動畫、故事與聲音，把 AI 小知識與經典內容講得更好懂。</p>
+        <p class="shuyi-hero-note">從短片到完整故事，收錄叔姨講古的影音與親子共聽內容，讓每一段想像都有可以回看的入口。</p>
+        <div class="shuyi-actions" aria-label="叔姨講古主要入口">
+          <a class="shuyi-button shuyi-button-primary" href="https://podcasts.apple.com/tw/podcast/%E5%8F%94%E5%A7%A8%E8%AC%9B%E5%8F%A4/id1829910020" target="_blank" rel="noopener" data-track-podcast>前往 Apple Podcasts</a>
+          <a class="shuyi-button shuyi-button-secondary" href="../series/journey-to-the-west/" data-track-series>西遊記故事全集</a>
+          <a class="shuyi-text-link" href="https://www.youtube.com/@叔姨講古" target="_blank" rel="noopener" data-track-channel>官方 YouTube 頻道 →</a>
+        </div>
+      </div>
+      <figure class="shuyi-hero-visual">
+        <img src="../assets/images/shuyi-podcast-cover.jpg" width="1200" height="1200" alt="叔姨講古 Podcast 節目封面" fetchpriority="high">
+        <figcaption>動畫・故事・聲音</figcaption>
+      </figure>
+    </section>
+
+    <section class="shuyi-section" id="latest" aria-labelledby="latest-title">
+      <div class="shuyi-section-head">
+        <div>
+          <p class="shuyi-section-kicker">Latest release</p>
+          <h2 id="latest-title">最新影音</h2>
+        </div>
+        <p>最近發布的叔姨講古影片，從一段故事開始。</p>
+      </div>
+      <div id="shuyi-latest-video" class="shuyi-latest-target" aria-live="polite">
+        <p class="shuyi-loading">正在載入最新影音。</p>
+      </div>
+    </section>
+
+    <section class="shuyi-section" id="shorts" aria-labelledby="shorts-title" hidden>
+      <div class="shuyi-section-head">
+        <div>
+          <p class="shuyi-section-kicker">Short form</p>
+          <h2 id="shorts-title">YouTube Shorts</h2>
+        </div>
+        <p>用幾分鐘，把經典故事和 AI 小知識講得更靠近生活。</p>
+      </div>
+      <div id="shuyi-shorts-grid" class="shuyi-video-grid shuyi-shorts-grid"></div>
+    </section>
+
+    <section class="shuyi-section" id="standard" aria-labelledby="standard-title" hidden>
+      <div class="shuyi-section-head">
+        <div>
+          <p class="shuyi-section-kicker">Long form</p>
+          <h2 id="standard-title">完整影片</h2>
+        </div>
+        <p>把每一回故事完整留下，適合慢慢觀看與親子共聽。</p>
+      </div>
+      <div id="shuyi-standard-grid" class="shuyi-video-grid shuyi-standard-grid"></div>
+    </section>
+
+    <section class="shuyi-section shuyi-podcast-section" id="podcast" aria-labelledby="podcast-title" hidden>
+      <div class="shuyi-section-head">
+        <div>
+          <p class="shuyi-section-kicker">Audio stories</p>
+          <h2 id="podcast-title">Podcast</h2>
+        </div>
+        <a class="shuyi-text-link" href="https://podcasts.apple.com/tw/podcast/%E5%8F%94%E5%A7%A8%E8%AC%9B%E5%8F%A4/id1829910020" target="_blank" rel="noopener" data-track-podcast>在 Apple Podcasts 收聽 →</a>
+      </div>
+      <div id="shuyi-podcast-grid" class="shuyi-podcast-grid"></div>
+    </section>
+
+    <section class="shuyi-journey-entry" id="journey" aria-labelledby="journey-title">
+      <div>
+        <p class="shuyi-section-kicker">Story archive</p>
+        <h2 id="journey-title">西遊記故事全集</h2>
+        <p>從石猴誕生到取經路上的妖怪與法寶，按回目整理叔姨講古的經典文學系列。</p>
+      </div>
+      <a class="shuyi-button shuyi-button-primary" href="../series/journey-to-the-west/" data-track-series>進入全集 →</a>
+    </section>
+  </main>
+
+  <footer class="shuyi-footer">
+    <div class="shuyi-footer-inner">
+      <p>叔姨講古：動畫、故事與 Podcast。</p>
+      <a href="/">回到 Chao AI 實作所</a>
+    </div>
+  </footer>
+
+  <script src="shuyi.js"></script>
+</body>
+</html>

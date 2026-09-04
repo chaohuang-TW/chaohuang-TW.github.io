@@ -479,10 +479,11 @@ function trackShuyiVideo(video) {
 
 function createShuyiVideoFeature(video) {
   const article = document.createElement("article");
-  article.className = "shuyi-video-feature";
+  const format = video.format === "standard" ? "standard" : "short";
+  article.className = `shuyi-video-feature is-${format}`;
 
   const media = document.createElement("a");
-  media.className = "shuyi-video-media";
+  media.className = `shuyi-video-media is-${format}`;
   media.href = video.youtubeUrl;
   media.target = "_blank";
   media.rel = "noopener";
@@ -507,7 +508,7 @@ function createShuyiVideoFeature(video) {
 
   const label = document.createElement("p");
   label.className = "shuyi-video-label";
-  label.textContent = `${video.channel} · YouTube Shorts`;
+  label.textContent = `${video.channel} · ${format === "short" ? "YouTube Short" : "YouTube 影片"}`;
 
   const title = document.createElement("h3");
   title.className = "shuyi-video-title";
@@ -537,8 +538,10 @@ function renderShuyiVideos(videos) {
   if (!target) return;
 
   const latestVideo = videos
-    .filter((video) => video.status === "published" && video.featured === true)
-    .sort((current, next) => next.order - current.order)[0];
+    .filter((video) => video.status === "published")
+    .sort((current, next) => (
+      new Date(next.publishedAt || 0) - new Date(current.publishedAt || 0)
+    ))[0];
 
   target.replaceChildren();
 

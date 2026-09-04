@@ -2327,6 +2327,10 @@ h2 {
   align-items: center;
 }
 
+.home-page .shuyi-video-feature.is-standard {
+  grid-template-columns: minmax(0, 48%) minmax(0, 52%);
+}
+
 .home-page .shuyi-video-media {
   position: relative;
   display: block;
@@ -2338,6 +2342,16 @@ h2 {
   border-radius: var(--radius-md);
   background: #050d18;
   box-shadow: var(--shadow-soft);
+}
+
+.home-page .shuyi-video-media.is-standard {
+  width: 100%;
+  max-width: none;
+  aspect-ratio: 16 / 9;
+}
+
+.home-page .shuyi-video-media.is-short {
+  aspect-ratio: 9 / 16;
 }
 
 .home-page .shuyi-video-media:focus-visible {
@@ -2494,6 +2508,19 @@ h2 {
   .home-page .shuyi-video-media {
     width: min(72vw, 280px);
     margin-inline: 0;
+  }
+
+  .home-page .shuyi-video-feature.is-standard {
+    grid-template-columns: 1fr;
+  }
+
+  .home-page .shuyi-video-media.is-standard {
+    width: 100%;
+    max-width: none;
+  }
+
+  .home-page .shuyi-video-media.is-short {
+    width: min(72vw, 280px);
   }
 
   .home-page .shuyi-video-title {
