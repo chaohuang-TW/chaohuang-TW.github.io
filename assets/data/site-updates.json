@@ -1,5 +1,16 @@
 [
   {
+    "id": "shuyi-hub-2026-09-04",
+    "date": "2026-09-04",
+    "type": "網站更新",
+    "title": "叔姨講古內容館上線｜動畫、影片與 Podcast 集中整理",
+    "description": "新增 4 支 YouTube 影音與最新 Podcast，並建立叔姨講古內容館，之後的新內容都能從同一個入口找到。",
+    "href": "/shuyi/",
+    "cta": "查看內容館",
+    "external": false,
+    "status": "published"
+  },
+  {
     "id": "shuyi-zxU-URYLxmY",
     "date": "2026-09-02",
     "type": "叔姨講古",
