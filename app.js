@@ -274,23 +274,13 @@ function renderCourseHub(courses) {
 
     fragment.querySelector(".course-status").textContent = course.status;
     fragment.querySelector(".course-subtitle").textContent = course.subtitle;
-    fragment.querySelector(".course-feature-title").textContent = course.title;
+    const courseLink = fragment.querySelector(".course-title-link");
+    courseLink.textContent = course.title;
+    courseLink.href = course.href || "#course-hub";
     fragment.querySelector(".course-feature-description").textContent = course.description;
 
-    card.addEventListener("click", () => {
+    courseLink.addEventListener("click", () => {
       trackCourseHub(course, course.href || "#course-hub");
-      if (course.href) {
-        window.location.href = course.href;
-      }
-    });
-    card.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        trackCourseHub(course, course.href || "#course-hub");
-        if (course.href) {
-          window.location.href = course.href;
-        }
-      }
     });
 
     course.prepTools.forEach((tool) => {
@@ -395,7 +385,7 @@ function createAiVideoCard(video, format, showDescription = false) {
   link.target = "_blank";
   link.rel = "noopener";
 
-  const title = document.createElement("span");
+  const title = document.createElement("h4");
   title.textContent = video.title;
 
   const action = document.createElement("span");
@@ -415,14 +405,12 @@ function createAiVideoCard(video, format, showDescription = false) {
   const frame = document.createElement("div");
   frame.className = `ai-video-frame is-${format}`;
 
-  const iframe = document.createElement("iframe");
-  iframe.src = video.embedUrl;
-  iframe.title = video.title;
-  iframe.loading = "lazy";
-  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-  iframe.allowFullscreen = true;
-
-  frame.append(iframe);
+  frame.append(window.ChaoMedia.create({
+    id: video.id,
+    title: video.title,
+    embedUrl: video.embedUrl,
+    onLoad: () => trackAiVideo(video)
+  }));
   card.append(frame);
   return card;
 }
@@ -632,13 +620,12 @@ function renderAiLabProjects(projects) {
       const frame = document.createElement("div");
       frame.className = "lab-video-frame";
 
-      const iframe = document.createElement("iframe");
-      iframe.src = project.embedUrl;
-      iframe.title = project.title;
-      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-      iframe.allowFullscreen = true;
-
-      frame.append(iframe);
+      frame.append(window.ChaoMedia.create({
+        id: project.youtubeId,
+        title: project.title,
+        embedUrl: project.embedUrl,
+        onLoad: () => trackAiLabProject(project)
+      }));
       card.append(copy, frame);
       target.append(card);
     });
@@ -887,6 +874,27 @@ async function bootstrapCourses() {
   }
 }
 
+function bindSectionNavigation() {
+  const links = Array.from(document.querySelectorAll('.top-nav-links a[href^="#"]'));
+  if (!links.length || !("IntersectionObserver" in window)) return;
+  const sections = links.map((link) => document.querySelector(link.hash)).filter(Boolean);
+  const observer = new IntersectionObserver((entries) => {
+    const entering = entries.filter((entry) => entry.isIntersecting)
+      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    if (!entering.length && sections[0].getBoundingClientRect().top <= innerHeight * 0.35) return;
+    const currentHash = entering.length ? `#${entering[0].target.id}` : null;
+    links.forEach((link) => {
+      if (link.hash === currentHash) {
+        link.setAttribute("aria-current", "location");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  }, { rootMargin: "-15% 0px -65% 0px", threshold: 0 });
+  sections.forEach((section) => observer.observe(section));
+}
+
+bindSectionNavigation();
 bindHomeCategoryTracking();
 bindBrandHubTracking();
 bindHomePrimaryActionTracking();

@@ -48,14 +48,12 @@ function createVideoArchiveCard(video, format) {
   const frame = document.createElement("div");
   frame.className = `video-archive-frame is-${format}`;
 
-  const iframe = document.createElement("iframe");
-  iframe.src = video.embedUrl;
-  iframe.title = video.title;
-  iframe.loading = "lazy";
-  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-  iframe.allowFullscreen = true;
-
-  frame.append(iframe);
+  frame.append(window.ChaoMedia.create({
+    id: video.id,
+    title: video.title,
+    embedUrl: video.embedUrl,
+    onLoad: () => trackVideo(video)
+  }));
   card.append(copy, frame);
   return card;
 }

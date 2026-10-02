@@ -33,6 +33,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="home-page">
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
   <header class="top-nav">
     <div class="top-nav-inner">
       <a href="/" class="top-nav-brand">Chao AI 實作所</a>
@@ -50,7 +51,7 @@
       </nav>
     </div>
   </header>
-  <main class="site-shell">
+  <main class="site-shell" id="main-content">
     <section class="hero" aria-labelledby="home-title">
       <div class="hero-banner-card">
         <picture class="hero-banner-picture">
@@ -363,14 +364,22 @@
     <footer class="site-footer">
       <p>Chao AI 實作所：AI 課程、工具筆記、短影音、Podcast 與互動作品的實作入口。</p>
       <p>Interactive design by chaohuang-TW</p>
+      <nav class="site-footer-nav" aria-label="頁尾章節導覽">
+        <a href="#learning-games">互動作品</a>
+        <a href="#ai-notes">工具筆記</a>
+        <a href="#course-hub">AI 課程</a>
+        <a href="#mica-ai-videos">AI 影音</a>
+        <a href="#podcast">叔姨講古</a>
+        <a href="#ai-lab">實驗室</a>
+      </nav>
       <p class="site-footer-privacy">本站不設會員系統，也不要求提供姓名或帳號資料；網站使用基本流量分析，作為內容與使用體驗改善參考。</p>
     </footer>
   </main>
 
   <template id="course-feature-template">
-    <article class="course-feature-card track-course-hub" tabindex="0">
+    <article class="course-feature-card track-course-hub">
       <div class="course-cover-wrap">
-        <img class="course-cover" src="" alt="">
+        <img class="course-cover" src="" alt="" width="1280" height="800" loading="lazy" decoding="async">
         <div class="course-cover-fallback" hidden>課程封面準備中</div>
       </div>
       <div class="course-feature-body">
@@ -378,7 +387,7 @@
           <span class="course-status"></span>
           <span class="course-subtitle"></span>
         </div>
-        <h3 class="course-feature-title"></h3>
+        <h3 class="course-feature-title"><a class="course-title-link" href=""></a></h3>
         <p class="course-feature-description"></p>
         <div class="course-tool-list" aria-label="課前準備工具"></div>
         <div class="course-resource-list" aria-label="課程資源"></div>
@@ -395,6 +404,7 @@
     </a>
   </template>
 
+  <script src="media.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
