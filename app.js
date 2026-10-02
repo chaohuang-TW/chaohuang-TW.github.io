@@ -194,7 +194,12 @@ function createFeaturedInteractiveProject(project) {
     facts.append(item);
   });
 
-  content.append(copy, facts);
+  const details = document.createElement('details');
+  details.className = 'project-details';
+  const summary = document.createElement('summary');
+  summary.textContent = '作品詳情';
+  details.append(summary, facts);
+  content.append(copy, details);
   card.append(media, content);
 
   return card;
@@ -212,9 +217,12 @@ function renderInteractiveProjects(projects) {
       project.status === "published"
       && project.featured === true
     ))
-    .sort((current, next) => (
-      next.order - current.order
-    ));
+    .sort((current, next) => {
+      const lead = target.dataset.leadProject;
+      if (current.id === lead) return -1;
+      if (next.id === lead) return 1;
+      return next.order - current.order;
+    });
 
   target.replaceChildren();
 
@@ -397,8 +405,8 @@ function createAiVideoCard(video, format, showDescription = false) {
   link.target = "_blank";
   link.rel = "noopener";
 
-  const title = document.createElement("h4");
-  title.textContent = video.title;
+  const title = document.createElement("h3");
+  title.textContent = video.title.replace(/^Mica AI 專題[｜|]\s*/, "");
 
   const action = document.createElement("span");
   action.textContent = "在 YouTube 開啟";
@@ -759,7 +767,7 @@ function bindAiNoteTracking() {
   const status = document.createElement("p");
   status.className = "interaction-status";
   status.setAttribute("role", "status");
-  document.querySelector(".note-list")?.after(status);
+  document.querySelector(".note-upcoming, .note-list")?.after(status);
   document.querySelectorAll(".track-ai-note").forEach((element) => {
     element.addEventListener("click", () => {
       sendEvent("select_ai_note", {
@@ -896,7 +904,8 @@ async function bootstrapCourses() {
 function bindSectionNavigation() {
   const links = Array.from(document.querySelectorAll('.top-nav-links a[href^="#"]'));
   if (!links.length || !("IntersectionObserver" in window)) return;
-  const sections = links.map((link) => document.querySelector(link.hash)).filter(Boolean);
+  const sections = links.map((link) => document.querySelector(link.hash)).filter(Boolean)
+    .sort((a, b) => a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1);
   if (!sections.length) return;
   const navigation = document.querySelector(".top-nav");
   const headings = sections.map((section) => section.querySelector("h2") || section);

@@ -44,6 +44,10 @@ window.ChaoMedia = {
         player.setAttribute("aria-busy", "false");
         status.textContent = "載入較久，可使用 YouTube 連結開啟。";
       }, 8000);
+      player.addEventListener("chao:unload", () => {
+        window.clearTimeout(delayed);
+        player.replaceWith(window.ChaoMedia.create({ id, title, embedUrl, onLoad }));
+      }, { once: true });
       iframe.addEventListener("load", () => {
         window.clearTimeout(delayed);
         player.classList.add("is-ready");
