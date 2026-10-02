@@ -7,10 +7,14 @@ window.ChaoMedia = {
     button.setAttribute("aria-label", `載入影片：${title}`);
 
     const image = document.createElement("img");
-    image.src = `https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`;
+    const thumbnailBase = `https://i.ytimg.com/vi/${encodeURIComponent(id)}`;
+    image.src = `${thumbnailBase}/maxresdefault.jpg`;
+    image.addEventListener('error', () => {
+      image.src = `${thumbnailBase}/hqdefault.jpg`;
+    }, { once: true });
     image.alt = `${title}影片縮圖`;
-    image.width = 480;
-    image.height = 360;
+    image.width = 1280;
+    image.height = 720;
     image.loading = "lazy";
     image.decoding = "async";
 

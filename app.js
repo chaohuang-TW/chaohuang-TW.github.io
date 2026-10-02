@@ -936,7 +936,82 @@ function bindSectionNavigation() {
   window.addEventListener("resize", observe, { passive: true });
 }
 
+function bindMobileNavigation() {
+  const button = document.querySelector('.nav-toggle');
+  const navigation = document.querySelector('#home-section-navigation');
+  if (!button || !navigation) return;
+  const mobile = window.matchMedia('(max-width: 820px)');
+  let open = false;
+  const update = () => {
+    button.hidden = !mobile.matches;
+    button.setAttribute('aria-expanded', String(open));
+    button.firstChild.textContent = open ? '關閉導覽' : '導覽';
+    button.querySelector('span').textContent = open ? '−' : '＋';
+    navigation.hidden = mobile.matches && !open;
+  };
+  button.addEventListener('click', () => { open = !open; update(); });
+  navigation.addEventListener('click', (event) => {
+    const link = event.target.closest('a');
+    if (!link || !mobile.matches) return;
+    const section = document.querySelector(link.hash);
+    if (!section) return;
+    event.preventDefault();
+    open = false;
+    update();
+    history.pushState(null, '', link.hash);
+    section.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
+    const heading = section.querySelector('h2');
+    if (heading) {
+      heading.setAttribute('tabindex', '-1');
+      heading.focus({ preventScroll: true });
+    }
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || !open) return;
+    open = false;
+    update();
+    button.focus();
+  });
+  mobile.addEventListener('change', () => { open = false; update(); });
+  update();
+}
+
+function bindEditorialEntrances() {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reduced.matches || !('IntersectionObserver' in window) || !Element.prototype.animate) return;
+  const observed = new WeakSet();
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      observer.unobserve(entry.target);
+      if (!reduced.matches) entry.target.animate(
+        [{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }],
+        { duration: 560, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }
+      );
+    });
+  }, { threshold: 0.08 });
+  const watch = () => document.querySelectorAll('.home-page .section-head, .home-page .interactive-feature-card, .home-page .footer-wordmark').forEach((element) => {
+    if (!observed.has(element)) { observed.add(element); observer.observe(element); }
+  });
+  watch();
+  const projects = document.querySelector('#interactive-feature-projects');
+  if (projects) {
+    const changes = new MutationObserver(() => {
+      if (projects.querySelector('.interactive-feature-card')) { watch(); changes.disconnect(); }
+    });
+    changes.observe(projects, { childList: true });
+  }
+  reduced.addEventListener('change', () => {
+    if (reduced.matches) {
+      observer.disconnect();
+      document.querySelectorAll('.section-head, .interactive-feature-card, .footer-wordmark').forEach(element => element.getAnimations().forEach(animation => animation.cancel()));
+    }
+  });
+}
+
+bindMobileNavigation();
 bindSectionNavigation();
+bindEditorialEntrances();
 bindHomeCategoryTracking();
 bindBrandHubTracking();
 bindHomePrimaryActionTracking();
