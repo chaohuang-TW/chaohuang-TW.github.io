@@ -21,12 +21,39 @@ window.ChaoMedia = {
     button.append(image, label);
 
     button.addEventListener("click", () => {
+      const player = document.createElement("div");
+      player.className = "media-player";
+      player.setAttribute("aria-busy", "true");
+      image.className = "media-player-preview";
+      image.alt = "";
+      const status = document.createElement("span");
+      status.className = "media-player-status";
+      status.setAttribute("role", "status");
+      status.textContent = "正在載入影片…";
       const iframe = document.createElement("iframe");
       iframe.src = embedUrl;
       iframe.title = title;
       iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
       iframe.allowFullscreen = true;
-      button.replaceWith(iframe);
+      const delayed = window.setTimeout(() => {
+        player.classList.add("is-delayed");
+        player.setAttribute("aria-busy", "false");
+        status.textContent = "載入較久，可使用 YouTube 連結開啟。";
+      }, 8000);
+      iframe.addEventListener("load", () => {
+        window.clearTimeout(delayed);
+        player.classList.add("is-ready");
+        player.setAttribute("aria-busy", "false");
+        status.remove();
+      }, { once: true });
+      iframe.addEventListener("error", () => {
+        window.clearTimeout(delayed);
+        player.classList.add("is-delayed");
+        player.setAttribute("aria-busy", "false");
+        status.textContent = "影片暫時無法載入，可使用 YouTube 連結開啟。";
+      }, { once: true });
+      player.append(image, iframe, status);
+      button.replaceWith(player);
       iframe.focus();
       if (onLoad) onLoad();
     }, { once: true });

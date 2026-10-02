@@ -54,7 +54,7 @@ function createVideoArchiveCard(video, format) {
     embedUrl: video.embedUrl,
     onLoad: () => trackVideo(video)
   }));
-  card.append(copy, frame);
+  card.append(frame, copy);
   return card;
 }
 

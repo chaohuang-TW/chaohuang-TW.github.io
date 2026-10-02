@@ -301,17 +301,29 @@ function renderCourseHub(courses) {
       toolList.append(link);
     });
 
+    const resourceStatus = document.createElement("p");
+    resourceStatus.className = "interaction-status";
+    resourceStatus.setAttribute("role", "status");
     course.resources.forEach((resource) => {
-      const button = document.createElement("button");
-      button.className = "course-resource-item";
-      button.type = "button";
-      button.innerHTML = `<span>${resource.label}</span><strong>${resource.status}</strong>`;
-      button.addEventListener("click", (event) => {
+      const available = !["即將開放", "整理中"].includes(resource.status);
+      const control = document.createElement(available ? "a" : "button");
+      control.className = "course-resource-item";
+      if (available) {
+        control.href = course.href;
+        if (course.id === "build-your-ai-website" && resource.target === "學習路徑") control.href += "#learning-path";
+        if (course.id === "build-your-ai-website" && resource.target === "第一課") control.href += "lesson-01/";
+      } else {
+        control.type = "button";
+      }
+      control.innerHTML = `<span>${resource.label}</span><strong>${resource.status}</strong>`;
+      control.addEventListener("click", (event) => {
         event.stopPropagation();
         trackCourseHub(course, resource.target || resource.label);
+        if (!available) resourceStatus.textContent = `${resource.label}：${resource.status}`;
       });
-      resourceList.append(button);
+      resourceList.append(control);
     });
+    resourceList.after(resourceStatus);
 
     target.append(fragment);
   });
@@ -393,13 +405,15 @@ function createAiVideoCard(video, format, showDescription = false) {
 
   link.append(title, action);
   link.addEventListener("click", () => trackAiVideo(video));
-  card.append(link);
+  const copy = document.createElement("div");
+  copy.className = "ai-video-copy";
+  copy.append(link);
 
   if (showDescription && video.description) {
     const description = document.createElement("p");
     description.className = "ai-video-description";
     description.textContent = video.description;
-    card.append(description);
+    copy.append(description);
   }
 
   const frame = document.createElement("div");
@@ -411,7 +425,7 @@ function createAiVideoCard(video, format, showDescription = false) {
     embedUrl: video.embedUrl,
     onLoad: () => trackAiVideo(video)
   }));
-  card.append(frame);
+  card.append(frame, copy);
   return card;
 }
 
@@ -742,12 +756,17 @@ function renderPodcastEpisodes(episodes) {
 }
 
 function bindAiNoteTracking() {
+  const status = document.createElement("p");
+  status.className = "interaction-status";
+  status.setAttribute("role", "status");
+  document.querySelector(".note-list")?.after(status);
   document.querySelectorAll(".track-ai-note").forEach((element) => {
     element.addEventListener("click", () => {
       sendEvent("select_ai_note", {
         note_title: element.dataset.noteTitle,
         status: element.dataset.status
       });
+      if (element.tagName === "BUTTON") status.textContent = `${element.dataset.noteTitle}：${element.dataset.status}`;
     });
   });
 }
@@ -878,11 +897,21 @@ function bindSectionNavigation() {
   const links = Array.from(document.querySelectorAll('.top-nav-links a[href^="#"]'));
   if (!links.length || !("IntersectionObserver" in window)) return;
   const sections = links.map((link) => document.querySelector(link.hash)).filter(Boolean);
-  const observer = new IntersectionObserver((entries) => {
-    const entering = entries.filter((entry) => entry.isIntersecting)
-      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-    if (!entering.length && sections[0].getBoundingClientRect().top <= innerHeight * 0.35) return;
-    const currentHash = entering.length ? `#${entering[0].target.id}` : null;
+  if (!sections.length) return;
+  const navigation = document.querySelector(".top-nav");
+  const headings = sections.map((section) => section.querySelector("h2") || section);
+  let observer;
+  const readingLine = () => {
+    const height = Math.max(2, innerHeight);
+    return Math.min(height, Math.max(navigation.getBoundingClientRect().height + 9, Math.round(height * 0.35)));
+  };
+  const refresh = () => {
+    const stripBottom = readingLine();
+    let currentHash = null;
+    headings.forEach((heading, index) => {
+      if (heading.getBoundingClientRect().top <= stripBottom) currentHash = `#${sections[index].id}`;
+    });
+    if (sections.at(-1).getBoundingClientRect().bottom < stripBottom) currentHash = null;
     links.forEach((link) => {
       if (link.hash === currentHash) {
         link.setAttribute("aria-current", "location");
@@ -890,8 +919,21 @@ function bindSectionNavigation() {
         link.removeAttribute("aria-current");
       }
     });
-  }, { rootMargin: "-15% 0px -65% 0px", threshold: 0 });
-  sections.forEach((section) => observer.observe(section));
+  };
+  const observe = () => {
+    if (observer) observer.disconnect();
+    const height = Math.max(2, innerHeight);
+    const stripBottom = readingLine();
+    const stripTop = stripBottom - 1;
+    observer = new IntersectionObserver(refresh, {
+      rootMargin: `${-stripTop}px 0px ${-(height - stripBottom)}px 0px`, threshold: 0
+    });
+    headings.forEach((heading) => observer.observe(heading));
+    sections.forEach((section) => observer.observe(section));
+    refresh();
+  };
+  observe();
+  window.addEventListener("resize", observe, { passive: true });
 }
 
 bindSectionNavigation();

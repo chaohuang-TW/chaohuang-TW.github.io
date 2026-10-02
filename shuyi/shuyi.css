@@ -58,6 +58,12 @@
   white-space: nowrap;
 }
 
+.shuyi-footer a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
+
 .shuyi-topbar nav a,
 .shuyi-footer a {
   color: var(--shuyi-muted);
@@ -201,6 +207,9 @@
 }
 
 .shuyi-text-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
   color: var(--shuyi-teal);
   font-weight: 850;
   text-underline-offset: 5px;
@@ -373,9 +382,18 @@
   text-underline-offset: 5px;
 }
 
+.shuyi-card-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
+
 .shuyi-card-link:hover,
-.shuyi-card-link:focus-visible {
+.shuyi-card-link:focus-visible,
+.shuyi-footer a:hover,
+.shuyi-footer a:focus-visible {
   text-decoration: underline;
+  text-underline-offset: 5px;
 }
 
 .shuyi-video-grid {
@@ -386,6 +404,27 @@
 .shuyi-shorts-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   max-width: 688px;
+}
+
+@media (min-width: 941px) {
+  .shuyi-section#shorts:not([hidden]) {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);
+    gap: 48px;
+    align-items: start;
+  }
+
+  #shorts .shuyi-section-head {
+    margin-bottom: 0;
+  }
+
+  .shuyi-shorts-grid {
+    max-width: none;
+  }
+
+  .shuyi-shorts-grid .shuyi-video-card.is-short .shuyi-card-media {
+    max-width: none;
+  }
 }
 
 .shuyi-standard-grid {
@@ -627,6 +666,7 @@
   .shuyi-button,
   .shuyi-actions .shuyi-text-link {
     width: 100%;
+    justify-content: center;
     text-align: center;
   }
 

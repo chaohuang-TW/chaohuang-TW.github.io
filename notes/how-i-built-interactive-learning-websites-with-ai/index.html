@@ -50,6 +50,22 @@
       </header>
 
       <div class="ai-note-layout">
+        <aside class="ai-note-toc">
+          <details>
+            <summary>閱讀目錄</summary>
+            <nav aria-label="文章章節">
+              <a href="#note-section-1">一、我不是先想網站，而是先想學習需求</a>
+              <a href="#note-section-2">二、ChatGPT 和 Codex 的工作不同</a>
+              <a href="#note-section-3">三、我的實際製作流程</a>
+              <a href="#note-section-4">四、我怎麼寫 Codex 指令</a>
+              <a href="#note-section-5">五、網站最常出現的問題，不一定是程式錯誤</a>
+              <a href="#note-section-6">六、AI 做得到什麼，也做不到什麼</a>
+              <a href="#note-section-7">七、我從中學到的事</a>
+              <a href="#note-section-8">八、初學者可以怎麼開始</a>
+              <a href="#note-conclusion">結語：AI 降低門檻，但作品仍然來自人的判斷</a>
+            </nav>
+          </details>
+        </aside>
         <div class="ai-note-content">
           <section class="ai-note-section" aria-labelledby="note-section-1">
             <h2 id="note-section-1">一、我不是先想網站，而是先想學習需求</h2>
@@ -236,5 +252,36 @@
 
     <footer class="site-footer"><p>Chao AI 實作所：記錄從想法到作品的 AI 實作過程。</p></footer>
   </main>
+  <script>
+    const toc = document.querySelector('.ai-note-toc');
+    toc.querySelector('details').open = window.matchMedia('(min-width: 1100px)').matches;
+    const tocLinks = Array.from(toc.querySelectorAll('a'));
+    const tocHeadings = tocLinks.map(link => document.querySelector(link.hash));
+    if ('IntersectionObserver' in window) {
+      let tocObserver;
+      const updateToc = () => {
+        let current = null;
+        tocHeadings.forEach((heading, index) => {
+          if (heading.getBoundingClientRect().top <= Math.max(80, innerHeight * 0.2)) current = index;
+        });
+        tocLinks.forEach((link, index) => {
+          if (index === current) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
+      };
+      const observeToc = () => {
+        if (tocObserver) tocObserver.disconnect();
+        const height = Math.max(2, innerHeight);
+        const top = Math.min(40, height - 1);
+        const bottom = Math.min(height, Math.max(top + 1, Math.round(height * 0.2)));
+        tocObserver = new IntersectionObserver(updateToc, {rootMargin: `${-top}px 0px ${-(height - bottom)}px 0px`});
+        tocHeadings.forEach(heading => tocObserver.observe(heading));
+        tocHeadings.forEach(heading => tocObserver.observe(heading.closest('.ai-note-section')));
+        updateToc();
+      };
+      observeToc();
+      window.addEventListener('resize', observeToc, {passive: true});
+    }
+  </script>
 </body>
 </html>
