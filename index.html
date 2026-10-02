@@ -37,9 +37,11 @@
   <header class="top-nav">
     <div class="top-nav-inner">
       <a href="/" class="top-nav-brand">Chao AI 實作所</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="home-section-navigation" hidden>導覽<span aria-hidden="true">＋</span></button>
 
       <nav
         class="top-nav-links"
+        id="home-section-navigation"
         aria-label="頁面章節導覽">
 
         <a href="#learning-games">互動作品</a>
@@ -181,7 +183,7 @@
       aria-labelledby="recent-updates-title">
       <div class="section-head split-head">
         <div>
-          <p class="section-kicker">What's new</p>
+          <p class="section-kicker" data-index="01">What's new</p>
           <h2 id="recent-updates-title">最近更新</h2>
         </div>
         <p class="section-note">最近新增的影片、Podcast 與實作內容。</p>
@@ -197,7 +199,7 @@
     <section class="course-section" id="learning-games" aria-labelledby="learning-games-title">
       <div class="section-head split-head">
         <div>
-          <p class="section-kicker">Interactive works</p>
+          <p class="section-kicker" data-index="02">Interactive works</p>
           <h2 id="learning-games-title">互動作品</h2>
         </div>
         <p class="section-note">AI 共創、親子共學與互動練習作品集</p>
@@ -245,7 +247,7 @@
     <section class="notes-section" id="ai-notes" aria-labelledby="ai-notes-title">
       <div class="section-head split-head">
         <div>
-          <p class="section-kicker">Tool notes</p>
+          <p class="section-kicker" data-index="03">Tool notes</p>
           <h2 id="ai-notes-title">AI 工具應用筆記</h2>
         </div>
         <p class="section-note">整理我如何運用 ChatGPT、Codex 與其他 AI 工具，完成網站、課程、文書與內容作品的實作方法。</p>
@@ -263,7 +265,7 @@
     <section class="course-hub" id="course-hub" aria-labelledby="course-hub-title">
       <div class="section-head split-head">
         <div>
-          <p class="section-kicker">Course center</p>
+          <p class="section-kicker" data-index="04">Course center</p>
           <h2 id="course-hub-title">課程中心</h2>
         </div>
         <p class="section-note">這裡會陸續整理我的 AI 課程、講義、實作資源與課後補充。</p>
@@ -274,7 +276,7 @@
     <section class="ai-video-section" id="mica-ai-videos" aria-labelledby="mica-ai-video-title">
       <div class="section-head split-head">
         <div>
-          <p class="section-kicker">Mica AI video</p>
+          <p class="section-kicker" data-index="05">Mica AI video</p>
           <h2 id="mica-ai-video-title">Mica AI 影音</h2>
         </div>
         <p class="section-note">以 Mica 為主角，整理 AI 小知識 Shorts 與完整專題影片。首頁精選最新內容，完整作品收錄於 Mica AI 影音庫。</p>
@@ -305,7 +307,7 @@
         </a>
         <div class="podcast-main">
           <div>
-            <p class="section-kicker">Stories in motion</p>
+            <p class="section-kicker" data-index="06">Stories in motion</p>
             <h2 id="podcast-title">叔姨講古</h2>
             <p>動畫、睡前故事、經典文學與親子共聽內容，用溫暖的聲音陪孩子進入故事世界。</p>
           </div>
@@ -340,7 +342,7 @@
     <section class="lab-section" id="ai-lab" aria-labelledby="ai-lab-title">
       <article class="feature-panel compact-panel">
         <div>
-          <p class="section-kicker">AI lab</p>
+          <p class="section-kicker" data-index="07">AI lab</p>
           <h2 id="ai-lab-title">AI 實驗室</h2>
           <p>收錄 AI 圖卡、短影音、提示詞、互動工具與實驗作品，整理從想法到成品的實作過程。</p>
         </div>
@@ -362,6 +364,7 @@
     </section>
 
     <footer class="site-footer">
+      <a class="footer-wordmark" href="/" aria-label="Chao AI 實作所首頁"><span>Chao AI</span><span>實作所</span></a>
       <p>Chao AI 實作所：AI 課程、工具筆記、短影音、Podcast 與互動作品的實作入口。</p>
       <p>Interactive design by chaohuang-TW</p>
       <nav class="site-footer-nav" aria-label="頁尾章節導覽">
@@ -373,6 +376,7 @@
         <a href="#ai-lab">實驗室</a>
       </nav>
       <p class="site-footer-privacy">本站不設會員系統，也不要求提供姓名或帳號資料；網站使用基本流量分析，作為內容與使用體驗改善參考。</p>
+      <a class="footer-top" href="#home-title">回到頁首</a>
     </footer>
   </main>
 
