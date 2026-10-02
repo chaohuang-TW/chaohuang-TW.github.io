@@ -1802,7 +1802,9 @@ h2 {
   }
 
   a:hover,
+  a:focus-visible,
   button:hover,
+  button:focus-visible,
   .home-page .brand-hub-copy,
   .home-page .brand-hub-arrow,
   .home-page .shuyi-video-thumbnail {
