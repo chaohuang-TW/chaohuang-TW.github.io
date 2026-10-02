@@ -122,8 +122,8 @@
   align-items: center;
   min-height: 560px;
   padding: clamp(32px, 4vw, 48px);
-  border-radius: var(--radius-lg, 20px);
-  background: var(--shuyi-surface);
+  border-radius: 0;
+  background: var(--shuyi-navy);
 }
 
 .shuyi-kicker,
@@ -139,8 +139,8 @@
 .shuyi-hero h1 {
   max-width: none;
   margin: 0 0 24px;
-  color: var(--shuyi-navy);
-  font-size: clamp(3.5rem, 6.8vw, 6.2rem);
+  color: var(--shuyi-surface);
+  font-size: clamp(3.5rem, 7.6vw, 7rem);
   line-height: 1.08;
   letter-spacing: -0.065em;
 }
@@ -160,6 +160,39 @@
   margin: 24px 0 0;
   color: var(--shuyi-muted);
   line-height: 1.85;
+}
+
+.shuyi-hero .shuyi-lead {
+  color: var(--shuyi-surface);
+}
+
+.shuyi-hero .shuyi-kicker,
+.shuyi-hero .shuyi-hero-note,
+.shuyi-hero .shuyi-hero-visual figcaption {
+  color: #c9d8d4;
+}
+
+.shuyi-hero .shuyi-button-primary {
+  color: var(--shuyi-navy);
+  background: var(--shuyi-paper);
+}
+
+.shuyi-hero .shuyi-button-primary:hover {
+  background: var(--shuyi-surface);
+}
+
+.shuyi-hero .shuyi-button-secondary {
+  color: var(--shuyi-surface);
+  border-color: rgba(255, 253, 250, 0.4);
+  background: transparent;
+}
+
+.shuyi-hero .shuyi-text-link {
+  color: var(--shuyi-surface);
+}
+
+.shuyi-hero a:focus-visible {
+  outline-color: var(--shuyi-surface);
 }
 
 .shuyi-actions {
