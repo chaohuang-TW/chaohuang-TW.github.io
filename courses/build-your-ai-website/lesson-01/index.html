@@ -13,11 +13,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>第一課：認識 ChatGPT 與 Codex，完成安裝｜Chao AI 實作所</title>
   <meta name="description" content="認識 ChatGPT 與 Codex 的角色、兩者如何合作，並完成 ChatGPT 桌面版或 Codex CLI 的基本安裝。">
+  <link rel="canonical" href="https://chaohuang-tw.github.io/courses/build-your-ai-website/lesson-01/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="第一課：認識 ChatGPT 與 Codex，完成安裝">
   <meta property="og:description" content="認識 ChatGPT 與 Codex 的角色、合作方式與基本安裝。">
   <meta property="og:url" content="https://chaohuang-tw.github.io/courses/build-your-ai-website/lesson-01/">
-  <meta property="og:image" content="https://chaohuang-tw.github.io/assets/course/build-your-ai-website/course-cover.png">
+  <meta property="og:image" content="https://chaohuang-tw.github.io/assets/course/build-your-ai-website/course-cover.png"><meta property="og:image:alt" content="用 AI 建立你的第一個官網：ChatGPT、Codex與GitHub Pages實作課程封面">
   <link rel="icon" href="../../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../../styles.css">
 </head>
@@ -69,7 +70,7 @@
         <p class="section-kicker">Workflow</p><h2 id="workflow-title">ChatGPT 與 Codex 的關係</h2>
         <ol class="ai-workflow" aria-label="網站建置合作流程"><li><span>01</span>你的目標</li><li><span>02</span>ChatGPT 整理需求</li><li><span>03</span>Codex 修改專案</li><li><span>04</span>GitHub 保存版本</li><li><span>05</span>GitHub Pages 發布網站</li></ol>
         <p class="workflow-keyline">ChatGPT 幫你想清楚，Codex 幫你做出來。</p>
-        <div class="guide-table-wrap"><table class="role-table"><thead><tr><th>工具</th><th>角色</th><th>任務</th></tr></thead><tbody>
+        <div class="guide-table-wrap" tabindex="0" role="region" aria-label="工具角色比較表"><table class="role-table"><thead><tr><th>工具</th><th>角色</th><th>任務</th></tr></thead><tbody>
           <tr><th>ChatGPT</th><td>企劃師／顧問</td><td>討論、規劃、解釋、整理需求</td></tr><tr><th>Codex</th><td>AI 工程師</td><td>讀取專案、修改檔案、執行檢查</td></tr><tr><th>GitHub</th><td>專案倉庫與版本紀錄</td><td>保存網站檔案與每次修改</td></tr><tr><th>GitHub Pages</th><td>公開展示空間</td><td>將 repository 的網站內容發布成公開網址</td></tr>
         </tbody></table></div>
       </section>
@@ -82,7 +83,7 @@
             <div class="guide-actions"><a class="primary-link install-track-link" href="https://chatgpt.com/download/" target="_blank" rel="noopener" data-tool-name="ChatGPT desktop" data-destination="https://chatgpt.com/download/">下載 ChatGPT</a><a class="secondary-link install-track-link" href="https://learn.chatgpt.com/docs/app" target="_blank" rel="noopener" data-tool-name="ChatGPT desktop docs" data-destination="https://learn.chatgpt.com/docs/app">查看官方桌面版說明</a></div>
           </article>
           <article class="install-option-card"><span class="option-label">終端機使用者</span><h3>Codex CLI</h3><p>適合已經習慣使用終端機、需要在本機 repository 中直接工作的使用者。</p>
-            <p class="code-label">macOS／Linux 官方安裝指令</p><pre><code>curl -fsSL https://chatgpt.com/codex/install.sh | sh</code></pre><p class="code-label">安裝後執行</p><pre><code>codex</code></pre>
+            <p class="code-label">macOS／Linux 官方安裝指令</p><pre tabindex="0"><code>curl -fsSL https://chatgpt.com/codex/install.sh | sh</code></pre><p class="code-label">安裝後執行</p><pre tabindex="0"><code>codex</code></pre>
             <p>第一次執行時，依畫面選擇使用 ChatGPT 帳號或其他可用方式登入。</p>
             <a class="primary-link install-track-link" href="https://learn.chatgpt.com/docs/codex/cli" target="_blank" rel="noopener" data-tool-name="Codex CLI docs" data-destination="https://learn.chatgpt.com/docs/codex/cli">查看 Codex CLI 官方說明</a>
             <aside class="lesson-note">Windows 使用者若不熟悉終端機，建議先採用 ChatGPT 桌面版。需要 CLI 時，請依 Codex CLI 官方文件目前提供的 Windows 安裝方式操作，不要在頁面自行杜撰或寫死未經確認的 Windows 指令。</aside>
@@ -94,7 +95,7 @@
 
       <section class="lesson-section" aria-labelledby="first-task-title">
         <p class="section-kicker">First task</p><h2 id="first-task-title">先閱讀，不修改</h2><p>第一次任務不要急著請 Codex 做網站。先確認它看得到正確資料夾，也能清楚回報內容。</p>
-        <div class="prompt-panel"><pre id="readonly-prompt"><code>請先閱讀目前資料夾。
+        <div class="prompt-panel"><pre id="readonly-prompt" tabindex="0"><code>請先閱讀目前資料夾。
 
 告訴我：
 
