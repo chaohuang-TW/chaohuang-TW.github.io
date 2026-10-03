@@ -19,17 +19,18 @@
   <meta property="og:url" content="https://chaohuang-tw.github.io/">
   <meta property="og:title" content="Chao AI 實作所｜AI 課程、筆記與互動作品">
   <meta property="og:description" content="整理我如何用 AI 做課程、簡報、文書、網站、短影音與親子學習作品。">
-  <meta property="og:image" content="https://chaohuang-tw.github.io/assets/images/chao-creative-machine.jpg">
-  <meta property="og:image:secure_url" content="https://chaohuang-tw.github.io/assets/images/chao-creative-machine.jpg">
-  <meta property="og:image:alt" content="以建築框架、遊戲軌道、影像與聲音模組組合而成的創作機器">
+  <meta property="og:image" content="https://chaohuang-tw.github.io/assets/images/projects/taiwan-agri-king.jpg">
+  <meta property="og:image:secure_url" content="https://chaohuang-tw.github.io/assets/images/projects/taiwan-agri-king.jpg">
+  <meta property="og:image:alt" content="臺灣農產王：環島產地爭霸戰實際遊戲畫面">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chao AI 實作所｜AI 課程、筆記與互動作品">
   <meta name="twitter:description" content="整理我如何用 AI 做課程、網站、影音與互動學習作品。">
-  <meta name="twitter:image" content="https://chaohuang-tw.github.io/assets/images/chao-creative-machine.jpg">
-  <meta name="twitter:image:alt" content="以建築框架、遊戲軌道、影像與聲音模組組合而成的創作機器">
+  <meta name="twitter:image" content="https://chaohuang-tw.github.io/assets/images/projects/taiwan-agri-king.jpg">
+  <meta name="twitter:image:alt" content="臺灣農產王：環島產地爭霸戰實際遊戲畫面">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <script src="theme.js"></script>
   <link rel="stylesheet" href="studio.css">
+  <link rel="stylesheet" href="home-workbench.css">
 </head>
 <body class="home-page">
   <a class="skip-link" href="#main-content">跳到主要內容</a>
@@ -41,7 +42,6 @@
       </nav>
       <div class="nav-utilities">
         <button class="theme-toggle" type="button" aria-label="切換顯示模式">明暗</button>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="home-section-navigation" hidden>導覽<span aria-hidden="true">＋</span></button>
       </div>
     </div>
   </header>
@@ -49,16 +49,53 @@
   <main id="main-content" class="site-shell">
     <section class="studio-hero" aria-labelledby="home-title">
       <div class="hero-copy">
+        <div class="hero-eyebrow">CHAO’S WORKBENCH</div>
         <h1 id="home-title">把想法，<br><span>做成作品。</span></h1>
         <p>和 AI 一起，把好奇心變成<br class="desktop-break">可以玩、可以學、可以分享的事物。</p>
         <div class="hero-primary-actions" aria-label="首頁精選入口">
           <a class="primary-link" href="#learning-games">探索互動作品 <span aria-hidden="true">↗</span></a>
           <a class="text-link track-home-primary-action" href="/courses/build-your-ai-website/" data-action-name="開始學習 AI 建站">開始學習 AI 建站 <span aria-hidden="true">→</span></a>
         </div>
+        <p class="hero-footnote">從一個念頭，到真正可以打開的作品。</p>
       </div>
-      <figure class="hero-art">
-        <img src="assets/images/chao-creative-machine.jpg" width="1511" height="1041" fetchpriority="high" decoding="async" alt="銀色軌道穿過建築框架，串連影像、網頁與聲音模組，象徵想法被組裝成實際作品">
-      </figure>
+      <section class="hero-workbench" aria-labelledby="workbench-title">
+        <header class="workbench-heading">
+          <h2 id="workbench-title">Chao 的實作展示台</h2>
+          <span class="workbench-motto" aria-hidden="true">PLAY / LEARN / MAKE</span>
+          <p class="workbench-intro">先玩一個作品，再試著做出自己的。</p>
+        </header>
+        <div class="workbench-projects">
+          <a class="workbench-card workbench-featured" href="https://chaohuang-tw.github.io/taiwan-agri-king/game.html" aria-label="開始玩臺灣農產王：環島產地爭霸戰">
+            <div class="workbench-browser" aria-hidden="true"><span class="browser-dots"><i></i><i></i><i></i></span><span class="browser-address">chaohuang-tw.github.io</span><span class="mobile-feature-label">01 / FEATURED PROJECT</span></div>
+            <img src="assets/images/projects/taiwan-agri-king.jpg" width="1400" height="788" fetchpriority="high" decoding="async" alt="臺灣農產王實際遊戲畫面：臺灣地圖與環島棋盤、玩家農產與市場資訊">
+            <div class="workbench-card-copy">
+              <h3>臺灣農產王</h3>
+              <p class="featured-desktop-description">AI × 臺灣農業 × 遊戲設計</p>
+              <p class="featured-mobile-description">環島產地爭霸戰</p>
+              <span class="workbench-card-arrow" aria-hidden="true">↗</span>
+            </div>
+          </a>
+          <a class="workbench-card workbench-play" href="https://chaohuang-tw.github.io/number-snake-arena/" aria-label="開始玩 Number Snake Arena">
+            <img src="assets/images/projects/number-snake-arena.jpg" width="1400" height="788" decoding="async" alt="Number Snake Arena 實際遊戲畫面：數字蛇在深色競技場中成長">
+            <div class="workbench-card-copy">
+              <span class="workbench-card-category">02 / PLAY</span>
+              <h3>Number Snake Arena</h3>
+              <p>數字成長 × 動作策略</p>
+              <span class="workbench-card-arrow" aria-hidden="true">↗</span>
+            </div>
+          </a>
+          <a class="workbench-card workbench-learn track-home-primary-action" href="/courses/build-your-ai-website/" data-action-name="展示台 AI 建站課程" aria-label="學習用 AI 建立你的第一個官網">
+            <img src="assets/course/build-your-ai-website/course-card-cover.webp" width="1448" height="1086" decoding="async" alt="用 AI 建立你的第一個官網課程封面，展示 ChatGPT、Codex 與 GitHub Pages 實作工具">
+            <div class="workbench-card-copy">
+              <span class="workbench-card-category">03 / LEARN</span>
+              <h3><span class="course-desktop-title">做出你的第一個網站</span><span class="course-mobile-title">用 AI 建立你的第一個官網</span></h3>
+              <p><span class="course-desktop-title">AI 建站課程</span><span class="course-mobile-title">零基礎，也能開始實作</span></p>
+              <span class="workbench-card-arrow" aria-hidden="true">↗</span>
+            </div>
+          </a>
+        </div>
+        <p class="workbench-status">真實作品・持續實作中</p>
+      </section>
     </section>
 
     <nav class="brand-hub-nav" aria-label="從這裡開始探索">
