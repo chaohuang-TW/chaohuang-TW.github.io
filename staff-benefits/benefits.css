@@ -108,7 +108,7 @@ a { color: var(--teal-dark); }
 .detail-hero { padding: 32px; background: linear-gradient(135deg, var(--navy-deep), #214d45); color: #f7fbfc; }
 .detail-hero__category { margin: 0 0 8px; color: #d6c18f; font-weight: 850; }
 .detail-hero h2 { margin: 0; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; }
-.detail-hero h2:focus { outline: 0; }
+.detail-hero h2:focus { outline: 3px solid var(--gold); outline-offset: 6px; }
 .detail-hero__offer { max-width: 720px; margin: 16px 0 0; font-size: 1.18rem; font-weight: 750; }
 .detail-hero__expiry { margin: 10px 0 0; color: #d3e0dc; }
 .detail-hero__notice { max-width: 720px; margin: 16px 0 0; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.2); color: #d8e6ea; }

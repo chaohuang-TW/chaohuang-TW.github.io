@@ -1,5 +1,7 @@
 (() => {
   const STORAGE_KEY = "chao-ai-guide-lesson-01";
+  const courseProgress = window.ChaoCourseProgress;
+  const main = document.querySelector("main[data-lesson-number]");
   const track = (name, parameters) => {
     if (typeof window.gtag === "function") window.gtag("event", name, parameters);
   };
@@ -8,7 +10,7 @@
     if (node) node.textContent = message;
   };
   const readProgress = () => {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch { return {}; }
+    return courseProgress.read(STORAGE_KEY);
   };
   const saveProgress = (progress) => {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)); } catch { /* Interaction still works in memory. */ }
@@ -58,23 +60,26 @@
 
   const checkboxes = [...document.querySelectorAll("[data-check-item]")];
   let progress = readProgress();
+  const renderComplete = () => {
+    const complete = courseProgress.isComplete("01", progress);
+    if (main) main.dataset.lessonComplete = String(complete);
+    setMessage("checklist-status", complete ? "本課已完成" : "尚未完成本課");
+  };
   checkboxes.forEach((checkbox) => {
-    checkbox.checked = Boolean(progress[checkbox.dataset.checkItem]);
+    checkbox.checked = courseProgress.isChecked(progress, checkbox.dataset.checkItem);
     checkbox.addEventListener("change", () => {
       progress[checkbox.dataset.checkItem] = checkbox.checked;
       saveProgress(progress);
-      track("complete_course_check_item", {
-        lesson_number: "01",
-        item_name: checkbox.dataset.checkItem,
-        checked: checkbox.checked
-      });
+      renderComplete();
     });
   });
 
   document.querySelector(".clear-lesson-progress")?.addEventListener("click", () => {
-    progress = {};
+    progress = Object.create(null);
     checkboxes.forEach((checkbox) => { checkbox.checked = false; });
     try { localStorage.removeItem(STORAGE_KEY); } catch { /* Nothing else is required. */ }
+    renderComplete();
     setMessage("checklist-status", "本課勾選紀錄已清除");
   });
+  renderComplete();
 })();

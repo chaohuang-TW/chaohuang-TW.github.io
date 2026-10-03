@@ -15,23 +15,26 @@
     link.rel = "noopener";
   });
 
+  const progress = window.ChaoCourseProgress;
+  const cards = [...document.querySelectorAll(".lesson-path-card[data-lesson-number]")];
+  const total = cards.length;
   let completed = 0;
-  document.querySelectorAll(".lesson-path-card[data-lesson-number]").forEach((card) => {
-    try {
-      const data = JSON.parse(localStorage.getItem(`chao-ai-guide-lesson-${card.dataset.lessonNumber}`) || "{}");
-      const values = Object.values(data);
-      if (values.length && values.every((value) => value === true)) {
-        completed += 1;
-        card.classList.add("is-complete");
-        const status = card.querySelector(".lesson-status");
-        if (status) status.textContent = "已完成";
-      }
-    } catch { /* A damaged or blocked localStorage starts at zero. */ }
+  cards.forEach((card) => {
+    const data = progress.read(`chao-ai-guide-lesson-${card.dataset.lessonNumber}`);
+    if (progress.isComplete(card.dataset.lessonNumber, data)) {
+      completed += 1;
+      card.classList.add("is-complete");
+      const status = card.querySelector(".lesson-status");
+      if (status) status.textContent = "已完成";
+    }
   });
   const progressText = document.querySelector("#course-progress-text");
   const progressBar = document.querySelector(".course-progress-bar");
   const progressFill = document.querySelector("#course-progress-fill");
-  if (progressText) progressText.textContent = `已完成 ${completed} / 8 課`;
-  if (progressBar) progressBar.setAttribute("aria-valuenow", String(completed));
-  if (progressFill) progressFill.style.width = `${completed / 8 * 100}%`;
+  if (progressText) progressText.textContent = `已完成 ${completed} / ${total} 課`;
+  if (progressBar) {
+    progressBar.setAttribute("aria-valuenow", String(completed));
+    progressBar.setAttribute("aria-valuemax", String(total));
+  }
+  if (progressFill) progressFill.style.width = `${total ? completed / total * 100 : 0}%`;
 })();

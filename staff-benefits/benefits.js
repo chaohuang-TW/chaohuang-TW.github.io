@@ -33,6 +33,7 @@ const state = {
   query: "",
   detailFromList: false,
   returnScrollY: 0,
+  returnBenefitSlug: null,
 };
 
 const elements = {
@@ -328,7 +329,12 @@ function createDetail(benefit) {
 }
 
 function createCategoryButtons() {
-  elements.categories.replaceChildren();
+  if (elements.categories.childElementCount) {
+    for (const button of elements.categories.querySelectorAll("button")) {
+      button.setAttribute("aria-pressed", String(state.activeCategory === button.dataset.category));
+    }
+    return;
+  }
   const counts = new Map(CATEGORY_ORDER.map((category) => [category, state.benefits.filter((item) => item.category === category).length]));
   for (const category of CATEGORY_ORDER) {
     const count = counts.get(category);
@@ -357,6 +363,7 @@ function filteredBenefits() {
 
 function createBenefitCard(benefit) {
   const card = create("a", "benefit-card");
+  card.dataset.benefitSlug = slugFor(benefit);
   card.setAttribute("href", `#${encodeURIComponent(slugFor(benefit))}`);
   card.append(create("p", "benefit-card__category", benefit.category));
   card.append(create("h3", "", benefit.name));
@@ -364,9 +371,11 @@ function createBenefitCard(benefit) {
   const expiry = expiryText(benefit);
   if (expiry) card.append(create("p", "benefit-card__expiry", expiry));
   card.append(create("span", "benefit-card__link", "查看完整優惠"));
-  card.addEventListener("click", () => {
+  card.addEventListener("click", (event) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     state.detailFromList = true;
     state.returnScrollY = window.scrollY;
+    state.returnBenefitSlug = slugFor(benefit);
   });
   return card;
 }
@@ -381,13 +390,30 @@ function renderList() {
 }
 
 function showList() {
+  const returningFromDetail = !elements.detailView.hidden;
+  const returnScrollY = state.detailFromList ? state.returnScrollY : 0;
+  const returnBenefitSlug = state.returnBenefitSlug;
   elements.detailView.hidden = true;
   elements.listView.hidden = false;
   elements.search.value = state.query;
   document.title = "員工特約優惠專區";
   clearCopyStatus();
   renderList();
-  requestAnimationFrame(() => window.scrollTo({ top: state.returnScrollY, behavior: "auto" }));
+  if (returningFromDetail) {
+    requestAnimationFrame(() => {
+      if (elements.listView.hidden) return;
+      const originCard = Array.from(elements.list.children).find((card) => card.dataset.benefitSlug === returnBenefitSlug);
+      const focusTarget = originCard || document.querySelector("#benefits-title");
+      focusTarget.focus({ preventScroll: true });
+      window.scrollTo({ top: returnScrollY, behavior: "instant" });
+      if (originCard) {
+        const rect = originCard.getBoundingClientRect();
+        if (rect.bottom <= 0 || rect.top >= window.innerHeight) {
+          originCard.scrollIntoView({ block: "nearest", behavior: "instant" });
+        }
+      }
+    });
+  }
 }
 
 function showDetail(benefit) {
@@ -398,8 +424,10 @@ function showDetail(benefit) {
   const { fragment, heading } = createDetail(benefit);
   elements.detailContent.append(fragment);
   document.title = `${benefit.name}｜員工特約優惠專區`;
-  window.scrollTo({ top: 0, behavior: "auto" });
-  requestAnimationFrame(() => heading.focus());
+  window.scrollTo({ top: 0, behavior: "instant" });
+  requestAnimationFrame(() => {
+    if (!elements.detailView.hidden && heading.isConnected) heading.focus({ preventScroll: true });
+  });
 }
 
 function route() {
@@ -417,8 +445,6 @@ function route() {
 }
 
 function returnToBenefitList(event) {
-  if (!state.detailFromList) return;
-
   event.preventDefault();
   history.replaceState(null, "", `${location.pathname}${location.search}`);
   showList();

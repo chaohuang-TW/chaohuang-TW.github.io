@@ -62,6 +62,7 @@ function createEpisodeCard(episode) {
   link.target = "_blank";
   link.rel = "noopener";
   link.textContent = "收聽本集";
+  link.setAttribute("aria-label", `收聽本集：第 ${episode.episodeNumber} 回，${episode.subtitle}`);
   link.addEventListener("click", () => {
     sendJourneyEvent("select_journey_episode", {
       episode_id: episode.id,
@@ -75,12 +76,12 @@ function createEpisodeCard(episode) {
   return card;
 }
 
-function renderEpisodes() {
+function renderEpisodes({ appendFrom = 0, focusNew = false } = {}) {
   const matchingEpisodes = getVisibleEpisodes();
   const episodesToRender = matchingEpisodes.slice(0, visibleCount);
   const query = searchInput.value.trim();
 
-  episodeGrid.replaceChildren();
+  if (appendFrom === 0) episodeGrid.replaceChildren();
   episodeCount.textContent = query
     ? `找到 ${matchingEpisodes.length} 集，目前可收聽共 ${publishedEpisodes.length} 集`
     : `目前可收聽共 ${publishedEpisodes.length} 集`;
@@ -91,10 +92,14 @@ function renderEpisodes() {
     emptyMessage.textContent = "找不到符合條件的集數，請換一個關鍵字。";
     episodeGrid.append(emptyMessage);
   } else {
-    episodesToRender.forEach((episode) => episodeGrid.append(createEpisodeCard(episode)));
+    episodesToRender.slice(appendFrom).forEach((episode) => episodeGrid.append(createEpisodeCard(episode)));
   }
 
   loadMoreButton.hidden = visibleCount >= matchingEpisodes.length;
+  if (focusNew) {
+    const firstNewCard = episodeGrid.children[appendFrom];
+    firstNewCard?.querySelector(".journey-episode-link")?.focus();
+  }
 }
 
 function resetAndRender() {
@@ -124,8 +129,9 @@ async function bootstrapJourneyEpisodes() {
 searchInput.addEventListener("input", resetAndRender);
 sortSelect.addEventListener("change", resetAndRender);
 loadMoreButton.addEventListener("click", () => {
+  const appendFrom = episodeGrid.children.length;
   visibleCount += JOURNEY_PAGE_SIZE;
-  renderEpisodes();
+  renderEpisodes({ appendFrom, focusNew: true });
 });
 
 bootstrapJourneyEpisodes();

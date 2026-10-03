@@ -47,10 +47,15 @@
         </div>
       </div>
       <figure class="course-hero-figure">
-        <img
-          src="../../assets/course/gen-ai-software-applications/course-main-visual.png"
-          width="1672" height="941" decoding="async" fetchpriority="high"
-          alt="生成式 AI 軟體應用課程主視覺，ChatGPT、NotebookLM、Notion 與工作流程應用">
+        <picture>
+          <source type="image/webp"
+            srcset="../../assets/course/gen-ai-software-applications/course-main-visual-640.webp 640w, ../../assets/course/gen-ai-software-applications/course-main-visual-1024.webp 1024w, ../../assets/course/gen-ai-software-applications/course-main-visual-1672.webp 1672w"
+            sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 940px) calc(100vw - 48px), (max-width: 1440px) calc((100vw - 144px) * 0.535), 694px">
+          <img
+            src="../../assets/course/gen-ai-software-applications/course-main-visual.png"
+            width="1672" height="941" decoding="async" fetchpriority="high"
+            alt="生成式 AI 軟體應用課程主視覺，ChatGPT、NotebookLM、Notion 與工作流程應用">
+        </picture>
       </figure>
     </section>
 
@@ -69,7 +74,7 @@
             width="1920" height="1080" loading="lazy" decoding="async"
             alt="今天的課程地圖：AI 基礎與安全、ChatGPT、精美簡報、NotebookLM、Notion、回顧行動">
         </figure>
-        <ol class="course-map-list" aria-label="今天的課程地圖文字版">
+        <ol class="course-map-list" id="course-map-text" aria-label="今天的課程地圖文字版">
           <li>AI 基礎與安全</li>
           <li>ChatGPT</li>
           <li>精美簡報</li>
@@ -86,21 +91,29 @@
           <p class="section-kicker">Handout preview</p>
           <h2 id="handout-preview-title">講義預覽</h2>
         </div>
-        <p class="section-note">完整講義將以 PDF 提供下載，頁面先呈現重點預覽，方便課前確認與課後回顧。</p>
+        <p class="section-note">完整講義將以 PDF 提供下載，頁面先呈現重點預覽，方便課前確認與課後回顧。選擇下方圖片可放大檢視。</p>
       </div>
       <div class="handout-preview-grid">
         <button
           class="slide-preview-card"
           type="button"
+          aria-haspopup="dialog" aria-controls="course-slide-preview"
           data-slide-title="課程主視覺"
-          data-image-path="../../assets/course/gen-ai-software-applications/course-main-visual.png">
-          <img src="../../assets/course/gen-ai-software-applications/course-main-visual.png" alt="課程主視覺預覽" width="1672" height="941" loading="lazy" decoding="async">
+          data-image-path="../../assets/course/gen-ai-software-applications/course-main-visual-1672.webp">
+          <picture>
+            <source type="image/webp"
+              srcset="../../assets/course/gen-ai-software-applications/course-main-visual-640.webp 640w, ../../assets/course/gen-ai-software-applications/course-main-visual-1024.webp 1024w, ../../assets/course/gen-ai-software-applications/course-main-visual-1672.webp 1672w"
+              sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 940px) calc((100vw - 88px) / 2), (max-width: 1440px) calc((100vw - 120px) / 2), 660px">
+            <img src="../../assets/course/gen-ai-software-applications/course-main-visual.png" alt="課程主視覺預覽" width="1672" height="941" loading="lazy" decoding="async">
+          </picture>
           <span>課程主視覺</span>
         </button>
         <button
           class="slide-preview-card"
           type="button"
+          aria-haspopup="dialog" aria-controls="course-slide-preview"
           data-slide-title="今天的課程地圖"
+          data-text-id="course-map-text"
           data-image-path="../../assets/course/gen-ai-software-applications/course-map.jpg">
           <img src="../../assets/course/gen-ai-software-applications/course-map.jpg" alt="今天的課程地圖預覽" width="1920" height="1080" loading="lazy" decoding="async">
           <span>今天的課程地圖</span>
@@ -108,7 +121,9 @@
         <button
           class="slide-preview-card"
           type="button"
+          aria-haspopup="dialog" aria-controls="course-slide-preview"
           data-slide-title="AI 大事紀與關鍵轉折"
+          data-text-id="ai-milestone-text"
           data-image-path="../../assets/course/gen-ai-software-applications/ai-milestone-timeline.jpg">
           <img src="../../assets/course/gen-ai-software-applications/ai-milestone-timeline.jpg" alt="AI 大事紀與關鍵轉折預覽" width="1920" height="1080" loading="lazy" decoding="async">
           <span>AI 大事紀與關鍵轉折</span>
@@ -116,12 +131,40 @@
         <button
           class="slide-preview-card"
           type="button"
+          aria-haspopup="dialog" aria-controls="course-slide-preview"
           data-slide-title="AI 不是新工具，而是新的工作方式"
+          data-text-id="ai-workflow-text"
           data-image-path="../../assets/course/gen-ai-software-applications/ai-new-workflow.jpg">
           <img src="../../assets/course/gen-ai-software-applications/ai-new-workflow.jpg" alt="AI 不是新工具，而是新的工作方式預覽" width="1920" height="1080" loading="lazy" decoding="async">
           <span>AI 不是新工具，而是新的工作方式</span>
         </button>
       </div>
+      <details>
+        <summary>AI 大事紀與關鍵轉折：圖片文字版</summary>
+        <div id="ai-milestone-text">
+          <p>依投影片原文（截至 2026 年 6 月）：</p>
+          <h3>從 ChatGPT 橫空出世到 2026 年 6 月：AI 大事紀與關鍵轉折</h3>
+          <p>AI 不只是變聰明，而是從聊天工具走向工作流程、產業基礎設施與能力分化</p>
+          <ul>
+            <li>2022.11：ChatGPT 推出 — AI 進入大眾視野</li>
+            <li>2023.03：GPT-4 發布 — 大型語言模型能力躍升</li>
+            <li>2023：大模型競賽開打 — Claude、Bard、Llama 興起</li>
+            <li>2024.05：GPT-4o 推出 — 文字、語音、影像整合</li>
+            <li>2024.08：歐盟 AI Act 生效 — AI 進入治理時代</li>
+            <li>2024.12：Sora 公開 — 影片生成走向大眾應用</li>
+            <li>2025：推理模型與 AI Coding 爆發 — AI 進入工作流程</li>
+            <li>2026.1-6：算力瓶頸與能力落差擴大 — 新一輪競爭展開</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>AI 不是新工具，而是新的工作方式：圖片文字版</summary>
+        <div id="ai-workflow-text">
+          <p>文件太多、會議太多、報表太多</p>
+          <h3>AI 不是新工具，而是新的工作方式</h3>
+          <p>讓重複工作變快，讓工作流程更聰明</p>
+        </div>
+      </details>
     </section>
 
     <footer class="site-footer">
@@ -129,6 +172,21 @@
       <p><a href="/">回首頁</a></p>
     </footer>
   </main>
+
+  <dialog class="course-preview-dialog" id="course-slide-preview" aria-labelledby="course-preview-title">
+    <div class="course-preview-header">
+      <h2 id="course-preview-title">講義預覽</h2>
+      <button class="course-preview-close" type="button" autofocus>關閉預覽</button>
+    </div>
+    <div class="course-preview-body">
+      <img class="course-preview-image" alt="">
+      <p><a class="course-preview-original" target="_blank" rel="noopener">開啟原尺寸圖片（新分頁）</a></p>
+      <details class="course-preview-transcript" hidden>
+        <summary>閱讀圖片文字版</summary>
+        <div class="course-preview-text"></div>
+      </details>
+    </div>
+  </dialog>
 
   <script>
     function sendCourseEvent(name, parameters) {
@@ -156,14 +214,7 @@
       });
     });
 
-    document.querySelectorAll(".slide-preview-card").forEach((card) => {
-      card.addEventListener("click", () => {
-        sendCourseEvent("select_slide_preview", {
-          slide_title: card.dataset.slideTitle,
-          image_path: card.dataset.imagePath
-        });
-      });
-    });
   </script>
+  <script src="./preview.js"></script>
 </body>
 </html>

@@ -286,6 +286,7 @@
 .studio-page .journey-episode-link:hover { background: transparent; color: var(--studio-text); transform: none; }
 .studio-page .journey-empty { background: var(--studio-surface); color: var(--studio-muted); border-color: var(--studio-line); }
 .studio-page .journey-more-wrap { margin-top: 40px; }
+.studio-page .journey-load-more[hidden] { display: none; }
 
 /* Courses: a publication cover beside the first action, then a navigable path. */
 .studio-page .guide-hero { grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); align-items: center; gap: 80px; padding: 8px 0 56px; }
@@ -557,4 +558,68 @@
   .studio-page .shuyi-card-media:hover .shuyi-card-image,
   .studio-page .shuyi-card-media:focus-visible .shuyi-card-image,
   .studio-page .shuyi-podcast-card:hover h3 { transform: none; }
+}
+
+/* Course slide preview: native modal, scoped to this course's dialog. */
+.studio-page .course-preview-dialog {
+  box-sizing: border-box;
+  width: min(1240px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--studio-line);
+  border-radius: var(--studio-radius);
+  background: var(--studio-surface-high);
+  color: var(--studio-text);
+}
+.studio-page .course-preview-dialog::backdrop { background: rgb(0 0 0 / 72%); }
+.studio-page .course-preview-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--studio-line);
+  background: var(--studio-surface-high);
+}
+.studio-page .course-preview-header h2 {
+  min-width: 0;
+  margin: 0;
+  font-size: clamp(1.05rem, 2.5vw, 1.5rem);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.studio-page .course-preview-close {
+  flex: 0 0 auto;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid var(--studio-control-line);
+  border-radius: 999px;
+  background: var(--studio-surface);
+  color: var(--studio-text);
+  font: inherit;
+  cursor: pointer;
+}
+.studio-page .course-preview-body { padding: 20px; overflow-wrap: anywhere; }
+.studio-page .course-preview-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  background: #fff;
+}
+.studio-page .course-preview-original { color: var(--studio-accent); }
+.studio-page .course-preview-transcript { line-height: 1.8; }
+.studio-page .course-preview-transcript summary { cursor: pointer; }
+.studio-page .course-preview-text :is(ol, ul) { padding-left: 1.5em; }
+@media (max-width: 767px) {
+  .studio-page .course-preview-header { gap: 12px; padding: 12px; }
+  .studio-page .course-preview-body { padding: 12px; }
+  .studio-page .course-preview-close { padding-inline: 12px; }
 }
