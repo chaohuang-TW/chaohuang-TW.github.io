@@ -31,6 +31,7 @@
   <script src="theme.js"></script>
   <link rel="stylesheet" href="studio.css">
   <link rel="stylesheet" href="home-workbench.css">
+  <link rel="stylesheet" href="home-lab.css">
 </head>
 <body class="home-page">
   <a class="skip-link" href="#main-content">跳到主要內容</a>
@@ -47,54 +48,46 @@
   </header>
 
   <main id="main-content" class="site-shell">
-    <section class="studio-hero" aria-labelledby="home-title">
+    <section class="studio-hero lab-hero" aria-labelledby="home-title">
       <div class="hero-copy">
-        <div class="hero-eyebrow">CHAO’S WORKBENCH</div>
-        <h1 id="home-title">把想法，<br><span>做成作品。</span></h1>
-        <p>和 AI 一起，把好奇心變成<br class="desktop-break">可以玩、可以學、可以分享的事物。</p>
+        <div class="hero-eyebrow">AI 創作與互動實驗室</div>
+        <h1 id="home-title"><span class="hero-first-line">讓想法，</span><span class="hero-kinetic"><span class="lab-sr-only">動起來。</span><span class="kinetic-window" aria-hidden="true"><span class="kinetic-track"><span>動起來。</span><span>玩起來。</span><span>做出來。</span><span>動起來。</span></span></span></span></h1>
+        <p>和 AI 一起，把好奇心變成<br class="desktop-break">可以玩、可以學、可以分享的作品。</p>
         <div class="hero-primary-actions" aria-label="首頁精選入口">
           <a class="primary-link" href="#learning-games">探索互動作品 <span aria-hidden="true">↗</span></a>
           <a class="text-link track-home-primary-action" href="/courses/build-your-ai-website/" data-action-name="開始學習 AI 建站">開始學習 AI 建站 <span aria-hidden="true">→</span></a>
         </div>
-        <p class="hero-footnote">從一個念頭，到真正可以打開的作品。</p>
       </div>
-      <section class="hero-workbench" aria-labelledby="workbench-title">
-        <header class="workbench-heading">
-          <h2 id="workbench-title">Chao 的實作展示台</h2>
-          <span class="workbench-motto" aria-hidden="true">PLAY / LEARN / MAKE</span>
-          <p class="workbench-intro">先玩一個作品，再試著做出自己的。</p>
+      <section class="creation-lab" data-scene="snake" aria-labelledby="workbench-title">
+        <header class="lab-heading">
+          <h2 id="workbench-title">先玩一下，看看會發生什麼。</h2>
+          <button id="lab-pause" type="button" aria-pressed="false">暫停動態</button>
         </header>
-        <div class="workbench-projects">
-          <a class="workbench-card workbench-featured" href="https://chaohuang-tw.github.io/taiwan-agri-king/game.html" aria-label="開始玩臺灣農產王：環島產地爭霸戰">
-            <div class="workbench-browser" aria-hidden="true"><span class="browser-dots"><i></i><i></i><i></i></span><span class="browser-address">chaohuang-tw.github.io</span><span class="mobile-feature-label">01 / FEATURED PROJECT</span></div>
-            <img src="assets/images/projects/taiwan-agri-king.jpg" width="1400" height="788" fetchpriority="high" decoding="async" alt="臺灣農產王實際遊戲畫面：臺灣地圖與環島棋盤、玩家農產與市場資訊">
-            <div class="workbench-card-copy">
-              <h3>臺灣農產王</h3>
-              <p class="featured-desktop-description">AI × 臺灣農業 × 遊戲設計</p>
-              <p class="featured-mobile-description">環島產地爭霸戰</p>
-              <span class="workbench-card-arrow" aria-hidden="true">↗</span>
-            </div>
-          </a>
-          <a class="workbench-card workbench-play" href="https://chaohuang-tw.github.io/number-snake-arena/" aria-label="開始玩 Number Snake Arena">
-            <img src="assets/images/projects/number-snake-arena.jpg" width="1400" height="788" decoding="async" alt="Number Snake Arena 實際遊戲畫面：數字蛇在深色競技場中成長">
-            <div class="workbench-card-copy">
-              <span class="workbench-card-category">02 / PLAY</span>
-              <h3>Number Snake Arena</h3>
-              <p>數字成長 × 動作策略</p>
-              <span class="workbench-card-arrow" aria-hidden="true">↗</span>
-            </div>
-          </a>
-          <a class="workbench-card workbench-learn track-home-primary-action" href="/courses/build-your-ai-website/" data-action-name="展示台 AI 建站課程" aria-label="學習用 AI 建立你的第一個官網">
-            <img src="assets/course/build-your-ai-website/course-card-cover.webp" width="1448" height="1086" decoding="async" alt="用 AI 建立你的第一個官網課程封面，展示 ChatGPT、Codex 與 GitHub Pages 實作工具">
-            <div class="workbench-card-copy">
-              <span class="workbench-card-category">03 / LEARN</span>
-              <h3><span class="course-desktop-title">做出你的第一個網站</span><span class="course-mobile-title">用 AI 建立你的第一個官網</span></h3>
-              <p><span class="course-desktop-title">AI 建站課程</span><span class="course-mobile-title">零基礎，也能開始實作</span></p>
-              <span class="workbench-card-arrow" aria-hidden="true">↗</span>
-            </div>
-          </a>
+        <div class="lab-scenes" role="group" aria-label="選擇首頁互動預覽">
+          <button class="lab-scene-button" type="button" data-scene="snake" aria-pressed="true">數字蛇</button>
+          <button class="lab-scene-button" type="button" data-scene="island" aria-pressed="false">環島棋盤</button>
+          <button class="lab-scene-button" type="button" data-scene="build" aria-pressed="false">AI 建站</button>
         </div>
-        <p class="workbench-status">真實作品・持續實作中</p>
+        <div class="lab-viewport" aria-label="既有作品畫面預覽" aria-describedby="lab-status">
+          <canvas id="lab-canvas" aria-hidden="true"></canvas>
+          <figure class="lab-original">
+            <img id="lab-project-image" src="assets/images/projects/number-snake-arena.jpg" width="1400" height="788" fetchpriority="high" decoding="async" alt="Number Snake Arena 實際遊戲畫面：數字蛇在深色競技場中成長">
+            <figcaption>原作畫面</figcaption>
+          </figure>
+          <span class="lab-preview-label">首頁互動預覽</span>
+        </div>
+        <div class="lab-project-copy">
+          <div><h3 id="lab-project-title">Number Snake Arena</h3><p id="lab-project-description">數字成長 × 動作策略</p></div>
+          <a id="lab-project-link" href="https://chaohuang-tw.github.io/number-snake-arena/" aria-label="開啟完整作品：Number Snake Arena">開啟完整作品 <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="lab-controls">
+          <button id="lab-action" type="button">轉向探索 <span aria-hidden="true">↻</span></button>
+          <div class="lab-direction-buttons" role="group" aria-label="數字蛇方向">
+            <button type="button" data-direction="left" aria-label="向左">←</button><button type="button" data-direction="up" aria-label="向上">↑</button><button type="button" data-direction="down" aria-label="向下">↓</button><button type="button" data-direction="right" aria-label="向右">→</button>
+          </div>
+        </div>
+        <p id="lab-status" role="status" aria-live="polite">開啟完整作品，或啟用 JavaScript 操作首頁預覽。</p>
+        <noscript><p class="lab-no-script">啟用 JavaScript 可操作首頁預覽，也可以直接開啟完整作品。</p><p class="lab-no-script"><a class="text-link" href="https://chaohuang-tw.github.io/taiwan-agri-king/game.html">開始玩臺灣農產王 ↗</a></p></noscript>
       </section>
     </section>
 
@@ -205,5 +198,6 @@
   <script src="media.js"></script>
   <script src="app.js"></script>
   <script src="studio.js"></script>
+  <script src="home-lab.js"></script>
 </body>
 </html>
