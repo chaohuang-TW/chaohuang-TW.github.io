@@ -869,5 +869,35 @@
     "status": "published",
     "featured": true,
     "source": "user-provided-apple-podcasts"
+  },
+  {
+    "id": "journey-069",
+    "series": "西遊記",
+    "episodeNumber": 69,
+    "title": "[西遊記] 第69回 白龍馬的尿竟被拿來做神藥！？悟空治好國王，妖怪搶王后的祕密曝光",
+    "subtitle": "白龍馬的尿竟被拿來做神藥！？悟空治好國王，妖怪搶王后的祕密曝光",
+    "publishedDate": "2026-09-28",
+    "publishedAt": "2026-09-27T16:00:00Z",
+    "appleEpisodeId": "1000792017582",
+    "applePodcastUrl": "https://podcasts.apple.com/tw/podcast/%E8%A5%BF%E9%81%8A%E8%A8%98-%E7%AC%AC69%E5%9B%9E-%E7%99%BD%E9%BE%8D%E9%A6%AC%E7%9A%84%E5%B0%BF%E7%AB%9F%E8%A2%AB%E6%8B%BF%E4%BE%86%E5%81%9A%E7%A5%9E%E8%97%A5-%E6%82%9F%E7%A9%BA%E6%B2%BB%E5%A5%BD%E5%9C%8B%E7%8E%8B-%E5%A6%96%E6%80%AA%E6%90%B6%E7%8E%8B%E5%90%8E%E7%9A%84%E7%A5%95%E5%AF%86%E6%9B%9D%E5%85%89/id1829910020?i=1000792017582",
+    "artwork": "https://is1-ssl.mzstatic.com/image/thumb/PodcastSource211/v4/a8/45/04/a8450472-f660-a53d-099c-2df5fca527d1/c40df07d-af91-4182-8912-ce54bfdb4360.jpeg/1200x1200bf.webp",
+    "status": "published",
+    "featured": true,
+    "source": "apple-podcasts"
+  },
+  {
+    "id": "journey-068",
+    "series": "西遊記",
+    "episodeNumber": 68,
+    "title": "[西遊記] 第68回 悟空揭皇榜自稱神醫！三根猴毛竟能替國王診脈？",
+    "subtitle": "悟空揭皇榜自稱神醫！三根猴毛竟能替國王診脈？",
+    "publishedDate": "2026-09-16",
+    "publishedAt": "2026-09-15T16:00:00Z",
+    "appleEpisodeId": "1000790036181",
+    "applePodcastUrl": "https://podcasts.apple.com/tw/podcast/%E8%A5%BF%E9%81%8A%E8%A8%98-%E7%AC%AC68%E5%9B%9E-%E6%82%9F%E7%A9%BA%E6%8F%AD%E7%9A%87%E6%A6%9C%E8%87%AA%E7%A8%B1%E7%A5%9E%E9%86%AB-%E4%B8%89%E6%A0%B9%E7%8C%B4%E6%AF%9B%E7%AB%9F%E8%83%BD%E6%9B%BF%E5%9C%8B%E7%8E%8B%E8%A8%BA%E8%84%88/id1829910020?i=1000790036181",
+    "artwork": "https://is1-ssl.mzstatic.com/image/thumb/PodcastSource221/v4/54/82/fd/5482fd9a-d864-e4e9-0605-ec0ddfc1f62f/89c896a8-93c3-4517-adc9-c983def98d0e.jpeg/1200x1200bf.webp",
+    "status": "published",
+    "featured": true,
+    "source": "apple-podcasts"
   }
 ]

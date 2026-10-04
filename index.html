@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="studio.css">
   <link rel="stylesheet" href="home-workbench.css">
   <link rel="stylesheet" href="home-lab.css">
+  <link rel="stylesheet" href="video-categories.css">
 </head>
 <body class="home-page">
   <a class="skip-link" href="#main-content">跳到主要內容</a>
@@ -110,7 +111,7 @@
       </header>
       <div id="interactive-feature-projects" class="interactive-feature-projects" data-lead-project="taiwan-agri-king"><p class="load-fallback">正在載入代表作品。</p></div>
       <div class="learning-collection">
-        <div class="learning-intro"><h3>一起練習，<br>一起長大。</h3><p>國語、數學與親子共學互動練習。</p><button class="learning-toggle secondary-link" type="button" aria-expanded="false" aria-controls="course-grid">查看全部 7 個練習</button></div>
+        <div class="learning-intro"><h3>一起練習，<br>一起長大。</h3><p id="learning-entry-summary">1 個學習平台與 6 個國語、數學練習入口。</p><button class="learning-toggle secondary-link" type="button" aria-expanded="false" aria-controls="course-grid">查看全部 7 個學習入口</button></div>
         <div id="course-grid" class="course-grid"><p class="load-fallback">正在載入互動練習。</p></div>
       </div>
     </section>
@@ -135,9 +136,15 @@
     </section>
 
     <section class="ai-video-section" id="mica-ai-videos" aria-labelledby="mica-ai-video-title">
-      <header class="section-head"><h2 id="mica-ai-video-title">Mica 陪你，<br>看懂 AI 的另一面。</h2><p>用一隻貓，把抽象的 AI 知識變成看得懂的故事。</p></header>
+      <header class="section-head"><h2 id="mica-ai-video-title">Mica 陪你，<br>看懂 AI，笑看日常。</h2><p>Mica AI 小劇場：從模型知識與工具專題，到 AI 創作的日常短劇。</p></header>
+      <div class="video-category-filters" role="group" aria-label="Mica 內容分類">
+        <button type="button" data-video-category="all" aria-pressed="true" disabled>全部內容 <span data-video-category-count="all">14</span></button>
+        <button type="button" data-video-category="knowledge" aria-pressed="false" disabled>AI 知識 <span data-video-category-count="knowledge">9</span></button>
+        <button type="button" data-video-category="theater" aria-pressed="false" disabled>AI 小劇場 <span data-video-category-count="theater">5</span></button>
+      </div>
+      <p id="home-video-category-status" class="video-category-status" role="status" aria-live="polite">收錄 9 支 AI 知識與 5 支 AI 小劇場。可分別查看專題影片與 Shorts。</p>
       <div class="media-toolbar">
-        <div class="media-tabs" role="tablist" aria-label="Mica AI 影片類型">
+        <div class="media-tabs" role="tablist" aria-label="Mica 影片格式">
           <button id="tab-feature" role="tab" aria-selected="true" aria-controls="panel-feature" type="button">專題影片</button>
           <button id="tab-shorts" role="tab" aria-selected="false" aria-controls="panel-shorts" tabindex="-1" type="button">AI Shorts</button>
         </div>

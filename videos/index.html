@@ -13,24 +13,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mica AI 影音庫｜Chao AI 實作所</title>
-  <meta name="description" content="收錄 Mica AI 小知識 Shorts、AI 模型故事與完整專題影片。">
+  <meta name="description" content="Mica AI 小劇場影音庫：收錄 AI 知識、模型故事與工具專題，也精選近期 AI 生活短劇。">
   <link rel="canonical" href="https://chaohuang-tw.github.io/videos/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_TW">
   <meta property="og:site_name" content="Chao AI 實作所">
   <meta property="og:url" content="https://chaohuang-tw.github.io/videos/">
   <meta property="og:title" content="Mica AI 影音庫｜Chao AI 實作所">
-  <meta property="og:description" content="收錄 Mica AI 小知識 Shorts、AI 模型故事與完整專題影片。">
+  <meta property="og:description" content="Mica AI 小劇場影音庫：收錄 AI 知識、模型故事與工具專題，也精選近期 AI 生活短劇。">
   <meta property="og:image" content="https://chaohuang-tw.github.io/assets/images/chao-ai-studio-hero-v3.png">
   <meta property="og:image:alt" content="Chao AI 實作所首頁主視覺">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Mica AI 影音庫｜Chao AI 實作所">
-  <meta name="twitter:description" content="收錄 Mica AI 小知識 Shorts、AI 模型故事與完整專題影片。">
+  <meta name="twitter:description" content="Mica AI 小劇場影音庫：收錄 AI 知識、模型故事與工具專題，也精選近期 AI 生活短劇。">
   <meta name="twitter:image" content="https://chaohuang-tw.github.io/assets/images/chao-ai-studio-hero-v3.png">
   <meta name="twitter:image:alt" content="Chao AI 實作所首頁主視覺">
   <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../styles.css">
-<link rel="stylesheet" href="/studio-pages.css"><script src="/theme.js"></script></head>
+<link rel="stylesheet" href="/studio-pages.css">
+  <link rel="stylesheet" href="../video-categories.css">
+<script src="/theme.js"></script></head>
 <body class="studio-page">
   <main class="site-shell video-library-page">
     <nav class="course-breadcrumb" aria-label="頁面導覽"><button class="theme-toggle" type="button" aria-label="切換顯示模式">切換明暗</button>
@@ -40,18 +42,26 @@
     </nav>
 
     <section class="video-library-hero" aria-labelledby="video-library-title">
-      <p class="section-kicker">Mica AI video</p>
+      <p class="section-kicker">Mica AI 小劇場</p>
       <h1 id="video-library-title">Mica AI 影音庫</h1>
-      <p class="video-library-subtitle">用一隻貓，陪你看懂 AI</p>
-      <p class="video-library-summary">收錄 Mica AI 小知識 Shorts、AI 模型故事與完整專題影片。</p>
+      <p class="video-library-subtitle">看懂 AI，笑看日常</p>
+      <p class="video-library-summary">保留 AI 知識、模型故事與工具專題，也精選近期 AI 創作的生活短劇。</p>
       <div class="hero-actions">
         <a class="secondary-link" href="/#mica-ai-videos">回到首頁 AI 影音</a>
       </div>
     </section>
 
+    <div class="video-category-filters" role="group" aria-label="Mica 內容分類">
+      <button type="button" data-video-category="all" aria-pressed="true" disabled>全部內容 <span data-video-category-count="all">14</span></button>
+      <button type="button" data-video-category="knowledge" aria-pressed="false" disabled>AI 知識 <span data-video-category-count="knowledge">9</span></button>
+      <button type="button" data-video-category="theater" aria-pressed="false" disabled>AI 小劇場 <span data-video-category-count="theater">5</span></button>
+    </div>
+    <p id="video-category-status" class="video-category-status" role="status" aria-live="polite">正在載入影音分類。</p>
+    <noscript><p class="load-fallback">啟用 JavaScript 可查看影音庫，或直接<a href="https://www.youtube.com/@Micaisacat" target="_blank" rel="noopener">前往 Mica AI 小劇場官方頻道</a>。</p></noscript>
+
     <section class="video-library-section" aria-labelledby="standard-video-title">
       <div class="section-head">
-        <h2 id="standard-video-title">專題影片</h2>
+        <h2 id="standard-video-title">專題影片 <span id="standard-video-count" class="video-format-count"></span></h2>
       </div>
       <div class="video-library-grid is-standard" id="standard-video-grid">
         <p class="load-fallback">正在載入專題影片。</p>
@@ -60,7 +70,7 @@
 
     <section class="video-library-section" aria-labelledby="short-video-title">
       <div class="section-head">
-        <h2 id="short-video-title">AI Shorts</h2>
+        <h2 id="short-video-title">AI Shorts <span id="short-video-count" class="video-format-count"></span></h2>
       </div>
       <div class="video-library-grid is-shorts" id="short-video-grid">
         <p class="load-fallback">正在載入 AI Shorts。</p>

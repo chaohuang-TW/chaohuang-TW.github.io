@@ -2,8 +2,8 @@
   {
     "id": "ai-lab-video-001",
     "type": "youtube",
-    "title": "AI 實驗室｜實作影片 01",
-    "description": "AI 應用與創作流程實驗紀錄。",
+    "title": "悟空 VS 二郎神 （Omni試做）",
+    "description": "以悟空與二郎神的對戰情境，記錄 Omni 影片試做。",
     "youtubeId": "97vU63GZfXo",
     "youtubeUrl": "https://youtu.be/97vU63GZfXo?si=Q9EB-FTZ5ASTDPwz",
     "embedUrl": "https://www.youtube.com/embed/97vU63GZfXo",
@@ -13,8 +13,8 @@
   {
     "id": "ai-lab-video-002",
     "type": "youtube",
-    "title": "AI 實驗室｜實作影片 02",
-    "description": "AI 應用與創作流程實驗紀錄。",
+    "title": "據說是 Fable 5 寫的提示詞 Grok 試做 #提示詞取自網路",
+    "description": "採用網路分享、標示為 Fable 5 所寫的提示詞，進行 Grok 影片試做。",
     "youtubeId": "Bsbsvuu8JVA",
     "youtubeUrl": "https://youtu.be/Bsbsvuu8JVA?si=NfoiaU-eUen_EsEH",
     "embedUrl": "https://www.youtube.com/embed/Bsbsvuu8JVA",
@@ -35,8 +35,8 @@
   {
     "id": "ai-lab-reference-7hhdFb8chck",
     "type": "video-reference",
-    "title": "GPT-5.6 最值得注意的進步",
-    "description": "它交出了一份完美簡報，直到 Mica 放大第三頁。",
+    "title": "【GPT-5.6 三種力量，三種選擇】",
+    "description": "認識 GPT-5.6 的 Sol、Terra、Luna 三種定位與選擇。",
     "youtubeId": "7hhdFb8chck",
     "youtubeUrl": "https://youtu.be/7hhdFb8chck?si=06tL8zA-j1zPGHTM",
     "href": "/videos/",

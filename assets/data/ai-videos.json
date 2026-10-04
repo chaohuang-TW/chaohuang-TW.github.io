@@ -1,27 +1,33 @@
 [
   {
     "id": "pCl-ZhjNorA",
-    "title": "Mica AI 短片｜AI 是什麼？",
+    "title": "〈AI 不是讀一句話，是拆一句話〉AI 讀文字的第一步：Tokenization。#AI小知識 #Tokenization #斷詞 #人工智慧 #生成式AI #AI入門 #Mica每天一則AI小知識",
     "youtubeUrl": "https://youtube.com/shorts/pCl-ZhjNorA?si=EMgMVIdsDisvDuXF",
     "embedUrl": "https://www.youtube.com/embed/pCl-ZhjNorA",
     "status": "published",
-    "order": 1
+    "order": 1,
+    "contentCategory": "knowledge",
+    "description": "AI 讀文字的第一步是 Tokenization：把一句話拆成可處理的片段。"
   },
   {
     "id": "xd7sT2kvBEM",
-    "title": "Mica AI 短片｜一起認識 AI",
+    "title": "什麼是鑒別式AI？不是負責生成，而是負責判斷。",
     "youtubeUrl": "https://youtube.com/shorts/xd7sT2kvBEM?si=E9dXVG5PpXeSOoG2",
     "embedUrl": "https://www.youtube.com/embed/xd7sT2kvBEM",
     "status": "published",
-    "order": 2
+    "order": 2,
+    "contentCategory": "knowledge",
+    "description": "鑒別式 AI 的工作是判斷，而不是生成。"
   },
   {
     "id": "0wW0-vu7XGM",
-    "title": "Mica AI 短片｜AI 不是魔法，是工具",
+    "title": "AI 不一定一開始就要人類告訴它答案。它可以自己練習：把同一個東西的不同樣子拉近，把不同東西推遠。久了以後，AI 就會學到資料之間真正重要的特徵。簡單說，就是先學會「誰跟誰像」，再學會「這是什麼」。",
     "youtubeUrl": "https://youtube.com/shorts/0wW0-vu7XGM?si=NoH0zt2srWboqnxc",
     "embedUrl": "https://www.youtube.com/embed/0wW0-vu7XGM",
     "status": "published",
-    "order": 3
+    "order": 3,
+    "contentCategory": "knowledge",
+    "description": "把同一個東西的不同樣子拉近、把不同東西推遠，學習資料之間的重要特徵。"
   },
   {
     "id": "uQzmPeCIDGU",
@@ -29,29 +35,32 @@
     "youtubeUrl": "https://youtube.com/shorts/uQzmPeCIDGU?si=PyB3fuC5HPgTplQw",
     "embedUrl": "https://www.youtube.com/embed/uQzmPeCIDGU",
     "status": "published",
-    "order": 4
+    "order": 4,
+    "contentCategory": "knowledge"
   },
   {
     "id": "7hhdFb8chck",
-    "title": "Mica AI 專題｜完美簡報，直到 Mica 放大第三頁",
-    "description": "它交出了一份完美簡報，直到 Mica 放大第三頁。GPT-5.6 最值得注意的進步。",
+    "title": "【GPT-5.6 三種力量，三種選擇】",
+    "description": "同樣是 GPT-5.6，為什麼會有 Sol、Terra、Luna 三種定位？",
     "youtubeUrl": "https://youtu.be/7hhdFb8chck?si=aloYMQ8f14IrZ0ak",
     "embedUrl": "https://www.youtube.com/embed/7hhdFb8chck",
     "format": "standard",
     "status": "published",
     "featured": false,
-    "order": 5
+    "order": 5,
+    "contentCategory": "knowledge"
   },
   {
     "id": "KyWjZqi-YKU",
-    "title": "Mica AI 短片｜GPT-5.6 三種力量：Sol、Terra、Luna",
-    "description": "同樣是 GPT-5.6，為什麼會有 Sol、Terra、Luna 三種定位？",
+    "title": "它交出了一份完美簡報，直到牠放大第三頁 🐱💻深夜丟下一句「明天要上臺」，我就去睡了。AI 真正的進步，不是回答得更好，而是把整件事做完，還驗收自己的成果。#GPT5.6 #AI助手 #深夜加班",
+    "description": "AI 製作完美簡報後，還會放大檢查第三頁：從完成工作到驗收自己的成果。",
     "youtubeUrl": "https://youtube.com/shorts/KyWjZqi-YKU?si=9yV3vPLsJuHHHdE0",
     "embedUrl": "https://www.youtube.com/embed/KyWjZqi-YKU",
     "format": "short",
     "status": "published",
     "featured": false,
-    "order": 6
+    "order": 6,
+    "contentCategory": "knowledge"
   },
   {
     "id": "M0DP1XxOLho",
@@ -61,7 +70,8 @@
     "format": "short",
     "status": "published",
     "featured": false,
-    "order": 7
+    "order": 7,
+    "contentCategory": "knowledge"
   },
   {
     "id": "cuwjzn4pnSA",
@@ -71,7 +81,8 @@
     "format": "short",
     "status": "published",
     "featured": false,
-    "order": 8
+    "order": 8,
+    "contentCategory": "knowledge"
   },
   {
     "id": "gzNm6ur6FoY",
@@ -82,6 +93,72 @@
     "format": "standard",
     "status": "published",
     "featured": true,
-    "order": 9
+    "order": 9,
+    "contentCategory": "knowledge"
+  },
+  {
+    "id": "TaHhN9fp9NI",
+    "title": "老公在廚房當副駕導航：慢點！油太多！火太大！魚快翻！老婆暴走：閉嘴，我會煮！老公淡定：我只是在讓妳體驗，平常妳唸我開車的感覺。 #搞笑短劇",
+    "youtubeUrl": "https://www.youtube.com/shorts/TaHhN9fp9NI",
+    "embedUrl": "https://www.youtube.com/embed/TaHhN9fp9NI",
+    "thumbnail": "https://i1.ytimg.com/vi/TaHhN9fp9NI/hqdefault.jpg",
+    "format": "short",
+    "contentCategory": "theater",
+    "status": "published",
+    "featured": false,
+    "publishedAt": "2026-09-27T10:39:46+00:00",
+    "order": 10
+  },
+  {
+    "id": "S4Uf5HzWQEs",
+    "title": "到寵物托運櫃檯，客服問：「狗狗多重？」我糾正：「他是我兒子！」她改口：「您兒子多重？」我答：「八歲，三十公斤。」她接著問：「您兒子打過『狂你兒子疫苗』了嗎？」 #搞笑短劇",
+    "youtubeUrl": "https://www.youtube.com/shorts/S4Uf5HzWQEs",
+    "embedUrl": "https://www.youtube.com/embed/S4Uf5HzWQEs",
+    "thumbnail": "https://i4.ytimg.com/vi/S4Uf5HzWQEs/hqdefault.jpg",
+    "format": "short",
+    "contentCategory": "theater",
+    "status": "published",
+    "featured": false,
+    "publishedAt": "2026-10-01T04:29:33+00:00",
+    "order": 11
+  },
+  {
+    "id": "XVsNHKmH8TE",
+    "title": "老先生擦撞跑車，車主索賠三百萬，不賠就打。他找訓練海豹的女兒，車主還笑。十分鐘後，車主趴了。女兒嘆氣：「爸，我訓練的是美國海豹部隊，不是海豹！」",
+    "youtubeUrl": "https://www.youtube.com/shorts/XVsNHKmH8TE",
+    "embedUrl": "https://www.youtube.com/embed/XVsNHKmH8TE",
+    "thumbnail": "https://i1.ytimg.com/vi/XVsNHKmH8TE/hqdefault.jpg",
+    "format": "short",
+    "contentCategory": "theater",
+    "status": "published",
+    "featured": false,
+    "publishedAt": "2026-10-02T04:39:19+00:00",
+    "order": 12
+  },
+  {
+    "id": "4DbDXGfxpLw",
+    "title": "老公要冰淇淋加草莓，還問老婆要不要記下來。老婆笑：「這麼簡單！」結果端來一碗麵。老公氣得指著碗：「我說那個蛋呢！」",
+    "youtubeUrl": "https://www.youtube.com/shorts/4DbDXGfxpLw",
+    "embedUrl": "https://www.youtube.com/embed/4DbDXGfxpLw",
+    "thumbnail": "https://i1.ytimg.com/vi/4DbDXGfxpLw/hqdefault.jpg",
+    "format": "short",
+    "contentCategory": "theater",
+    "status": "published",
+    "featured": false,
+    "publishedAt": "2026-10-03T03:08:28+00:00",
+    "order": 13
+  },
+  {
+    "id": "g5smMOupcLI",
+    "title": "比你優秀的人都比你努力，那你努力還有什麼用？但足夠沒用就沒人可以利用我！",
+    "youtubeUrl": "https://www.youtube.com/shorts/g5smMOupcLI",
+    "embedUrl": "https://www.youtube.com/embed/g5smMOupcLI",
+    "thumbnail": "https://i4.ytimg.com/vi/g5smMOupcLI/hqdefault.jpg",
+    "format": "short",
+    "contentCategory": "theater",
+    "status": "published",
+    "featured": false,
+    "publishedAt": "2026-10-03T09:25:44+00:00",
+    "order": 14
   }
 ]

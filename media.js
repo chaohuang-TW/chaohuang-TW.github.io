@@ -1,6 +1,6 @@
 /* A lightweight, keyboard-native facade: YouTube loads only on request. */
 window.ChaoMedia = {
-  create({ id, title, embedUrl, onLoad }) {
+  create({ id, title, embedUrl, thumbnail, onLoad }) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "media-poster";
@@ -8,7 +8,7 @@ window.ChaoMedia = {
 
     const image = document.createElement("img");
     const thumbnailBase = `https://i.ytimg.com/vi/${encodeURIComponent(id)}`;
-    image.src = `${thumbnailBase}/maxresdefault.jpg`;
+    image.src = thumbnail || `${thumbnailBase}/maxresdefault.jpg`;
     image.addEventListener('error', () => {
       image.src = `${thumbnailBase}/hqdefault.jpg`;
     }, { once: true });
@@ -46,7 +46,7 @@ window.ChaoMedia = {
       }, 8000);
       player.addEventListener("chao:unload", () => {
         window.clearTimeout(delayed);
-        player.replaceWith(window.ChaoMedia.create({ id, title, embedUrl, onLoad }));
+        player.replaceWith(window.ChaoMedia.create({ id, title, embedUrl, thumbnail, onLoad }));
       }, { once: true });
       iframe.addEventListener("load", () => {
         window.clearTimeout(delayed);

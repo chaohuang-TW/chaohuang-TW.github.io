@@ -3,27 +3,48 @@
     "id": "build-your-ai-website",
     "title": "用 AI 建立你的第一個官網",
     "subtitle": "ChatGPT × Codex × GitHub Pages",
-    "description": "從認識 ChatGPT 與 Codex、完成安裝開始，一步一步規劃、建置並發布自己的第一個網站。全程以 Chao AI 實作所為真實案例。",
-    "status": "持續更新",
+    "description": "從認識 ChatGPT 與 Codex、完成安裝開始，一步一步規劃、建置並發布自己的第一個網站。8 課網頁指南皆可直接閱讀，全程以 Chao AI 實作所為真實案例。",
+    "status": "8 課已開放",
     "cover": "assets/course/build-your-ai-website/course-card-cover.webp",
     "href": "/courses/build-your-ai-website/",
     "prepTools": [
-      { "name": "ChatGPT", "href": "https://chatgpt.com/" },
-      { "name": "Codex", "href": "https://learn.chatgpt.com/docs" },
-      { "name": "GitHub", "href": "https://github.com/" }
+      {
+        "name": "ChatGPT",
+        "href": "https://chatgpt.com/"
+      },
+      {
+        "name": "Codex",
+        "href": "https://learn.chatgpt.com/docs"
+      },
+      {
+        "name": "GitHub",
+        "href": "https://github.com/"
+      }
     ],
     "resources": [
-      { "label": "學習路徑", "status": "8 個主題", "target": "學習路徑" },
-      { "label": "第一課", "status": "開始閱讀", "target": "第一課" },
-      { "label": "教材形式", "status": "網頁指南", "target": "網頁指南" }
+      {
+        "label": "學習路徑",
+        "status": "8 課可閱讀",
+        "target": "學習路徑"
+      },
+      {
+        "label": "第一課",
+        "status": "開始閱讀",
+        "target": "第一課"
+      },
+      {
+        "label": "教材形式",
+        "status": "網頁指南",
+        "target": "網頁指南"
+      }
     ]
   },
   {
     "id": "gen-ai-software-applications",
     "title": "生成式 AI 軟體應用課程",
     "subtitle": "ChatGPT × NotebookLM × Notion",
-    "description": "從文書、簡報、報表到會議管理，整理課前準備、講義與實作資源。",
-    "status": "即將上架",
+    "description": "從文書、簡報、報表到會議管理，先查看課程地圖與講義重點預覽；完整講義尚未開放。",
+    "status": "預覽已開放",
     "cover": "assets/course/gen-ai-software-applications/course-card-cover.webp",
     "href": "/courses/gen-ai-software-applications/",
     "prepTools": [
@@ -45,6 +66,12 @@
         "label": "課前準備",
         "status": "可查看",
         "target": "課前準備"
+      },
+      {
+        "label": "講義預覽",
+        "status": "可查看",
+        "target": "講義預覽",
+        "href": "/courses/gen-ai-software-applications/#handout-preview"
       },
       {
         "label": "課程講義",

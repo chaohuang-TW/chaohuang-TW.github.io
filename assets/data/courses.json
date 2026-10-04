@@ -1,23 +1,24 @@
 [
   {
     "id": "moon-river",
-    "subject": "國語",
-    "lesson": "第七課",
-    "cardLabel": "國語 第七課",
-    "name": "月光河",
-    "platformTitle": "月光河互動練習",
-    "focus": "故事排序、部首辨識、字族應用、句型與聆聽理解",
+    "subject": "學習平台",
+    "lesson": "國語 × 數學",
+    "cardLabel": "國小互動練習平台",
+    "name": "小學學習冒險島",
+    "platformTitle": "小學學習冒險島",
+    "focus": "從平台入口選擇國小課文與數學複習的互動練習",
     "href": "https://chaohuang-tw.github.io/g2-mandarin-moon-river/",
-    "basis": "練習內容依據：國小二年級下學期國語第七課〈月光河〉",
+    "basis": "平台內容：國小課文與數學複習互動練習",
     "skillsIntro": [
-      "課文順序與故事理解",
-      "部首、字族與語詞辨識",
-      "句型與語氣詞運用",
-      "聆聽理解與重點擷取"
+      "選擇年級與練習入口",
+      "國語課文互動練習",
+      "數學複習互動練習"
     ],
-    "learnSummary": "我學會先抓住故事中的人物、事件和原因，再用生字、句型與聆聽線索完成作答。",
+    "learnSummary": "把課程變成孩子可以自己闖關的互動練習。",
     "featured": true,
-    "homeOrder": 1
+    "homeOrder": 1,
+    "category": "platform",
+    "cta": "探索學習平台"
   },
   {
     "id": "dog-egg-case",
@@ -37,7 +38,8 @@
     ],
     "learnSummary": "我學會根據證詞和線索慢慢推理，不急著下結論，也能整理句子順序說清楚事情經過。",
     "featured": true,
-    "homeOrder": 2
+    "homeOrder": 2,
+    "category": "practice"
   },
   {
     "id": "magic-brush",
@@ -56,7 +58,8 @@
       "用文字與創意完成表達"
     ],
     "learnSummary": "我學會用故事情節、字形線索和句型表達自己的想法，也能把畫面描述得更完整。",
-    "featured": false
+    "featured": false,
+    "category": "practice"
   },
   {
     "id": "happy-explorer",
@@ -75,7 +78,8 @@
       "寫出自己的生活日記"
     ],
     "learnSummary": "我學會從課文找出人物、地點和重點，再用生字、句型和日記寫法表達探險收穫。",
-    "featured": false
+    "featured": false,
+    "category": "practice"
   },
   {
     "id": "little-reader",
@@ -94,7 +98,8 @@
       "完成圖書館與桌球日記任務"
     ],
     "learnSummary": "我學會從日記抓重點，也能分辨書名號和食部字，並把自己的活動寫成完整句子。",
-    "featured": false
+    "featured": false,
+    "category": "practice"
   },
   {
     "id": "giant-mountain",
@@ -113,7 +118,8 @@
       "分辨多音字與形近字"
     ],
     "learnSummary": "我學會從課文細節推理原因，也能看懂譬喻句，整理重點後再做判斷。",
-    "featured": false
+    "featured": false,
+    "category": "practice"
   },
   {
     "id": "math-final",
@@ -135,6 +141,7 @@
     ],
     "learnSummary": "我學會用六個任務整理期末重點，能判讀算式、換算長度、分類形體、平均分配，也能比較簡單分數。",
     "featured": true,
-    "homeOrder": 3
+    "homeOrder": 3,
+    "category": "practice"
   }
 ]

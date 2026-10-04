@@ -166,7 +166,10 @@ function renderPodcast(episodes) {
   const target = document.querySelector("#shuyi-podcast-grid");
   if (!section || !target) return;
 
-  const latest = episodes.filter((episode) => episode.featured === true).slice(0, 2);
+  const latest = episodes
+    .filter((episode) => episode.featured === true)
+    .sort((current, next) => new Date(next.publishedAt || 0) - new Date(current.publishedAt || 0))
+    .slice(0, 2);
   if (latest.length === 0) {
     section.hidden = true;
     return;

@@ -317,9 +317,9 @@ function renderCourseHub(courses) {
       const control = document.createElement(available ? "a" : "button");
       control.className = "course-resource-item";
       if (available) {
-        control.href = course.href;
-        if (course.id === "build-your-ai-website" && resource.target === "學習路徑") control.href += "#learning-path";
-        if (course.id === "build-your-ai-website" && resource.target === "第一課") control.href += "lesson-01/";
+        control.href = resource.href || course.href;
+        if (!resource.href && course.id === "build-your-ai-website" && resource.target === "學習路徑") control.href += "#learning-path";
+        if (!resource.href && course.id === "build-your-ai-website" && resource.target === "第一課") control.href += "lesson-01/";
       } else {
         control.type = "button";
       }
@@ -349,9 +349,11 @@ function renderCourses(courses) {
     const fragment = template.content.cloneNode(true);
     const card = fragment.querySelector(".course-card");
     card.href = course.href;
+    card.dataset.category = course.category || "practice";
     card.querySelector(".course-label").textContent = course.cardLabel;
     card.querySelector(".course-name").textContent = course.name;
-    card.querySelector(".course-focus").textContent = `能力重點：${course.focus}`;
+    card.querySelector(".course-focus").textContent = `${course.category === "platform" ? "平台內容" : "能力重點"}：${course.focus}`;
+    card.querySelector(".course-action").textContent = `${course.cta || "進入練習"} ↗`;
     card.addEventListener("click", () => {
       if (typeof window.gtag === "function") {
         window.gtag("event", "select_course", {
@@ -398,6 +400,7 @@ function createAiVideoCard(video, format, showDescription = false) {
   card.dataset.videoTitle = video.title;
   card.dataset.youtubeUrl = video.youtubeUrl;
   card.dataset.videoFormat = format;
+  card.dataset.contentCategory = video.contentCategory || "knowledge";
 
   const link = document.createElement("a");
   link.className = "ai-video-link";
@@ -415,7 +418,10 @@ function createAiVideoCard(video, format, showDescription = false) {
   link.addEventListener("click", () => trackAiVideo(video));
   const copy = document.createElement("div");
   copy.className = "ai-video-copy";
-  copy.append(link);
+  const categoryLabel = document.createElement("p");
+  categoryLabel.className = "video-content-category";
+  categoryLabel.textContent = video.contentCategory === "theater" ? "AI 小劇場" : "AI 知識";
+  copy.append(categoryLabel, link);
 
   if (showDescription && video.description) {
     const description = document.createElement("p");
@@ -431,19 +437,23 @@ function createAiVideoCard(video, format, showDescription = false) {
     id: video.id,
     title: video.title,
     embedUrl: video.embedUrl,
+    thumbnail: video.thumbnail,
     onLoad: () => trackAiVideo(video)
   }));
   card.append(frame, copy);
   return card;
 }
 
-function renderAiVideos(videos) {
+function renderAiVideos(videos, category = "all") {
   const featureTarget = document.querySelector("#ai-video-feature");
   const shortsTarget = document.querySelector("#ai-video-grid");
 
   if (!featureTarget || !shortsTarget) return;
 
-  const publishedVideos = videos.filter((video) => video.status === "published");
+  const publishedVideos = videos.filter((video) => (
+    video.status === "published"
+    && (category === "all" || (video.contentCategory || "knowledge") === category)
+  ));
   const featuredVideo = publishedVideos
     .filter((video) => video.featured === true && video.format === "standard")
     .sort((current, next) => next.order - current.order)[0];
@@ -452,15 +462,36 @@ function renderAiVideos(videos) {
     .sort((current, next) => next.order - current.order)
     .slice(0, 3);
 
-  featureTarget.replaceChildren();
-  shortsTarget.replaceChildren();
+  [featureTarget, shortsTarget].forEach((target) => {
+    target.querySelectorAll(".media-player").forEach((player) => player.dispatchEvent(new Event("chao:unload")));
+    target.replaceChildren();
+  });
 
   if (featuredVideo) {
     featureTarget.append(createAiVideoCard(featuredVideo, "standard", true));
+  } else {
+    const message = document.createElement("p");
+    message.className = "load-fallback";
+    message.textContent = "這個分類目前以短片呈現，請切換至 AI Shorts 查看精選。";
+    featureTarget.append(message);
   }
 
   latestShorts.forEach((video) => {
     shortsTarget.append(createAiVideoCard(video, "short"));
+  });
+
+  const status = document.querySelector("#home-video-category-status");
+  if (status) {
+    const label = { all: "全部內容", knowledge: "AI 知識", theater: "AI 小劇場" }[category];
+    status.textContent = `${label}共 ${publishedVideos.length} 支，首頁精選 ${latestShorts.length} 支短片；完整內容可到影音庫查看。`;
+    status.dataset.videoCount = publishedVideos.length;
+  }
+  const allPublished = videos.filter((video) => video.status === "published");
+  document.querySelectorAll("#mica-ai-videos [data-video-category-count]").forEach((element) => {
+    const value = element.dataset.videoCategoryCount;
+    element.textContent = allPublished.filter((video) => (
+      value === "all" || (video.contentCategory || "knowledge") === value
+    )).length;
   });
 }
 
@@ -472,9 +503,21 @@ async function bootstrapAiVideos() {
   try {
     const videos = await loadJson("assets/data/ai-videos.json");
     renderAiVideos(videos);
+    const filters = [...document.querySelectorAll("#mica-ai-videos .video-category-filters button[data-video-category]")];
+    filters.forEach((button) => {
+      button.disabled = false;
+      button.addEventListener("click", () => {
+        const category = button.dataset.videoCategory;
+        filters.forEach((filter) => filter.setAttribute("aria-pressed", String(filter === button)));
+        renderAiVideos(videos, category);
+        if (category === "theater") document.querySelector("#tab-shorts")?.click();
+      });
+    });
   } catch (_error) {
     featureTarget.innerHTML = '<p class="load-fallback">短片資料暫時無法載入。</p>';
     shortsTarget.innerHTML = '<p class="load-fallback">短片資料暫時無法載入。</p>';
+    const status = document.querySelector("#home-video-category-status");
+    if (status) status.textContent = "影音資料暫時無法載入，請重新整理頁面或前往完整影音庫。";
   }
 }
 
@@ -738,6 +781,8 @@ function renderPodcastEpisodes(episodes) {
 
   episodes
     .filter((episode) => episode.featured)
+    .sort((current, next) => new Date(next.publishedAt || 0) - new Date(current.publishedAt || 0))
+    .slice(0, 2)
     .forEach((episode) => {
       const link = document.createElement("a");
       link.className = "podcast-episode-card podcast-episode-link";
@@ -803,7 +848,7 @@ function bindLearningGamesToggle() {
     renderLearningCourses(nextExpanded);
     button.textContent = nextExpanded
       ? "收合練習列表"
-      : `查看全部 ${learningCourses.length} 個練習`;
+      : `查看全部 ${learningCourses.length} 個學習入口`;
 
     sendEvent("toggle_learning_games", {
       expanded: nextExpanded
@@ -885,7 +930,12 @@ async function bootstrapCourses() {
 
     if (button) {
       button.disabled = false;
-      button.textContent = `查看全部 ${learningCourses.length} 個練習`;
+      button.textContent = `查看全部 ${learningCourses.length} 個學習入口`;
+    }
+    const summary = document.querySelector("#learning-entry-summary");
+    if (summary) {
+      const platformCount = learningCourses.filter((course) => course.category === "platform").length;
+      summary.textContent = `${platformCount} 個學習平台與 ${learningCourses.length - platformCount} 個國語、數學練習入口。`;
     }
   } catch (_error) {
     learningCourses = [];

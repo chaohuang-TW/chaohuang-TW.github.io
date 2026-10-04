@@ -1,5 +1,16 @@
 [
   {
+    "id": "content-sync-2026-10-04",
+    "date": "2026-10-04",
+    "type": "內容更新",
+    "title": "Podcast、叔姨影片與 Mica AI 小劇場同步更新",
+    "description": "補上西遊記第 68、69 回與 8 支叔姨影片，新增 Mica AI 小劇場精選，並更新學習平台及課程閱讀狀態。",
+    "href": "/shuyi/",
+    "cta": "查看叔姨最新內容",
+    "external": false,
+    "status": "published"
+  },
+  {
     "id": "shuyi-hub-2026-09-04",
     "date": "2026-09-04",
     "type": "網站更新",
