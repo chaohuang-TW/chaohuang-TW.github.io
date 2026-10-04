@@ -1,10 +1,20 @@
-async function loadJson(path) {
-  const response = await fetch(path);
-  if (!response.ok) throw new Error(`Failed to load ${path}`);
-  return response.json();
-}
+const jsonRequests = new Map();
+const learningCourseHandlers = new WeakMap();
 
-let learningCourses = [];
+async function loadJson(path) {
+  if (!jsonRequests.has(path)) {
+    const request = fetch(path).then((response) => {
+      if (!response.ok) throw new Error(`Failed to load ${path}`);
+      return response.json().then((data) => {
+        if (!Array.isArray(data)) throw new Error(`Invalid data in ${path}`);
+        return data;
+      });
+    });
+    jsonRequests.set(path, request);
+    request.catch(() => jsonRequests.delete(path));
+  }
+  return jsonRequests.get(path);
+}
 
 function sendEvent(name, parameters) {
   if (typeof window.gtag === "function") {
@@ -13,92 +23,129 @@ function sendEvent(name, parameters) {
 }
 
 function formatSiteUpdateDate(value) {
-  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value || "");
+  return match ? `${match[1]}.${match[2]}.${match[3]}` : value;
+}
 
-  if (!match) return value;
+function formatContentDate(value) {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(value || "")) return formatSiteUpdateDate(value);
+  const date = new Date(value);
+  if (!Number.isFinite(date.getTime())) return "";
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Taipei", year: "numeric", month: "2-digit", day: "2-digit"
+  }).formatToParts(date);
+  const part = (type) => parts.find((item) => item.type === type).value;
+  return `${part("year")}.${part("month")}.${part("day")}`;
+}
 
-  return `${match[1]}.${match[2]}.${match[3]}`;
+function publicationValue(record) {
+  return record.publishedAt || record.publishedDate || record.date || "";
+}
+
+function publicationTimestamp(record) {
+  const value = publicationValue(record);
+  return Date.parse(/^\d{4}-\d{2}-\d{2}$/.test(value) ? `${value}T00:00:00+08:00` : value);
+}
+
+function isPublishedRecord(record) {
+  return (!record.status || record.status === "published")
+    && Number.isFinite(publicationTimestamp(record));
+}
+
+function appendLoadStatus(target, message) {
+  if (!target) return;
+  let status = target.querySelector(".dynamic-load-status");
+  if (!status) {
+    status = document.createElement(target.tagName === "UL" ? "li" : "p");
+    status.className = "load-fallback dynamic-load-status";
+    status.setAttribute("role", "status");
+    target.append(status);
+  }
+  status.textContent = message;
+}
+
+function replacePreservingFocus(target, ...children) {
+  const active = document.activeElement;
+  const href = active && target.contains(active) && active.tagName === "A" ? active.href : "";
+  target.replaceChildren(...children);
+  if (href) {
+    const replacement = [...target.querySelectorAll("a[href]")].find((link) => link.href === href);
+    if (replacement) replacement.focus({ preventScroll: true });
+  }
+}
+
+function contentIdentity(href) {
+  try {
+    const url = new URL(href, "https://chaohuang-tw.github.io/");
+    if (url.hostname === "youtu.be") return `youtube:${url.pathname.split("/")[1]}`;
+    if (/(^|\.)youtube\.com$/.test(url.hostname)) {
+      const id = url.searchParams.get("v") || url.pathname.split("/")[2];
+      if (id) return `youtube:${id}`;
+    }
+    if (url.hostname === "podcasts.apple.com" && url.searchParams.get("i")) {
+      return `podcast:${url.searchParams.get("i")}`;
+    }
+    return url.href;
+  } catch (_error) { return href; }
 }
 
 function createRecentUpdateCard(update) {
-  const card = document.createElement("article");
-  card.className = "recent-update-card";
-
-  const meta = document.createElement("div");
-  meta.className = "recent-update-meta";
-
+  const item = document.createElement("li");
+  item.className = "recent-update-item";
+  item.dataset.updateId = update.id;
+  item.dataset.source = update.sourcePath || "assets/data/site-updates.json";
   const date = document.createElement("time");
-  date.dateTime = update.date;
-  date.textContent = formatSiteUpdateDate(update.date);
-
-  const type = document.createElement("span");
-  type.className = "recent-update-type";
-  type.textContent = update.type;
-
-  meta.append(date, type);
-
-  const title = document.createElement("h3");
-  title.className = "recent-update-title";
-  title.textContent = update.title;
-
-  card.append(meta, title);
-
-  if (update.description) {
-    const description = document.createElement("p");
-    description.className = "recent-update-description";
-    description.textContent = update.description;
-    card.append(description);
-  }
-
+  date.dateTime = publicationValue(update);
+  date.textContent = formatContentDate(publicationValue(update));
   const link = document.createElement("a");
   link.className = "recent-update-link";
   link.href = update.href;
-  link.textContent = `${update.cta} →`;
-
   if (update.external === true) {
     link.target = "_blank";
     link.rel = "noopener";
   }
-
-  link.addEventListener("click", () => {
-    sendEvent("select_site_update", {
-      update_id: update.id,
-      update_type: update.type,
-      update_title: update.title,
-      href: update.href
-    });
-  });
-
-  card.append(link);
-
-  return card;
+  const type = document.createElement("span");
+  type.className = "recent-update-type";
+  type.textContent = update.type;
+  const title = document.createElement("span");
+  title.className = "recent-update-title";
+  title.textContent = update.title;
+  link.append(type, title);
+  link.addEventListener("click", () => sendEvent("select_site_update", {
+    update_id: update.id, update_type: update.type, update_title: update.title, href: update.href
+  }));
+  item.append(date, link);
+  return item;
 }
 
-function renderRecentUpdates(updates) {
+function renderRecentUpdates(updates, micaVideos = [], shuyiVideos = [], podcastEpisodes = []) {
   const target = document.querySelector("#recent-updates-grid");
-
   if (!target) return;
-
-  const latestUpdates = updates
-    .filter((update) => update.status === "published")
-    .sort((current, next) => (
-      next.date.localeCompare(current.date)
-    ))
-    .slice(0, 3);
-
-  target.replaceChildren();
-
-  if (latestUpdates.length === 0) {
-    const fallback = document.createElement("p");
-    fallback.className = "load-fallback";
-    fallback.textContent = "目前沒有新的公開內容。";
-    target.append(fallback);
+  const candidates = updates.filter((update) => update.status === "published"
+    && !["網站更新", "內容更新"].includes(update.type) && update.href && isPublishedRecord(update))
+    .map((update) => ({ ...update, sourcePath: "assets/data/site-updates.json" }));
+  const addVideos = (videos, sourcePath, label) => videos.filter((video) => video.status === "published"
+    && video.youtubeUrl && isPublishedRecord(video)).forEach((video) => candidates.push({
+    ...video, id: `${label}-${video.id}`, href: video.youtubeUrl, external: true,
+    type: label === "Mica" ? (video.contentCategory === "theater" ? "AI 小劇場" : "AI 知識") : "叔姨講古",
+    sourcePath
+  }));
+  addVideos(micaVideos, "assets/data/ai-videos.json", "Mica");
+  addVideos(shuyiVideos, "assets/data/shuyi-videos.json", "叔姨");
+  podcastEpisodes.filter((episode) => episode.href && isPublishedRecord(episode)).forEach((episode) => candidates.push({
+    ...episode, href: episode.href, external: true, type: "Podcast", sourcePath: "assets/data/podcast-episodes.json"
+  }));
+  // Prefer the actual publication record over a dated homepage announcement of the same item.
+  const unique = new Map();
+  candidates.forEach((candidate) => unique.set(contentIdentity(candidate.href), candidate));
+  const latest = [...unique.values()].sort((current, next) => publicationTimestamp(next) - publicationTimestamp(current)
+    || current.id.localeCompare(next.id)).slice(0, 4);
+  if (!latest.length) {
+    appendLoadStatus(target, "近期內容資料暫時無法核對，仍可使用現有連結。");
     return;
   }
-
-  latestUpdates.forEach((update) => {
-    target.append(createRecentUpdateCard(update));
-  });
+  const items = latest.map(createRecentUpdateCard);
+  replacePreservingFocus(target, ...items);
 }
 
 function trackInteractiveProject(project) {
@@ -224,19 +271,12 @@ function renderInteractiveProjects(projects) {
       return next.order - current.order;
     });
 
-  target.replaceChildren();
-
   if (featuredProjects.length === 0) {
-    const fallback = document.createElement("p");
-    fallback.className = "load-fallback";
-    fallback.textContent = "代表作品暫時無法顯示。";
-    target.append(fallback);
+    appendLoadStatus(target, "代表作品資料暫時無法核對，仍可使用現有作品連結。");
     return;
   }
-
-  featuredProjects.forEach((project) => {
-    target.append(createFeaturedInteractiveProject(project));
-  });
+  const cards = featuredProjects.map(createFeaturedInteractiveProject);
+  replacePreservingFocus(target, ...cards);
 }
 
 function trackCourseHub(course, target) {
@@ -254,6 +294,7 @@ function renderCourseHub(courses) {
 
   if (!target || !template) return;
 
+  const cards = document.createDocumentFragment();
   courses.forEach((course) => {
     const fragment = template.content.cloneNode(true);
     const card = fragment.querySelector(".course-feature-card");
@@ -333,296 +374,153 @@ function renderCourseHub(courses) {
     });
     resourceList.after(resourceStatus);
 
-    target.append(fragment);
+    cards.append(fragment);
   });
+  if (cards.childNodes.length) replacePreservingFocus(target, cards);
+  else appendLoadStatus(target, "課程資料暫時無法核對，仍可使用現有課程入口。");
+}
+
+function bindLearningCourse(link, course) {
+  const previous = learningCourseHandlers.get(link);
+  if (previous) link.removeEventListener("click", previous);
+  const handler = () => sendEvent("select_course", {
+    course_id: course.id, course_name: course.name, subject: course.subject, lesson: course.lesson, href: course.href
+  });
+  learningCourseHandlers.set(link, handler);
+  link.addEventListener("click", handler);
 }
 
 function renderCourses(courses) {
+  const platformTarget = document.querySelector("#learning-platform");
+  const platformLink = document.querySelector("#learning-platform-link");
+  const platformName = document.querySelector("#learning-platform-name");
+  const platformSummary = document.querySelector("#learning-platform-summary");
   const target = document.querySelector("#course-grid");
-  const template = document.querySelector("#course-card-template");
-
-  if (!target || !template) return;
-
-  target.replaceChildren();
-
-  courses.forEach((course) => {
-    const fragment = template.content.cloneNode(true);
-    const card = fragment.querySelector(".course-card");
-    card.href = course.href;
-    card.dataset.category = course.category || "practice";
-    card.querySelector(".course-label").textContent = course.cardLabel;
-    card.querySelector(".course-name").textContent = course.name;
-    card.querySelector(".course-focus").textContent = `${course.category === "platform" ? "平台內容" : "能力重點"}：${course.focus}`;
-    card.querySelector(".course-action").textContent = `${course.cta || "進入練習"} ↗`;
-    card.addEventListener("click", () => {
-      if (typeof window.gtag === "function") {
-        window.gtag("event", "select_course", {
-          course_id: course.id,
-          course_name: course.name,
-          subject: course.subject,
-          lesson: course.lesson,
-          href: course.href
-        });
-      }
-    });
-    target.append(fragment);
+  if (!platformTarget || !platformLink || !platformName || !platformSummary || !target) return;
+  const platform = courses.find((course) => course.category === "platform" && course.href);
+  const practices = courses.filter((course) => course.category === "practice" && course.href);
+  if (!platform || !practices.length) {
+    appendLoadStatus(target, "學習資料暫時無法核對，仍可使用現有練習入口。");
+    return;
+  }
+  const items = practices.map((course) => {
+    const item = document.createElement("li");
+    item.className = "practice-item";
+    const link = document.createElement("a");
+    link.className = "course-card";
+    link.href = course.href;
+    link.dataset.category = "practice";
+    link.dataset.courseId = course.id;
+    const label = document.createElement("span");
+    label.className = "course-label";
+    label.textContent = course.cardLabel;
+    const name = document.createElement("strong");
+    name.className = "course-name";
+    name.textContent = course.name;
+    const arrow = document.createElement("span");
+    arrow.className = "course-action";
+    arrow.textContent = "↗";
+    arrow.setAttribute("aria-hidden", "true");
+    link.append(label, name, arrow);
+    bindLearningCourse(link, course);
+    item.append(link);
+    return item;
   });
-}
-
-function getFeaturedCourses(courses) {
-  return courses
-    .filter((course) => course.featured === true)
-    .sort((current, next) => (
-      (current.homeOrder || 99) - (next.homeOrder || 99)
-    ));
-}
-
-function renderLearningCourses(expanded) {
-  renderCourses(
-    expanded
-      ? learningCourses
-      : getFeaturedCourses(learningCourses)
-  );
+  platformTarget.dataset.courseId = platform.id;
+  platformTarget.dataset.category = "platform";
+  platformLink.href = platform.href;
+  platformName.textContent = platform.name;
+  platformSummary.textContent = platform.learnSummary || platform.focus;
+  bindLearningCourse(platformLink, platform);
+  replacePreservingFocus(target, ...items);
 }
 
 function trackAiVideo(video) {
-  sendEvent("select_ai_video", {
-    video_id: video.id,
-    video_title: video.title,
-    youtube_url: video.youtubeUrl
-  });
-}
-
-function createAiVideoCard(video, format, showDescription = false) {
-  const card = document.createElement("article");
-  card.className = `ai-video-card is-${format}`;
-  card.dataset.videoId = video.id;
-  card.dataset.videoTitle = video.title;
-  card.dataset.youtubeUrl = video.youtubeUrl;
-  card.dataset.videoFormat = format;
-  card.dataset.contentCategory = video.contentCategory || "knowledge";
-
-  const link = document.createElement("a");
-  link.className = "ai-video-link";
-  link.href = video.youtubeUrl;
-  link.target = "_blank";
-  link.rel = "noopener";
-
-  const title = document.createElement("h3");
-  title.textContent = video.title.replace(/^Mica AI 專題[｜|]\s*/, "");
-
-  const action = document.createElement("span");
-  action.textContent = "在 YouTube 開啟";
-
-  link.append(title, action);
-  link.addEventListener("click", () => trackAiVideo(video));
-  const copy = document.createElement("div");
-  copy.className = "ai-video-copy";
-  const categoryLabel = document.createElement("p");
-  categoryLabel.className = "video-content-category";
-  categoryLabel.textContent = video.contentCategory === "theater" ? "AI 小劇場" : "AI 知識";
-  copy.append(categoryLabel, link);
-
-  if (showDescription && video.description) {
-    const description = document.createElement("p");
-    description.className = "ai-video-description";
-    description.textContent = video.description;
-    copy.append(description);
-  }
-
-  const frame = document.createElement("div");
-  frame.className = `ai-video-frame is-${format}`;
-
-  frame.append(window.ChaoMedia.create({
-    id: video.id,
-    title: video.title,
-    embedUrl: video.embedUrl,
-    thumbnail: video.thumbnail,
-    onLoad: () => trackAiVideo(video)
-  }));
-  card.append(frame, copy);
-  return card;
-}
-
-function renderAiVideos(videos, category = "all") {
-  const featureTarget = document.querySelector("#ai-video-feature");
-  const shortsTarget = document.querySelector("#ai-video-grid");
-
-  if (!featureTarget || !shortsTarget) return;
-
-  const publishedVideos = videos.filter((video) => (
-    video.status === "published"
-    && (category === "all" || (video.contentCategory || "knowledge") === category)
-  ));
-  const featuredVideo = publishedVideos
-    .filter((video) => video.featured === true && video.format === "standard")
-    .sort((current, next) => next.order - current.order)[0];
-  const latestShorts = publishedVideos
-    .filter((video) => (video.format || "short") === "short")
-    .sort((current, next) => next.order - current.order)
-    .slice(0, 3);
-
-  [featureTarget, shortsTarget].forEach((target) => {
-    target.querySelectorAll(".media-player").forEach((player) => player.dispatchEvent(new Event("chao:unload")));
-    target.replaceChildren();
-  });
-
-  if (featuredVideo) {
-    featureTarget.append(createAiVideoCard(featuredVideo, "standard", true));
-  } else {
-    const message = document.createElement("p");
-    message.className = "load-fallback";
-    message.textContent = "這個分類目前以短片呈現，請切換至 AI Shorts 查看精選。";
-    featureTarget.append(message);
-  }
-
-  latestShorts.forEach((video) => {
-    shortsTarget.append(createAiVideoCard(video, "short"));
-  });
-
-  const status = document.querySelector("#home-video-category-status");
-  if (status) {
-    const label = { all: "全部內容", knowledge: "AI 知識", theater: "AI 小劇場" }[category];
-    status.textContent = `${label}共 ${publishedVideos.length} 支，首頁精選 ${latestShorts.length} 支短片；完整內容可到影音庫查看。`;
-    status.dataset.videoCount = publishedVideos.length;
-  }
-  const allPublished = videos.filter((video) => video.status === "published");
-  document.querySelectorAll("#mica-ai-videos [data-video-category-count]").forEach((element) => {
-    const value = element.dataset.videoCategoryCount;
-    element.textContent = allPublished.filter((video) => (
-      value === "all" || (video.contentCategory || "knowledge") === value
-    )).length;
-  });
-}
-
-async function bootstrapAiVideos() {
-  const featureTarget = document.querySelector("#ai-video-feature");
-  const shortsTarget = document.querySelector("#ai-video-grid");
-  if (!featureTarget || !shortsTarget) return;
-
-  try {
-    const videos = await loadJson("assets/data/ai-videos.json");
-    renderAiVideos(videos);
-    const filters = [...document.querySelectorAll("#mica-ai-videos .video-category-filters button[data-video-category]")];
-    filters.forEach((button) => {
-      button.disabled = false;
-      button.addEventListener("click", () => {
-        const category = button.dataset.videoCategory;
-        filters.forEach((filter) => filter.setAttribute("aria-pressed", String(filter === button)));
-        renderAiVideos(videos, category);
-        if (category === "theater") document.querySelector("#tab-shorts")?.click();
-      });
-    });
-  } catch (_error) {
-    featureTarget.innerHTML = '<p class="load-fallback">短片資料暫時無法載入。</p>';
-    shortsTarget.innerHTML = '<p class="load-fallback">短片資料暫時無法載入。</p>';
-    const status = document.querySelector("#home-video-category-status");
-    if (status) status.textContent = "影音資料暫時無法載入，請重新整理頁面或前往完整影音庫。";
-  }
+  sendEvent("select_ai_video", { video_id: video.id, video_title: video.title, youtube_url: video.youtubeUrl });
 }
 
 function trackShuyiVideo(video) {
   sendEvent("select_shuyi_video", {
-    video_id: video.id,
-    video_title: video.title,
-    channel: video.channel,
-    href: video.youtubeUrl
+    video_id: video.id, video_title: video.title, channel: video.channel, href: video.youtubeUrl
   });
 }
 
-function createShuyiVideoFeature(video) {
-  const article = document.createElement("article");
-  const format = video.format === "standard" ? "standard" : "short";
-  article.className = `shuyi-video-feature is-${format}`;
-
-  const media = document.createElement("a");
-  media.className = `shuyi-video-media is-${format}`;
-  media.href = video.youtubeUrl;
-  media.target = "_blank";
-  media.rel = "noopener";
-
-  const image = document.createElement("img");
-  image.className = "shuyi-video-thumbnail";
-  image.src = video.thumbnail;
-  image.alt = video.thumbnailAlt;
-  image.loading = "lazy";
-  image.decoding = "async";
-
-  const playIndicator = document.createElement("span");
-  playIndicator.className = "shuyi-video-play";
-  playIndicator.setAttribute("aria-hidden", "true");
-  playIndicator.textContent = "▶";
-
-  media.append(image, playIndicator);
-  media.addEventListener("click", () => trackShuyiVideo(video));
-
-  const copy = document.createElement("div");
-  copy.className = "shuyi-video-copy";
-
-  const label = document.createElement("p");
-  label.className = "shuyi-video-label";
-  label.textContent = `${video.channel} · ${format === "short" ? "YouTube Short" : "YouTube 影片"}`;
-
-  const title = document.createElement("h3");
-  title.className = "shuyi-video-title";
-  title.textContent = video.title;
-
-  const description = document.createElement("p");
-  description.className = "shuyi-video-description";
-  description.textContent = video.description;
-
+function renderMediaLatest(target, record, kind) {
+  if (!target || !record) return;
+  const isPodcast = kind === "podcast";
   const link = document.createElement("a");
-  link.className = "shuyi-video-link";
-  link.href = video.youtubeUrl;
+  link.className = "media-latest-link";
+  link.href = isPodcast ? record.href : record.youtubeUrl;
   link.target = "_blank";
   link.rel = "noopener";
-  link.textContent = "觀看影片 →";
-  link.addEventListener("click", () => trackShuyiVideo(video));
-
-  copy.append(label, title, description, link);
-  article.append(media, copy);
-
-  return article;
+  link.dataset.contentId = record.id;
+  link.dataset.contentType = kind;
+  link.dataset.publishedAt = publicationValue(record);
+  const image = document.createElement("img");
+  image.className = "media-latest-image";
+  image.src = isPodcast ? (record.artwork || "assets/images/shuyi-podcast-cover.jpg")
+    : (record.thumbnail || `https://i.ytimg.com/vi/${encodeURIComponent(record.id)}/hqdefault.jpg`);
+  image.alt = "";
+  image.width = 480;
+  image.height = isPodcast ? 480 : 360;
+  image.loading = "lazy";
+  image.decoding = "async";
+  image.addEventListener("error", () => { image.hidden = true; }, { once: true });
+  const copy = document.createElement("span");
+  copy.className = "media-latest-copy";
+  const meta = document.createElement("span");
+  meta.className = "media-latest-meta";
+  const category = document.createElement("span");
+  category.textContent = isPodcast ? "Podcast" : kind === "mica"
+    ? (record.contentCategory === "theater" ? "AI 小劇場" : "AI 知識")
+    : (record.format === "short" ? "YouTube Shorts" : "動畫影片");
+  const date = document.createElement("time");
+  date.dateTime = publicationValue(record);
+  date.textContent = formatContentDate(publicationValue(record));
+  meta.append(category, date);
+  const title = document.createElement("strong");
+  title.className = "media-latest-title";
+  title.textContent = record.title;
+  const action = document.createElement("span");
+  action.className = "media-latest-action";
+  action.textContent = isPodcast ? "收聽本集 ↗" : "在 YouTube 觀看 ↗";
+  copy.append(meta, title, action);
+  link.append(image, copy);
+  link.addEventListener("click", () => {
+    if (isPodcast) trackPodcastEpisode(record);
+    else if (kind === "mica") trackAiVideo(record);
+    else trackShuyiVideo(record);
+  });
+  replacePreservingFocus(target, link);
 }
 
-function renderShuyiVideos(videos) {
-  const target = document.querySelector("#shuyi-video-feature");
-
-  if (!target) return;
-
-  const latestVideo = videos
-    .filter((video) => video.status === "published")
-    .sort((current, next) => (
-      new Date(next.publishedAt || 0) - new Date(current.publishedAt || 0)
-    ))[0];
-
-  target.replaceChildren();
-
-  if (!latestVideo) {
-    const fallback = document.createElement("p");
-    fallback.className = "load-fallback";
-    fallback.textContent = "目前沒有新的叔姨講古動畫。";
-    target.append(fallback);
-    return;
+async function bootstrapMediaLatest() {
+  const micaTarget = document.querySelector("#mica-latest");
+  const shuyiTarget = document.querySelector("#shuyi-latest");
+  if (!micaTarget && !shuyiTarget) return;
+  const [mica, shuyi, podcasts] = await Promise.allSettled([
+    loadJson("assets/data/ai-videos.json"), loadJson("assets/data/shuyi-videos.json"), loadJson("assets/data/podcast-episodes.json")
+  ]);
+  if (micaTarget) {
+    const latest = mica.status === "fulfilled" ? mica.value.filter((video) => video.status === "published"
+      && video.youtubeUrl && isPublishedRecord(video)).sort((a, b) => publicationTimestamp(b) - publicationTimestamp(a))[0] : null;
+    if (latest) renderMediaLatest(micaTarget, latest, "mica");
+    else appendLoadStatus(micaTarget, "最新影音資料暫時無法核對，仍可開啟原作或影音庫。");
   }
-
-  target.append(createShuyiVideoFeature(latestVideo));
-}
-
-async function bootstrapShuyiVideos() {
-  const target = document.querySelector("#shuyi-video-feature");
-
-  if (!target) return;
-
-  try {
-    const videos = await loadJson("assets/data/shuyi-videos.json");
-    renderShuyiVideos(videos);
-  } catch (_error) {
-    target.replaceChildren();
-    const fallback = document.createElement("p");
-    fallback.className = "load-fallback";
-    fallback.textContent = "叔姨講古動畫資料暫時無法載入。";
-    target.append(fallback);
+  if (shuyiTarget) {
+    if (shuyi.status === "fulfilled" && podcasts.status === "fulfilled") {
+      const candidates = [
+        ...shuyi.value.filter((video) => video.status === "published" && video.youtubeUrl && isPublishedRecord(video))
+          .map((record) => ({ record, kind: "shuyi" })),
+        ...podcasts.value.filter((episode) => episode.href && isPublishedRecord(episode))
+          .map((record) => ({ record, kind: "podcast" }))
+      ].sort((a, b) => publicationTimestamp(b.record) - publicationTimestamp(a.record));
+      if (candidates[0]) {
+        renderMediaLatest(shuyiTarget, candidates[0].record, candidates[0].kind);
+        return;
+      }
+    }
+    appendLoadStatus(shuyiTarget, "最新故事資料暫時無法核對，仍可開啟原作或內容館。");
   }
 }
 
@@ -637,74 +535,48 @@ function trackAiLabProject(project) {
 
 function renderAiLabProjects(projects) {
   const target = document.querySelector("#ai-lab-projects");
-
   if (!target) return;
-
-  projects
-    .filter((project) => project.status === "published")
-    .sort((current, next) => current.order - next.order)
-    .forEach((project) => {
-      const isVideoReference = project.type === "video-reference";
-      const card = document.createElement("article");
-      card.className = "lab-project-card";
-      card.dataset.projectId = project.id;
-      card.dataset.projectType = project.type;
-      card.dataset.youtubeId = project.youtubeId;
-
-      const copy = document.createElement("div");
-      copy.className = "lab-project-copy";
-
-      const label = document.createElement("span");
-      label.className = "lab-project-label";
-      label.textContent = isVideoReference ? "Mica AI video" : "AI experiment";
-
-      const title = document.createElement("h3");
-      title.textContent = project.title;
-
-      const description = document.createElement("p");
-      description.textContent = project.description;
-
-      const link = document.createElement("a");
-      link.className = "lab-project-link";
-      link.href = isVideoReference ? project.href : project.youtubeUrl;
-      link.textContent = isVideoReference ? "前往 Mica AI 影音庫觀看" : "在 YouTube 開啟";
-      if (!isVideoReference) {
-        link.target = "_blank";
-        link.rel = "noopener";
-      }
-      link.addEventListener("click", () => trackAiLabProject(project));
-
-      copy.append(label, title, description, link);
-
-      if (isVideoReference) {
-        card.append(copy);
-        target.append(card);
-        return;
-      }
-
-      const frame = document.createElement("div");
-      frame.className = "lab-video-frame";
-
-      frame.append(window.ChaoMedia.create({
-        id: project.youtubeId,
-        title: project.title,
-        embedUrl: project.embedUrl,
-        onLoad: () => trackAiLabProject(project)
-      }));
-      card.append(copy, frame);
-      target.append(card);
-    });
+  const trials = projects.filter((project) => project.status === "published"
+    && project.type !== "video-reference" && project.youtubeUrl).sort((a, b) => a.order - b.order);
+  if (!trials.length) {
+    appendLoadStatus(target, "試作記錄資料暫時無法核對，仍可使用現有原作連結。");
+    return;
+  }
+  const items = trials.map((project) => {
+    const item = document.createElement("li");
+    item.className = "lab-record";
+    item.dataset.projectId = project.id;
+    item.dataset.projectType = project.type;
+    item.dataset.youtubeId = project.youtubeId;
+    const link = document.createElement("a");
+    link.className = "lab-record-link";
+    link.href = project.youtubeUrl;
+    link.target = "_blank";
+    link.rel = "noopener";
+    const title = document.createElement("span");
+    title.className = "lab-record-title";
+    title.textContent = project.title;
+    const description = document.createElement("span");
+    description.className = "lab-record-description";
+    description.textContent = project.description;
+    const action = document.createElement("span");
+    action.className = "lab-record-action";
+    action.textContent = "在 YouTube 開啟 ↗";
+    link.append(title, description, action);
+    link.addEventListener("click", () => trackAiLabProject(project));
+    item.append(link);
+    return item;
+  });
+  replacePreservingFocus(target, ...items);
 }
 
 async function bootstrapAiLabProjects() {
   const target = document.querySelector("#ai-lab-projects");
   if (!target) return;
-
   try {
-    const projects = await loadJson("assets/data/ai-lab-projects.json");
-    renderAiLabProjects(projects);
+    renderAiLabProjects(await loadJson("assets/data/ai-lab-projects.json"));
   } catch (_error) {
-    target.innerHTML = '<p class="load-fallback">AI 實驗室內容暫時無法載入。</p>';
+    appendLoadStatus(target, "試作記錄資料暫時無法載入，仍可使用現有原作連結。");
   }
 }
 
@@ -774,39 +646,7 @@ function trackPodcastEpisode(episode) {
   });
 }
 
-function renderPodcastEpisodes(episodes) {
-  const target = document.querySelector("#podcast-episodes");
 
-  if (!target) return;
-
-  episodes
-    .filter((episode) => episode.featured)
-    .sort((current, next) => new Date(next.publishedAt || 0) - new Date(current.publishedAt || 0))
-    .slice(0, 2)
-    .forEach((episode) => {
-      const link = document.createElement("a");
-      link.className = "podcast-episode-card podcast-episode-link";
-      link.href = episode.href;
-      link.target = "_blank";
-      link.rel = "noopener";
-
-      [
-        ["span", "episode-label", "episode"],
-        ["strong", "podcast-episode-title", episode.title],
-        ["span", "podcast-episode-subtitle", episode.subtitle],
-        ["span", "podcast-episode-description", episode.description],
-        ["span", "podcast-episode-cta", "收聽本集"]
-      ].forEach(([tagName, className, text]) => {
-        const element = document.createElement(tagName);
-        element.className = className;
-        element.textContent = text;
-        link.append(element);
-      });
-
-      link.addEventListener("click", () => trackPodcastEpisode(episode));
-      target.append(link);
-    });
-}
 
 function bindAiNoteTracking() {
   const status = document.createElement("p");
@@ -835,26 +675,7 @@ function bindLabProjectTracking() {
   });
 }
 
-function bindLearningGamesToggle() {
-  const button = document.querySelector(".learning-toggle");
 
-  if (!button) return;
-
-  button.addEventListener("click", () => {
-    if (learningCourses.length === 0) return;
-
-    const nextExpanded = button.getAttribute("aria-expanded") !== "true";
-    button.setAttribute("aria-expanded", String(nextExpanded));
-    renderLearningCourses(nextExpanded);
-    button.textContent = nextExpanded
-      ? "收合練習列表"
-      : `查看全部 ${learningCourses.length} 個學習入口`;
-
-    sendEvent("toggle_learning_games", {
-      expanded: nextExpanded
-    });
-  });
-}
 
 async function bootstrapCourseHub() {
   const target = document.querySelector("#course-hub-grid");
@@ -862,21 +683,21 @@ async function bootstrapCourseHub() {
     const courses = await loadJson("assets/data/courses-hub.json");
     renderCourseHub(courses);
   } catch (_error) {
-    target.innerHTML = '<p class="load-fallback">課程中心資料載入中發生問題，請重新整理頁面再試一次。</p>';
+    appendLoadStatus(target, "課程資料暫時無法載入，仍可使用現有課程入口。");
   }
 }
 
 async function bootstrapRecentUpdates() {
   const target = document.querySelector("#recent-updates-grid");
-
   if (!target) return;
-
-  try {
-    const updates = await loadJson("assets/data/site-updates.json");
-    renderRecentUpdates(updates);
-  } catch (_error) {
-    target.innerHTML =
-      '<p class="load-fallback">最近更新資料暫時無法載入。</p>';
+  const results = await Promise.allSettled([
+    loadJson("assets/data/site-updates.json"), loadJson("assets/data/ai-videos.json"),
+    loadJson("assets/data/shuyi-videos.json"), loadJson("assets/data/podcast-episodes.json")
+  ]);
+  if (results.every((result) => result.status === "fulfilled")) {
+    renderRecentUpdates(...results.map((result) => result.value));
+  } else {
+    appendLoadStatus(target, "近期資料暫時無法核對，仍可使用現有內容連結。");
   }
 }
 
@@ -894,60 +715,17 @@ async function bootstrapInteractiveProjects() {
 
     renderInteractiveProjects(projects);
   } catch (_error) {
-    target.innerHTML =
-      '<p class="load-fallback">'
-      + "代表作品資料暫時無法載入。"
-      + "</p>";
-  }
-}
-
-async function bootstrapPodcastEpisodes() {
-  const target = document.querySelector("#podcast-episodes");
-  if (!target) return;
-
-  try {
-    const episodes = await loadJson("assets/data/podcast-episodes.json");
-    renderPodcastEpisodes(episodes);
-  } catch (_error) {
-    target.innerHTML = '<p class="load-fallback">Podcast 集數資料載入中發生問題，請重新整理頁面再試一次。</p>';
+    appendLoadStatus(target, "代表作品資料暫時無法載入，仍可使用現有作品連結。");
   }
 }
 
 async function bootstrapCourses() {
   const target = document.querySelector("#course-grid");
-  const button = document.querySelector(".learning-toggle");
-
+  if (!target) return;
   try {
-    learningCourses = await loadJson("assets/data/courses.json");
-
-    const featuredCourses = getFeaturedCourses(learningCourses);
-
-    if (featuredCourses.length !== 3) {
-      throw new Error("Featured learning course count must be 3");
-    }
-
-    renderLearningCourses(false);
-
-    if (button) {
-      button.disabled = false;
-      button.textContent = `查看全部 ${learningCourses.length} 個學習入口`;
-    }
-    const summary = document.querySelector("#learning-entry-summary");
-    if (summary) {
-      const platformCount = learningCourses.filter((course) => course.category === "platform").length;
-      summary.textContent = `${platformCount} 個學習平台與 ${learningCourses.length - platformCount} 個國語、數學練習入口。`;
-    }
+    renderCourses(await loadJson("assets/data/courses.json"));
   } catch (_error) {
-    learningCourses = [];
-
-    if (target) {
-      target.innerHTML = '<p class="load-fallback">課程資料載入中發生問題，請重新整理頁面再試一次。</p>';
-    }
-
-    if (button) {
-      button.disabled = true;
-      button.textContent = "練習暫時無法載入";
-    }
+    appendLoadStatus(target, "學習資料暫時無法載入，仍可使用現有平台與練習入口。");
   }
 }
 
@@ -1078,12 +856,9 @@ bindPodcastTracking();
 bindPodcastSeriesTracking();
 bindAiNoteTracking();
 bindLabProjectTracking();
-bindLearningGamesToggle();
-bootstrapAiVideos();
-bootstrapShuyiVideos();
+bootstrapMediaLatest();
 bootstrapAiLabProjects();
 bootstrapRecentUpdates();
 bootstrapInteractiveProjects();
 bootstrapCourseHub();
-bootstrapPodcastEpisodes();
 bootstrapCourses();

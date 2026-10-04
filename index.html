@@ -32,15 +32,15 @@
   <link rel="stylesheet" href="studio.css">
   <link rel="stylesheet" href="home-workbench.css">
   <link rel="stylesheet" href="home-lab.css">
-  <link rel="stylesheet" href="video-categories.css">
+  <link rel="stylesheet" href="home-structure.css">
 </head>
-<body class="home-page">
+<body class="home-page home-ia">
   <a class="skip-link" href="#main-content">跳到主要內容</a>
   <header class="top-nav">
     <div class="top-nav-inner">
       <a href="/" class="top-nav-brand">Chao AI <span>實作所</span></a>
       <nav class="top-nav-links" id="home-section-navigation" aria-label="頁面章節導覽">
-        <a href="#learning-games">互動作品</a><a href="#ai-notes">工具筆記</a><a href="#course-hub">AI 課程</a><a href="#mica-ai-videos">AI 影音</a><a href="#podcast">叔姨講古</a><a href="#ai-lab">實驗室</a>
+        <a href="#learning-games">互動作品</a><a href="#course-hub">AI 課程</a><a href="#ai-notes">實作筆記</a><a href="#media-stories">影音與故事</a><a href="#recent-updates">最近更新</a><a href="#about">關於</a>
       </nav>
       <div class="nav-utilities">
         <button class="theme-toggle" type="button" aria-label="切換顯示模式">明暗</button>
@@ -92,106 +92,83 @@
       </section>
     </section>
 
-    <nav class="brand-hub-nav" aria-label="從這裡開始探索">
-      <span class="explore-label">找到你的入口</span>
-      <div class="explore-links">
-        <a class="brand-hub-link" href="#learning-games" data-hub-item="互動作品" data-target="#learning-games">玩一個作品 <span aria-hidden="true">↗</span></a>
-        <a class="brand-hub-link" href="#course-hub" data-hub-item="AI 課程" data-target="#course-hub">學會做網站 <span aria-hidden="true">↗</span></a>
-        <a class="brand-hub-link" href="#ai-notes" data-hub-item="工具筆記" data-target="#ai-notes">看看實作筆記 <span aria-hidden="true">↗</span></a>
-        <a class="brand-hub-link" href="#mica-ai-videos" data-hub-item="AI 影音" data-target="#mica-ai-videos">看懂 AI <span aria-hidden="true">↗</span></a>
-        <a class="brand-hub-link" href="#podcast" data-hub-item="叔姨講古" data-target="#podcast">聽一段故事 <span aria-hidden="true">↗</span></a>
-        <a class="brand-hub-link" href="#ai-lab" data-hub-item="實驗紀錄" data-target="#ai-lab">走進實驗室 <span aria-hidden="true">↗</span></a>
-      </div>
-    </nav>
-
     <section class="works-section" id="learning-games" aria-labelledby="learning-games-title">
-      <header class="section-head">
-        <h2 id="learning-games-title">可以玩的作品。</h2>
-        <p>從親子共創到臺灣農業，這些是我和 AI 一起完成的互動作品。</p>
-      </header>
-      <div id="interactive-feature-projects" class="interactive-feature-projects" data-lead-project="taiwan-agri-king"><p class="load-fallback">正在載入代表作品。</p></div>
-      <div class="learning-collection">
-        <div class="learning-intro"><h3>一起練習，<br>一起長大。</h3><p id="learning-entry-summary">1 個學習平台與 6 個國語、數學練習入口。</p><button class="learning-toggle secondary-link" type="button" aria-expanded="false" aria-controls="course-grid">查看全部 7 個學習入口</button></div>
-        <div id="course-grid" class="course-grid"><p class="load-fallback">正在載入互動練習。</p></div>
-      </div>
+      <header class="section-head"><p class="section-index">01 · 互動作品</p><h2 id="learning-games-title">可以玩的作品。</h2><p>從數字成長、環島策略到星球開墾，和 AI 一起做成能實際玩的作品。</p></header>
+      <div id="interactive-feature-projects" class="interactive-feature-projects" data-lead-project="taiwan-agri-king"><div class="static-entrances"><p>探索三個代表作品：</p><a href="https://chaohuang-tw.github.io/star-planet-tycoon/">星球大富翁：寶石星開墾計畫 ↗</a><a href="https://chaohuang-tw.github.io/taiwan-agri-king/game.html">臺灣農產王：環島產地爭霸戰 ↗</a><a href="https://chaohuang-tw.github.io/number-snake-arena/">Number Snake Arena ↗</a></div></div>
+      <article class="learning-platform" id="learning-platform" aria-labelledby="learning-platform-name">
+        <div class="platform-overview"><p class="section-index">互動學習平台</p><h3><span id="learning-platform-name">小學學習冒險島</span></h3><p id="learning-platform-summary">從平台入口探索國小課文與數學複習，也可以直接選擇下方的練習。</p><a class="text-link" id="learning-platform-link" href="https://chaohuang-tw.github.io/g2-mandarin-moon-river/">探索完整學習平台 <span aria-hidden="true">↗</span></a></div>
+        <div class="platform-practices"><h4 id="practice-list-title">六個練習，選一個開始。</h4><ul id="course-grid" class="practice-list" aria-labelledby="practice-list-title">
+          <li><a class="course-card" href="https://chaohuang-tw.github.io/g2-mandarin-dog-egg-case/" data-category="practice"><span class="course-label">國語 第八課</span><span class="course-name">狗窩蛋事件</span><span class="course-action" aria-hidden="true">↗</span></a></li>
+          <li><a class="course-card" href="https://chaohuang-tw.github.io/g2-mandarin-magic-brush-ma-liang/" data-category="practice"><span class="course-label">國語 第九課</span><span class="course-name">神筆馬良</span><span class="course-action" aria-hidden="true">↗</span></a></li>
+          <li><a class="course-card" href="https://chaohuang-tw.github.io/g2-mandarin-happy-explorer/" data-category="practice"><span class="course-label">國語 第十課</span><span class="course-name">快樂的探險家</span><span class="course-action" aria-hidden="true">↗</span></a></li>
+          <li><a class="course-card" href="https://chaohuang-tw.github.io/g2-mandarin-little-reader-paradise/" data-category="practice"><span class="course-label">國語 第十一課</span><span class="course-name">小讀者樂園</span><span class="course-action" aria-hidden="true">↗</span></a></li>
+          <li><a class="course-card" href="https://chaohuang-tw.github.io/g2-mandarin-giant-mountain/" data-category="practice"><span class="course-label">國語 第十二課</span><span class="course-name">巨人山</span><span class="course-action" aria-hidden="true">↗</span></a></li>
+          <li><a class="course-card" href="https://chaohuang-tw.github.io/g2-mandarin-moon-river/g2-math-final-adventure/" data-category="practice"><span class="course-label">數學 二下期末</span><span class="course-name">二下數學期末大冒險</span><span class="course-action" aria-hidden="true">↗</span></a></li>
+        </ul></div>
+      </article>
     </section>
 
     <section class="course-hub" id="course-hub" aria-labelledby="course-hub-title">
-      <header class="section-head"><h2 id="course-hub-title">你也可以，<br>做出自己的第一個作品。</h2><p>把真實的製作過程拆開，一步一步跟著做。</p></header>
-      <div class="course-hub-grid" id="course-hub-grid"></div>
+      <header class="section-head"><p class="section-index">02 · AI 課程</p><h2 id="course-hub-title">你也可以，<br>做出自己的第一個作品。</h2><p>把真實的製作過程拆開，一步一步跟著做。</p></header>
+      <div class="course-hub-grid" id="course-hub-grid"><div class="static-entrances"><a href="/courses/build-your-ai-website/">用 AI 建立你的第一個官網 · 8 課可閱讀 ↗</a><a href="/courses/gen-ai-software-applications/#handout-preview">生成式 AI 軟體應用課程 · 預覽已開放，完整講義尚未開放 ↗</a></div></div>
     </section>
 
     <section class="notes-section" id="ai-notes" aria-labelledby="ai-notes-title">
-      <header class="section-head"><h2 id="ai-notes-title">過程，也值得分享。</h2><p>工具筆記、工作方法，以及做完之後才知道的事。</p></header>
+      <header class="section-head"><p class="section-index">03 · 實作筆記</p><h2 id="ai-notes-title">過程，也值得分享。</h2><p>先讀完成的實作方法，再看看仍在試的工具與想法。</p></header>
       <div class="note-list">
         <a class="note-feature track-ai-note track-home-primary-action" href="/notes/how-i-built-interactive-learning-websites-with-ai/" data-note-title="我如何用 AI 做出互動學習網站" data-status="published" data-action-name="閱讀最新實作筆記">
           <img src="assets/images/chao-ai-studio-hero-v3.webp" width="1419" height="1108" loading="lazy" decoding="async" alt="創作者和 AI 協作，把想法做成網站與影音作品">
           <div><span class="note-category">AI 工具應用筆記</span><h3>我如何用 AI 做出互動學習網站</h3><p>從一句需求，到真正能在手機上操作的作品。</p><span class="text-link">閱讀最新實作筆記 <span aria-hidden="true">↗</span></span></div>
         </a>
-        <div class="note-upcoming">
-          <button class="note-item track-ai-note" type="button" data-note-title="用 Codex 管理 GitHub Pages 的心得" data-status="建置中"><span>用 Codex 管理 GitHub Pages 的心得</span><small>建置中</small></button>
-          <button class="note-item track-ai-note" type="button" data-note-title="從 Prompt 到作品：AI 協作的工作方式" data-status="建置中"><span>從 Prompt 到作品：AI 協作的工作方式</span><small>建置中</small></button>
-        </div>
       </div>
+      <section class="experiment-section" id="ai-lab" aria-labelledby="ai-lab-title">
+        <header class="experiment-heading"><h3 id="ai-lab-title">試作紀錄</h3><p>AI 實驗室：把工具放進真實情境，留下可觀看的嘗試。</p></header>
+        <ul id="ai-lab-projects" class="experiment-list">
+          <li class="lab-record" data-project-id="ai-lab-video-001" data-project-type="youtube"><a class="lab-record-link" href="https://youtu.be/97vU63GZfXo?si=Q9EB-FTZ5ASTDPwz" target="_blank" rel="noopener"><span class="lab-record-title">悟空 VS 二郎神 （Omni試做）</span><span class="lab-record-description">以悟空與二郎神的對戰情境，記錄 Omni 影片試做。</span><span class="lab-record-action">在 YouTube 開啟 ↗</span></a></li>
+          <li class="lab-record" data-project-id="ai-lab-video-002" data-project-type="youtube"><a class="lab-record-link" href="https://youtu.be/Bsbsvuu8JVA?si=NfoiaU-eUen_EsEH" target="_blank" rel="noopener"><span class="lab-record-title">據說是 Fable 5 寫的提示詞 Grok 試做 #提示詞取自網路</span><span class="lab-record-description">採用網路分享、標示為 Fable 5 所寫的提示詞，進行 Grok 影片試做。</span><span class="lab-record-action">在 YouTube 開啟 ↗</span></a></li>
+          <li class="lab-record" data-project-id="ai-lab-video-003" data-project-type="youtube"><a class="lab-record-link" href="https://youtu.be/EQpcdW5cVp4?si=i0qcjOg2OhVo86GZ" target="_blank" rel="noopener"><span class="lab-record-title">同圖同詞，誰的貓拳更有戲？</span><span class="lab-record-description">Google Flow 對上 Super Grok，同一張參考圖、同一組提示詞，卻演出兩種完全不同的氣場。你比較喜歡哪一邊？</span><span class="lab-record-action">在 YouTube 開啟 ↗</span></a></li>
+        </ul>
+      </section>
+      <details class="note-drafts"><summary>正在整理的筆記 <span>2 篇建置中</span></summary><ul class="draft-list"><li><span>用 Codex 管理 GitHub Pages 的心得</span><small>建置中</small></li><li><span>從 Prompt 到作品：AI 協作的工作方式</span><small>建置中</small></li></ul></details>
     </section>
 
-    <section class="ai-video-section" id="mica-ai-videos" aria-labelledby="mica-ai-video-title">
-      <header class="section-head"><h2 id="mica-ai-video-title">Mica 陪你，<br>看懂 AI，笑看日常。</h2><p>Mica AI 小劇場：從模型知識與工具專題，到 AI 創作的日常短劇。</p></header>
-      <div class="video-category-filters" role="group" aria-label="Mica 內容分類">
-        <button type="button" data-video-category="all" aria-pressed="true" disabled>全部內容 <span data-video-category-count="all">14</span></button>
-        <button type="button" data-video-category="knowledge" aria-pressed="false" disabled>AI 知識 <span data-video-category-count="knowledge">9</span></button>
-        <button type="button" data-video-category="theater" aria-pressed="false" disabled>AI 小劇場 <span data-video-category-count="theater">5</span></button>
+    <section class="media-stories-section" id="media-stories" aria-labelledby="media-stories-title">
+      <header class="section-head"><p class="section-index">04 · 影音與故事館</p><h2 id="media-stories-title">看懂 AI，<br>也聽一段好故事。</h2><p>選一個館走進去。完整分類、影片與故事，都各自在館內。</p></header>
+      <div class="media-hub-grid">
+        <article class="media-hub-card" id="mica-ai-videos" aria-labelledby="mica-ai-video-title">
+          <header><p class="media-hub-kicker">AI 知識 × 日常小劇場</p><h3 id="mica-ai-video-title">Mica AI 影音庫</h3><p class="media-hub-summary">模型知識、工具專題與 AI 創作的日常短劇。依興趣在館內切換 AI 知識與小劇場。</p></header>
+          <a class="media-hub-cta text-link" href="/videos/">走進 Mica AI 影音庫 <span aria-hidden="true">↗</span></a>
+          <span class="legacy-anchor" id="tab-feature" aria-hidden="true"></span><span class="legacy-anchor" id="tab-shorts" aria-hidden="true"></span><span class="legacy-anchor" id="panel-feature" aria-hidden="true"></span><span class="legacy-anchor" id="panel-shorts" aria-hidden="true"></span><span class="legacy-anchor" id="ai-video-feature" aria-hidden="true"></span><span class="legacy-anchor" id="ai-video-grid" aria-hidden="true"></span><span class="legacy-anchor" id="home-video-category-status" aria-hidden="true"></span>
+          <div id="mica-latest" class="media-latest"><a class="media-latest-link" href="https://www.youtube.com/shorts/g5smMOupcLI" target="_blank" rel="noopener" data-content-id="g5smMOupcLI"><img class="media-latest-image" src="https://i4.ytimg.com/vi/g5smMOupcLI/hqdefault.jpg" width="480" height="360" loading="lazy" decoding="async" alt="比你優秀的人都比你努力，那你努力還有什麼用？但足夠沒用就沒人可以利用我！影片縮圖"><span class="media-latest-copy"><span class="media-latest-meta"><span>AI 小劇場</span> <time datetime="2026-10-03">2026-10-03</time></span><span class="media-latest-title">比你優秀的人都比你努力，那你努力還有什麼用？但足夠沒用就沒人可以利用我！</span><span class="media-latest-action">在 YouTube 觀看 <span aria-hidden="true">↗</span></span></span></a></div>
+        </article>
+        <article class="media-hub-card" id="podcast" aria-labelledby="podcast-title">
+          <header><p class="media-hub-kicker">動畫 × 經典故事 × Podcast</p><h3 id="podcast-title">叔姨講古</h3><p class="media-hub-summary">動畫、睡前故事與經典文學。影片、Shorts 和 Podcast 全集，集中在同一個內容館。</p></header>
+          <a class="media-hub-cta text-link" href="/shuyi/">走進叔姨講古 <span aria-hidden="true">↗</span></a>
+          <span class="legacy-anchor" id="shuyi-video-feature" aria-hidden="true"></span><span class="legacy-anchor" id="podcast-episodes" aria-hidden="true"></span>
+          <div id="shuyi-latest" class="media-latest"><a class="media-latest-link" href="https://youtube.com/shorts/79FMMJ-EMFk" target="_blank" rel="noopener" data-content-id="79FMMJ-EMFk"><img class="media-latest-image" src="assets/images/shuyi/79FMMJ-EMFk.jpg" width="480" height="360" loading="lazy" decoding="async" alt="孫悟空 VS 賽太歲 演武 #西遊記 #兒童故事 #經典故事 #西遊記動畫影片縮圖"><span class="media-latest-copy"><span class="media-latest-meta"><span>Shorts</span> <time datetime="2026-10-03">2026-10-03</time></span><span class="media-latest-title">孫悟空 VS 賽太歲 演武 #西遊記 #兒童故事 #經典故事 #西遊記動畫</span><span class="media-latest-action">在 YouTube 觀看 <span aria-hidden="true">↗</span></span></span></a></div>
+        </article>
       </div>
-      <p id="home-video-category-status" class="video-category-status" role="status" aria-live="polite">收錄 9 支 AI 知識與 5 支 AI 小劇場。可分別查看專題影片與 Shorts。</p>
-      <div class="media-toolbar">
-        <div class="media-tabs" role="tablist" aria-label="Mica 影片格式">
-          <button id="tab-feature" role="tab" aria-selected="true" aria-controls="panel-feature" type="button">專題影片</button>
-          <button id="tab-shorts" role="tab" aria-selected="false" aria-controls="panel-shorts" tabindex="-1" type="button">AI Shorts</button>
-        </div>
-        <a class="text-link" href="/videos/">查看全部 Mica AI 影片 <span aria-hidden="true">↗</span></a>
-      </div>
-      <div id="panel-feature" role="tabpanel" aria-labelledby="tab-feature"><div id="ai-video-feature" class="ai-video-feature"><p class="load-fallback">正在載入專題影片。</p></div></div>
-      <div id="panel-shorts" role="tabpanel" aria-labelledby="tab-shorts" hidden><div id="ai-video-grid" class="ai-video-grid"><p class="load-fallback">正在載入 AI Shorts。</p></div></div>
-    </section>
-
-    <section class="podcast-section" id="podcast" aria-labelledby="podcast-title">
-      <div class="story-intro">
-        <picture>
-          <source type="image/webp" srcset="assets/images/shuyi-podcast-cover-320.webp 320w, assets/images/shuyi-podcast-cover-640.webp 640w, assets/images/shuyi-podcast-cover-960.webp 960w" sizes="(max-width: 468px) calc(84vw - 33.6px), (max-width: 600px) 360px, (max-width: 1100px) calc(41.86vw - 53.58px), (max-width: 1200px) calc(41.86vw - 66.98px), 435px">
-          <img class="story-cover" src="assets/images/shuyi-podcast-cover.jpg" width="2048" height="2048" loading="lazy" decoding="async" alt="叔姨講古 Podcast 節目封面">
-        </picture>
-        <div><h2 id="podcast-title">故事開始了，<br>一起聽吧。</h2><p>叔姨講古：動畫、睡前故事、經典文學與親子共聽。用溫暖的聲音，陪孩子進入故事世界。</p><a class="primary-link" href="/shuyi/">走進叔姨講古 <span aria-hidden="true">↗</span></a></div>
-      </div>
-      <div class="story-content">
-        <div class="story-video"><h3>最新動畫</h3><div id="shuyi-video-feature"><p class="load-fallback">正在載入動畫。</p></div></div>
-        <div class="story-audio"><h3>最近精彩集數</h3><div id="podcast-episodes"></div>
-          <div class="podcast-actions">
-            <a class="text-link track-podcast" href="https://podcasts.apple.com/tw/podcast/%E5%8F%94%E5%A7%A8%E8%AC%9B%E5%8F%A4/id1829910020" target="_blank" rel="noopener" data-podcast-title="叔姨講古" data-platform="Apple Podcasts">前往 Apple Podcasts 收聽 ↗</a>
-            <a class="text-link track-podcast-series" href="/series/journey-to-the-west/" data-series-name="西遊記">查看西遊記全集 ↗</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="lab-section" id="ai-lab" aria-labelledby="ai-lab-title">
-      <header class="section-head"><h2 id="ai-lab-title">還在試，<br>才有下一個可能。</h2><p>AI 實驗室。把工具放進真實情境，看看會發生什麼。</p></header>
-      <div id="ai-lab-projects" class="lab-project-grid"></div>
     </section>
 
     <section class="recent-updates-section" id="recent-updates" aria-labelledby="recent-updates-title">
-      <header class="section-head"><h2 id="recent-updates-title">最近更新</h2></header>
-      <div id="recent-updates-grid" class="recent-updates-grid"><p class="load-fallback">正在載入最近更新。</p></div>
+      <header class="section-head"><p class="section-index">05 · 最近更新</p><h2 id="recent-updates-title">最近有新內容。</h2></header>
+      <ul id="recent-updates-grid" class="recent-updates-list" aria-label="最近公開內容">
+        <li class="recent-update-item"><time datetime="2026-10-03">2026.10.03</time><a class="recent-update-link" href="https://youtube.com/shorts/79FMMJ-EMFk" target="_blank" rel="noopener"><span class="recent-update-type">叔姨講古</span><span class="recent-update-title">孫悟空 VS 賽太歲 演武 #西遊記 #兒童故事 #經典故事 #西遊記動畫 <span aria-hidden="true">↗</span></span></a></li>
+        <li class="recent-update-item"><time datetime="2026-10-03">2026.10.03</time><a class="recent-update-link" href="https://www.youtube.com/shorts/g5smMOupcLI" target="_blank" rel="noopener"><span class="recent-update-type">Mica AI 小劇場</span><span class="recent-update-title">比你優秀的人都比你努力，那你努力還有什麼用？但足夠沒用就沒人可以利用我！ <span aria-hidden="true">↗</span></span></a></li>
+        <li class="recent-update-item"><time datetime="2026-10-03">2026.10.03</time><a class="recent-update-link" href="https://www.youtube.com/shorts/4DbDXGfxpLw" target="_blank" rel="noopener"><span class="recent-update-type">Mica AI 小劇場</span><span class="recent-update-title">老公要冰淇淋加草莓，還問老婆要不要記下來。老婆笑：「這麼簡單！」結果端來一碗麵。老公氣得指著碗：「我說那個蛋呢！」 <span aria-hidden="true">↗</span></span></a></li>
+        <li class="recent-update-item"><time datetime="2026-10-02">2026.10.02</time><a class="recent-update-link" href="https://www.youtube.com/shorts/XVsNHKmH8TE" target="_blank" rel="noopener"><span class="recent-update-type">Mica AI 小劇場</span><span class="recent-update-title">老先生擦撞跑車，車主索賠三百萬，不賠就打。他找訓練海豹的女兒，車主還笑。十分鐘後，車主趴了。女兒嘆氣：「爸，我訓練的是美國海豹部隊，不是海豹！」 <span aria-hidden="true">↗</span></span></a></li>
+      </ul>
     </section>
 
-    <section class="studio-statement" aria-labelledby="statement-title">
-      <p>Chao AI 實作所</p><h2 id="statement-title">好奇心是起點。<br>做出來，才是答案。</h2>
-      <p>我從實際需求出發，把 AI 運用在課程、網站、文書、影音與親子共學。這裡收藏完成的作品，也留下嘗試的方法與過程。</p>
+    <section class="studio-statement" id="about" aria-labelledby="statement-title">
+      <p class="section-index">06 · 關於 Chao AI 實作所</p><h2 id="statement-title">好奇心是起點。<br>做出來，才是答案。</h2>
+      <p>這裡是把 AI 想法做成課程、網站、影音與互動作品的實作空間。收藏完成的作品，也留下嘗試的方法與過程。</p>
       <a class="text-link" href="#learning-games">回到互動作品 <span aria-hidden="true">↑</span></a>
     </section>
   </main>
   <footer class="site-footer">
     <a class="footer-wordmark" href="/" aria-label="Chao AI 實作所首頁">Chao AI<span>實作所</span></a>
-    <div class="footer-bottom"><p>把 AI，做成真正可用的作品。</p><nav aria-label="頁尾章節導覽"><a href="#learning-games">互動作品</a><a href="#course-hub">AI 課程</a><a href="#ai-notes">工具筆記</a><a href="#mica-ai-videos">AI 影音</a><a href="#podcast">叔姨講古</a><a href="#ai-lab">實驗室</a></nav></div>
+    <div class="footer-bottom"><p>把 AI，做成真正可用的作品。</p><nav aria-label="頁尾章節導覽"><a href="#learning-games">互動作品</a><a href="#course-hub">AI 課程</a><a href="#ai-notes">實作筆記</a><a href="#media-stories">影音與故事</a><a href="#recent-updates">最近更新</a><a href="#about">關於</a></nav></div>
     <p class="site-footer-privacy">本站不設會員系統，也不要求提供姓名或帳號資料；網站使用基本流量分析，作為內容與使用體驗改善參考。</p>
   </footer>
 
@@ -202,9 +179,7 @@
     </article>
   </template>
   <template id="course-card-template"><a class="course-card" href=""><p class="course-label"></p><h3 class="course-name"></h3><p class="course-focus"></p><span class="course-action">進入練習 ↗</span></a></template>
-  <script src="media.js"></script>
   <script src="app.js"></script>
-  <script src="studio.js"></script>
   <script src="home-lab.js"></script>
 </body>
 </html>
