@@ -45,6 +45,37 @@
     <section class="studio-hero simple-hero" aria-labelledby="home-title">
       <div class="hero-copy"><p class="hero-eyebrow">CHAO AI 實作所</p><h1 id="home-title">把 AI 想法，<br>做成自己的作品。</h1><p>從 AI 課程開始，跟著實作筆記，<br class="desktop-break">一步一步做出網站與互動作品。</p>
       <div class="hero-primary-actions"><a class="primary-link track-home-primary-action" href="#course-hub" data-action-name="探索 AI 課程">探索 AI 課程 <span aria-hidden="true">→</span></a><a class="text-link track-home-primary-action" href="#ai-notes" data-action-name="閱讀實作筆記">閱讀實作筆記 <span aria-hidden="true">→</span></a></div></div>
+      <section class="creation-lab" id="interactive-preview" data-scene="build" aria-labelledby="workbench-title">
+        <header class="lab-heading">
+          <h2 id="workbench-title">選一個作品，操作看看。</h2>
+          <button id="lab-pause" type="button" aria-pressed="false">暫停動態</button>
+        </header>
+        <div class="lab-scenes" role="group" aria-label="選擇首頁互動預覽">
+          <button class="lab-scene-button" type="button" data-scene="snake" aria-pressed="false">數字蛇</button>
+          <button class="lab-scene-button" type="button" data-scene="island" aria-pressed="false">環島棋盤</button>
+          <button class="lab-scene-button" type="button" data-scene="build" aria-pressed="true">AI 建站</button>
+        </div>
+        <div class="lab-viewport" aria-label="既有作品畫面預覽" aria-describedby="lab-status">
+          <canvas id="lab-canvas" aria-hidden="true"></canvas>
+          <figure class="lab-original">
+            <img id="lab-project-image" src="assets/course/build-your-ai-website/course-card-cover.webp" width="1400" height="788" loading="eager" decoding="async" alt="用 AI 建立你的第一個官網課程封面">
+            <figcaption>原作畫面</figcaption>
+          </figure>
+          <span class="lab-preview-label">首頁互動預覽</span>
+        </div>
+        <div class="lab-project-copy">
+          <div><h3 id="lab-project-title">打造你的 AI 網站</h3><p id="lab-project-description">想法、程式到發佈的建站演示。</p></div>
+          <a id="lab-project-link" href="/courses/build-your-ai-website/" aria-label="開啟完整作品：打造你的 AI 網站">開啟完整作品 <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="lab-controls">
+          <button id="lab-action" type="button">重播建站過程 <span aria-hidden="true">↻</span></button>
+          <div class="lab-direction-buttons" role="group" aria-label="數字蛇方向">
+            <button type="button" data-direction="left" aria-label="向左">←</button><button type="button" data-direction="up" aria-label="向上">↑</button><button type="button" data-direction="down" aria-label="向下">↓</button><button type="button" data-direction="right" aria-label="向右">→</button>
+          </div>
+        </div>
+        <p id="lab-status" role="status" aria-live="polite">開啟完整作品，或啟用 JavaScript 操作首頁預覽。</p>
+        <noscript><p class="lab-no-script">啟用 JavaScript 可操作首頁預覽，也可以直接開啟完整作品。</p><p class="lab-no-script"><a class="text-link" href="https://chaohuang-tw.github.io/taiwan-agri-king/game.html">開始玩臺灣農產王 ↗</a></p></noscript>
+      </section>
     </section>
     <section class="course-hub simple-section" id="course-hub" aria-labelledby="course-hub-title">
       <header class="section-head"><p class="section-index">01 · AI 課程</p><h2 id="course-hub-title">從這裡開始實作。</h2></header>
@@ -75,38 +106,6 @@
       </div>
       <nav class="other-works" aria-label="其他互動作品"><span>其他作品</span><a href="https://chaohuang-tw.github.io/star-planet-tycoon/">星球大富翁 ↗</a><span id="learning-platform"><a id="learning-platform-link" href="https://chaohuang-tw.github.io/g2-mandarin-moon-river/"><span id="learning-platform-name">小學學習冒險島</span> ↗</a></span></nav>
       <details class="compact-details legacy-practices" id="course-grid"><summary id="practice-list-title">原有練習入口 <span>國語與數學</span></summary><nav aria-label="原有練習入口" class="legacy-practice-links"><a href="https://chaohuang-tw.github.io/g2-mandarin-dog-egg-case/">狗窩蛋事件 ↗</a><a href="https://chaohuang-tw.github.io/g2-mandarin-magic-brush-ma-liang/">神筆馬良 ↗</a><a href="https://chaohuang-tw.github.io/g2-mandarin-happy-explorer/">快樂的探險家 ↗</a><a href="https://chaohuang-tw.github.io/g2-mandarin-little-reader-paradise/">小讀者樂園 ↗</a><a href="https://chaohuang-tw.github.io/g2-mandarin-giant-mountain/">巨人山 ↗</a><a href="https://chaohuang-tw.github.io/g2-mandarin-moon-river/g2-math-final-adventure/">二下數學期末大冒險 ↗</a></nav></details>
-      <details class="compact-details optional-preview" id="interactive-preview"><summary>操作首頁互動預覽 <span>AI 建站／數字蛇／環島棋盤</span></summary>      <section class="creation-lab" data-scene="build" aria-labelledby="workbench-title">
-        <header class="lab-heading">
-          <h2 id="workbench-title">選一個作品，操作看看。</h2>
-          <button id="lab-pause" type="button" aria-pressed="false">暫停動態</button>
-        </header>
-        <div class="lab-scenes" role="group" aria-label="選擇首頁互動預覽">
-          <button class="lab-scene-button" type="button" data-scene="snake" aria-pressed="false">數字蛇</button>
-          <button class="lab-scene-button" type="button" data-scene="island" aria-pressed="false">環島棋盤</button>
-          <button class="lab-scene-button" type="button" data-scene="build" aria-pressed="true">AI 建站</button>
-        </div>
-        <div class="lab-viewport" aria-label="既有作品畫面預覽" aria-describedby="lab-status">
-          <canvas id="lab-canvas" aria-hidden="true"></canvas>
-          <figure class="lab-original">
-            <img id="lab-project-image" src="assets/course/build-your-ai-website/course-card-cover.webp" width="1400" height="788" loading="lazy" decoding="async" alt="用 AI 建立你的第一個官網課程封面">
-            <figcaption>原作畫面</figcaption>
-          </figure>
-          <span class="lab-preview-label">首頁互動預覽</span>
-        </div>
-        <div class="lab-project-copy">
-          <div><h3 id="lab-project-title">打造你的 AI 網站</h3><p id="lab-project-description">想法、程式到發佈的建站演示。</p></div>
-          <a id="lab-project-link" href="/courses/build-your-ai-website/" aria-label="開啟完整作品：打造你的 AI 網站">開啟完整作品 <span aria-hidden="true">↗</span></a>
-        </div>
-        <div class="lab-controls">
-          <button id="lab-action" type="button">重播建站過程 <span aria-hidden="true">↻</span></button>
-          <div class="lab-direction-buttons" role="group" aria-label="數字蛇方向">
-            <button type="button" data-direction="left" aria-label="向左">←</button><button type="button" data-direction="up" aria-label="向上">↑</button><button type="button" data-direction="down" aria-label="向下">↓</button><button type="button" data-direction="right" aria-label="向右">→</button>
-          </div>
-        </div>
-        <p id="lab-status" role="status" aria-live="polite">開啟完整作品，或啟用 JavaScript 操作首頁預覽。</p>
-        <noscript><p class="lab-no-script">啟用 JavaScript 可操作首頁預覽，也可以直接開啟完整作品。</p><p class="lab-no-script"><a class="text-link" href="https://chaohuang-tw.github.io/taiwan-agri-king/game.html">開始玩臺灣農產王 ↗</a></p></noscript>
-      </section>
-</details>
     </section>
   </main>
   <footer class="site-footer" id="about">
