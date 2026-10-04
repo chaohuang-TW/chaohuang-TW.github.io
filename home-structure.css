@@ -1,141 +1,114 @@
-/* Homepage information hierarchy. The existing interactive hero is unchanged. */
-.home-ia .top-nav-links a,
-.home-ia .footer-bottom nav a { min-width: 44px; }
-.home-ia .section-head > .section-index,
-.home-ia .section-index {
-  margin: 0 0 16px;
-  color: var(--accent);
-  font-size: 14px;
-  line-height: 1.5;
-  font-weight: 650;
-  letter-spacing: .035em;
-}
-.home-ia .static-entrances { display: grid; gap: 12px; grid-column: 1 / -1; }
-.home-ia .static-entrances a { display: flex; align-items: center; min-height: 48px; color: var(--accent); text-decoration: underline; text-underline-offset: 5px; }
-.home-ia .learning-platform {
-  display: grid;
-  grid-template-columns: minmax(0, .9fr) minmax(0, 1.4fr);
-  gap: 48px;
-  margin-top: 80px;
-  padding: 40px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-}
-.home-ia .platform-overview h3 { font-size: clamp(26px, 2.5vw, 36px); line-height: 1.35; }
-.home-ia .platform-overview > p:not(.section-index) { margin-top: 20px; font-size: 16px; line-height: 1.8; color: var(--muted); }
-.home-ia .platform-overview > .text-link { margin-top: 24px; font-size: 15px; }
-.home-ia .platform-practices { padding-left: 36px; border-left: 1px solid var(--line); min-width: 0; }
-.home-ia .platform-practices h4 { font-size: 17px; line-height: 1.6; letter-spacing: 0; margin-bottom: 16px; }
-.home-ia .practice-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; list-style: none; padding: 0; margin: 0; }
-.home-ia .practice-list li { min-width: 0; border-top: 1px solid var(--line); }
-.home-ia .practice-list .course-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto; gap: 4px 12px; min-height: 90px; padding: 16px 0; border: 0; }
-.home-ia .practice-list .course-label { font-size: 14px; line-height: 1.5; }
-.home-ia .practice-list .course-name { font-size: 18px; line-height: 1.45; letter-spacing: -.025em; font-weight: 650; }
-.home-ia .practice-list .course-action { grid-row: 1 / 3; grid-column: 2; font-size: 21px; }
-.home-ia .practice-list .course-card:hover .course-name { color: var(--accent); text-decoration: underline; text-underline-offset: 5px; }
-.home-ia .course-tool-link { min-height: 44px; font-size: 14px; }
-.home-ia .course-resource-item span { font-size: 14px; }
-.home-ia .course-resource-item strong { font-size: 15px; }
-.home-ia .course-feature-topline { font-size: 14px; }
-.home-ia .note-category { font-size: 14px; }
-.home-ia .experiment-section { margin-top: 52px; padding-top: 32px; border-top: 1px solid var(--line); }
-.home-ia .experiment-heading { display: flex; align-items: baseline; gap: 28px; margin-bottom: 20px; }
-.home-ia .experiment-heading h3 { font-size: 26px; white-space: nowrap; }
-.home-ia .experiment-heading p { color: var(--muted); font-size: 15px; line-height: 1.8; }
-.home-ia .experiment-list { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; counter-reset: experiment; }
-.home-ia .lab-record { min-width: 0; border-top: 1px solid var(--line); counter-increment: experiment; }
-.home-ia .lab-record::before { content: '0' counter(experiment); display: block; color: var(--muted); font-size: 14px; padding-top: 18px; }
-.home-ia .lab-record-link { display: flex; flex-direction: column; gap: 12px; min-height: 132px; padding: 12px 0; }
-.home-ia .lab-record-title { display: block; font-size: 18px; font-weight: 650; line-height: 1.6; }
-.home-ia .lab-record-description { display: block; font-size: 15px; line-height: 1.8; color: var(--muted); }
-.home-ia .lab-record-action { color: var(--accent); font-size: 14px; margin-top: auto; }
-.home-ia .lab-record-link:hover .lab-record-title { text-decoration: underline; text-underline-offset: 5px; }
-.home-ia .note-drafts { margin-top: 28px; border-top: 1px solid var(--line); padding-top: 6px; }
-.home-ia .note-drafts summary { cursor: pointer; min-height: 48px; padding: 12px 0; font-size: 15px; color: var(--muted); }
-.home-ia .note-drafts summary > span { display: inline-block; margin-left: 12px; font-size: 14px; }
-.home-ia .draft-list { list-style: none; margin: 0; padding: 0 0 0 18px; }
-.home-ia .draft-list li { display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; font-size: 15px; color: var(--muted); }
-.home-ia .draft-list small { font-size: 14px; white-space: nowrap; }
-.home-ia .media-hub-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
-.home-ia .media-hub-card { display: flex; flex-direction: column; min-width: 0; padding: 32px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; scroll-margin-top: 96px; }
-.home-ia .media-hub-kicker { font-size: 14px; line-height: 1.5; color: var(--accent); margin-bottom: 16px; }
-.home-ia .media-hub-card h3 { font-size: clamp(27px, 2.7vw, 38px); line-height: 1.35; }
-.home-ia .media-hub-summary { color: var(--muted); font-size: 16px; line-height: 1.8; margin-top: 18px; min-height: 3.6em; }
-.home-ia .media-hub-cta { align-self: flex-start; font-size: 16px; font-weight: 700; margin-top: 16px; }
-.home-ia .media-latest { border-top: 1px solid var(--line); padding-top: 24px; margin-top: 24px; }
-.home-ia .media-latest-link { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 22px; align-items: start; min-height: 160px; }
-.home-ia .media-latest-image { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 8px; background: var(--bg); }
-.home-ia .media-latest-copy { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-.home-ia .media-latest-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 14px; color: var(--muted); line-height: 1.6; }
-.home-ia .media-latest-meta::before { content: '最新精選'; color: var(--accent); }
-.home-ia .media-latest-title { display: block; font-size: 18px; font-weight: 650; line-height: 1.6; overflow-wrap: anywhere; }
-.home-ia .media-latest-action { display: block; color: var(--accent); font-size: 14px; line-height: 1.6; }
-.home-ia .media-latest-link:hover .media-latest-title { text-decoration: underline; text-underline-offset: 5px; }
-.home-ia .media-latest-link:not(:has(.media-latest-image:not([hidden]))) { grid-template-columns: 1fr; }
-.home-ia .recent-updates-section { grid-template-columns: minmax(0, .65fr) minmax(0, 1.35fr); gap: 64px; }
-.home-ia .recent-updates-section .section-head h2 { font-size: 34px; line-height: 1.4; }
-.home-ia .recent-updates-list { margin: 0; padding: 0; list-style: none; }
-.home-ia .recent-update-item { display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--line); }
-.home-ia .recent-update-item:first-child { padding-top: 0; }
-.home-ia .recent-update-item > time { color: var(--muted); font-size: 14px; line-height: 1.8; padding-top: 8px; }
-.home-ia .recent-update-link { display: grid; grid-template-columns: 82px minmax(0, 1fr); gap: 16px; min-height: 44px; margin: 0; align-items: baseline; padding: 6px 0; }
-.home-ia .recent-update-type { font-size: 14px; line-height: 1.8; }
-.home-ia .recent-update-title { font-size: 16px; line-height: 1.8; overflow-wrap: anywhere; }
-.home-ia .recent-update-link:hover .recent-update-title { text-decoration: underline; text-underline-offset: 5px; }
-.home-ia .studio-statement > .section-index { color: var(--accent); font-size: 14px; }
-.home-ia .footer-bottom nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
-.home-ia .footer-bottom nav a { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; }
-.home-ia .dynamic-load-status { grid-column: 1 / -1; list-style: none; font-size: 15px; color: var(--muted); margin-top: 16px; }
-.home-ia .legacy-anchor { display: block; height: 0; scroll-margin-top: 96px; }
-@media (max-width: 1100px) {
-  .home-ia .learning-platform { gap: 28px; padding: 28px; grid-template-columns: minmax(0, .85fr) minmax(0, 1.35fr); }
-  .home-ia .platform-practices { padding-left: 24px; }
-  .home-ia .practice-list { gap: 0 16px; }
-  .home-ia .media-hub-card { padding: 28px; }
-  .home-ia .media-latest-link { grid-template-columns: 100px minmax(0, 1fr); gap: 18px; }
-  .home-ia .recent-updates-section { gap: 36px; }
-  .home-ia .recent-update-link { grid-template-columns: 1fr; gap: 4px; }
-}
+/* A quiet homepage: courses, one published method, then selected work. */
+.home-page.home-simple .site-shell,
+.home-page.home-simple .site-footer,
+.home-page.home-simple .top-nav-inner { width: min(1120px, calc(100% - 80px)); }
+.home-simple .top-nav-inner { height: 80px; }
+.home-simple .top-nav-links { margin-left: auto; gap: 28px; }
+.home-simple .top-nav-links a { font-size: 16px; min-width: 44px; min-height: 44px; }
+.home-simple .nav-utilities { margin-left: 8px; }
+.home-page.home-simple .studio-hero { display: block; padding: 64px 0 58px; }
+.home-simple .hero-copy { padding: 0; animation: none; }
+.home-simple .hero-eyebrow { font-size: 15px; letter-spacing: .08em; margin: 0 0 20px; }
+.home-page.home-simple .hero-copy h1 { font-size: clamp(42px, 5vw, 68px); line-height: 1.2; letter-spacing: -.04em; font-weight: 750; }
+.home-page.home-simple .hero-copy > p { font-size: 20px; margin-top: 24px; max-width: 34em; }
+.home-simple .hero-primary-actions { margin-top: 28px; gap: 16px 28px; }
+.home-simple .hero-primary-actions a { font-size: 17px; }
+.home-page.home-simple .site-shell > .simple-section { margin-top: 0 !important; padding: 48px 0; border-top: 1px solid var(--line); }
+.home-page.home-simple .section-head { display: block; margin-bottom: 28px; max-width: none; }
+.home-simple .section-index { color: var(--accent); margin: 0 0 12px; font-size: 15px; font-weight: 650; letter-spacing: .03em; }
+.home-page.home-simple .section-head h2 { font-size: clamp(30px, 3vw, 40px); line-height: 1.35; }
+.home-simple .course-hub-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.home-simple .simple-course { display: flex; flex-direction: column; align-items: start; gap: 16px; padding: 28px; min-width: 0; border: 1px solid var(--line); border-radius: 12px; background: var(--raised); }
+.home-simple .course-status { color: var(--accent); font-size: 15px; line-height: 1.6; margin: 0; }
+.home-simple .simple-course h3 { font-size: 27px; line-height: 1.4; }
+.home-simple .simple-course > p:not(.course-status),
+.home-simple .simple-note > p:not(.note-category),
+.home-simple .selected-work p { color: var(--muted); font-size: 17px; line-height: 1.8; }
+.home-simple .simple-course .text-link { margin-top: auto; }
+.home-simple .text-link { font-size: 17px; }
+.home-simple .compact-details { margin-top: 24px; border-top: 1px solid var(--line); }
+.home-simple .compact-details summary { cursor: pointer; padding: 15px 0; min-height: 52px; font-size: 16px; line-height: 1.7; color: var(--muted); }
+.home-simple .compact-details summary span { font-size: 15px; margin-left: 12px; }
+.home-simple .compact-details[open] > summary { color: var(--ink); }
+.home-simple .preparation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; padding: 16px 0 24px; }
+.home-simple .preparation-grid h3 { font-size: 20px; }
+.home-simple .preparation-grid nav { display: flex; flex-wrap: wrap; gap: 0 20px; margin-top: 12px; }
+.home-simple .preparation-grid a { display: inline-flex; align-items: center; min-height: 44px; font-size: 16px; text-decoration: underline; text-underline-offset: 5px; }
+.home-simple .simple-note { max-width: 780px; }
+.home-simple .note-category { font-size: 15px; color: var(--muted); margin-bottom: 12px; }
+.home-simple .simple-note h3 { font-size: clamp(26px, 2.8vw, 34px); line-height: 1.4; }
+.home-simple .simple-note > p:not(.note-category) { margin-top: 14px; }
+.home-simple .simple-note .text-link { margin-top: 16px; }
+.home-simple .compact-link-list { list-style: none; padding: 0 0 12px; margin: 0; }
+.home-simple .lab-record { border-top: 1px solid var(--line); }
+.home-simple .lab-record-link { display: grid; gap: 6px; padding: 18px 0; }
+.home-simple .lab-record-title { font-size: 18px; font-weight: 650; line-height: 1.6; }
+.home-simple .lab-record-description { color: var(--muted); font-size: 16px; }
+.home-simple .lab-record-action { color: var(--accent); font-size: 15px; }
+.home-simple .selected-works { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+.home-simple .selected-work { display: grid; grid-template-columns: 140px minmax(0, 1fr); align-items: start; gap: 20px; min-width: 0; }
+.home-simple .selected-work > img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; }
+.home-simple .selected-work h3 { font-size: 23px; line-height: 1.4; }
+.home-simple .selected-work p { margin-top: 10px; }
+.home-simple .selected-work .text-link { margin-top: 8px; }
+.home-simple .other-works { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 24px; align-items: center; color: var(--muted); font-size: 16px; }
+.home-simple .other-works a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 5px; }
+.home-simple #learning-platform { display: inline-block; }
+.home-simple .legacy-anchor { display: block; height: 0; scroll-margin-top: 100px; }
+.home-simple [id] { scroll-margin-top: 100px; }
+.home-simple .creation-lab { max-width: 820px; margin: 16px 0 24px; animation: none; }
+.home-simple .lab-heading { display: flex; }
+.home-simple .lab-heading h2 { position: static; width: auto; height: auto; overflow: visible; clip-path: none; font-size: 18px; }
+.home-simple #lab-pause { position: static; font-size: 15px; }
+.home-simple .lab-scenes { padding-right: 0; }
+.home-simple .lab-viewport { aspect-ratio: 1.9; }
+.home-simple #lab-status { font-size: 15px; }
+.home-page.home-simple .site-footer { padding: 40px 0 24px; }
+.home-simple .footer-overview { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.home-simple .footer-overview h2 { font-size: 23px; line-height: 1.4; margin-bottom: 16px; }
+.home-simple .footer-overview p { font-size: 17px; color: var(--muted); max-width: 30em; }
+.home-simple .footer-overview nav > a { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0 16px; align-items: baseline; min-height: 44px; font-size: 17px; }
+.home-simple .footer-overview nav > a span { color: var(--muted); font-size: 15px; }
+.home-simple .footer-updates { margin-top: 28px; }
+.home-simple .compact-updates { margin: 0; padding: 0 0 12px; list-style: none; }
+.home-simple .compact-updates li { padding: 16px 0; border-top: 1px solid var(--line); }
+.home-simple .update-meta { display: block; font-size: 15px; color: var(--muted); }
+.home-simple .compact-updates a { display: block; padding-top: 8px; font-size: 17px; text-decoration: underline; text-underline-offset: 5px; }
+.home-simple .footer-bottom { margin: 20px 0 16px; gap: 12px 24px; }
+.home-simple .footer-bottom nav a { font-size: 15px; min-height: 44px; }
+.home-simple .site-footer-privacy { font-size: 14px; line-height: 1.8; }
+.home-simple .dynamic-load-status { font-size: 15px; color: var(--muted); margin: 12px 0; }
 @media (max-width: 820px) {
-  .home-ia .learning-platform { grid-template-columns: 1fr; gap: 28px; margin-top: 56px; }
-  .home-ia .platform-practices { border-left: 0; border-top: 1px solid var(--line); padding-left: 0; padding-top: 24px; }
-  .home-ia .platform-overview { max-width: 40em; }
-  .home-ia .experiment-heading { display: block; }
-  .home-ia .experiment-heading p { margin-top: 12px; }
-  .home-ia .experiment-list { gap: 20px; }
-  .home-ia .media-hub-grid { gap: 24px; }
-  .home-ia .media-hub-card { padding: 24px; }
-  .home-ia .media-latest-link { grid-template-columns: 1fr; gap: 16px; }
-  .home-ia .media-latest-image { width: 112px; }
-  .home-ia .recent-updates-section { grid-template-columns: 1fr; gap: 8px; }
+  .home-page.home-simple .site-shell, .home-page.home-simple .site-footer, .home-page.home-simple .top-nav-inner { width: calc(100% - 40px); }
+  .home-simple .top-nav-inner { height: auto; display: grid; grid-template-columns: 1fr auto; gap: 0; padding-bottom: 6px; }
+  .home-simple .top-nav-brand { font-size: 24px; min-height: 60px; }
+  .home-simple .top-nav-brand span { font-size: 15px; }
+  .home-simple .nav-utilities { grid-column: 2; grid-row: 1; margin-left: 0; }
+  .home-page.home-simple .top-nav-links { display: flex; flex-wrap: wrap; width: auto; margin: 0; grid-column: 1 / -1; grid-row: 2; gap: 0 22px; border: 0; padding: 0; }
+  .home-simple .top-nav-links a { font-size: 15px; }
+  .home-page.home-simple .studio-hero { padding: 40px 0; }
+  .home-page.home-simple .hero-copy > p { font-size: 18px; }
+  .home-simple .selected-works { grid-template-columns: 1fr; }
+  .home-simple .selected-work { grid-template-columns: 160px minmax(0, 1fr); }
+  .home-simple .footer-overview { gap: 32px; }
+  .home-simple [id] { scroll-margin-top: 130px; }
 }
 @media (max-width: 600px) {
-  .home-ia .learning-platform { padding: 24px; margin-inline: -4px; }
-  .home-ia .platform-overview h3 { font-size: 28px; }
-  .home-ia .practice-list { grid-template-columns: 1fr; }
-  .home-ia .practice-list .course-card { min-height: 82px; }
-  .home-ia .experiment-section { margin-top: 40px; padding-top: 28px; }
-  .home-ia .experiment-heading h3 { font-size: 25px; }
-  .home-ia .experiment-list { grid-template-columns: 1fr; gap: 0; }
-  .home-ia .lab-record-link { min-height: 104px; gap: 8px; padding-bottom: 20px; }
-  .home-ia .note-drafts { margin-top: 16px; }
-  .home-ia .note-drafts summary > span { margin-left: 8px; }
-  .home-ia .draft-list li { display: block; }
-  .home-ia .draft-list small { display: block; margin-top: 4px; }
-  .home-ia .media-hub-grid { grid-template-columns: 1fr; }
-  .home-ia .media-hub-summary { min-height: 0; }
-  .home-ia .media-latest-link { grid-template-columns: 90px minmax(0, 1fr); gap: 16px; }
-  .home-ia .media-latest-image { width: 100%; }
-  .home-ia .media-latest-title { font-size: 17px; }
-  .home-ia .media-latest-meta { gap: 2px 8px; }
-  .home-ia .recent-updates-section .section-head h2 { font-size: 30px; }
-  .home-ia .recent-update-item { grid-template-columns: 1fr; gap: 4px; padding: 16px 0; }
-  .home-ia .recent-update-item > time { padding-top: 0; }
-  .home-ia .recent-update-link { gap: 4px; }
-  .home-ia .footer-bottom nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 12px; width: 100%; }
+  .home-simple .course-hub-grid, .home-simple .preparation-grid, .home-simple .footer-overview { grid-template-columns: 1fr; }
+  .home-page.home-simple .site-shell > .simple-section { padding: 36px 0; }
+  .home-simple .simple-course { padding: 24px; }
+  .home-simple .simple-course h3 { font-size: 26px; }
+  .home-simple .selected-work { grid-template-columns: 100px minmax(0, 1fr); gap: 16px; }
+  .home-simple .selected-work h3 { font-size: 21px; }
+  .home-simple .compact-details summary span { display: block; margin-left: 20px; }
+  .home-simple .other-works { gap: 0 20px; }
+  .home-simple .other-works > span:first-child { width: 100%; }
+  .home-simple .footer-overview nav > a { padding: 5px 0; }
+  .home-simple .footer-bottom nav { display: flex; flex-wrap: wrap; gap: 0 24px; }
+  .home-simple .lab-viewport { aspect-ratio: 1.55; }
 }
-@media (max-width: 350px) {
-  .home-ia .learning-platform, .home-ia .media-hub-card { padding: 20px; }
-  .home-ia .media-latest-link { grid-template-columns: 72px minmax(0, 1fr); gap: 12px; }
+@media (prefers-reduced-motion: reduce) {
+  .home-simple *, .home-simple *::before, .home-simple *::after { animation: none !important; transition: none !important; }
 }
+.home-simple .legacy-practice-links { display: flex; flex-wrap: wrap; gap: 0 24px; padding-bottom: 16px; }
+.home-simple .legacy-practice-links a { display: inline-flex; align-items: center; min-height: 44px; font-size: 16px; text-decoration: underline; text-underline-offset: 5px; }

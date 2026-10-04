@@ -6,6 +6,7 @@
     const root = document.querySelector('.creation-lab');
     if (!root || root.dataset.enhanced === 'true') return;
 
+    const preview = root.closest('details');
     const canvas = root.querySelector('#lab-canvas');
     const viewport = root.querySelector('.lab-viewport');
     const image = root.querySelector('#lab-project-image');
@@ -95,7 +96,7 @@
     }
 
     function mayAnimate() {
-      return available && !policyPaused() && inView && !document.hidden && pageActive;
+      return available && (!preview || preview.open) && !policyPaused() && inView && !document.hidden && pageActive;
     }
 
     function cancelFrame() {
@@ -550,6 +551,8 @@
     function resize() {
       if (!available) return;
       const bounds = canvas.getBoundingClientRect();
+      // A closed optional preview has no layout; retain the last useful canvas size.
+      if (bounds.width <= 0 || bounds.height <= 0) return;
       const nextWidth = Math.max(1, Math.round(bounds.width));
       const nextHeight = Math.max(1, Math.round(bounds.height));
       const nextRatio = Math.min(1.5, window.devicePixelRatio || 1);
@@ -624,6 +627,10 @@
       const targetY = (event.clientY - bounds.top) / bounds.height;
       const angle = Math.atan2((targetY - snake.y) * height, (targetX - snake.x) * width);
       steer(angle, '數字蛇已轉向你選的位置。');
+    });
+    if (preview) preview.addEventListener('toggle', () => {
+      if (preview.open) resize();
+      syncPlayback();
     });
     document.addEventListener('visibilitychange', syncPlayback);
     window.addEventListener('pagehide', () => { pageActive = false; cancelFrame(); });
