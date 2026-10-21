@@ -52,6 +52,16 @@ function createVideoCard(video, format, featured = false) {
 
   const image = document.createElement("img");
   image.className = "shuyi-card-image";
+  const responsiveThumbnails = /\/(?:usbEn7o_eP8|zxU-URYLxmY|5DsyBqLKld8|198kYi2pcqo|79FMMJ-EMFk)\.jpg$/;
+  if (responsiveThumbnails.test(video.thumbnail || '')) {
+    const base = resolveAssetPath(video.thumbnail).replace(/\.jpg$/, '-responsive-');
+    image.srcset = /\/(?:usbEn7o_eP8|zxU-URYLxmY)\.jpg$/.test(video.thumbnail)
+      ? `${base}480.webp 480w, ${base}960.webp 960w`
+      : `${base}480.webp 480w`;
+    image.sizes = featured
+      ? '(max-width: 767px) calc(100vw - 40px), (max-width: 940px) calc(100vw - 64px), 660px'
+      : '(max-width: 767px) calc(100vw - 40px), (max-width: 940px) calc((100vw - 88px) / 2), 440px';
+  }
   image.src = resolveAssetPath(video.thumbnail);
   image.alt = video.thumbnailAlt || `${video.title}影片縮圖`;
   image.loading = featured ? "eager" : "lazy";

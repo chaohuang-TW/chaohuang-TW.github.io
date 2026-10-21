@@ -1,0 +1,7 @@
+/* Keep adjacent image-preview and transcript controls comfortably separated. */
+.studio-page #handout-preview > details { margin-top: 12px; }
+.studio-page #handout-preview > details > summary {
+  min-height: 44px;
+  padding-block: 10px;
+  cursor: pointer;
+}

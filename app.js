@@ -67,12 +67,14 @@
     });
   }
   let navigationFrame = null;
-  window.addEventListener('scroll', () => {
+  function scheduleNavigation() {
     if (navigationFrame !== null) return;
     navigationFrame = requestAnimationFrame(() => { navigationFrame = null; refreshNavigation(); });
-  }, { passive: true });
-  window.addEventListener('resize', refreshNavigation, { passive: true });
-  refreshNavigation();
+  }
+  window.addEventListener('scroll', scheduleNavigation, { passive: true });
+  window.addEventListener('resize', scheduleNavigation, { passive: true });
+  // Do not force synchronous layout before the static hero has been painted.
+  requestAnimationFrame(() => setTimeout(scheduleNavigation, 0));
 
   function publicationValue(record) { return record.publishedAt || record.publishedDate || record.date || ''; }
   function publicationTimestamp(record) {
@@ -145,5 +147,19 @@
     });
     target.replaceChildren(...items);
   }
-  refreshLatest();
+  // Static, usable fallback links are already in the document. Refresh optional
+  // data after the first paint, or immediately when its disclosure is opened.
+  let latestStarted = false;
+  function startLatest() {
+    if (latestStarted) return;
+    latestStarted = true;
+    refreshLatest();
+  }
+  document.getElementById('recent-updates')?.addEventListener('toggle', event => {
+    if (event.currentTarget.open) startLatest();
+  });
+  requestAnimationFrame(() => setTimeout(() => {
+    if ('requestIdleCallback' in window) requestIdleCallback(startLatest, { timeout: 1500 });
+    else startLatest();
+  }, 0));
 })();
