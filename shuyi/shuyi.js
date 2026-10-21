@@ -18,16 +18,15 @@ function resolveAssetPath(path) {
   return `../${path}`;
 }
 
+const dateFormatter = new Intl.DateTimeFormat("zh-TW", {
+  year: "numeric", month: "2-digit", day: "2-digit", timeZone: "Asia/Taipei"
+});
+
 function formatDate(value) {
   if (!value) return "";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return value;
-  return new Intl.DateTimeFormat("zh-TW", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    timeZone: "Asia/Taipei"
-  }).format(date).replaceAll("/", ".");
+  return dateFormatter.format(date).replaceAll("/", ".");
 }
 
 function trackVideo(video) {
@@ -106,7 +105,13 @@ function createVideoCard(video, format, featured = false) {
   return card;
 }
 
-function renderVideoSection(sectionId, targetId, videos, format, featured = false) {
+function yieldToBrowser() {
+  return globalThis.scheduler?.yield
+    ? globalThis.scheduler.yield()
+    : new Promise(resolve => setTimeout(resolve, 0));
+}
+
+async function renderVideoSection(sectionId, targetId, videos, format, featured = false) {
   const section = document.querySelector(`#${sectionId}`);
   const target = document.querySelector(`#${targetId}`);
   if (!section || !target) return;
@@ -116,19 +121,25 @@ function renderVideoSection(sectionId, targetId, videos, format, featured = fals
     return;
   }
 
+  const fragment = document.createDocumentFragment();
+  for (let i = 0; i < videos.length; i++) {
+    fragment.append(createVideoCard(videos[i], format, featured));
+    if (i % 3 === 2) await yieldToBrowser();
+  }
+  target.replaceChildren(fragment);
   section.hidden = false;
-  target.replaceChildren();
-  videos.forEach((video) => target.append(createVideoCard(video, format, featured)));
 }
 
-function renderVideos(videos) {
+async function renderVideos(videos) {
   const published = videos
     .filter((video) => video.status === "published")
     .sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0));
 
-  renderVideoSection("latest", "shuyi-latest-video", published.slice(0, 1), published[0]?.format === "standard" ? "standard" : "short", true);
-  renderVideoSection("shorts", "shuyi-shorts-grid", published.filter((video) => video.format === "short"), "short");
-  renderVideoSection("standard", "shuyi-standard-grid", published.filter((video) => video.format === "standard"), "standard");
+  await renderVideoSection("latest", "shuyi-latest-video", published.slice(0, 1), published[0]?.format === "standard" ? "standard" : "short", true);
+  await yieldToBrowser();
+  await renderVideoSection("shorts", "shuyi-shorts-grid", published.filter((video) => video.format === "short"), "short");
+  await yieldToBrowser();
+  await renderVideoSection("standard", "shuyi-standard-grid", published.filter((video) => video.format === "standard"), "standard");
 }
 
 function trackPodcast(episode) {
@@ -222,10 +233,19 @@ function bindStaticTracking() {
 
 async function bootstrap() {
   bindStaticTracking();
+  // Fetch concurrently, but let the initial document paint before card work.
+  // No artificial timer/interaction gate: content remains immediately available.
+  const data = Promise.allSettled([loadJson(VIDEO_DATA_URL), loadJson(PODCAST_DATA_URL)]);
+  const hero = document.querySelector('.shuyi-hero-visual img');
+  if (hero?.decode) {
+    try { await hero.decode(); } catch (_) { /* A broken cover must not block the content. */ }
+  }
+  await new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve, 0)));
+  const [videoResult, podcastResult] = await data;
 
   try {
-    const videos = await loadJson(VIDEO_DATA_URL);
-    renderVideos(videos);
+    if (videoResult.status !== 'fulfilled') throw videoResult.reason;
+    await renderVideos(videoResult.value);
   } catch (_error) {
     const target = document.querySelector("#shuyi-latest-video");
     if (target) {
@@ -238,12 +258,16 @@ async function bootstrap() {
   }
 
   try {
-    const episodes = await loadJson(PODCAST_DATA_URL);
-    renderPodcast(episodes);
+    await yieldToBrowser();
+    if (podcastResult.status !== 'fulfilled') throw podcastResult.reason;
+    renderPodcast(podcastResult.value);
   } catch (_error) {
     const section = document.querySelector("#podcast");
     if (section) section.hidden = true;
   }
+  // A directly requested dynamic section may have been hidden during parsing.
+  const hashTarget = document.getElementById(location.hash.slice(1));
+  if (hashTarget && !hashTarget.hidden) hashTarget.scrollIntoView();
 }
 
 bootstrap();
