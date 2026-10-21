@@ -111,6 +111,13 @@ function yieldToBrowser() {
     : new Promise(resolve => setTimeout(resolve, 0));
 }
 
+function afterRenderingOpportunity() {
+  // A task yield alone may resume within the same frame, batching all section
+  // layouts together. Give each completed section a rendering opportunity.
+  // This is frame scheduling, not a fixed delay or an analytics gate.
+  return new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve, 0)));
+}
+
 async function renderVideoSection(sectionId, targetId, videos, format, featured = false) {
   const section = document.querySelector(`#${sectionId}`);
   const target = document.querySelector(`#${targetId}`);
@@ -136,9 +143,9 @@ async function renderVideos(videos) {
     .sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0));
 
   await renderVideoSection("latest", "shuyi-latest-video", published.slice(0, 1), published[0]?.format === "standard" ? "standard" : "short", true);
-  await yieldToBrowser();
+  await afterRenderingOpportunity();
   await renderVideoSection("shorts", "shuyi-shorts-grid", published.filter((video) => video.format === "short"), "short");
-  await yieldToBrowser();
+  await afterRenderingOpportunity();
   await renderVideoSection("standard", "shuyi-standard-grid", published.filter((video) => video.format === "standard"), "standard");
 }
 
@@ -240,7 +247,7 @@ async function bootstrap() {
   if (hero?.decode) {
     try { await hero.decode(); } catch (_) { /* A broken cover must not block the content. */ }
   }
-  await new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve, 0)));
+  await afterRenderingOpportunity();
   const [videoResult, podcastResult] = await data;
 
   try {
@@ -258,7 +265,7 @@ async function bootstrap() {
   }
 
   try {
-    await yieldToBrowser();
+    await afterRenderingOpportunity();
     if (podcastResult.status !== 'fulfilled') throw podcastResult.reason;
     renderPodcast(podcastResult.value);
   } catch (_error) {
