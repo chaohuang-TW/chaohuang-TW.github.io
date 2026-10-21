@@ -1,4 +1,4 @@
-/* Keep the existing gtag queue/config/events; let the static homepage paint
+/* Shared by home and Shuyi. Keep the existing gtag queue/config/events; paint
    before the third-party analytics library competes for its main thread. */
 (() => {
   const loadAnalytics = () => requestAnimationFrame(() => setTimeout(() => {
