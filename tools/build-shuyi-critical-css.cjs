@@ -78,5 +78,10 @@ else html = html.replace('<link rel="stylesheet" href="../assets/styles/shuyi.mi
 const theme = `<script id="shuyi-critical-theme">\n${fs.readFileSync(path.join(root, 'theme.js'), 'utf8').trim()}\n</script>`;
 if (html.includes('<script id="shuyi-critical-theme">')) html = html.replace(/<script id="shuyi-critical-theme">[\s\S]*?<\/script>/, theme);
 else html = html.replace('<script src="/theme.js"></script>', theme);
+// Preserve the analytics loader byte-for-byte while removing its separate
+// first-party request from the cover's critical download window.
+const analytics = `<script id="shuyi-critical-analytics">\n${fs.readFileSync(path.join(root, 'shuyi/analytics.js'), 'utf8').trim()}\n</script>`;
+if (html.includes('<script id="shuyi-critical-analytics">')) html = html.replace(/<script id="shuyi-critical-analytics">[\s\S]*?<\/script>/, analytics);
+else html = html.replace('<script defer src="./analytics.js"></script>', analytics);
 fs.writeFileSync(htmlPath, html);
 console.log(JSON.stringify({sources, criticalBytes: Buffer.byteLength(css), retainedClasses: [...classes].sort()}, null, 2));

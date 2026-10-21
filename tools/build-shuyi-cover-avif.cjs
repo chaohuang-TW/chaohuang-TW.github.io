@@ -3,7 +3,12 @@ const sharp = require('sharp');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 (async () => {
-  for (const width of [320, 480, 640, 960]) {
+  const requestedWidths = process.argv.slice(2).map(Number);
+  const widths = requestedWidths.length ? requestedWidths : [320, 480, 512, 640, 768, 960];
+  if (widths.some(width => ![320, 480, 512, 640, 768, 960].includes(width))) {
+    throw new Error('Unsupported cover width');
+  }
+  for (const width of widths) {
     const output = `assets/images/shuyi-podcast-cover-responsive-${width}.avif`;
     const info = await sharp(path.join(root, 'assets/images/shuyi-podcast-cover.jpg'))
       .resize({ width, withoutEnlargement: true })

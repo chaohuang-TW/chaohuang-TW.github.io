@@ -18,14 +18,17 @@ function resolveAssetPath(path) {
   return `../${path}`;
 }
 
-const dateFormatter = new Intl.DateTimeFormat("zh-TW", {
-  year: "numeric", month: "2-digit", day: "2-digit", timeZone: "Asia/Taipei"
-});
+let dateFormatter;
 
 function formatDate(value) {
   if (!value) return "";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return value;
+  // Construct ICU formatting only when a card needs a date, after the cover's
+  // rendering opportunity, rather than during the deferred script's startup.
+  dateFormatter ||= new Intl.DateTimeFormat("zh-TW", {
+    year: "numeric", month: "2-digit", day: "2-digit", timeZone: "Asia/Taipei"
+  });
   return dateFormatter.format(date).replaceAll("/", ".");
 }
 
