@@ -2,18 +2,19 @@
    Native CSS; existing routes, media players, and learning state remain intact. */
 :root {
   color-scheme: light;
-  --studio-bg: #f1f2f0;
-  --studio-surface: #e7eae5;
-  --studio-surface-high: #f8f9f6;
-  --studio-text: #202523;
-  --studio-muted: #5e6862;
-  --studio-accent: #bb3e2a;
-  --studio-line: #c9cec7;
+  --studio-bg: #f4f1e8;
+  --studio-surface: #e8e9dd;
+  --studio-surface-high: #faf8f1;
+  --studio-text: #203b31;
+  --studio-muted: #56665c;
+  --studio-accent: #a4432f;
+  --studio-line: #c9cbbc;
   --studio-control-line: #7f8a81;
   --studio-accent-soft: #e9ddd7;
   --studio-on-accent: #f8f9f6;
-  /* Containers use 12 px corners; interactive controls use full pills. */
-  --studio-radius: 12px;
+  /* Editorial surfaces and controls share a quiet, near-square edge. */
+  --studio-radius: 3px;
+  --studio-serif: "Songti TC", "STSong", "Noto Serif TC", serif;
   --navy: var(--studio-text);
   --navy-deep: var(--studio-text);
   --navy-2: var(--studio-text);
@@ -48,13 +49,13 @@
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --studio-bg: #181d1b;
-  --studio-surface: #242b27;
-  --studio-surface-high: #2b332e;
-  --studio-text: #edf0e9;
-  --studio-muted: #afb8af;
-  --studio-accent: #f18468;
-  --studio-line: #414b43;
+  --studio-bg: #111e18;
+  --studio-surface: #213027;
+  --studio-surface-high: #29372d;
+  --studio-text: #e5eade;
+  --studio-muted: #b9c3b7;
+  --studio-accent: #e19a82;
+  --studio-line: #4e5e51;
   --studio-control-line: #78877d;
   --studio-accent-soft: #352b26;
   --studio-on-accent: #181d1b;
@@ -64,13 +65,17 @@
   min-height: 100dvh;
   background: var(--studio-bg);
   color: var(--studio-text);
-  font-family: "Helvetica Neue", "PingFang TC", "Noto Sans TC", Arial, sans-serif;
+  font-family: "PingFang TC", "Heiti TC", system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 .studio-page ::selection { background: var(--studio-accent); color: var(--studio-on-accent); }
 .studio-page :focus-visible { outline: 2px solid var(--studio-accent); outline-offset: 5px; }
 .studio-page :is(h1, h2, h3) { color: var(--studio-text); text-wrap: balance; }
+.studio-page :is(h1, h2) { font-family: var(--studio-serif); }
+.studio-page .skip-link { background: var(--studio-text); color: var(--studio-bg); }
+.studio-page .skip-link:focus { z-index: 100; }
+.studio-page main:focus { outline: none; }
 .studio-page .title-phrase { display: inline-block; }
 .studio-page .title-line { display: block; }
 .studio-page img { max-width: 100%; }
@@ -104,7 +109,7 @@
   margin-left: auto;
   padding: 9px 13px;
   border: 1px solid var(--studio-line);
-  border-radius: 999px;
+  border-radius: var(--studio-radius);
   color: var(--studio-text);
   background: transparent;
   font: 600 .76rem/1.2 "Helvetica Neue", "PingFang TC", sans-serif;
@@ -117,7 +122,7 @@
 .studio-page :is(.primary-link, .secondary-link, .shuyi-button, .material-button, .copy-prompt-button, .clear-lesson-progress) {
   min-height: 48px;
   padding: 13px 21px;
-  border-radius: 999px;
+  border-radius: var(--studio-radius);
   font-weight: 650;
   font-size: .92rem;
   line-height: 1.4;
@@ -187,8 +192,7 @@
 .studio-page .video-library-grid.is-standard .video-archive-card + .video-archive-card { margin-top: 144px; }
 .studio-page .video-library-grid.is-standard .video-archive-card:first-child h3 { font-size: clamp(1.65rem, 2.6vw, 2.45rem); font-weight: 550; letter-spacing: -.035em; }
 .studio-page .video-library-grid.is-shorts { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px 32px; }
-.studio-page .video-library-grid.is-shorts .video-archive-card:nth-child(3n + 2) { margin-top: 72px; }
-.studio-page .video-library-grid.is-shorts .video-archive-card:nth-child(3n + 3) { margin-top: 144px; }
+.studio-page .video-library-grid.is-shorts .video-archive-card { margin-top: 0; border-top: 1px solid var(--studio-line); padding-top: 24px; }
 .studio-page .video-archive-card { overflow: visible; }
 .studio-page .video-archive-copy { padding: 24px 0 0; gap: 12px; }
 .studio-page .video-archive-copy h3 { font-size: clamp(1.12rem, 1.6vw, 1.45rem); font-weight: 600; letter-spacing: -.025em; }
@@ -343,7 +347,7 @@
 .studio-page .lesson-meta { gap: 32px; }
 .studio-page .lesson-meta dd { font-weight: 550; }
 .studio-page .lesson-toc { position: static; top: auto; gap: 4px 28px; padding: 24px 0; margin-top: 0; background: transparent; }
-.studio-page .lesson-toc a { font-size: .87rem; font-weight: 550; }
+.studio-page .lesson-toc a { display: inline-flex; align-items: center; min-height: 44px; font-size: .94rem; font-weight: 550; }
 .studio-page .lesson-section { margin-top: 72px; }
 .studio-page .lesson-section h2 { font-size: clamp(1.7rem, 2.5vw, 2.3rem); font-weight: 550; letter-spacing: -.04em; }
 .studio-page .lesson-section h3 { font-weight: 550; }
@@ -419,8 +423,6 @@
   .studio-page .video-library-grid.is-standard { grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 32px; }
   .studio-page .video-library-grid.is-standard .video-archive-card + .video-archive-card { margin-top: 96px; }
   .studio-page .video-library-grid.is-shorts { gap: 40px 24px; }
-  .studio-page .video-library-grid.is-shorts .video-archive-card:nth-child(3n + 2) { margin-top: 40px; }
-  .studio-page .video-library-grid.is-shorts .video-archive-card:nth-child(3n + 3) { margin-top: 80px; }
   .studio-page .guide-hero { grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); gap: 40px; }
   .studio-page .guide-hero h1 { font-size: 3.2rem; }
   .studio-page .guide-actions { flex-direction: column; align-items: stretch; }
@@ -456,9 +458,11 @@
   .studio-page .video-library-subtitle { font-size: 1.18rem; }
   .studio-page .video-library-grid.is-standard { grid-template-columns: 1fr; gap: 48px; }
   .studio-page .video-library-grid.is-standard .video-archive-card + .video-archive-card { margin-top: 0; }
-  .studio-page .video-library-grid.is-shorts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 20px; }
-  .studio-page .video-library-grid.is-shorts .video-archive-card:nth-child(n) { margin-top: 0; }
-  .studio-page .video-library-grid.is-shorts .video-archive-card:nth-child(even) { margin-top: 48px; }
+  .studio-page .video-library-grid.is-shorts { grid-template-columns: 1fr; gap: 32px; }
+  .studio-page .video-library-grid.is-shorts .video-archive-card { display: grid; grid-template-columns: minmax(104px, .65fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+  .studio-page .video-library-grid.is-shorts .video-archive-copy { padding-top: 0; }
+  .studio-page .video-library-grid.is-shorts .video-archive-copy h3 { font-size: 1rem; line-height: 1.7; text-wrap: pretty; }
+  .studio-page .video-library-grid.is-shorts .media-poster-label { left: 6px; bottom: 8px; padding: 8px; font-size: .75rem; white-space: nowrap; border-radius: var(--studio-radius); }
   .studio-page .video-archive-copy { padding-top: 20px; }
   .studio-page .video-archive-copy h3 { font-size: 1.1rem; }
   .studio-page .video-archive-copy p { font-size: .88rem; }
@@ -541,7 +545,6 @@
   .studio-page .shuyi-footer-inner { width: calc(100% - 32px); }
   .studio-page .video-library-grid.is-shorts,
   .studio-page .shuyi-shorts-grid { grid-template-columns: 1fr; }
-  .studio-page .video-library-grid.is-shorts .video-archive-card:nth-child(even),
   .studio-page .shuyi-shorts-grid > :nth-child(2) { margin-top: 0; padding-top: 0; }
   .studio-page .journey-controls { grid-template-columns: 1fr; }
   .studio-page .shuyi-journey-entry { padding: 24px 20px; }
