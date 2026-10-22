@@ -40,7 +40,7 @@ function compact(css) {
 }
 async function main() {
   const manifest = [];
-  for (const [source, widths, quality] of images) {
+  for (const [source, widths, quality] of process.argv.includes('--css-only') ? [] : images) {
     for (const width of widths) {
       const target = source.replace(/\.[^.]+$/, `-responsive-${width}.webp`);
       const info = await sharp(path.join(root, source)).resize({ width, withoutEnlargement: true }).webp({ quality, effort: 6 }).toFile(path.join(root, target));
