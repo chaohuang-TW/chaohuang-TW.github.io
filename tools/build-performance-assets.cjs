@@ -7,7 +7,8 @@ const images = [
   ['assets/course/build-your-ai-website/course-card-cover.webp', [320, 640, 960], 86],
   ['assets/course/gen-ai-software-applications/course-card-cover.webp', [320, 640, 960], 86],
   ['assets/images/projects/taiwan-agri-king.jpg', [640, 960], 84],
-  ...['course-map', 'ai-milestone-timeline', 'ai-new-workflow'].map(name => [`assets/course/gen-ai-software-applications/${name}.jpg`, [640, 1024], 90]),
+  ['assets/course/gen-ai-software-applications/course-main-visual.png', [768], 90],
+  ...['course-map', 'ai-milestone-timeline', 'ai-new-workflow'].map(name => [`assets/course/gen-ai-software-applications/${name}.jpg`, [640, 768, 1024], 90]),
   ...['usbEn7o_eP8', 'zxU-URYLxmY'].map(name => [`assets/images/shuyi/${name}.jpg`, [480, 960], 84]),
   ...['5DsyBqLKld8', '198kYi2pcqo', '79FMMJ-EMFk'].map(name => [`assets/images/shuyi/${name}.jpg`, [480, 960], 62]),
   ['assets/images/shuyi-podcast-cover.jpg', [320, 480, 640, 960], 84]
@@ -40,14 +41,16 @@ function compact(css) {
 }
 async function main() {
   const manifest = [];
+  const courseOnly = process.argv.includes('--course-lcp');
   for (const [source, widths, quality] of process.argv.includes('--css-only') ? [] : images) {
-    for (const width of widths) {
+    if (courseOnly && !source.startsWith('assets/course/gen-ai-software-applications/')) continue;
+    for (const width of courseOnly ? widths.filter(width => width === 768) : widths) {
       const target = source.replace(/\.[^.]+$/, `-responsive-${width}.webp`);
-      const info = await sharp(path.join(root, source)).resize({ width, withoutEnlargement: true }).webp({ quality, effort: 6 }).toFile(path.join(root, target));
+      const info = await sharp(path.join(root, source)).resize({ width, withoutEnlargement: true }).webp({ quality, effort: 6, ...(source.endsWith('.png') ? { smartSubsample: true } : {}) }).toFile(path.join(root, target));
       manifest.push({ source, target, width: info.width, height: info.height, bytes: info.size });
     }
   }
-  for (const [target, sources] of [
+  for (const [target, sources] of courseOnly ? [] : [
     ['assets/styles/course-preview.min.css', ['styles.css', 'studio-pages.css', 'courses/gen-ai-software-applications/performance.css']],
     ['assets/styles/shuyi.min.css', ['styles.css', 'shuyi/shuyi.css', 'studio-pages.css']]
   ]) {
