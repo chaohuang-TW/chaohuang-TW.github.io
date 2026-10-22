@@ -63,3 +63,15 @@
 :is(#mica-ai-videos, .video-library-page) :is(.ai-video-copy h3, .video-archive-copy h3) {
   overflow-wrap: anywhere;
 }
+@media (min-width: 360px) and (max-width: 767px) {
+  :is(#mica-ai-videos, .video-library-page) .video-category-filters {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+  :is(#mica-ai-videos, .video-library-page) .video-category-filters button {
+    padding: 9px 5px;
+    font-size: .875rem;
+    white-space: nowrap;
+  }
+}
