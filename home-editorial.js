@@ -35,7 +35,7 @@
         if (current !== generation || preference.matches || document.hidden) return;
         story.classList.add('is-playing');
         status.textContent = '建站流程播放中。';
-        timer = setTimeout(() => stop('建站流程播放完成，可再看一次或開啟課程。'), 4500);
+        timer = setTimeout(() => stop('建站流程播放完成，可再看一次或開啟課程。'), 2300);
       });
     });
   }
