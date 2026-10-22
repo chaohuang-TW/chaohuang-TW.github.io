@@ -295,26 +295,26 @@
 .studio-page .journey-load-more[hidden] { display: none; }
 
 /* Courses: a publication cover beside the first action, then a navigable path. */
-.studio-page .guide-hero { grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); align-items: center; gap: 80px; padding: 8px 0 56px; }
-.studio-page .guide-hero h1 { max-width: 10em; font-size: clamp(2.8rem, 5.1vw, 4.9rem); font-weight: 550; line-height: 1.16; letter-spacing: -.065em; }
+.studio-page .guide-hero { grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); align-items: center; gap: 64px; padding: 8px 0 40px; }
+.studio-page .guide-hero h1 { max-width: 10em; font-size: clamp(2.8rem, 4.6vw, 4.2rem); font-weight: 600; line-height: 1.28; letter-spacing: -.02em; }
 .studio-page .guide-hero h1 > span { display: block; }
 .studio-page .guide-subtitle { margin-top: 24px; color: var(--studio-accent); font-weight: 500; font-size: 1.13rem; }
 .studio-page .guide-intro { margin-top: 28px; font-size: 1rem; }
-.studio-page .guide-cover { width: 100%; max-width: 340px; transform: rotate(3deg); }
-.studio-page .guide-cover img { box-shadow: 12px 16px 0 var(--studio-surface); }
-.studio-page .guide-section { margin-top: 104px; }
-.studio-page .guide-section-head { margin-bottom: 40px; }
+.studio-page .guide-cover { width: 100%; max-width: 250px; transform: none; justify-self: center; }
+.studio-page .guide-cover img { box-shadow: 10px 12px 0 var(--studio-surface); }
+.studio-page .guide-section { margin-top: 72px; }
+.studio-page .guide-section-head { margin-bottom: 28px; }
 .studio-page .guide-section-head h2 { font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 550; letter-spacing: -.055em; }
 .studio-page .guide-audience-grid { grid-template-columns: 1fr; gap: 0; }
-.studio-page .guide-info-card { display: grid; grid-template-columns: 40px minmax(160px, .8fr) minmax(0, 1.2fr); gap: 24px; align-items: baseline; padding: 28px 0; }
+.studio-page .guide-info-card { display: grid; grid-template-columns: minmax(160px, .8fr) minmax(0, 1.2fr); gap: 32px; align-items: baseline; padding: 24px 0; }
 .studio-page .guide-info-card h3 { margin: 0; font-size: 1.45rem; font-weight: 550; }
 .studio-page .guide-info-card p { margin: 0; color: var(--studio-muted); }
-.studio-page .guide-card-number { color: var(--studio-muted); font-size: .75rem; }
+.studio-page .guide-card-number { display: none; }
 .studio-page .guide-check-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 40px; }
 .studio-page .guide-check-list li { border-bottom: 0; background: var(--studio-surface); padding: 28px 24px 28px 56px; border-radius: var(--studio-radius); }
 .studio-page .guide-check-list li::before { left: 24px; top: 28px; }
 .studio-page .learning-path-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-.studio-page .lesson-path-card { position: relative; grid-template-columns: auto 1fr; gap: 16px 24px; padding: 32px; border: 1px solid var(--studio-line); background: transparent; border-radius: var(--studio-radius); }
+.studio-page .lesson-path-card { position: relative; grid-template-columns: auto 1fr; gap: 12px 24px; padding: 28px; border: 1px solid var(--studio-line); background: transparent; border-radius: var(--studio-radius); }
 .studio-page .lesson-path-card .lesson-number { grid-column: 1; grid-row: 1 / 4; padding-top: 4px; font-size: 1rem; }
 .studio-page .lesson-path-card .lesson-status { grid-column: 2; grid-row: 1; }
 .studio-page .lesson-path-card h3,
@@ -330,28 +330,31 @@
 .studio-page .guide-case-section { max-width: 54rem; margin-top: 104px; padding: 40px 0; border-top-color: var(--studio-accent); }
 .studio-page .guide-case-section h2 { font-weight: 550; }
 .studio-page .course-page-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 64px; padding: 16px 0 64px; }
-.studio-page .course-page-copy h1 { font-size: clamp(2.7rem, 5vw, 4.8rem); font-weight: 550; letter-spacing: -.06em; }
+.studio-page .course-page-copy h1 { font-size: clamp(2.7rem, 4.3vw, 4.1rem); font-weight: 600; letter-spacing: -.02em; line-height: 1.3; }
 .studio-page .course-page-subtitle { font-weight: 500; }
 .studio-page .course-page .split-head { display: block; }
 .studio-page .course-page .section-note { margin-top: 20px; max-width: 40rem; }
 .studio-page .course-page .section-head h2 { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 550; }
 .studio-page .course-map-layout { grid-template-columns: minmax(0, 1.4fr) minmax(0, .6fr); gap: 56px; }
 .studio-page .course-map-list li { font-weight: 550; }
-.studio-page .handout-preview-grid { gap: 40px; }
+.studio-page .handout-preview-grid { gap: 32px; }
+.studio-page .slide-preview-card { padding: 0; border: 1px solid var(--studio-line); background: transparent; text-align: left; }
+.studio-page .slide-preview-card span { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 60px; padding: 16px 20px; font-size: 1.05rem; line-height: 1.6; }
+.studio-page .slide-preview-card span::after { content: "↗"; color: var(--studio-accent); font-size: 1.4rem; }
 
 /* Reading surfaces use a stable text measure. No motion interrupts reading. */
 .studio-page .guide-lesson-page { max-width: 1360px; }
-.studio-page .lesson-article { max-width: 52rem; font-size: 1.08rem; }
-.studio-page .lesson-hero { padding: 24px 0 48px; }
-.studio-page .lesson-hero h1 { max-width: 16em; margin-top: 16px; font-size: clamp(2.4rem, 4.2vw, 4rem); font-weight: 550; line-height: 1.2; letter-spacing: -.055em; }
+.studio-page .lesson-article { max-width: 36em; font-size: 1.125rem; line-height: 1.95; }
+.studio-page .lesson-hero { padding: 16px 0 32px; }
+.studio-page .lesson-hero h1 { max-width: 16em; margin-top: 12px; font-size: clamp(2.1rem, 3.5vw, 3.25rem); font-weight: 600; line-height: 1.35; letter-spacing: -.02em; }
 .studio-page .lesson-subtitle { font-weight: 500; }
 .studio-page .lesson-series-progress { color: var(--studio-muted); font-weight: 500; }
 .studio-page .lesson-meta { gap: 32px; }
 .studio-page .lesson-meta dd { font-weight: 550; }
-.studio-page .lesson-toc { position: static; top: auto; gap: 4px 28px; padding: 24px 0; margin-top: 0; background: transparent; }
+.studio-page .lesson-toc { position: static; top: auto; gap: 4px 24px; padding: 16px 0; margin-top: 0; background: transparent; }
 .studio-page .lesson-toc a { display: inline-flex; align-items: center; min-height: 44px; font-size: .94rem; font-weight: 550; }
-.studio-page .lesson-section { margin-top: 72px; }
-.studio-page .lesson-section h2 { font-size: clamp(1.7rem, 2.5vw, 2.3rem); font-weight: 550; letter-spacing: -.04em; }
+.studio-page .lesson-section { margin-top: 56px; }
+.studio-page .lesson-section h2 { font-size: clamp(1.6rem, 2.2vw, 2rem); font-weight: 600; letter-spacing: -.015em; line-height: 1.5; }
 .studio-page .lesson-section h3 { font-weight: 550; }
 .studio-page :is(.lesson-outcome-grid article, .concept-card-grid article) { color: var(--studio-text); background: transparent; border-color: var(--studio-line); font-weight: 550; }
 .studio-page :is(.lesson-note, .lesson-note.is-warning, .safety-card, .common-mistakes) { border-color: var(--studio-accent); background: var(--studio-surface); color: var(--studio-text); }
@@ -367,17 +370,17 @@
 .studio-page .lesson-pagination .primary-link { white-space: normal; }
 .studio-page .lesson-footer-nav { gap: 24px; }
 
-.studio-page .ai-note-hero { max-width: 1120px; margin-left: 0; padding: 24px 0 64px; }
-.studio-page .ai-note-hero h1 { max-width: 15em; font-size: clamp(2.6rem, 5.5vw, 5.2rem); font-weight: 550; line-height: 1.15; letter-spacing: -.06em; }
+.studio-page .ai-note-hero { max-width: 1120px; margin-inline: auto; padding: 16px 0 48px; }
+.studio-page .ai-note-hero h1 { max-width: 17em; font-size: clamp(2.6rem, 4.5vw, 4.1rem); font-weight: 600; line-height: 1.35; letter-spacing: -.02em; }
 .studio-page .ai-note-deck { margin-top: 28px; font-weight: 500; color: var(--studio-muted); }
-.studio-page .ai-note-lead { max-width: 48rem; margin: 48px 0 0 auto; font-size: 1.08rem; }
-.studio-page .ai-note-layout { grid-template-columns: minmax(180px, 250px) minmax(0, 48rem); justify-content: space-between; gap: 72px; font-size: 1.08rem; }
-.studio-page .ai-note-section { margin-top: 80px; }
-.studio-page .ai-note-section h2 { font-weight: 550; font-size: clamp(1.75rem, 2.6vw, 2.45rem); }
+.studio-page .ai-note-lead { max-width: 36em; margin: 36px 0 0 284px; font-size: 1.125rem; line-height: 1.95; }
+.studio-page .ai-note-layout { grid-template-columns: 220px minmax(0, 36em); max-width: 1120px; margin-inline: auto; justify-content: start; gap: 64px; font-size: 1.125rem; line-height: 1.95; }
+.studio-page .ai-note-section { margin-top: 60px; }
+.studio-page .ai-note-section h2 { font-weight: 600; font-size: clamp(1.7rem, 2.2vw, 2.1rem); line-height: 1.5; letter-spacing: -.015em; }
 .studio-page .ai-note-section h3 { font-weight: 550; }
-.studio-page .ai-note-toc { margin-top: 80px; top: 32px; }
+.studio-page .ai-note-toc { margin-top: 60px; top: 32px; }
 .studio-page .ai-note-toc summary { font-weight: 600; }
-.studio-page .ai-note-toc a { font-size: .8rem; }
+.studio-page .ai-note-toc a { font-size: .9rem; line-height: 1.8; min-height: 44px; display: flex; align-items: center; padding-block: 8px; }
 .studio-page .ai-note-role-grid { grid-template-columns: 1fr; gap: 0; }
 .studio-page .ai-note-role-card { display: grid; grid-template-columns: 8rem 1fr; gap: 10px 24px; padding: 24px 0; }
 .studio-page .ai-note-role-card h3 { grid-column: 1; grid-row: 1 / 3; margin: 0; }
@@ -429,7 +432,7 @@
   .studio-page .guide-hero { grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); gap: 40px; }
   .studio-page .guide-hero h1 { font-size: 3.2rem; }
   .studio-page .guide-actions { flex-direction: column; align-items: stretch; }
-  .studio-page .guide-info-card { grid-template-columns: 32px minmax(150px, .8fr) minmax(0, 1.2fr); gap: 20px; }
+  .studio-page .guide-info-card { grid-template-columns: minmax(150px, .8fr) minmax(0, 1.2fr); gap: 24px; }
   .studio-page .lesson-path-card { padding: 24px; gap: 12px 18px; }
   .studio-page .course-page-hero { grid-template-columns: 1fr; }
   .studio-page .course-page-copy h1 { max-width: none; font-size: 3.5rem; }
@@ -437,6 +440,7 @@
   .studio-page .course-map-layout { grid-template-columns: 1fr; gap: 32px; }
   .studio-page .course-map-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
   .studio-page .ai-note-layout { grid-template-columns: minmax(150px, 190px) minmax(0, 1fr); gap: 40px; }
+  .studio-page .ai-note-lead { margin-left: 0; }
   .studio-page .ai-note-role-card { grid-template-columns: 1fr; }
   .studio-page .ai-note-role-card :is(h3, strong, p) { grid-column: 1; grid-row: auto; }
 }
@@ -501,13 +505,13 @@
   .studio-page .journey-controls { grid-template-columns: minmax(0, 1fr) minmax(0, .85fr); }
   .studio-page .journey-episode-grid { grid-template-columns: 1fr; gap: 0; }
   .studio-page .journey-episode-card { padding: 22px 0; }
-  .studio-page .guide-hero { grid-template-columns: 1fr; gap: 48px; padding: 16px 0 48px; }
+  .studio-page .guide-hero { grid-template-columns: 1fr; gap: 28px; padding: 8px 0 32px; }
   .studio-page .guide-hero h1 { max-width: 11em; font-size: clamp(2.35rem, 9.4vw, 4rem); }
-  .studio-page .guide-cover { width: min(65%, 300px); justify-self: end; margin-right: 10px; }
+  .studio-page .guide-cover { width: min(42%, 168px); justify-self: end; margin-right: 10px; }
   .studio-page .guide-actions { align-items: stretch; }
   .studio-page .guide-section { margin-top: 72px; }
-  .studio-page .guide-info-card { grid-template-columns: 26px minmax(0, 1fr); gap: 14px 20px; }
-  .studio-page .guide-info-card p { grid-column: 2; }
+  .studio-page .guide-info-card { grid-template-columns: 1fr; gap: 10px; }
+  .studio-page .guide-info-card p { grid-column: 1; }
   .studio-page .guide-info-card h3 { font-size: 1.35rem; }
   .studio-page .guide-check-list,
   .studio-page .learning-path-grid { grid-template-columns: 1fr; gap: 20px; }
@@ -520,7 +524,7 @@
   .studio-page .lesson-article,
   .studio-page .ai-note-content { font-size: 1.02rem; }
   .studio-page .lesson-hero { padding: 12px 0 32px; }
-  .studio-page .lesson-hero h1 { font-size: clamp(2.1rem, 7.5vw, 3rem); }
+  .studio-page .lesson-hero h1 { font-size: clamp(1.9rem, 7.5vw, 3rem); }
   .studio-page .lesson-meta { grid-template-columns: 1fr; gap: 16px; }
   .studio-page .lesson-meta div { display: grid; grid-template-columns: 6rem 1fr; gap: 16px; padding-top: 16px; }
   .studio-page .lesson-meta dd { margin: 0; }
