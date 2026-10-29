@@ -117,6 +117,9 @@ summary::-webkit-details-marker{display:none}
 .work-secondary .work-image{padding:10px;border:1px solid var(--rule);background:#e4e1d1}
 .work-secondary h3{font-size:38px;line-height:1.16;letter-spacing:-1.5px;margin:13px 0 18px}
 .work-secondary p:not(.content-meta){font-size:17px;line-height:1.85;max-width:20em;margin-bottom:18px}
+.work-versions{display:flex;flex-wrap:wrap;gap:10px 12px}
+.work-versions .text-link{gap:12px;padding:6px 12px;border:1px solid var(--rule);font-size:16px;white-space:nowrap;min-height:48px}
+.work-versions .text-link:hover{border-color:var(--accent)}
 .other-works{display:flex;align-items:center;gap:40px;margin-top:42px;padding:22px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-size:17px}
 .other-works>span:first-child{font-size:14px;color:var(--muted);margin-right:auto}
 .other-works a{min-height:40px;display:flex;align-items:center}
