@@ -73,5 +73,22 @@
     "status": "published",
     "featured": true,
     "order": 3
+  },
+  {
+    "id": "number-snake-arena-growth-preview",
+    "eyebrow": "AI × 遊戲設計 × 競技成長",
+    "title": "Number Snake Arena｜v0.8 競技成長預覽",
+    "description": "數字蛇的另一種玩法，加入淺色競技場、食物成長與排名。與經典版分開提供，保留原有作品入口。",
+    "tags": [
+      "AI 協作",
+      "競技成長",
+      "v0.8 預覽"
+    ],
+    "href": "https://number-snake-arcade-v08-preview-20261029.chaohuang.chatgpt.site",
+    "cta": "試玩預覽",
+    "external": true,
+    "status": "published",
+    "featured": true,
+    "order": 4
   }
 ]

@@ -76,7 +76,7 @@
   // Do not force synchronous layout before the static hero has been painted.
   requestAnimationFrame(() => setTimeout(scheduleNavigation, 0));
 
-  function publicationValue(record) { return record.publishedAt || record.publishedDate || record.date || ''; }
+  function publicationValue(record) { return record.publishedAt || record.publishedDate || record.date || record.addedAt || ''; }
   function publicationTimestamp(record) {
     const date = publicationValue(record);
     return Date.parse(/^\d{4}-\d{2}-\d{2}$/.test(date) ? `${date}T00:00:00+08:00` : date);
@@ -102,7 +102,7 @@
       const records = await loadJson(path);
       const record = records.filter(item => (!item.status || item.status === 'published')
         && item[destination] && Number.isFinite(publicationTimestamp(item)))
-        .sort((a, b) => publicationTimestamp(b) - publicationTimestamp(a))[0];
+        .sort((a, b) => publicationTimestamp(b) - publicationTimestamp(a) || (b.order || 0) - (a.order || 0))[0];
       if (!record) throw new Error(`No published records in ${path}`);
       return { kind, record, href: record[destination], path };
     }));
@@ -133,7 +133,7 @@
       const date = document.createElement('time');
       date.dateTime = publicationValue(record);
       date.textContent = publicationDate(record);
-      meta.append(`${kind} · `, date);
+      meta.append(`${kind} · ${!record.publishedAt && !record.publishedDate && !record.date ? '收錄 ' : ''}`, date);
       const link = document.createElement('a');
       link.href = href;
       link.target = '_blank';

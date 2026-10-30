@@ -85,7 +85,7 @@ function createVideoCard(video, format, featured = false) {
   const meta = document.createElement("p");
   meta.className = "shuyi-card-meta";
   const series = video.series ? ` · ${video.series}` : "";
-  meta.textContent = `${video.channel}${series} · ${formatDate(video.publishedAt)}`;
+  meta.textContent = `${video.channel}${series} · ${video.publishedAt ? formatDate(video.publishedAt) : `收錄 ${formatDate(video.addedAt)}`}`;
 
   const title = document.createElement("h3");
   title.className = "shuyi-card-title";
@@ -143,7 +143,7 @@ async function renderVideoSection(sectionId, targetId, videos, format, featured 
 async function renderVideos(videos) {
   const published = videos
     .filter((video) => video.status === "published")
-    .sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0));
+    .sort((a, b) => new Date(b.publishedAt || b.addedAt || 0) - new Date(a.publishedAt || a.addedAt || 0) || (b.order || 0) - (a.order || 0));
 
   await renderVideoSection("latest", "shuyi-latest-video", published.slice(0, 1), published[0]?.format === "standard" ? "standard" : "short", true);
   await afterRenderingOpportunity();

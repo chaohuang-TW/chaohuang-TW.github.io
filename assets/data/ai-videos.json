@@ -160,5 +160,18 @@
     "featured": false,
     "publishedAt": "2026-10-03T09:25:44+00:00",
     "order": 14
+  },
+  {
+    "id": "opxLe8KHdi8",
+    "title": "梵谷與慕夏：名畫舞台對決",
+    "description": "以梵谷《星夜》與慕夏《吉絲夢妲》為題材的 AI 舞台短片，將畫作元素轉化為對決場景。",
+    "youtubeUrl": "https://www.youtube.com/shorts/opxLe8KHdi8",
+    "embedUrl": "https://www.youtube.com/embed/opxLe8KHdi8",
+    "format": "short",
+    "contentCategory": "performance",
+    "status": "published",
+    "featured": true,
+    "order": 15,
+    "addedAt": "2026-10-30"
   }
 ]

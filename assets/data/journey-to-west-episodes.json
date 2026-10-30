@@ -899,5 +899,83 @@
     "status": "published",
     "featured": true,
     "source": "apple-podcasts"
+  },
+  {
+    "id": "journey-070",
+    "series": "西遊記",
+    "episodeNumber": 70,
+    "title": "西遊記・第70回",
+    "subtitle": "悟空變小妖偷紫金鈴！寶貝剛到手，竟被妖王當場抓包！？",
+    "publishedDate": "2026-10-09",
+    "appleEpisodeId": "1000794039214",
+    "applePodcastUrl": "https://podcasts.apple.com/tw/podcast/id1829910020?i=1000794039214",
+    "status": "published",
+    "featured": false,
+    "source": "apple-podcasts"
+  },
+  {
+    "id": "journey-071",
+    "series": "西遊記",
+    "episodeNumber": 71,
+    "title": "西遊記・第71回",
+    "subtitle": "悟空變宮女偷回紫金鈴！妖王真身竟是菩薩坐騎！？",
+    "publishedDate": "2026-10-17",
+    "appleEpisodeId": "1000796816088",
+    "applePodcastUrl": "https://podcasts.apple.com/tw/podcast/id1829910020?i=1000796816088",
+    "status": "published",
+    "featured": false,
+    "source": "apple-podcasts"
+  },
+  {
+    "id": "journey-072",
+    "series": "西遊記",
+    "episodeNumber": 72,
+    "title": "西遊記・第72回",
+    "subtitle": "唐僧誤闖盤絲洞！七個蜘蛛精吐絲抓人，八戒竟變鯰魚被困住！？",
+    "publishedDate": "2026-10-19",
+    "appleEpisodeId": "1000797067749",
+    "applePodcastUrl": "https://podcasts.apple.com/tw/podcast/id1829910020?i=1000797067749",
+    "status": "published",
+    "featured": false,
+    "source": "apple-podcasts"
+  },
+  {
+    "id": "journey-073",
+    "series": "西遊記",
+    "episodeNumber": 73,
+    "title": "西遊記・第73回",
+    "subtitle": "悟空大戰千眼蜈蚣精！滿天金光竟被一根繡花針破解！？",
+    "publishedDate": "2026-10-20",
+    "appleEpisodeId": "1000797261213",
+    "applePodcastUrl": "https://podcasts.apple.com/tw/podcast/id1829910020?i=1000797261213",
+    "status": "published",
+    "featured": false,
+    "source": "apple-podcasts"
+  },
+  {
+    "id": "journey-074",
+    "series": "西遊記",
+    "episodeNumber": 74,
+    "title": "西遊記・第74回",
+    "subtitle": "悟空變小鑽風闖獅駝嶺！竟靠幾句話嚇跑一萬妖兵！？",
+    "publishedDate": "2026-10-22",
+    "appleEpisodeId": "1000797637652",
+    "applePodcastUrl": "https://podcasts.apple.com/tw/podcast/id1829910020?i=1000797637652",
+    "status": "published",
+    "featured": false,
+    "source": "apple-podcasts"
+  },
+  {
+    "id": "journey-075",
+    "series": "西遊記",
+    "episodeNumber": 75,
+    "title": "西遊記・第75回",
+    "subtitle": "悟空被關陰陽二氣瓶！鑽破寶瓶逃生，竟又被獅王一口吞下！？",
+    "publishedDate": "2026-10-30",
+    "appleEpisodeId": "1000798643255",
+    "applePodcastUrl": "https://podcasts.apple.com/tw/podcast/id1829910020?i=1000798643255",
+    "status": "published",
+    "featured": true,
+    "source": "apple-podcasts"
   }
 ]

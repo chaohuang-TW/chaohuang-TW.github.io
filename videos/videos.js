@@ -4,12 +4,12 @@ const standardVideoGrid = document.querySelector("#standard-video-grid");
 const shortVideoGrid = document.querySelector("#short-video-grid");
 const videoCategoryButtons = [...document.querySelectorAll(".video-library-page button[data-video-category]")];
 const videoCategoryStatus = document.querySelector("#video-category-status");
-const videoCategoryLabels = { all: "全部內容", knowledge: "AI 知識", theater: "AI 小劇場" };
+const videoCategoryLabels = { all: "全部內容", knowledge: "AI 知識", theater: "AI 小劇場", performance: "舞台與創作" };
 let archiveVideos = [];
 let selectedVideoCategory = "all";
 
 function getVideoContentCategory(video) {
-  return video.contentCategory === "theater" ? "theater" : "knowledge";
+  return ["knowledge", "theater", "performance"].includes(video.contentCategory) ? video.contentCategory : "knowledge";
 }
 
 function formatVideoPublishDate(value) {
@@ -48,11 +48,11 @@ function createVideoArchiveCard(video, format) {
   const category = document.createElement("p");
   category.className = "video-content-category";
   category.append(document.createTextNode(videoCategoryLabels[getVideoContentCategory(video)]));
-  const publishedDate = formatVideoPublishDate(video.publishedAt);
+  const publishedDate = formatVideoPublishDate(video.publishedAt || video.addedAt);
   if (publishedDate) {
-    category.append(document.createTextNode(" · "));
+    category.append(document.createTextNode(video.publishedAt ? " · " : " · 收錄 "));
     const time = document.createElement("time");
-    time.dateTime = video.publishedAt;
+    time.dateTime = video.publishedAt || video.addedAt;
     time.textContent = publishedDate;
     category.append(time);
   }

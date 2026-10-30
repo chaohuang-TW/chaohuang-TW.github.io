@@ -1,5 +1,16 @@
 [
   {
+    "id": "public-works-sync-2026-10-30",
+    "date": "2026-10-30",
+    "type": "作品更新",
+    "title": "西遊記第 70～75 回、名畫舞台短片與貪食蛇預覽入口",
+    "description": "補入 6 集 Podcast 與 6 支西遊記影片，收錄梵谷與慕夏舞台短片，並整理數字蛇 v0.8 競技成長預覽；原有作品持續保留。",
+    "href": "/shuyi/",
+    "cta": "查看叔姨講古",
+    "external": false,
+    "status": "published"
+  },
+  {
     "id": "content-sync-2026-10-04",
     "date": "2026-10-04",
     "type": "內容更新",
