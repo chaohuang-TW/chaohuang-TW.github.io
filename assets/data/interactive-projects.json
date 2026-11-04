@@ -14,10 +14,10 @@
       "五位勇者各自成長",
       "原創概念練習與解說"
     ],
-    "href": "https://five-subject-brave-squad.chaohuang.chatgpt.site",
+    "href": "/five-subject-brave-squad/",
     "cta": "開啟作品",
-    "external": true,
-    "status": "showcase",
+    "external": false,
+    "status": "published",
     "featured": true,
     "order": 1,
     "image": "assets/images/projects/five-subject-brave-squad/mandarin.webp",
