@@ -315,11 +315,15 @@ footer{padding:29px 0 25px}
 .brave-feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:38px;align-items:center;padding:36px;background:var(--soft);border-top:3px solid var(--ink)}
 .brave-copy h3{font-family:var(--serif);font-size:42px;font-weight:900;line-height:1.3;margin:14px 0 20px}
 .brave-copy .brave-deck{font-family:var(--serif);font-size:27px;font-weight:750;line-height:1.65;margin-bottom:18px}
+.brave-learning{display:flex;flex-direction:column;align-items:flex-start}
 .brave-learning>p{font-size:18px;line-height:1.85;max-width:32em}
 .brave-learning .brave-note{font-size:14px;color:var(--muted);margin:14px 0 24px}
 .brave-learning .button{width:fit-content}
-.brave-subjects{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));list-style:none;padding:0 0 20px;margin:0 0 22px;border-bottom:1px solid var(--rule);gap:12px}
-.brave-subjects li{font-family:var(--serif);font-size:26px;font-weight:750}
+.brave-party{order:-1;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:100%;gap:10px;padding-bottom:20px;margin-bottom:22px;border-bottom:1px solid var(--rule)}
+.brave-party figure{margin:0;min-width:0}
+.brave-party img{width:100%;height:auto}
+.brave-party figcaption{font-family:var(--serif);font-size:20px;font-weight:750;text-align:center;line-height:1.5;margin-top:6px}
+.brave-party:hover figcaption{color:var(--accent)}
 .brave-feature~.work-primary{margin-top:66px}
 .media-note{font-size:16px;color:var(--muted);margin-top:10px;line-height:1.8}
 @media(max-width:1100px){.now-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 32px}
@@ -336,8 +340,9 @@ footer{padding:29px 0 25px}
 .brave-feature{padding:25px 22px 28px;gap:24px}
 .brave-copy h3{font-size:33px;margin:12px 0 16px}
 .brave-copy .brave-deck{font-size:25px}
-.brave-subjects{gap:8px;padding-bottom:16px;margin-bottom:18px}
-.brave-subjects li{font-size:21px}
+.brave-party{order:0;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 8px;padding-top:18px;padding-bottom:0;margin:24px 0 0;border-top:1px solid var(--rule);border-bottom:0}
+.brave-party figcaption{font-size:18px}
+.brave-party figure:nth-child(4){grid-column:1}
 .brave-learning>p{font-size:17px}
 .brave-feature~.work-primary{margin-top:42px}
 .media-note{font-size:15px}

@@ -19,7 +19,9 @@
     "external": true,
     "status": "showcase",
     "featured": true,
-    "order": 1
+    "order": 1,
+    "image": "assets/images/projects/five-subject-brave-squad/mandarin.webp",
+    "imageAlt": "五科勇者小隊的國語勇者角色圖"
   },
   {
     "id": "number-snake-arena",
