@@ -975,6 +975,20 @@
     "appleEpisodeId": "1000798643255",
     "applePodcastUrl": "https://podcasts.apple.com/tw/podcast/id1829910020?i=1000798643255",
     "status": "published",
+    "featured": false,
+    "source": "apple-podcasts"
+  },
+  {
+    "id": "journey-076",
+    "series": "西遊記",
+    "episodeNumber": 76,
+    "title": "西遊記・第76回",
+    "subtitle": "悟空把獅王當風箏放！揪住白象鼻子，唐僧竟被騙進妖怪城！？",
+    "publishedDate": "2026-11-03",
+    "publishedAt": "2026-11-02T16:00:00Z",
+    "appleEpisodeId": "1000799624627",
+    "applePodcastUrl": "https://podcasts.apple.com/tw/podcast/id1829910020?i=1000799624627",
+    "status": "published",
     "featured": true,
     "source": "apple-podcasts"
   }

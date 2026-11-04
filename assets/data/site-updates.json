@@ -1,5 +1,16 @@
 [
   {
+    "id": "homepage-review-2026-11-04",
+    "date": "2026-11-04",
+    "type": "首頁整理",
+    "title": "五科勇者作品介紹與近期公開內容整理",
+    "description": "五科勇者加入精選介紹；補入西遊記第76回、王維〈相思〉影音與 Podcast、Mica AI 使用層次及生活短劇，並整理建站指南與課程預覽入口。",
+    "href": "/#current-highlights",
+    "cta": "查看近期重點",
+    "external": false,
+    "status": "published"
+  },
+  {
     "id": "public-works-sync-2026-10-30",
     "date": "2026-10-30",
     "type": "作品更新",

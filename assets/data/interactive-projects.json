@@ -1,53 +1,25 @@
 [
   {
-    "id": "star-planet-tycoon",
-    "eyebrow": "親子 × AI 共創",
-    "title": "星球大富翁：寶石星開墾計畫",
-    "image": "assets/images/projects/star-planet-tycoon.jpg",
-    "imageAlt": "星球大富翁寶石星開墾計畫遊戲畫面",
-    "description": "從孩子的一個遊戲想法開始，我和兒子一起討論規則，再與 AI 反覆設計、開發與測試，最後做成真正可以玩的網頁桌遊。",
+    "id": "five-subject-brave-squad",
+    "eyebrow": "三年級學習 × 角色冒險",
+    "title": "五科勇者小隊",
+    "description": "國語、英文、數學、社會、自然各有一位勇者。每次只選一科出征，完成冒險後，只有出征的角色累積成長。三年級上學期的原創概念練習，答錯可讀解說，再照自己的步調挑戰。",
     "tags": [
-      "親子共創",
-      "AI 協作",
-      "網頁桌遊"
+      "五科學習",
+      "角色冒險",
+      "AI 協作"
     ],
     "highlights": [
-      "1～2 位真人＋電腦玩家",
-      "24 格環狀棋盤",
-      "20 回合結算",
-      "手機、平板、桌機皆可玩"
+      "每次專心練習一科",
+      "五位勇者各自成長",
+      "原創概念練習與解說"
     ],
-    "href": "https://chaohuang-tw.github.io/star-planet-tycoon/",
-    "cta": "開始遊戲",
+    "href": "https://five-subject-brave-squad.chaohuang.chatgpt.site",
+    "cta": "開啟作品",
     "external": true,
-    "status": "published",
+    "status": "showcase",
     "featured": true,
     "order": 1
-  },
-  {
-    "id": "taiwan-agri-king",
-    "eyebrow": "AI × 臺灣農業 × 遊戲設計",
-    "title": "臺灣農產王：環島產地爭霸戰",
-    "image": "assets/images/projects/taiwan-agri-king.jpg",
-    "imageAlt": "臺灣農產王環島產地爭霸戰遊戲畫面",
-    "description": "把臺灣農漁產地資料做成一款兒童與家庭網頁桌遊。玩家沿環島棋盤認識產地、採購農漁產品、觀察市場變化，在 12 輪遊戲中累積自己的農產版圖。",
-    "tags": [
-      "臺灣農業",
-      "AI 協作",
-      "策略桌遊"
-    ],
-    "highlights": [
-      "22 縣市 × 48 項農漁產品",
-      "30 格環島棋盤",
-      "1～4 位真人，不足四席由電腦補位",
-      "2,000 局平衡驗證"
-    ],
-    "href": "https://chaohuang-tw.github.io/taiwan-agri-king/game.html",
-    "cta": "開始遊戲",
-    "external": true,
-    "status": "published",
-    "featured": true,
-    "order": 2
   },
   {
     "id": "number-snake-arena",
@@ -72,23 +44,73 @@
     "external": true,
     "status": "published",
     "featured": true,
-    "order": 3
+    "order": 2
   },
   {
     "id": "number-snake-arena-growth-preview",
     "eyebrow": "AI × 遊戲設計 × 競技成長",
-    "title": "Number Snake Arena｜v0.8 競技成長預覽",
-    "description": "數字蛇的另一種玩法，加入淺色競技場、食物成長與排名。與經典版分開提供，保留原有作品入口。",
+    "title": "Number Snake Arena｜競技成長候選預覽",
+    "description": "數字蛇的另一種玩法，加入淺色競技場、食物成長與排名。目前提供 v0.8.3 候選預覽，與經典版分開保留。",
     "tags": [
       "AI 協作",
       "競技成長",
-      "v0.8 預覽"
+      "候選預覽"
     ],
     "href": "https://number-snake-arcade-v08-preview-20261029.chaohuang.chatgpt.site",
     "cta": "試玩預覽",
     "external": true,
     "status": "published",
     "featured": true,
+    "order": 3
+  },
+  {
+    "id": "taiwan-agri-king",
+    "eyebrow": "AI × 臺灣農業 × 遊戲設計",
+    "title": "臺灣農產王：環島產地爭霸戰",
+    "image": "assets/images/projects/taiwan-agri-king.jpg",
+    "imageAlt": "臺灣農產王環島產地爭霸戰遊戲畫面",
+    "description": "把臺灣農漁產地資料做成一款兒童與家庭網頁桌遊。玩家沿環島棋盤認識產地、採購農漁產品、觀察市場變化，在 12 輪遊戲中累積自己的農產版圖。",
+    "tags": [
+      "臺灣農業",
+      "AI 協作",
+      "策略桌遊"
+    ],
+    "highlights": [
+      "22 縣市 × 48 項農漁產品",
+      "30 格環島棋盤",
+      "1～4 位真人，不足四席由電腦補位",
+      "2,000 局平衡驗證"
+    ],
+    "href": "https://chaohuang-tw.github.io/taiwan-agri-king/game.html",
+    "cta": "開始遊戲",
+    "external": true,
+    "status": "published",
+    "featured": true,
     "order": 4
+  },
+  {
+    "id": "star-planet-tycoon",
+    "eyebrow": "親子 × AI 共創",
+    "title": "星球大富翁：寶石星開墾計畫",
+    "image": "assets/images/projects/star-planet-tycoon.jpg",
+    "imageAlt": "星球大富翁寶石星開墾計畫遊戲畫面",
+    "description": "從孩子的一個遊戲想法開始，我和兒子一起討論規則，再與 AI 反覆設計、開發與測試，最後做成真正可以玩的網頁桌遊。",
+    "tags": [
+      "親子共創",
+      "AI 協作",
+      "網頁桌遊"
+    ],
+    "highlights": [
+      "1～2 位真人＋電腦玩家",
+      "24 格環狀棋盤",
+      "20 回合結算",
+      "手機、平板、桌機皆可玩"
+    ],
+    "href": "https://chaohuang-tw.github.io/star-planet-tycoon/",
+    "cta": "開始遊戲",
+    "external": true,
+    "status": "published",
+    "featured": true,
+    "order": 5
   }
 ]
