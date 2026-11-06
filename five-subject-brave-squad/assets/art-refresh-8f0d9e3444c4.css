@@ -1,0 +1,13 @@
+/* Character-art display only. Gameplay and save schema remain the shipped v1. */
+.scene-hero .featured .pose-idle,.scene-hero .featured .pose-attack{width:86%;height:86%;left:7%;top:3%;}
+.battle-scene[data-skill="chinese"]{--attack-shift:10.6771%;}
+.battle-scene[data-skill="english"]{--attack-shift:8.3815%;}
+.battle-scene[data-skill="math"]{--attack-shift:6.1927%;}
+.battle-scene[data-skill="social"]{--attack-shift:9.2891%;}
+.battle-scene[data-skill="science"]{--attack-shift:10.25%;}
+.battle-scene .hero-art .pose-idle,.battle-scene .hero-art .pose-attack{width:82%;height:82%;left:9%;top:2%;bottom:auto;}
+.battle-scene .hero-art .pose-attack{top:calc(2% + var(--attack-shift,0%));}
+@media(max-width:760px){
+ .scene-hero .featured .pose-idle,.scene-hero .featured .pose-attack{width:80%;height:85%;left:5%;top:2%;}
+ .battle-scene .battle-character{height:120px;bottom:2px;}
+}
